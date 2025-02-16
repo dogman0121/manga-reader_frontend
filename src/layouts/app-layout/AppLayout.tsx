@@ -14,7 +14,6 @@ import UserContext from "../../context/UserContext";
 import { EmptyUser } from "../../types/User";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import AuthModal from "../../features/AuthModal/components/AuthModal";
-import Modal from "@mui/material/Modal";
 
 
 function Header({ setTheme }: {setTheme: Function}) {
@@ -22,7 +21,7 @@ function Header({ setTheme }: {setTheme: Function}) {
     
     const { device } = useDeviceDetect();
 
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const [checked, setChecked] = useState(getColorScheme() === "dark" ? true : false);
 

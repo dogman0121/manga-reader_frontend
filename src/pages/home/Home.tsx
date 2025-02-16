@@ -1,5 +1,4 @@
 import Button from "@mui/material/Button"
-import { darkTheme } from "../../theme"
 import { useTheme } from "@mui/material/styles"
 
 export default function Home() {

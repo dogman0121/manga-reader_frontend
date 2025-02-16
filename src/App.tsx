@@ -5,7 +5,7 @@ import Home from "./pages/home/Home";
 import Title from "./pages/title/Title";
 import NotFound from "./pages/not-found/NotFound";
 import { useState } from "react";
-import { User, EmptyUser } from "./types/User"
+import { EmptyUser } from "./types/User"
 import UserContext from "./context/UserContext"
 
 
