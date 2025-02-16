@@ -36,7 +36,7 @@ jobs:
       - name: Upload to server
         uses: ArthurYdalgo/github-action-scp@0.7.5
         with:
-          local: dist/*
+          local: dist/
           remote: scp/home/var/www/manga-reader/
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
