@@ -1,29 +1,36 @@
+name: Deploy to Server
+
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
-  prepare:
-    runs-on: self-hosted
+  deploy:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: checkout repo
+      - name: Checkout code
         uses: actions/checkout@v3
-      - name: install dependencies
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install dependencies
         run: npm install
-  
-  build:
-    runs-on: self-hosted
-    needs: prepare
-    steps:
-      - name: build
+
+      - name: Build React app
         run: npm run build
 
-  deploy:
-    runs-on: self-hosted
-    needs: build
-    steps:
-      - name: move directory
-        run: mv -v /dist/* /var/www/manga-reader/
-
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            rm -rf /var/www/manga-reader/*
+            cp -r ./dist/* /var/www/manga-reader/
