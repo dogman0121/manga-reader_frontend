@@ -33,3 +33,4 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             rm -rf /var/www/manga-reader/*
+            cp -r ./dist/* /var/www/html/ || (echo "Error copying files" && exit 1)
