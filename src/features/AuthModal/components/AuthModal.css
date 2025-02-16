@@ -1,0 +1,28 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.input {
+    width: 100%;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.submit {
+    margin-top: 10px !important;
+    width: 100%;
+}
+
+.forgot {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.change {
+    text-align: center;
+    margin-top: 10px;
+}

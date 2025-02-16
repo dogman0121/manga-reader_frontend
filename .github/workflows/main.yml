@@ -1,0 +1,27 @@
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  prepare:
+    runs-on: self-hosted
+    steps:
+      - name: install dependencies
+        run: npm install
+  
+  build:
+    runs-on: self-hosted
+    needs: prepare
+    steps:
+      - name: build
+        run: npm run build
+
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: move directory
+        run: mv -v /dist/* /var/www/manga-reader/
+

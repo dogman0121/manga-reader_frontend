@@ -4,3 +4,40 @@
     margin: 0 auto;
     padding: 0 20px;
 }
+
+.Footer_Section {
+    display: flex;
+    flex-direction: column;
+}
+
+.Footer_Subsection {
+    display: flex;
+    flex-direction: column;
+}
+
+.Footer_Subsection + .Footer_Subsection {
+    margin-top: 30px;
+}
+
+.Footer_Content {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 20px;
+}
+
+.Footer_Item {
+    font-size: 14px;
+}
+
+.Footer_Item + .Footer_Item {
+    margin-top: 10px;
+}
+
+.Footer_h1 {
+    font-size: 28px;
+}
+
+.Footer_h2 {
+    font-size: 20px;
+}

@@ -16,32 +16,69 @@ declare module '@mui/material/styles' {
     }
 }
 
-export const lightTheme = createTheme({
-    palette: {
-        background: {
-            default: "#FFFFFF",
-        },
-        customBackgrounds: {
-            header: "#FFD600",
-            footer: "#FFD600"
-        },
-    },
+export const defaultTheme = createTheme({
     components: {
+        MuiCssBaseline:{
+            styleOverrides: `
+                input:-webkit-autofill {
+                    boxShadow: 0 0 0 100px #FFFFFF inset !important,
+                    WebkitTextFillColor: inhenerit !important
+                }
+            `
+        },
         MuiButton: {
             styleOverrides: {
                 root: {
                     borderRadius: "20px",
-                },
-            },
+                    boxShadow: "none",
+                    "&:hover": {
+                        boxShadow: "none",
+                    }
+                }
+            }
         },
-    },
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                            borderRadius: "16px",
+                        },
+                    },
+                }
+            }
+        }
+    }
 })
 
-export const darkTheme = createTheme({
-    colorSchemes: {
-        dark: true
-    },
+export const lightTheme = createTheme(Object.assign(defaultTheme, {
     palette: {
+        mode: "light",
+        primary: {
+            main: "#FFD600",
+        },
+        secondary: {
+            main: "#656565"
+        },
+        background: {
+            default: "#FFFFFF",
+        },
+        customBackgrounds: {
+            header: "#FFF1AA",
+            footer: "#FFD600"
+        },
+    },
+}))
+
+export const darkTheme = createTheme(Object.assign(defaultTheme, {
+    palette: {
+        mode: "dark",
+        primary: {
+            main: "#FFD600"
+        },
+        secondary: {
+            main: "#D9D9D9"
+        },
         background: {
             paper: "#171717"
         },
@@ -52,4 +89,4 @@ export const darkTheme = createTheme({
     },
     typography: {
     }
-});
+}));
