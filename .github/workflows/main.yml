@@ -33,6 +33,13 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             rm -rf /var/www/manga-reader/*
-            ls
-            ls -la ./dist
-            cp -r ./dist/* /var/www/html/
+      - name: Upload to server
+      - name: Copy folder content recursively to remote
+        uses: ArthurYdalgo/github-action-scp@release
+        with:
+          local: dist/*
+          remote: scp/home/var/www/manga-reader/
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
