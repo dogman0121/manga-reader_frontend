@@ -34,7 +34,6 @@ jobs:
           script: |
             rm -rf /var/www/manga-reader/*
       - name: Upload to server
-      - name: Copy folder content recursively to remote
         uses: ArthurYdalgo/github-action-scp@release
         with:
           local: dist/*
