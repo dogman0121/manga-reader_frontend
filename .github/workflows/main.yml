@@ -33,5 +33,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             rm -rf /var/www/manga-reader/*
+            ls
             ls -la ./dist
             cp -r ./dist/* /var/www/html/
