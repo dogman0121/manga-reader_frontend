@@ -34,11 +34,11 @@ jobs:
           script: |
             rm -rf /var/www/manga-reader/*
       - name: Upload to server
-        uses: ArthurYdalgo/github-action-scp@0.7.5
+        uses: appleboy/scp-action@v0.1.7
         with:
-          local: dist/
-          remote: scp/home/var/www/manga-reader/
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
+          source: dist/
+          target: /home/var/www/manga-reader
