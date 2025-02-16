@@ -34,7 +34,7 @@ jobs:
           script: |
             rm -rf /var/www/manga-reader/*
       - name: Upload to server
-        uses: ArthurYdalgo/github-action-scp@release
+        uses: ArthurYdalgo/github-action-scp@0.7.5
         with:
           local: dist/*
           remote: scp/home/var/www/manga-reader/
