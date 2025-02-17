@@ -1,31 +1,70 @@
 import { Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import "./AuthModal.css"
+import styles from "./AuthModal.module.css"
+import loginUser from "../services/api/loginUser";
+import { useContext, useState } from "react";
+import fetchUser from "../../../services/api/fetchUser";
+import UserContext from "../../../context/UserContext";
+
 
 function Login({ setSection }: { setSection: Function}) {
+    const [wrongForm, setWrongForm] = useState(false);
+
+    const [login, setLogin] = useState("");
+
+    const [password, setPassword] = useState("");
+
+    const { setUser } = useContext(UserContext);
+
+    const handleLogin = async() => {
+        const response = await loginUser(login, password);
+
+        if (response.msg) {
+            setWrongForm(true);
+        }
+        else {
+            localStorage.setItem("access_token", response.access_token);
+            localStorage.setItem("refresh_token", response.refresh_token);
+
+            setUser(await fetchUser());
+        }
+
+    }
+
     return (
         <>
             <h2>Авторизация</h2>
+            { wrongForm && (
+                <Box
+                    className={styles.Error}
+                >
+                    Неправильное имя или пароль
+                </Box>
+            )}
             <Box
-                className="form"
+                className={styles.Form}
             >
                 <TextField
+                    error={wrongForm}
                     label="Login"
                     variant="outlined"
                     color="secondary"
-                    className="input"
+                    className={styles.Input}
+                    onInput={(e) => {setLogin((e.target as HTMLInputElement).value)}}
                 />
 
                 <TextField
+                    error={wrongForm}
                     label="Password"
                     variant="outlined"
                     type="password"
                     color="secondary"
-                    className="input"
+                    className={styles.Input}
+                    onInput={(e) => {setPassword((e.target as HTMLInputElement).value)}}
                 />
             </Box>
             <Box
-                className="link forgot"
+                className={[styles.Link, styles.Forgot].join(" ")}
                 sx={{
                     color: "primary.main",
                 }}
@@ -35,16 +74,17 @@ function Login({ setSection }: { setSection: Function}) {
             </Box>
             <Button
                 variant="contained"
-                className="submit"
+                className={styles.Submit}
+                onClick={handleLogin}
             >
                 Войти
             </Button>
             <Box
-                className="change"
+                className={styles.Change}
             >
                 Нет учетной записи? 
                 <Box
-                    className="link"
+                    className={styles.Link}
                     sx={{
                         color: "primary.main"
                     }}

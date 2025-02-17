@@ -99,6 +99,7 @@ function Header({ setTheme }: {setTheme: Function}) {
                             />
                             {device !== "pc" &&
                                 <Avatar 
+                                    onClick={() => {setAuthModalOpen(true)}}
                                     sx={{
                                         width: "36px",
                                         height: "36px"

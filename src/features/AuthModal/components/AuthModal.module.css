@@ -1,28 +1,34 @@
-.form {
+.Form {
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+    margin-top: 10px
 }
 
-.input {
+.Error {
+    color: #FF0000;
+    text-align: center;
+}
+
+.Input {
     width: 100%;
 }
 
-.link:hover {
+.Link:hover {
     text-decoration: underline;
 }
 
-.submit {
+.Submit {
     margin-top: 10px !important;
     width: 100%;
 }
 
-.forgot {
+.Forgot {
     text-align: center;
     margin-top: 10px;
 }
 
-.change {
+.Change {
     text-align: center;
     margin-top: 10px;
 }

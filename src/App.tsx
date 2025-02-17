@@ -4,13 +4,26 @@ import AppLayout from "./layouts/app-layout/AppLayout";
 import Home from "./pages/home/Home";
 import Title from "./pages/title/Title";
 import NotFound from "./pages/not-found/NotFound";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EmptyUser } from "./types/User"
 import UserContext from "./context/UserContext"
+import fetchUser from "./services/api/fetchUser";
 
 
 function App() {
   const [user, setUser] = useState(EmptyUser);
+
+  useEffect(() => {
+    const loadUser = async () => {
+      const user = await fetchUser();
+
+      setUser(user);
+    }
+
+    loadUser();
+
+    return () => {}
+  }, [])
 
   return (
     <>
