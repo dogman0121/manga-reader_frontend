@@ -1,7 +1,7 @@
 import FetchApi from "../../../../services/api/FetchApi";
 
 const registerUser = async (login: string, email: string, password: string) => {
-    const response = await FetchApi("http://kanwoo.ru/api/user/register", {
+    const response = await FetchApi("https://kanwoo.ru/api/user/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
