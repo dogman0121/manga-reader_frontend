@@ -8,8 +8,6 @@ function Verify() {
         
         const token = urlParams.get("t");
 
-        console.log(urlParams);
-
         if (token !== null){
             const sendVerificationToken = async(token: string) => {
                 const json = await verifyUser(token);
@@ -21,6 +19,8 @@ function Verify() {
             }
             sendVerificationToken(token);
         }
+
+        document.location.href="https://kanwoo.ru/"
 
         return () => {};
     }, []);

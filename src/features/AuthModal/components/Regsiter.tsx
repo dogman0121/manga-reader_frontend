@@ -61,8 +61,8 @@ function Register({ setSection }: { setSection: Function}) {
                     className={styles.Error}
                 >
                     {wrongForm === 1 && <>Пароли не совпадают</>}
-                    {wrongForm === 2 && <>Пользователь с такой почтой существует</>}
-                    {wrongForm === 3 && <>Пользователь с таким именем уже существует</>}
+                    {wrongForm === 2 && <>Пользователь с такой почтой уже существует</>}
+                    {wrongForm === 3 && <>Данное имя пользователя занято</>}
                     {wrongForm === 10 && <>Ошибка</>}
                 </Box>
             )}
