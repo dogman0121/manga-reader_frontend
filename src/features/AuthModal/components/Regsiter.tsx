@@ -6,6 +6,8 @@ import { useContext, useState } from "react";
 import registerUser from "../services/api/registerUser";
 import fetchUser from "../../../services/api/fetchUser";
 import UserContext from "../../../context/UserContext";
+import { saveAccessToken, saveRefreshToken } from "../../../utils/token";
+
 
 function Register({ setSection }: { setSection: Function}) {
     const [login, setLogin] = useState("");
@@ -26,6 +28,9 @@ function Register({ setSection }: { setSection: Function}) {
 
             if (response.msg) {
                 switch(response.msg){
+                    case "Email sent":
+                        setSection("verify");
+                        break;
                     case "Login already taken":
                         setWrongForm(3);
                         break;
@@ -37,8 +42,8 @@ function Register({ setSection }: { setSection: Function}) {
                 }
             }
             else {
-                localStorage.setItem("access_token", response.access_token);
-                localStorage.setItem("refresh_token", response.refresh_token);
+                saveAccessToken(response.access_token);
+                saveRefreshToken(response.refresh_token);
     
                 setUser(await fetchUser());
             }

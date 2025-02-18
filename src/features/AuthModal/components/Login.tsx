@@ -5,6 +5,7 @@ import loginUser from "../services/api/loginUser";
 import { useContext, useState } from "react";
 import fetchUser from "../../../services/api/fetchUser";
 import UserContext from "../../../context/UserContext";
+import { saveAccessToken, saveRefreshToken } from "../../../utils/token";
 
 
 function Login({ setSection }: { setSection: Function}) {
@@ -23,8 +24,8 @@ function Login({ setSection }: { setSection: Function}) {
             setWrongForm(true);
         }
         else {
-            localStorage.setItem("access_token", response.access_token);
-            localStorage.setItem("refresh_token", response.refresh_token);
+            saveAccessToken(response.access_token);
+            saveRefreshToken(response.refresh_token);
 
             setUser(await fetchUser());
         }

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { EmptyUser } from "./types/User"
 import UserContext from "./context/UserContext"
 import fetchUser from "./services/api/fetchUser";
+import Verify from "./features/AuthModal/components/Verify";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/auth" element={<AuthLayout />}>
               <Route path="register"/>
               <Route path="login"/>
+              <Route path="verify" element={<Verify />}/>
           </Route>
           <Route path="/" element={<AppLayout />}>
               <Route index element={<Home/>} />

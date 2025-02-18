@@ -1,9 +1,10 @@
 import Box from "@mui/material/Box"
 import Modal from "@mui/material/Modal";
-import { SyntheticEvent, useState } from "react";
+import { useState } from "react";
 import Register from "./Regsiter";
 import Login from "./Login";
 import Forgot from "./Forgot";
+import Message from "./Message";
 
 const style = {
     position: 'absolute',
@@ -16,16 +17,20 @@ const style = {
     pt: 2,
     px: 4,
     pb: 3,
+    border: "none",
     borderRadius: "20px"
 };
 
-function AuthModal({open, onClose}: {open: boolean, onClose: React.EventHandler<SyntheticEvent>}) {
+function AuthModal({open, onClose}: {open: boolean, onClose: Function}) {
     const [section, setSection] = useState("login");
 
     return (
         <Modal
             open={open}
-            onClose={onClose}
+            onClose={() => {
+                onClose();
+                setSection("login")
+            }}
         >
             <Box sx={{...style}}>
                 { section === "register" && (
@@ -36,6 +41,12 @@ function AuthModal({open, onClose}: {open: boolean, onClose: React.EventHandler<
                 )}
                 { section === "forgot" && (
                     <Forgot />
+                )}
+                { section === "verify" && (
+                    <Message 
+                        title="Подтвержение почты"
+                        information="На вашу почту отправлено письмо с подтверждением регистрации."
+                    />
                 )}
             </Box>
         </Modal>

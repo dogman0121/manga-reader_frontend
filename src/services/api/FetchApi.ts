@@ -1,20 +1,10 @@
-const getAccessToken = () => {
-    return localStorage.getItem("access_token");
-}
-
-const saveAccessToken = (token: string) => {
-    localStorage.setItem("access_token", token);
-}
-
-const saveRefreshToken = (token: string) => {
-    localStorage.setItem("refresh_token", token);
-}
+import { getAccessToken, saveAccessToken, saveRefreshToken, getRefreshToken } from "../../utils/token";
 
 const refreshToken = async () => {
     const response = await fetch("http://127.0.0.1:5000/user/refresh", {
         method: "POST",
         headers: {
-            Authorization: `Bearer ${localStorage.getItem("refresh_token")}`
+            Authorization: `Bearer ${getRefreshToken()}`
         }
     });
 
@@ -44,8 +34,8 @@ const FetchApi = async (url: string, body: RequestInit = {}) => {
     try {
         const response = await sendRequest(url, body);
 
-        if (response.status === 401) {
-            await refreshToken();
+        if (response.status === 401 && getRefreshToken()) {
+            await refreshToken() ;
 
             const newResponse = await sendRequest(url, body);
 
