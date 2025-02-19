@@ -7,9 +7,9 @@ import styles from "./AppLayout.module.css"
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Avatar, Checkbox } from "@mui/material";
+import { Avatar, Checkbox, Popover } from "@mui/material";
 import { getColorScheme, setColorScheme } from "../../utils/colorScheme";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import UserContext from "../../context/UserContext";
 import { EmptyUser } from "../../types/User";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
@@ -25,7 +25,11 @@ function Header({ setTheme }: {setTheme: Function}) {
 
     const [checked, setChecked] = useState(getColorScheme() === "dark" ? true : false);
 
-    const [authModalOpen, setAuthModalOpen] = useState(false);
+    const [authModalOpened, setAuthModalOpened] = useState(false);
+
+    const [userMenuOpened, setUserMenuOpened] = useState(false);
+
+    const avatarRef = useRef(null);
 
     return (
         <Box 
@@ -99,7 +103,7 @@ function Header({ setTheme }: {setTheme: Function}) {
                             />
                             {device !== "pc" &&
                                 <Avatar 
-                                    onClick={() => {setAuthModalOpen(true)}}
+                                    onClick={() => {setAuthModalOpened(true)}}
                                     sx={{
                                         width: "36px",
                                         height: "36px"
@@ -109,7 +113,7 @@ function Header({ setTheme }: {setTheme: Function}) {
                             {device === "pc" &&
                                 <Button 
                                     variant="contained" 
-                                    onClick={() => {setAuthModalOpen(true)}}
+                                    onClick={() => {setAuthModalOpened(true)}}
                                     sx={
                                         { 
                                             background: theme.palette.primary.main
@@ -123,22 +127,53 @@ function Header({ setTheme }: {setTheme: Function}) {
                     }
                     { user !== EmptyUser &&
                         <Avatar 
+                            ref={avatarRef}
                             src={user.avatar}
                             sx={{
                                 width: "36px",
                                 height: "36px"
                             }}
+                            onClick={() => {setUserMenuOpened(true)}}
                         />
                     }
                 </Box>
             </Box>
-            <AuthModal open={authModalOpen} onClose={() => {setAuthModalOpen(false)}}/>
+            <Popover
+                open={userMenuOpened}
+                onClose={() => {setUserMenuOpened(false)}}
+                anchorEl={avatarRef.current}
+                anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right"
+                }}
+                transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right"
+                }}
+                sx={{
+                    margin:"10px 0 0 0",
+                    ".MuiPaper-root": {
+                        borderRadius: "12px"
+                    }
+                }}
+            >
+                <Box
+                    sx={{
+                        padding: "10px"
+                    }}
+                >
+                    Сева крутой!!!
+                </Box>
+            </Popover>
+            <AuthModal open={authModalOpened} onClose={() => {setAuthModalOpened(false)}}/>
         </Box>
     )
 }
 
 function Footer() {
     const theme = useTheme();
+
+    const {device} = useDeviceDetect();
 
     return (
         <Box
@@ -155,8 +190,9 @@ function Footer() {
                 <Box 
                     sx={{
                         display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between"
+                        flexDirection: device == "mobile" ? "column" : "row",
+                        justifyContent: "space-between",
+                        rowGap: "30px"
                     }}
                 >
                     <Box className={styles.Footer_Section}>

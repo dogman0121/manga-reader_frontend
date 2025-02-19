@@ -1,7 +1,7 @@
 import { getAccessToken, saveAccessToken, saveRefreshToken, getRefreshToken } from "../../utils/token";
 
 const refreshToken = async () => {
-    const response = await fetch("http://127.0.0.1:5000/user/refresh", {
+    const response = await fetch("https://kanwoo.ru/api/user/refresh", {
         method: "POST",
         headers: {
             Authorization: `Bearer ${getRefreshToken()}`

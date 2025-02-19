@@ -20,7 +20,7 @@ function Verify() {
             sendVerificationToken(token);
         }
 
-        document.location.href="https://kanwoo.ru/"
+        document.location.href = "https://kanwoo.ru/";
 
         return () => {};
     }, []);

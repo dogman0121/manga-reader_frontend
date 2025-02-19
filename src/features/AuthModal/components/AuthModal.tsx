@@ -18,7 +18,10 @@ const style = {
     px: 4,
     pb: 3,
     border: "none",
-    borderRadius: "20px"
+    borderRadius: "20px",
+    "&:focus": {
+      outline: "none"
+    }
 };
 
 function AuthModal({open, onClose}: {open: boolean, onClose: Function}) {
