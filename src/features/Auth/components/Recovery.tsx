@@ -25,7 +25,7 @@ function Recovery({ setSection }: { setSection: Function}) {
 
         const response = await recoveryPassword(token, password);
 
-        if (response.msg === "Password changed")
+        if (response.msg === "Password updated")
             setSection("login");
     }
 
