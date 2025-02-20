@@ -14,6 +14,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme, darkTheme } from "./theme";
 import { CssBaseline } from "@mui/material";
 import Auth from "./features/Auth/components/Auth";
+import AuthPage from "./features/Auth/components/AuthPage";
 
 
 function App() {
@@ -55,11 +56,11 @@ function App() {
           >
             <Routes>
               <Route path="/auth" element={<AuthLayout />}>
-                  <Route path="register" element={<Auth section="register" />}/>
-                  <Route path="forgot" element={<Auth section="forgot" />}/>
-                  <Route path="login" element={<Auth section="login" />}/>
-                  <Route path="verify" element={<Auth section="verify" />}/>
-                  <Route path="recovery" element={<Auth section="recovery"/>} />
+                  <Route path="register" element={<AuthPage section="register" />}/>
+                  <Route path="forgot" element={<AuthPage section="forgot" />}/>
+                  <Route path="login" element={<AuthPage section="login" />}/>
+                  <Route path="verify" element={<AuthPage section="verify" />}/>
+                  <Route path="recovery" element={<AuthPage section="recovery"/>} />
               </Route>
               <Route path="/" element={<AppLayout />}>
                   <Route index element={<Home/>} />
