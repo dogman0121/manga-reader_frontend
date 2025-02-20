@@ -9,14 +9,10 @@ import { EmptyUser } from "./types/User"
 import UserContext from "./context/UserContext"
 import ThemeContext from "./context/ThemeContext"
 import fetchUser from "./services/api/fetchUser";
-import Verify from "./features/Auth/components/Verify";
-import Recovery from "./features/Auth/components/Recovery";
 import { getColorScheme, setColorScheme } from "./utils/colorScheme";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme, darkTheme } from "./theme";
 import { CssBaseline } from "@mui/material";
-import Register from "./features/Auth/components/Regsiter";
-import Login from "./features/Auth/components/Login";
 import Auth from "./features/Auth/components/Auth";
 
 
