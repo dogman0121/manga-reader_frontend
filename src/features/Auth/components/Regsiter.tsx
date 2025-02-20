@@ -44,7 +44,7 @@ function Register({ setSection }: { setSection: Function }) {
 
     return (
         <>
-            <h2>Регистрация</h2>
+            <h2 className={styles.Header}>Регистрация</h2>
             { wrongForm !== 0 && (
                 <Box
                     className={styles.Error}

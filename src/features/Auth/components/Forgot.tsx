@@ -18,7 +18,7 @@ function Forgot({ setSection }: { setSection: Function }) {
 
     return (
         <>
-            <h2>Восстановление пароля</h2>
+            <h2 className={styles.Header}>Восстановление пароля</h2>
             <Box
                 className={styles.Form}
             >

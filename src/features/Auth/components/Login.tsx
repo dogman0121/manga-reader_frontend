@@ -30,7 +30,7 @@ function Login({ setSection, onSuccess }: { setSection: Function, onSuccess?: Fu
 
     return (
         <>
-            <h2>Авторизация</h2>
+            <h2 className={styles.Header}>Авторизация</h2>
             { wrongForm && (
                 <Box
                     className={styles.Error}
