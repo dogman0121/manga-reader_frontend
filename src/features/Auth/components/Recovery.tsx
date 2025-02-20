@@ -46,6 +46,7 @@ function Recovery({ setSection }: { setSection: Function}) {
                     error={wrongForm}
                     label="Password"
                     variant="outlined"
+                    type="password"
                     color="secondary"
                     className={styles.Input}
                     onInput={(e) => {setPassword((e.target as HTMLInputElement).value)}}
