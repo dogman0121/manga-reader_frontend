@@ -13,7 +13,6 @@ import { getColorScheme, setColorScheme } from "./utils/colorScheme";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme, darkTheme } from "./theme";
 import { CssBaseline } from "@mui/material";
-import Auth from "./features/Auth/components/Auth";
 import AuthPage from "./features/Auth/components/AuthPage";
 
 
