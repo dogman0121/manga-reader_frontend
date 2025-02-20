@@ -2,14 +2,11 @@ import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import styles from "./Auth.module.css"
-import { useContext, useState } from "react";
+import { useState } from "react";
 import registerUser from "../services/api/registerUser";
-import fetchUser from "../../../services/api/fetchUser";
-import UserContext from "../../../context/UserContext";
-import { saveAccessToken, saveRefreshToken } from "../../../utils/token";
 
 
-function Register({ setSection }: { setSection: Function}) {
+function Register({ setSection }: { setSection: Function }) {
     const [login, setLogin] = useState("");
     
     const [email, setEmail] = useState("");
@@ -20,8 +17,6 @@ function Register({ setSection }: { setSection: Function}) {
 
     const [wrongForm, setWrongForm] = useState(0);
 
-    const { setUser } = useContext(UserContext);
-
     const handleRegister = async() => {
         if (password == repeatPassword){
             const response = await registerUser(login, email, password);
@@ -29,7 +24,7 @@ function Register({ setSection }: { setSection: Function}) {
             if (response.msg) {
                 switch(response.msg){
                     case "Email sent":
-                        setSection("verify");
+                        setSection("verification_message");
                         break;
                     case "Login already taken":
                         setWrongForm(3);
@@ -40,12 +35,6 @@ function Register({ setSection }: { setSection: Function}) {
                     default:
                         setWrongForm(10);
                 }
-            }
-            else {
-                saveAccessToken(response.access_token);
-                saveRefreshToken(response.refresh_token);
-    
-                setUser(await fetchUser());
             }
         }
         else {

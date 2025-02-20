@@ -16,9 +16,19 @@ import Header from "../../components/Header";
 import Main from "../../components/Main";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
+import { deleteRefreshToken, deleteAccessToken } from "../../utils/token";
 
 
 function UserMenu({open, onClose, anchorEl}: PopoverProps){
+    const { setUser } = useContext(UserContext);
+
+    const handleClose = () => {
+        deleteAccessToken()
+        deleteRefreshToken()
+        setUser(EmptyUser)
+        onClose ? onClose({}, "backdropClick") : null
+    }
+
     return (
         <Popover
             open={open}
@@ -40,7 +50,11 @@ function UserMenu({open, onClose, anchorEl}: PopoverProps){
             }}
         >
             <Box>
-                Сева топ
+                <Box
+                    onClick={handleClose}
+                >
+                    Выйти
+                </Box>
             </Box>
         </Popover>
     )
@@ -173,7 +187,7 @@ function AppHeader() {
                 onClose={() => {setUserMenuOpened(false)}}
                 anchorEl={avatarRef.current}
             />
-            <AuthModal open={authModalOpened} onClose={() => {setAuthModalOpened(false)}}/>
+            <AuthModal open={authModalOpened && user === EmptyUser} onClose={() => {setAuthModalOpened(false)}}/>
         </Header>
     )
 }

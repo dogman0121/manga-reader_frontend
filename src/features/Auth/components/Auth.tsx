@@ -6,7 +6,7 @@ import Message from './Message';
 import { Box } from '@mui/material';
 
 
-function Auth({ section }: { section: string }) {
+function Auth({ section, onAuth }: { section: string, onAuth: Function }) {
     const [currentSection, setCurrentSection] = useState(section);
 
     const style = {
@@ -33,7 +33,7 @@ function Auth({ section }: { section: string }) {
                 <Register setSection={setCurrentSection} />
             )}
             { currentSection === "login" && (
-                <Login setSection={setCurrentSection}/>
+                <Login setSection={setCurrentSection} onSuccess={onAuth}/>
             )}
             { currentSection === "forgot" && (
                 <Forgot setSection={setCurrentSection}/>

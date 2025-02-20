@@ -3,10 +3,9 @@ import TextField from "@mui/material/TextField";
 import styles from "./Auth.module.css"
 import { useState } from "react";
 import recoveryPassword from "../services/api/recoveryPassword";
-import { saveAccessToken, saveRefreshToken } from "../../../utils/token";
 
 
-function Recovery() {
+function Recovery({ setSection }: { setSection: Function}) {
     const [wrongForm, setWrongForm] = useState(false);
 
     const [password, setPassword] = useState("");
@@ -26,10 +25,8 @@ function Recovery() {
 
         const response = await recoveryPassword(token, password);
 
-        if (!response.msg){
-            saveAccessToken(response.access_token);
-            saveRefreshToken(response.refresh_token);
-        }
+        if (response.msg === "Password changed")
+            setSection("login");
     }
 
     return (

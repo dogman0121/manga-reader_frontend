@@ -13,3 +13,11 @@ export const saveAccessToken = (token: string) => {
 export const saveRefreshToken = (token: string) => {
     localStorage.setItem("refresh_token", token);
 }
+
+export const deleteAccessToken = () => {
+    localStorage.removeItem("access_token");
+}
+
+export const deleteRefreshToken = () => {
+    localStorage.removeItem("refresh_token");
+}

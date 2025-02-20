@@ -5,14 +5,14 @@ import { useState } from "react";
 import getRecoveryMessage from "../services/api/getRecoveryMessage";
 
 
-function Forgot({ setSection }: { setSection: Function}) {
+function Forgot({ setSection }: { setSection: Function }) {
     const [email, setEmail] = useState("");
 
     const handleForgot = async () => {
         const response = await getRecoveryMessage(email);
 
         if (response.msg === "Email sent") {
-            setSection("recovery");
+            setSection("forgot_message");
         }
     }
 

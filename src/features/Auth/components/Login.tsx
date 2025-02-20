@@ -2,20 +2,16 @@ import { Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import styles from "./Auth.module.css"
 import loginUser from "../services/api/loginUser";
-import { useContext, useState } from "react";
-import fetchUser from "../../../services/api/fetchUser";
-import UserContext from "../../../context/UserContext";
+import { useState } from "react";
 import { saveAccessToken, saveRefreshToken } from "../../../utils/token";
 
 
-function Login({ setSection }: { setSection: Function}) {
+function Login({ setSection, onSuccess }: { setSection: Function, onSuccess?: Function}) {
     const [wrongForm, setWrongForm] = useState(false);
 
     const [login, setLogin] = useState("");
 
     const [password, setPassword] = useState("");
-
-    const { setUser } = useContext(UserContext);
 
     const handleLogin = async() => {
         const response = await loginUser(login, password);
@@ -27,7 +23,7 @@ function Login({ setSection }: { setSection: Function}) {
             saveAccessToken(response.access_token);
             saveRefreshToken(response.refresh_token);
 
-            setUser(await fetchUser());
+            onSuccess ? onSuccess() : null;
         }
 
     }
