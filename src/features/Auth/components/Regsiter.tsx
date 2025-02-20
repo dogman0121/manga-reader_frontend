@@ -112,7 +112,7 @@ function Register({ setSection }: { setSection: Function }) {
                     }}
                     onClick={()=>{setSection("login")}}
                 >
-                    Зарегестрироваться
+                    Войти
                 </Box>
             </Box>
         </>
