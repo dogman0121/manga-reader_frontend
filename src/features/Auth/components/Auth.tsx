@@ -4,6 +4,7 @@ import Login from './Login';
 import Forgot from './Forgot';
 import Message from './Message';
 import { Box } from '@mui/material';
+import Recovery from './Recovery';
 
 
 function Auth({ section, onAuth }: { section: string, onAuth: Function }) {
@@ -38,7 +39,16 @@ function Auth({ section, onAuth }: { section: string, onAuth: Function }) {
             { currentSection === "forgot" && (
                 <Forgot setSection={setCurrentSection}/>
             )}
-            { currentSection === "verify" && (
+            { currentSection === "recovery" && (
+                <Recovery setSection={setCurrentSection}/>
+            )}
+            { currentSection === "forgot_message" && (
+                <Message 
+                    title="Восстановление пароля"
+                    information="На вашу почту отправлено письмо с восстановлением пароля."
+                />
+            )}
+            { currentSection === "verify_message" && (
                 <Message 
                     title="Подтвержение почты"
                     information="На вашу почту отправлено письмо с подтверждением регистрации."

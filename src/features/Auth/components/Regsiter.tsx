@@ -24,7 +24,7 @@ function Register({ setSection }: { setSection: Function }) {
             if (response.msg) {
                 switch(response.msg){
                     case "Email sent":
-                        setSection("verification_message");
+                        setSection("verify_message");
                         break;
                     case "Login already taken":
                         setWrongForm(3);
