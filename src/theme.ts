@@ -18,14 +18,6 @@ declare module '@mui/material/styles' {
 
 export const defaultTheme = createTheme({
     components: {
-        MuiCssBaseline:{
-            styleOverrides: `
-                input:-webkit-autofill {
-                    boxShadow: 0 0 0 100px #FFFFFF inset !important,
-                    WebkitTextFillColor: inhenerit !important
-                }
-            `
-        },
         MuiButton: {
             styleOverrides: {
                 root: {

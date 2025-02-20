@@ -1,23 +1,56 @@
 import { Outlet } from "react-router-dom";
-import { ThemeProvider } from "@mui/material/styles";
 import { useTheme } from "@mui/material/styles";
-import { darkTheme, lightTheme } from "../../theme";
 import SvgIcon from "@mui/material/SvgIcon";
 import styles from "./AppLayout.module.css"
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import { Avatar, Checkbox, Popover } from "@mui/material";
-import { getColorScheme, setColorScheme } from "../../utils/colorScheme";
+import { Avatar, Checkbox, Popover, PopoverProps} from "@mui/material";
+import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
 import UserContext from "../../context/UserContext";
 import { EmptyUser } from "../../types/User";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
-import AuthModal from "../../features/AuthModal/components/AuthModal";
+import AuthModal from "../../features/Auth/components/AuthModal";
+import ThemeContext from "../../context/ThemeContext";
+import Header from "../../components/Header";
+import Main from "../../components/Main";
+import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
 
 
-function Header({ setTheme }: {setTheme: Function}) {
+function UserMenu({open, onClose, anchorEl}: PopoverProps){
+    return (
+        <Popover
+            open={open}
+            onClose={onClose}
+            anchorEl={anchorEl}
+            anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right"
+            }}
+            transformOrigin={{
+                vertical: "top",
+                horizontal: "right"
+            }}
+            sx={{
+                margin:"10px 0 0 0",
+                ".MuiPaper-root": {
+                    borderRadius: "12px"
+                }
+            }}
+        >
+            <Box>
+                Сева топ
+            </Box>
+        </Popover>
+    )
+}
+
+
+function AppHeader() {
     const theme = useTheme();
+
+    const { setTheme } = useContext(ThemeContext);
     
     const { device } = useDeviceDetect();
 
@@ -32,41 +65,35 @@ function Header({ setTheme }: {setTheme: Function}) {
     const avatarRef = useRef(null);
 
     return (
-        <Box 
-            sx = {{
-                background: theme.palette.customBackgrounds?.header,
-                boxShadow: "0 1px 0 rgba(0, 0, 0, 0.1)"
-            }}
-            component="header"
-        >
+        <Header>
             <Box
                 sx = {{
                     display: "flex",
                     justifyContent: "space-between",
-                    py: "10px"
                 }}
-                className={styles.Content}
             >
                 <Box
                     sx={{
                         display: "flex"
                     }}
-                >
-                    <SvgIcon 
-                        viewBox="0 0 96 96"
-                        sx={{
-                            width: "32px",
-                            height: "32px"
-                        }}
-                    >
-                        <g transform="translate(0.000000,96.000000) scale(0.100000,-0.100000)"
-                            fill="var(--icon)" stroke="none">
-                            <path d="M135 888 c-3 -7 -4 -195 -3 -418 l3 -405 85 0 85 0 3 131 3 130 43
-                            43 44 43 127 -176 127 -176 84 0 c69 0 84 3 84 16 0 8 -72 115 -160 236 l-161
-                            221 29 31 c133 143 282 318 277 326 -3 6 -46 10 -94 10 l-87 0 -155 -171 -154
-                            -171 -5 169 -5 168 -83 3 c-60 2 -84 -1 -87 -10z"/>
-                        </g>
-                    </SvgIcon>
+                >   
+                    <Link to="/">
+                        <SvgIcon 
+                            viewBox="0 0 96 96"
+                            sx={{
+                                width: "32px",
+                                height: "32px"
+                            }}
+                        >
+                            <g transform="translate(0.000000,96.000000) scale(0.100000,-0.100000)"
+                                fill="var(--icon)" stroke="none">
+                                <path d="M135 888 c-3 -7 -4 -195 -3 -418 l3 -405 85 0 85 0 3 131 3 130 43
+                                43 44 43 127 -176 127 -176 84 0 c69 0 84 3 84 16 0 8 -72 115 -160 236 l-161
+                                221 29 31 c133 143 282 318 277 326 -3 6 -46 10 -94 10 l-87 0 -155 -171 -154
+                                -171 -5 169 -5 168 -83 3 c-60 2 -84 -1 -87 -10z"/>
+                            </g>
+                        </SvgIcon>
+                    </Link>
                     
                     <Box component="ul"
                         sx={{
@@ -76,8 +103,11 @@ function Header({ setTheme }: {setTheme: Function}) {
                             columnGap: "25px"
                         }}
                     >
+                        
                         <Box component="li">
-                            каталог
+                            <Link to="/catalog">
+                                каталог
+                            </Link>
                         </Box>
                         <Box component="li">
                             поиск
@@ -138,116 +168,67 @@ function Header({ setTheme }: {setTheme: Function}) {
                     }
                 </Box>
             </Box>
-            <Popover
+            <UserMenu
                 open={userMenuOpened}
                 onClose={() => {setUserMenuOpened(false)}}
                 anchorEl={avatarRef.current}
-                anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "right"
-                }}
-                transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right"
-                }}
-                sx={{
-                    margin:"10px 0 0 0",
-                    ".MuiPaper-root": {
-                        borderRadius: "12px"
-                    }
-                }}
-            >
-                <Box
-                    sx={{
-                        padding: "10px"
-                    }}
-                >
-                    Сева крутой!!!
-                </Box>
-            </Popover>
+            />
             <AuthModal open={authModalOpened} onClose={() => {setAuthModalOpened(false)}}/>
-        </Box>
+        </Header>
     )
 }
 
-function Footer() {
-    const theme = useTheme();
-
+function AppFooter() {
     const {device} = useDeviceDetect();
 
     return (
-        <Box
-            sx={{
-                background: theme.palette.customBackgrounds?.footer,
-                marginTop: "20px",
-                py: "20px"
-            }}
-            component="footer"
-        >
-            <Box
-                className={styles.Content}
+        <Footer>
+            <Box 
+                sx={{
+                    display: "flex",
+                    flexDirection: device == "mobile" ? "column" : "row",
+                    justifyContent: "space-between",
+                    rowGap: "30px"
+                }}
             >
-                <Box 
-                    sx={{
-                        display: "flex",
-                        flexDirection: device == "mobile" ? "column" : "row",
-                        justifyContent: "space-between",
-                        rowGap: "30px"
-                    }}
-                >
-                    <Box className={styles.Footer_Section}>
-                        <Box className={styles.Footer_Subsection}>
-                            <Box className={styles.Footer_h1}>KANWOO</Box>
-                            <Box className={styles.Footer_Item}>Обратная связь</Box>
-                        </Box>
-                        <Box className={styles.Footer_Subsection}>
-                            <Box className={styles.Footer_h2}>Почта для связи</Box>
-                            <Box className={styles.Footer_Item}>contact@kanwoo.ru</Box>
-                        </Box>
+                <Box className={styles.Footer_Section}>
+                    <Box className={styles.Footer_Subsection}>
+                        <Box className={styles.Footer_h1}>KANWOO</Box>
+                        <Box className={styles.Footer_Item}>Обратная связь</Box>
                     </Box>
-                    <Box className={styles.Footer_Section}>
-                        <Box className={styles.Footer_h2}>Полезные статьи</Box>
-                        <Box className={styles.Footer_Content}>
-                            <Box className={styles.Footer_Item}>Как создать мангу</Box>
-                            <Box className={styles.Footer_Item}>Как создать команду</Box>
-                            <Box className={styles.Footer_Item}>Как добавить главу</Box>
-                        </Box>
+                    <Box className={styles.Footer_Subsection}>
+                        <Box className={styles.Footer_h2}>Почта для связи</Box>
+                        <Box className={styles.Footer_Item}>contact@kanwoo.ru</Box>
                     </Box>
-                    <Box className={styles.Footer_Section}>
-                        <Box className={styles.Footer_h2}>Инфо</Box>
-                        <Box className={styles.Footer_Content}>
-                            <Box className={styles.Footer_Item}>Пользовательское соглашение</Box>
-                            <Box className={styles.Footer_Item}>Для правообладателей</Box>
-                        </Box>
+                </Box>
+                <Box className={styles.Footer_Section}>
+                    <Box className={styles.Footer_h2}>Полезные статьи</Box>
+                    <Box className={styles.Footer_Content}>
+                        <Box className={styles.Footer_Item}>Как создать мангу</Box>
+                        <Box className={styles.Footer_Item}>Как создать команду</Box>
+                        <Box className={styles.Footer_Item}>Как добавить главу</Box>
+                    </Box>
+                </Box>
+                <Box className={styles.Footer_Section}>
+                    <Box className={styles.Footer_h2}>Инфо</Box>
+                    <Box className={styles.Footer_Content}>
+                        <Box className={styles.Footer_Item}>Пользовательское соглашение</Box>
+                        <Box className={styles.Footer_Item}>Для правообладателей</Box>
                     </Box>
                 </Box>
             </Box>
-        </Box>
+        </Footer>
     )
 }
 
 export default function AppLayout() {
-    const [isDarkMode, setIsDarkMode] = useState(getColorScheme() === "dark");
-
-    const handleTheme = (theme: string) => {
-        setIsDarkMode(!isDarkMode);
-        setColorScheme(theme);
-    }
-
     return (
-        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-            <CssBaseline />
-            <Header 
-                setTheme={handleTheme}
-            />
-            <main>
-                <Box 
-                    className={styles.Content}
-                >
-                    <Outlet />
-                </Box>
-            </main>
-            <Footer />
-        </ThemeProvider>
+        <>
+            <AppHeader/>
+            <Main>
+                <Outlet />
+            </Main>
+            <AppFooter />
+        </>
     )
 };

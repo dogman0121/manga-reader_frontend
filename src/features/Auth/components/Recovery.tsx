@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import styles from "./AuthModal.module.css"
+import styles from "./Auth.module.css"
 import { useState } from "react";
 import recoveryPassword from "../services/api/recoveryPassword";
 import { saveAccessToken, saveRefreshToken } from "../../../utils/token";

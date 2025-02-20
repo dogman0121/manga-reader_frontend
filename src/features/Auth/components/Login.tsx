@@ -1,6 +1,6 @@
 import { Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import styles from "./AuthModal.module.css"
+import styles from "./Auth.module.css"
 import loginUser from "../services/api/loginUser";
 import { useContext, useState } from "react";
 import fetchUser from "../../../services/api/fetchUser";
