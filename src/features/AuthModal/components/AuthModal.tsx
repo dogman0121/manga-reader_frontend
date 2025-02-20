@@ -43,7 +43,7 @@ function AuthModal({open, onClose}: {open: boolean, onClose: Function}) {
                     <Login setSection={setSection}/>
                 )}
                 { section === "forgot" && (
-                    <Forgot />
+                    <Forgot setSection={setSection}/>
                 )}
                 { section === "verify" && (
                     <Message 

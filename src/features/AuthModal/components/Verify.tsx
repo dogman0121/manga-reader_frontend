@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import verifyUser from "../services/api/verifyUser";
+import verifyRegistration from "../services/api/verifyRegistration";
 import { saveAccessToken, saveRefreshToken } from "../../../utils/token";
 
 function Verify() {
@@ -9,18 +9,19 @@ function Verify() {
         const token = urlParams.get("t");
 
         if (token !== null){
-            const sendVerificationToken = async(token: string) => {
-                const json = await verifyUser(token);
-
-                if (!json.msg) {
-                    saveAccessToken(json.access_token);
-                    saveRefreshToken(json.refresh_token);
-                }
-            }
-            sendVerificationToken(token);
+            verifyRegistration(token)
+                .then((json) => {
+                    if (!json.msg) {
+                        saveAccessToken(json.access_token);
+                        saveRefreshToken(json.refresh_token);
+                    }
+                    else
+                        document.location.href = "https://kanwoo.ru/";
+                })
+                .then(() => {
+                    document.location.href = "https://kanwoo.ru/";
+                })
         }
-
-        document.location.href = "https://kanwoo.ru/";
 
         return () => {};
     }, []);

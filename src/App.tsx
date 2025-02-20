@@ -9,6 +9,7 @@ import { EmptyUser } from "./types/User"
 import UserContext from "./context/UserContext"
 import fetchUser from "./services/api/fetchUser";
 import Verify from "./features/AuthModal/components/Verify";
+import Recovery from "./features/AuthModal/components/Recovery";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
               <Route path="register"/>
               <Route path="login"/>
               <Route path="verify" element={<Verify />}/>
+              <Route path="recovery" element={<Recovery />} />
           </Route>
           <Route path="/" element={<AppLayout />}>
               <Route index element={<Home/>} />
