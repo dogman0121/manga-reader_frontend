@@ -1,9 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
-import SvgIcon from "@mui/material/SvgIcon";
 import styles from "./AppLayout.module.css"
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import { SvgIcon, Box, Button, Drawer, DrawerProps } from "@mui/material";
 import { Avatar, Checkbox, Popover, PopoverProps} from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
@@ -19,16 +17,35 @@ import { Link } from "react-router-dom";
 import { deleteRefreshToken, deleteAccessToken } from "../../utils/token";
 
 
-function UserMenu({open, onClose, anchorEl}: PopoverProps){
+function UserMenu(){
     const { setUser } = useContext(UserContext);
 
-    const handleClose = () => {
+    const handleLogout = () => {
         deleteAccessToken()
         deleteRefreshToken()
         setUser(EmptyUser)
-        onClose ? onClose({}, "backdropClick") : null
     }
 
+    return (
+        <Box>
+            <Button
+                sx={{
+                    width: "100%",
+                    borderRadius: "10px",
+                    textTransform: "none",
+                    height: "30px"
+                }}
+                color="error"
+                variant="text"
+                onClick={handleLogout}
+            >
+                Выйти
+            </Button>
+        </Box>
+    )
+}
+
+function UserMenuPopover({open, onClose, anchorEl}: PopoverProps) {
     return (
         <Popover
             open={open}
@@ -45,18 +62,33 @@ function UserMenu({open, onClose, anchorEl}: PopoverProps){
             sx={{
                 margin:"10px 0 0 0",
                 ".MuiPaper-root": {
-                    borderRadius: "12px"
+                    borderRadius: "12px",
+                    width: "250px",
+                    padding: "10px",
                 }
             }}
-        >
-            <Box>
-                <Box
-                    onClick={handleClose}
-                >
-                    Выйти
-                </Box>
-            </Box>
+        >   
+            <UserMenu />
         </Popover>
+    )
+}
+
+function UserMenuDrawer({open, onClose}: DrawerProps) {
+    return (
+        <Drawer
+            open={open}
+            onClose={onClose}
+            anchor="right"
+        >
+            <Box
+                sx={{
+                    width: "70vw",
+                    padding: "25px 15px"
+                }}
+            >
+                <UserMenu />
+            </Box>
+        </Drawer>
     )
 }
 
@@ -182,11 +214,18 @@ function AppHeader() {
                     }
                 </Box>
             </Box>
-            <UserMenu
+            { device !== "mobile" ?
+            <UserMenuPopover
                 open={userMenuOpened}
                 onClose={() => {setUserMenuOpened(false)}}
                 anchorEl={avatarRef.current}
             />
+            :
+            <UserMenuDrawer 
+                open={userMenuOpened}
+                onClose={() => {setUserMenuOpened(false)}}
+            />
+            }
             <AuthModal open={authModalOpened && user === EmptyUser} onClose={() => {setAuthModalOpened(false)}}/>
         </Header>
     )
