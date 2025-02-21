@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import styles from "./AppLayout.module.css"
-import { SvgIcon, Box, Button, Drawer, DrawerProps } from "@mui/material";
+import { SvgIcon, Box, Button, Drawer, DrawerProps, Typography } from "@mui/material";
 import { Avatar, Checkbox, Popover, PopoverProps} from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
@@ -15,6 +15,7 @@ import Main from "../../components/Main";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import { deleteRefreshToken, deleteAccessToken } from "../../utils/token";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 
 function UserMenu(){
@@ -33,13 +34,20 @@ function UserMenu(){
                     width: "100%",
                     borderRadius: "10px",
                     textTransform: "none",
-                    height: "30px"
+                    fontSize: "15px"
                 }}
                 color="error"
                 variant="text"
                 onClick={handleLogout}
             >
-                Выйти
+                <ExitToAppIcon fontSize="small"/> 
+                <Typography 
+                    sx={{
+                        ml: "5px"
+                    }}
+                >
+                    Выход
+                </Typography>
             </Button>
         </Box>
     )
@@ -60,15 +68,20 @@ function UserMenuPopover({open, onClose, anchorEl}: PopoverProps) {
                 horizontal: "right"
             }}
             sx={{
-                margin:"10px 0 0 0",
+                mt:"10px",
                 ".MuiPaper-root": {
                     borderRadius: "12px",
-                    width: "250px",
-                    padding: "10px",
                 }
             }}
         >   
-            <UserMenu />
+            <Box
+                sx={{
+                    width: "250px",
+                    padding: "10px",
+                }}
+            >
+                <UserMenu />
+            </Box>
         </Popover>
     )
 }
