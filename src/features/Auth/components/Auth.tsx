@@ -19,9 +19,7 @@ function Auth({ section, onAuth }: { section: string, onAuth: Function }) {
         maxWidth: 400,
         bgcolor: 'background.paper',
         boxShadow: 24,
-        pt: 3,
-        px: 4,
-        pb: 3,
+        padding: "24px 32px",
         border: "none",
         borderRadius: "20px",
         "&:focus": {

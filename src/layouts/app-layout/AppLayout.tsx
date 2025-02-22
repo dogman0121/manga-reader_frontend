@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import styles from "./AppLayout.module.css"
-import { SvgIcon, Box, Button, Drawer, DrawerProps, Typography } from "@mui/material";
+import { SvgIcon, Box, Button, Typography } from "@mui/material";
 import { Avatar, Checkbox, Popover, PopoverProps} from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
 import UserContext from "../../context/UserContext";
 import { EmptyUser } from "../../types/User";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
-import AuthModal from "../../features/Auth/components/AuthModal";
+import AuthModal from "../../features/auth/components/AuthModal";
 import ThemeContext from "../../context/ThemeContext";
 import Header from "../../components/Header";
 import Main from "../../components/Main";
@@ -16,6 +16,7 @@ import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import { deleteRefreshToken, deleteAccessToken } from "../../utils/token";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import SearchModal from "../../features/search/components/SearchModal";
 
 
 function UserMenu(){
@@ -86,32 +87,30 @@ function UserMenuPopover({open, onClose, anchorEl}: PopoverProps) {
     )
 }
 
-function UserMenuDrawer({open, onClose}: DrawerProps) {
-    return (
-        <Drawer
-            open={open}
-            onClose={onClose}
-            anchor="right"
-        >
-            <Box
-                sx={{
-                    width: "70vw",
-                    padding: "25px 15px"
-                }}
-            >
-                <UserMenu />
-            </Box>
-        </Drawer>
-    )
-}
+// function UserMenuDrawer({open, onClose}: DrawerProps) {
+//     return (
+//         <Drawer
+//             open={open}
+//             onClose={onClose}
+//             anchor="right"
+//         >
+//             <Box
+//                 sx={{
+//                     width: "70vw",
+//                     padding: "25px 15px"
+//                 }}
+//             >
+//                 <UserMenu />
+//             </Box>
+//         </Drawer>
+//     )
+// }
 
 
 function AppHeader() {
     const theme = useTheme();
 
     const { setTheme } = useContext(ThemeContext);
-    
-    const { device } = useDeviceDetect();
 
     const { user } = useContext(UserContext);
 
@@ -120,6 +119,8 @@ function AppHeader() {
     const [authModalOpened, setAuthModalOpened] = useState(false);
 
     const [userMenuOpened, setUserMenuOpened] = useState(false);
+
+    const [searchModalOpened, setSearchModalOpened] = useState(false);
 
     const avatarRef = useRef(null);
 
@@ -168,7 +169,7 @@ function AppHeader() {
                                 каталог
                             </Link>
                         </Box>
-                        <Box component="li">
+                        <Box component="li" onClick={() => {setSearchModalOpened(true)}}>
                             поиск
                         </Box>
                     </Box>
@@ -190,28 +191,17 @@ function AppHeader() {
                                     }
                                 }
                             />
-                            {device !== "pc" &&
-                                <Avatar 
-                                    onClick={() => {setAuthModalOpened(true)}}
-                                    sx={{
-                                        width: "36px",
-                                        height: "36px"
-                                    }}
-                                />
-                            }
-                            {device === "pc" &&
-                                <Button 
-                                    variant="contained" 
-                                    onClick={() => {setAuthModalOpened(true)}}
-                                    sx={
-                                        { 
-                                            background: theme.palette.primary.main
-                                        }
+                            <Button 
+                                variant="contained" 
+                                onClick={() => {setAuthModalOpened(true)}}
+                                sx={
+                                    { 
+                                        background: theme.palette.primary.main
                                     }
-                                >
-                                    Войти
-                                </Button>
-                            }
+                                }
+                            >
+                                Войти
+                            </Button>
                         </>
                     }
                     { user !== EmptyUser &&
@@ -227,19 +217,13 @@ function AppHeader() {
                     }
                 </Box>
             </Box>
-            { device !== "mobile" ?
             <UserMenuPopover
                 open={userMenuOpened}
                 onClose={() => {setUserMenuOpened(false)}}
                 anchorEl={avatarRef.current}
             />
-            :
-            <UserMenuDrawer 
-                open={userMenuOpened}
-                onClose={() => {setUserMenuOpened(false)}}
-            />
-            }
             <AuthModal open={authModalOpened && user === EmptyUser} onClose={() => {setAuthModalOpened(false)}}/>
+            <SearchModal open={searchModalOpened} onClose={() => {setSearchModalOpened(false)}}/>
         </Header>
     )
 }
@@ -287,14 +271,17 @@ function AppFooter() {
     )
 }
 
-export default function AppLayout() {
+function AppLayout() {
     return (
         <>
             <AppHeader/>
             <Main>
                 <Outlet />
+                
             </Main>
             <AppFooter />
         </>
     )
 };
+
+export default AppLayout;

@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import AuthLayout from "./layouts/auth-layout/AuthLayout";
 import AppLayout from "./layouts/app-layout/AppLayout";
+import AppLayoutMobile from "./layouts/app-layout-mobile/AppLayoutMobile";
 import Home from "./pages/home/Home";
 import Title from "./pages/title/Title";
 import NotFound from "./pages/not-found/NotFound";
@@ -13,18 +14,21 @@ import { getColorScheme, setColorScheme } from "./utils/colorScheme";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme, darkTheme } from "./theme";
 import { CssBaseline } from "@mui/material";
-import AuthPage from "./features/Auth/components/AuthPage";
+import AuthPage from "./features/auth/components/AuthPage";
+import useDeviceDetect from "./hooks/useDeviceDetect";
 
 
 function App() {
   const [user, setUser] = useState(EmptyUser);
 
   const [isDarkMode, setIsDarkMode] = useState(getColorScheme() === "dark");
-  
-    const setTheme = (theme: string) => {
-        setIsDarkMode(!isDarkMode);
-        setColorScheme(theme);
-    }
+
+  const { device } = useDeviceDetect();
+
+  const setTheme = (theme: string) => {
+      setIsDarkMode(!isDarkMode);
+      setColorScheme(theme);
+  }
 
   useEffect(() => {
     const loadUser = async () => {
@@ -61,7 +65,7 @@ function App() {
                   <Route path="verify" element={<AuthPage section="verify" />}/>
                   <Route path="recovery" element={<AuthPage section="recovery"/>} />
               </Route>
-              <Route path="/" element={<AppLayout />}>
+              <Route path="/" element={device !== "mobile" ? <AppLayout /> : <AppLayoutMobile />}>
                   <Route index element={<Home/>} />
                   <Route path="manga/:id" element={<Title />} />
                   <Route path="*" element={<NotFound />} />
