@@ -52,7 +52,6 @@ function AppLayoutMobile() {
                     >
                         <BottomNavigationAction 
                             sx={actionStyles} 
-                            label="Домой"
                             icon={
                                 <Link to="/">
                                     <HomeRoundedIcon fontSize="medium"/>
@@ -61,7 +60,6 @@ function AppLayoutMobile() {
                         />
                         <BottomNavigationAction 
                             sx={actionStyles} 
-                            label="Поиск"
                             icon={
                                 <Link to="/search">
                                     <SearchRoundedIcon fontSize="medium"/>
@@ -70,12 +68,10 @@ function AppLayoutMobile() {
                         />
                         <BottomNavigationAction 
                             sx={actionStyles} 
-                            label="Уведомления"
                             icon={<NotificationsRoundedIcon fontSize="medium"/>} 
                         />
                         <BottomNavigationAction 
                             sx={actionStyles} 
-                            label="Меню"
                             icon={<MenuRoundedIcon fontSize="medium"/>} 
                             onClick={() => {setMenuOpened(true)}}
                         />
