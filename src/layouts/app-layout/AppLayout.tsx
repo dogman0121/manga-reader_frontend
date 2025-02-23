@@ -6,7 +6,7 @@ import { Avatar, Checkbox } from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
 import UserContext from "../../context/UserContext";
-import { EmptyUser } from "../../types/User";
+import { EMPTY_USER } from "../../types/User";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import AuthModal from "../../features/auth/components/AuthModal";
 import ThemeContext from "../../context/ThemeContext";
@@ -91,7 +91,7 @@ function AppHeader() {
                         flexDirection: "row"
                     }}
                 >
-                    {user === EmptyUser && 
+                    {user === EMPTY_USER && 
                         <>
                             <Checkbox
                                 checked={checked}
@@ -115,7 +115,7 @@ function AppHeader() {
                             </Button>
                         </>
                     }
-                    { user !== EmptyUser &&
+                    { user !== EMPTY_USER &&
                         <Avatar 
                             ref={avatarRef}
                             src={user.avatar}
@@ -133,7 +133,7 @@ function AppHeader() {
                 onClose={() => {setUserMenuOpened(false)}}
                 anchorEl={avatarRef.current}
             />
-            <AuthModal open={authModalOpened && user === EmptyUser} onClose={() => {setAuthModalOpened(false)}}/>
+            <AuthModal open={authModalOpened && user === EMPTY_USER} onClose={() => {setAuthModalOpened(false)}}/>
             <SearchModal open={searchModalOpened} onClose={() => {setSearchModalOpened(false)}}/>
         </Header>
     )

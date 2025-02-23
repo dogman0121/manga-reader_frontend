@@ -1,4 +1,4 @@
-import { EmptyUser } from "../../types/User";
+import { EMPTY_USER } from "../../types/User";
 import FetchApi from "./FetchApi";
 
 const fetchUser = async() => {
@@ -7,7 +7,7 @@ const fetchUser = async() => {
     if (response.ok)
         return await response.json();
     else 
-        return EmptyUser;
+        return EMPTY_USER;
 }
 
 export default fetchUser;

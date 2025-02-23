@@ -6,7 +6,7 @@ import Home from "./pages/home/Home";
 import Title from "./pages/title/Title";
 import NotFound from "./pages/not-found/NotFound";
 import { useEffect, useState } from "react";
-import { EmptyUser } from "./types/User"
+import { EMPTY_USER } from "./types/User"
 import UserContext from "./context/UserContext"
 import ThemeContext from "./context/ThemeContext"
 import fetchUser from "./services/api/fetchUser";
@@ -19,7 +19,7 @@ import useDeviceDetect from "./hooks/useDeviceDetect";
 
 
 function App() {
-  const [user, setUser] = useState(EmptyUser);
+  const [user, setUser] = useState(EMPTY_USER);
 
   const [isDarkMode, setIsDarkMode] = useState(getColorScheme() === "dark");
 

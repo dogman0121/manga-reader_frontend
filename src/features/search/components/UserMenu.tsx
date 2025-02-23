@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { EmptyUser } from "../../../types/User";
+import { EMPTY_USER } from "../../../types/User";
 import UserContext from "../../../context/UserContext";
 import { Avatar, Box, Button, Typography, Paper, DrawerProps,Popover, PopoverProps } from "@mui/material";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -7,13 +7,56 @@ import useDeviceDetect from "../../../hooks/useDeviceDetect";
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-import MobileDrawer from "./ui/MobileDrawer";
+import MobileDrawer from "../../../components/ui/MobileDrawer";
+import AuthModal from "../../auth/components/AuthModal";
+import { Checkbox } from "@mui/material";
+import { getColorScheme } from "../../../utils/colorScheme";
+import ThemeContext from "../../../context/ThemeContext";
+import UserMenuContext from "../../../context/UserMenuContext";
+import { deleteAccessToken, deleteRefreshToken } from "../../../utils/token";
 
 
 function Settings() {
+    const [ isDarkMode, setIsDarkMode ] = useState(getColorScheme() === "dark");
+
+    const { setTheme } = useContext(ThemeContext);
+
     return (
         <>
-            Првие
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column"
+                }}
+            >
+                <Typography
+                    sx={{
+                        fontSize: "18px",
+                        textAlign: "center"
+                    }}
+                >
+                    Настройки
+                </Typography>
+                <Box
+                    sx={{
+                        mt: "5px",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    }}
+                >
+                    <Typography>Тема</Typography>
+                    <Checkbox 
+                        checked={isDarkMode}
+                        onChange={
+                            (e: React.ChangeEvent<HTMLInputElement>) => { 
+                                setIsDarkMode(e.target.checked);
+                                e.target.checked ? setTheme("dark") : setTheme("light") 
+                            }
+                        }
+                    />
+                </Box>
+            </Box>
         </>
     )
 }
@@ -92,7 +135,15 @@ function UserWidget() {
 }
 
 
-function ExitButton({ onLogout }: { onLogout?: React.ReactEventHandler<HTMLButtonElement> }) {
+function ExitButton() {
+    const { setUser } = useContext(UserContext);
+
+    const onLogout = () => {
+        deleteAccessToken();
+        deleteRefreshToken();
+        setUser(EMPTY_USER);
+    }
+
     return (
         <Button
             sx={{
@@ -119,6 +170,8 @@ function ExitButton({ onLogout }: { onLogout?: React.ReactEventHandler<HTMLButto
 
 
 function AnonymusMenu() {
+    const [authModalOpened, setAuthModalOpened] = useState(false);
+
     return (
         <>
             <HeaderMobile />
@@ -148,10 +201,17 @@ function AnonymusMenu() {
                     sx={{
                         mt: "10px"
                     }}
+                    onClick={() => {
+                        setAuthModalOpened(true);
+                    }}
                 >
                     Войти
                 </Button>
             </Box>
+            <AuthModal 
+                open={authModalOpened}
+                onClose={setAuthModalOpened}
+            />
         </>
     )
 } 
@@ -193,7 +253,7 @@ function UserMenu(){
         <>
             {device === "mobile" ?
                 <>
-                    {user !== EmptyUser ?
+                    {user !== EMPTY_USER ?
                         <UserMenuMobile />
                         :
                         <AnonymusMenu />
@@ -215,7 +275,18 @@ export function UserMenuDrawer({open, onClose}: DrawerProps) {
                 onClose={onClose}
                 anchor="right"
             >
-                <UserMenu />
+                <UserMenuContext.Provider
+                    value={{
+                        onClose: () => {
+                            window.history.back();
+                            window.history.back();
+                            onClose ? onClose({}, "backdropClick") : null;
+                        }
+                    }}
+                >
+                    <UserMenu />
+                </UserMenuContext.Provider>
+                
             </MobileDrawer>
         </>
     )

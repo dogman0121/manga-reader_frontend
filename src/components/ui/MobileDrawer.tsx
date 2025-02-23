@@ -1,11 +1,9 @@
 import { Box, Drawer, DrawerProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import React, { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function MobileDrawer({open, onClose, anchor, children}: DrawerProps) {
     const theme = useTheme();
-
-    const drawerRef = React.createRef<HTMLDivElement>();
 
     useEffect(() => {
             let level: number;
@@ -26,25 +24,25 @@ export default function MobileDrawer({open, onClose, anchor, children}: DrawerPr
                 
                 window.history.pushState({modal: true, level: level}, "");
                 window.history.pushState({modal: true, level: level, role: "band"}, "");
-                
-                window.addEventListener("popstate", handlePopState);
             }
+
+            window.addEventListener("popstate", handlePopState);
 
             return () => {
                 window.removeEventListener("popstate", handlePopState);
             }
     
-        }, [open, onClose]);
+        }, [open]);
 
     
     const handleClose = () => {
+        window.history.back();
         window.history.back();
         onClose ? onClose({}, "backdropClick") : null;
     }
 
     return (
         <Drawer
-            ref={drawerRef}
             open={open}
             onClose={handleClose}
             anchor={anchor}

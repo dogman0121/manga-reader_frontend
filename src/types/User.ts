@@ -6,7 +6,7 @@ export interface User {
     role: number
 }
 
-export const EmptyUser: User = {
+export const EMPTY_USER: User = {
     id: 0,
     login: "",
     email: "",

@@ -69,7 +69,7 @@ export const lightTheme = createTheme(Object.assign(defaultTheme, {
     typography: {
         subtitle1: {
             fontSize: "14px",
-            color: "#707070"            
+            color: "#606060"            
         }
     }
 }))
