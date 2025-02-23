@@ -1,6 +1,6 @@
 import { Box, Drawer, DrawerProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 export default function MobileDrawer({open, onClose, anchor, children}: DrawerProps) {
     const theme = useTheme();
