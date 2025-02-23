@@ -62,7 +62,7 @@ function AppLayoutMobile() {
             if (menuOpened)
                 return setMenuOpened(_menuOpened => false);
 
-            const href = (event.target as Window).location.pathname;
+            const href = (event.currentTarget as Window).location.pathname;
 
             if (href === "/")
                 setNavSection(0);
