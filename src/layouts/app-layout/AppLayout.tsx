@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import styles from "./AppLayout.module.css"
 import { SvgIcon, Box, Button  } from "@mui/material";
-import { Avatar, Checkbox, Popover, PopoverProps} from "@mui/material";
+import { Avatar, Checkbox } from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
 import UserContext from "../../context/UserContext";
