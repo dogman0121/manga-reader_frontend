@@ -1,18 +1,23 @@
 import { Box, Drawer, DrawerProps } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function MobileDrawer({open, onClose, anchor, children}: DrawerProps) {
     const theme = useTheme();
 
-    useEffect(() => {
-            let level: number;
+    const level = useRef(0);
 
+    useEffect(() => {
             const handlePopState = (event: PopStateEvent) => {
+                if (event.state.level === level.current && !open){
+                    window.history.back();
+                    return ;
+                }
+
                 if (event.state.role === "band")
                     return;
-
-                if (open && event.state?.level === level){
+                
+                if (open && event.state.level === level.current){
                     onClose ? onClose({}, "escapeKeyDown") : null;
                     window.history.back();
                 }
@@ -20,10 +25,10 @@ export default function MobileDrawer({open, onClose, anchor, children}: DrawerPr
 
             
             if (open) {
-                level = (0 | window.history.state?.level) + 1;
+                level.current = (0 | window.history.state?.level) + 1;
                 
-                window.history.pushState({modal: true, level: level}, "");
-                window.history.pushState({modal: true, level: level, role: "band"}, "");
+                window.history.pushState({modal: true, level: level.current}, "");
+                window.history.pushState({modal: true, level: level.current, role: "band"}, "");
             }
 
             window.addEventListener("popstate", handlePopState);

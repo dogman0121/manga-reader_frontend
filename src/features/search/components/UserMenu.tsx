@@ -133,7 +133,9 @@ function UserWidget() {
                         sx={{
                             ml: "15px"
                         }}
-                        onClick={() => {onClose()}}
+                        onClick={() => {
+                            onClose();
+                        }}
                     >
                         <Typography>{user.login}</Typography>
                         <Typography
@@ -296,8 +298,6 @@ export function UserMenuDrawer({open, onClose}: DrawerProps) {
                 <UserMenuContext.Provider
                     value={{
                         onClose: () => {
-                            window.history.back();
-                            window.history.back();
                             onClose ? onClose({}, "backdropClick") : null;
                         }
                     }}
