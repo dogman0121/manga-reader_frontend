@@ -53,6 +53,23 @@ function AppLayoutMobile() {
 
     const [prevPage, setPrevPage] = useState(0);
 
+    useEffect(() => {
+        const handlePopState = (event: PopStateEvent) => {
+            const href = (event.target as Window).location.pathname;
+
+            if (href === "/")
+                setNavSection(0);
+            if (href.startsWith("/search"))
+                setNavSection(1);
+        }
+        
+        window.addEventListener("popstate", handlePopState);
+
+        return () => {
+            window.removeEventListener("popstate", handleGoBack);
+        }
+    }, [])
+
     const handleGoBack = () => {
         setNavSection(prevPage);
     }
