@@ -139,7 +139,7 @@ function UserWidget() {
                         <Typography
                             sx={{
                                 fontSize: "14px",
-                                color: "#D9D9D9",
+                                color: theme.typography.subtitle1.color,
                                 textDecoration: "underline"
                             }}
                         >
