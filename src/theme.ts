@@ -4,14 +4,18 @@ declare module '@mui/material/styles' {
     interface PaletteOptions {
         customBackgrounds?: {
             header?: string,
-            footer?: string
+            footer?: string,
+            widget?: string,
+            paper?: string
         }
     }
 
     interface Palette {
         customBackgrounds?: {
             header?: string,
-            footer?: string
+            footer?: string,
+            widget?: string,
+            paper?: string
         }
     }
 }
@@ -39,7 +43,7 @@ export const defaultTheme = createTheme({
                     },
                 }
             }
-        },
+        }
     }
 })
 
@@ -57,9 +61,17 @@ export const lightTheme = createTheme(Object.assign(defaultTheme, {
         },
         customBackgrounds: {
             header: "#FFF1AA",
-            footer: "#FFD600"
+            footer: "#FFD600",
+            widget: "#FFFFFF",
+            paper: "#FFFFFF"
         },
     },
+    typography: {
+        subtitle1: {
+            fontSize: "14px",
+            color: "#707070"            
+        }
+    }
 }))
 
 export const darkTheme = createTheme(Object.assign(defaultTheme, {
@@ -76,9 +88,15 @@ export const darkTheme = createTheme(Object.assign(defaultTheme, {
         },
         customBackgrounds: {
             header: "#06090E",
-            footer: "#06090E"
+            footer: "#06090E",
+            widget: "#2c2c2c",
+            paper: "#171717"
         },
     },
     typography: {
+        subtitle1: {
+            fontSize: "14px",
+            color: "#D9D9D9"            
+        }
     }
 }));

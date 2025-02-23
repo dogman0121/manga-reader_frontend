@@ -1,4 +1,4 @@
-import { Box, Paper, BottomNavigation, BottomNavigationAction, Drawer, DrawerProps } from "@mui/material";
+import { Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -6,44 +6,8 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useEffect, useState } from "react";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { Outlet, Link } from 'react-router-dom'
-import UserMenu from "../../features/search/components/UserMenu";
+import { UserMenuDrawer } from "../../features/search/components/UserMenu";
 
-function UserMenuDrawer({open, onClose}: DrawerProps) {
-
-    useEffect(() => {
-        if (open)
-            window.history.pushState({drawerOpened: true}, "");
-
-        const handlePopState = (_event: PopStateEvent) => {
-            if (open){
-                onClose ? onClose({}, "escapeKeyDown") : null;
-            }
-        }
-
-        window.addEventListener("popstate", handlePopState);
-        return () => {
-            window.removeEventListener("popstate", handlePopState);
-        }
-
-    }, [open, onClose]);
-
-    return (
-        <Drawer
-            open={open}
-            onClose={onClose}
-            anchor="right"
-        >
-            <Box
-                sx={{
-                    width: "70vw",
-                    padding: "25px 15px"
-                }}
-            >
-                <UserMenu />
-            </Box>
-        </Drawer>
-    )
-}
 
 function AppLayoutMobile() {
     const [navSection, setNavSection] = useState(0);
@@ -59,8 +23,8 @@ function AppLayoutMobile() {
             window.history.pushState({drawerOpened: true}, "");
 
         const handlePopState = (event: PopStateEvent) => {
-            if (menuOpened)
-                return setMenuOpened(_menuOpened => false);
+            if (event.state?.modal)
+                return;
 
             const href = (event.currentTarget as Window).location.pathname;
 
@@ -75,7 +39,7 @@ function AppLayoutMobile() {
         return () => {
             window.removeEventListener("popstate", handleGoBack);
         }
-    }, [menuOpened, setMenuOpened])
+    }, [])
 
     const handleGoBack = () => {
         setNavSection(prevPage);

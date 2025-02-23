@@ -15,42 +15,7 @@ import Main from "../../components/Main";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import SearchModal from "../../features/search/components/SearchModal";
-import UserMenu from "../../features/search/components/UserMenu";
-
-
-
-function UserMenuPopover({open, onClose, anchorEl}: PopoverProps) {
-    return (
-        <Popover
-            open={open}
-            onClose={onClose}
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right"
-            }}
-            transformOrigin={{
-                vertical: "top",
-                horizontal: "right"
-            }}
-            sx={{
-                mt:"10px",
-                ".MuiPaper-root": {
-                    borderRadius: "12px",
-                }
-            }}
-        >   
-            <Box
-                sx={{
-                    width: "250px",
-                    padding: "10px",
-                }}
-            >
-                <UserMenu />
-            </Box>
-        </Popover>
-    )
-}
+import { UserMenuPopover } from "../../features/search/components/UserMenu";
 
 
 function AppHeader() {
