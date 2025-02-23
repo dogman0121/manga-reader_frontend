@@ -45,11 +45,17 @@ function UserMenuDrawer({open, onClose}: DrawerProps) {
 }
 
 function AppLayoutMobile() {
-    const [value, setValue] = useState(0);
+    const [navSection, setNavSection] = useState(0);
 
     const { device } = useDeviceDetect();
 
     const [ menuOpened, setMenuOpened ] = useState(false);
+
+    const [prevPage, setPrevPage] = useState(0);
+
+    const handleGoBack = () => {
+        setNavSection(prevPage);
+    }
 
     const actionStyles = {
         fontSize: "12px",
@@ -62,9 +68,10 @@ function AppLayoutMobile() {
                 <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                     <BottomNavigation
                     showLabels
-                    value={value}
+                    value={navSection}
                     onChange={(_event, newValue) => {
-                        setValue(newValue);
+                        setPrevPage(navSection);
+                        setNavSection(newValue);
                     }}
                     >
                         <BottomNavigationAction 
@@ -97,7 +104,10 @@ function AppLayoutMobile() {
             )}
             <UserMenuDrawer 
                 open={menuOpened}
-                onClose={() => {setMenuOpened(false)}}
+                onClose={() => {
+                    setMenuOpened(false)
+                    handleGoBack();
+                }}
             />
         </>
     )
