@@ -8,6 +8,8 @@ function Verify() {
         
         const token = urlParams.get("t");
 
+        console.log(token);
+
         if (token !== null){
             verifyRegistration(token)
                 .then((json) => {
@@ -27,7 +29,7 @@ function Verify() {
     }, []);
 
     return (
-        <>zxczxc</>
+        <></>
     )
 }
 

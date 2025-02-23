@@ -3,6 +3,7 @@ import Register from './Regsiter';
 import Login from './Login';
 import Forgot from './Forgot';
 import Message from './Message';
+import Verify from './Verify';
 import { Box } from '@mui/material';
 import Recovery from './Recovery';
 
@@ -37,6 +38,9 @@ function Auth({ section, onAuth }: { section: string, onAuth: Function }) {
             )}
             { currentSection === "forgot" && (
                 <Forgot setSection={setCurrentSection}/>
+            )}
+            { currentSection === "verify" && (
+                <Verify />
             )}
             { currentSection === "recovery" && (
                 <Recovery setSection={setCurrentSection}/>
