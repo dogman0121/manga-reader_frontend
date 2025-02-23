@@ -3,12 +3,29 @@ import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { Outlet, Link } from 'react-router-dom'
 import UserMenu from "../../features/search/components/UserMenu";
 
 function UserMenuDrawer({open, onClose}: DrawerProps) {
+
+    useEffect(() => {
+        if (open)
+            window.history.pushState({drawerOpened: true}, "");
+
+        const handlePopState = (_event: PopStateEvent) => {
+            if (open)
+                onClose ? onClose({}, "escapeKeyDown") : null;
+        }
+
+        window.addEventListener("popstate", handlePopState);
+        return () => {
+            window.removeEventListener("popstate", handlePopState);
+        }
+
+    }, [open, onClose]);
+
     return (
         <Drawer
             open={open}
