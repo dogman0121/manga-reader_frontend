@@ -106,6 +106,8 @@ function HeaderMobile() {
 function UserWidget() {
     const { user } = useContext(UserContext);
 
+    const {onClose} = useContext(UserMenuContext);
+
     const theme = useTheme();
 
     return (
@@ -117,16 +119,32 @@ function UserWidget() {
                         borderRadius: "12px",
                         boxShadow: 3,
                         bgcolor: theme.palette.customBackgrounds?.widget,
-                        display: "flex"
+                        display: "flex",
                     }}
                 >
-                    <Avatar src={user.avatar} />
+                    <Avatar 
+                        src={user.avatar} 
+                        variant="square"
+                        sx={{
+                            borderRadius: "8px"
+                        }}
+                    />
                     <Box
                         sx={{
-                            ml: "10px"
+                            ml: "15px"
                         }}
+                        onClick={() => {onClose()}}
                     >
                         <Typography>{user.login}</Typography>
+                        <Typography
+                            sx={{
+                                fontSize: "14px",
+                                color: "#D9D9D9",
+                                textDecoration: "underline"
+                            }}
+                        >
+                            перейти в профиль
+                        </Typography>
                     </Box>
                 </Paper>
             </Link>
