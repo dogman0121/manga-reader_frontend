@@ -15,8 +15,9 @@ function UserMenuDrawer({open, onClose}: DrawerProps) {
             window.history.pushState({drawerOpened: true}, "");
 
         const handlePopState = (_event: PopStateEvent) => {
-            if (open)
+            if (open){
                 onClose ? onClose({}, "escapeKeyDown") : null;
+            }
         }
 
         window.addEventListener("popstate", handlePopState);
@@ -54,7 +55,13 @@ function AppLayoutMobile() {
     const [prevPage, setPrevPage] = useState(0);
 
     useEffect(() => {
+        if (menuOpened)
+            window.history.pushState({drawerOpened: true}, "");
+
         const handlePopState = (event: PopStateEvent) => {
+            if (menuOpened)
+                return setMenuOpened(menuOpened => false);
+
             const href = (event.target as Window).location.pathname;
 
             if (href === "/")
@@ -68,7 +75,7 @@ function AppLayoutMobile() {
         return () => {
             window.removeEventListener("popstate", handleGoBack);
         }
-    }, [])
+    }, [menuOpened, setMenuOpened])
 
     const handleGoBack = () => {
         setNavSection(prevPage);
