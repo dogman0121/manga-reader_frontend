@@ -60,7 +60,7 @@ function AppLayoutMobile() {
 
         const handlePopState = (event: PopStateEvent) => {
             if (menuOpened)
-                return setMenuOpened(menuOpened => false);
+                return setMenuOpened(_menuOpened => false);
 
             const href = (event.target as Window).location.pathname;
 
