@@ -16,6 +16,7 @@ import { lightTheme, darkTheme } from "./theme";
 import { CssBaseline } from "@mui/material";
 import AuthPage from "./features/auth/components/AuthPage";
 import useDeviceDetect from "./hooks/useDeviceDetect";
+import { HelmetProvider } from "react-helmet-async";
 
 
 function App() {
@@ -44,36 +45,38 @@ function App() {
 
   return (
     <>
-      <ThemeContext.Provider
-        value={{
-          setTheme
-        }}
-      >
-        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-          <CssBaseline />
-          <UserContext.Provider
-            value={{
-              user,
-              setUser
-            }}
-          >
-            <Routes>
-              <Route path="/auth" element={<AuthLayout />}>
-                  <Route path="register" element={<AuthPage section="register" />}/>
-                  <Route path="forgot" element={<AuthPage section="forgot" />}/>
-                  <Route path="login" element={<AuthPage section="login" />}/>
-                  <Route path="verify" element={<AuthPage section="verify" />}/>
-                  <Route path="recovery" element={<AuthPage section="recovery"/>} />
-              </Route>
-              <Route path="/" element={device !== "mobile" ? <AppLayout /> : <AppLayoutMobile />}>
-                  <Route index element={<Home/>} />
-                  <Route path="manga/:id" element={<Title />} />
-                  <Route path="*" element={<NotFound />} />
-              </Route>
-            </Routes>
-          </UserContext.Provider>
-        </ThemeProvider>
-      </ThemeContext.Provider>
+      <HelmetProvider>
+        <ThemeContext.Provider
+          value={{
+            setTheme
+          }}
+        >
+          <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+            <CssBaseline />
+            <UserContext.Provider
+              value={{
+                user,
+                setUser
+              }}
+            >
+              <Routes>
+                <Route path="/auth" element={<AuthLayout />}>
+                    <Route path="register" element={<AuthPage section="register" />}/>
+                    <Route path="forgot" element={<AuthPage section="forgot" />}/>
+                    <Route path="login" element={<AuthPage section="login" />}/>
+                    <Route path="verify" element={<AuthPage section="verify" />}/>
+                    <Route path="recovery" element={<AuthPage section="recovery"/>} />
+                </Route>
+                <Route path="/" element={device !== "mobile" ? <AppLayout /> : <AppLayoutMobile />}>
+                    <Route index element={<Home/>} />
+                    <Route path="manga/:id" element={<Title />} />
+                    <Route path="*" element={<NotFound />} />
+                </Route>
+              </Routes>
+            </UserContext.Provider>
+          </ThemeProvider>
+        </ThemeContext.Provider>
+      </HelmetProvider>
     </>
   )
 }
