@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button"
 import { useTheme } from "@mui/material/styles"
-import OpenGraphMeta from "../../features/search/components/OpenGraphMeta";
+import OpenGraphMeta from "../../components/OpenGraphMeta";
 
 export default function Home() {
     const theme = useTheme();

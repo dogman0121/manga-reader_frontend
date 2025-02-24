@@ -11,6 +11,10 @@ interface OpenGraphMetaProps {
 function OpenGraphMeta({ title, description, url, image, siteName }: OpenGraphMetaProps) {
   return (
     <Helmet>
+      {/* Metadate */}
+      <title>{title}</title>
+      <meta name="name" content={description} />
+
       {/* OpenGraph metadata */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
