@@ -1,4 +1,4 @@
-import { Box, BoxProps, Paper } from "@mui/material"
+import { BoxProps, Paper } from "@mui/material"
 import { useTheme } from "@mui/material";
 
 export default function Widget({ onClick, sx, children }: BoxProps) {
