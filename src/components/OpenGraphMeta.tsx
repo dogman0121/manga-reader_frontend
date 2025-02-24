@@ -20,7 +20,6 @@ function OpenGraphMeta({ title, description, url, image, siteName }: OpenGraphMe
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={image} />
-      <meta property="og:type" content="website" />
       {siteName && <meta property="og:site_name" content={siteName} />}
 
       {/* Twitter metadata */}
