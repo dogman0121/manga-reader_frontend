@@ -6,7 +6,7 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useEffect, useState } from "react";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { Outlet, Link } from 'react-router-dom'
-import { UserMenuDrawer } from "../../features/search/components/UserMenu";
+import { UserMenuDrawer } from "../../components/UserMenu";
 
 
 function AppLayoutMobile() {

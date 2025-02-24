@@ -63,7 +63,7 @@ export const lightTheme = createTheme(Object.assign(defaultTheme, {
             header: "#FFF1AA",
             footer: "#FFD600",
             widget: "#FFFFFF",
-            paper: "#FFFFFF"
+            paper: "#E9E9E9"
         },
     },
     typography: {

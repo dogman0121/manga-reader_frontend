@@ -15,7 +15,7 @@ import Main from "../../components/Main";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import SearchModal from "../../features/search/components/SearchModal";
-import { UserMenuPopover } from "../../features/search/components/UserMenu";
+import { UserMenuPopover } from "../../components/UserMenu";
 
 
 function AppHeader() {

@@ -1,26 +1,66 @@
 import { useContext, useState } from "react";
-import { EMPTY_USER } from "../../../types/User";
-import UserContext from "../../../context/UserContext";
-import { Avatar, Box, Button, Typography, Paper, DrawerProps,Popover, PopoverProps } from "@mui/material";
+import { EMPTY_USER } from "../types/User";
+import UserContext from "../context/UserContext";
+import { Avatar, Box, Button, Typography, DrawerProps,Popover, PopoverProps } from "@mui/material";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import useDeviceDetect from "../../../hooks/useDeviceDetect";
+import useDeviceDetect from "../hooks/useDeviceDetect";
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-import MobileDrawer from "../../../components/ui/MobileDrawer";
-import AuthModal from "../../auth/components/AuthModal";
+import MobileDrawer from "./ui/MobileDrawer";
+import AuthModal from "../features/auth/components/AuthModal";
 import { Checkbox } from "@mui/material";
-import { getColorScheme } from "../../../utils/colorScheme";
-import ThemeContext from "../../../context/ThemeContext";
-import UserMenuContext from "../../../context/UserMenuContext";
-import { deleteAccessToken, deleteRefreshToken } from "../../../utils/token";
+import { getColorScheme } from "../utils/colorScheme";
+import ThemeContext from "../context/ThemeContext";
+import UserMenuContext from "../context/UserMenuContext";
+import { deleteAccessToken, deleteRefreshToken } from "../utils/token";
+import Widget from "./ui/Widget";
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 
-function Settings() {
+const buttonWidgetStyle = {
+    display: "flex",
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between"
+}
+
+
+function ThemeSetting() {
     const [ isDarkMode, setIsDarkMode ] = useState(getColorScheme() === "dark");
 
     const { setTheme } = useContext(ThemeContext);
 
+    return (
+        <Widget>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: "100%",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                }}
+            >
+                <Typography>Тема</Typography>
+                <Checkbox 
+                    sx={{
+                        padding: 0
+                    }}
+                    checked={isDarkMode}
+                    onChange={
+                        (e: React.ChangeEvent<HTMLInputElement>) => { 
+                            setIsDarkMode(e.target.checked);
+                            e.target.checked ? setTheme("dark") : setTheme("light") 
+                        }
+                    }
+                />
+            </Box>
+        </Widget>
+    )
+}
+
+function Settings() {
     return (
         <>
             <Box
@@ -39,22 +79,13 @@ function Settings() {
                 </Typography>
                 <Box
                     sx={{
-                        mt: "5px",
+                        mt: "15px",
                         display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
+                        flexDirection:"column",
+                        rowGap: "7px"
                     }}
                 >
-                    <Typography>Тема</Typography>
-                    <Checkbox 
-                        checked={isDarkMode}
-                        onChange={
-                            (e: React.ChangeEvent<HTMLInputElement>) => { 
-                                setIsDarkMode(e.target.checked);
-                                e.target.checked ? setTheme("dark") : setTheme("light") 
-                            }
-                        }
-                    />
+                    <ThemeSetting />
                 </Box>
             </Box>
         </>
@@ -113,19 +144,13 @@ function UserWidget() {
     return (
         <>
             <Link to={`/profile/${user.id}`}>
-                <Paper
-                    sx={{
-                        padding: "10px",
-                        borderRadius: "12px",
-                        boxShadow: 3,
-                        bgcolor: theme.palette.customBackgrounds?.widget,
-                        display: "flex",
-                    }}
-                >
+                <Widget>
                     <Avatar 
                         src={user.avatar} 
                         variant="square"
                         sx={{
+                            width: "46px",
+                            height: "46px",
                             borderRadius: "8px"
                         }}
                     />
@@ -133,22 +158,22 @@ function UserWidget() {
                         sx={{
                             ml: "15px"
                         }}
-                        onClick={() => {
-                            onClose();
-                        }}
                     >
                         <Typography>{user.login}</Typography>
                         <Typography
                             sx={{
-                                fontSize: "14px",
+                                fontSize: "13px",
                                 color: theme.typography.subtitle1.color,
                                 textDecoration: "underline"
+                            }}
+                            onClick={() => {
+                                onClose();
                             }}
                         >
                             перейти в профиль
                         </Typography>
                     </Box>
-                </Paper>
+                </Widget>
             </Link>
         </>
     )
@@ -185,6 +210,29 @@ function ExitButton() {
                 Выход
             </Typography>
         </Button>
+    )
+}
+
+function AddMangaButton() {
+    const { onClose } = useContext(UserMenuContext);
+
+    return (
+        <Link to="/manga/add">
+            <Widget
+                onClick={() => {
+                    onClose();
+                }}
+            >
+                <Box
+                    sx={{
+                        ...buttonWidgetStyle
+                    }}
+                >
+                    Добавить тайтл
+                    <AddRoundedIcon />
+                </Box>
+            </Widget>
+        </Link>
     )
 }
 
@@ -249,6 +297,7 @@ function UserMenuMobile() {
                 }}
             >
                 <UserWidget />
+                <AddMangaButton />
                 <ExitButton />
             </Box>
         </>
