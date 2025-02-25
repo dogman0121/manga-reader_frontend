@@ -66,7 +66,7 @@ function Settings() {
             <Box
                 sx={{
                     display: "flex",
-                    flexDirection: "column"
+                    flexDirection: "column",
                 }}
             >
                 <Typography
@@ -132,7 +132,6 @@ function HeaderMobile() {
         </Box>
     )
 }
-
 
 function UserWidgetMobile() {
     const { user } = useContext(UserContext);
@@ -298,44 +297,52 @@ function AnonymusMenu() {
 
     return (
         <>
-            <HeaderMobile />
             <Box
                 sx={{
-                    position: "absolute",
-                    left: "50%",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
-
                     width: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center"
+                    height: "100%",
                 }}
             >
+                <HeaderMobile />
                 <Box
                     sx={{
-                        textAlign: "center"
+                        position: "absolute",
+                        left: "50%",
+                        top: "50%",
+                        transform: "translate(-50%, -50%)",
+
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center"
                     }}
                 >
-                    Войдите в аккаунт
+                    <Box
+                        sx={{
+                            textAlign: "center"
+                        }}
+                    >
+                        Войдите в аккаунт
+                    </Box>
+                    <Button 
+                        variant="contained"
+                        sx={{
+                            mt: "10px"
+                        }}
+                        onClick={(e) => {
+                            setAuthModalOpened(true);
+                            e.preventDefault();
+                        }}
+                    >
+                        Войти
+                    </Button>
                 </Box>
-                <Button 
-                    variant="contained"
-                    sx={{
-                        mt: "10px"
-                    }}
-                    onClick={() => {
-                        setAuthModalOpened(true);
-                    }}
-                >
-                    Войти
-                </Button>
+                <AuthModal 
+                    open={authModalOpened}
+                    onClose={setAuthModalOpened}
+                />
             </Box>
-            <AuthModal 
-                open={authModalOpened}
-                onClose={setAuthModalOpened}
-            />
         </>
     )
 } 

@@ -9,7 +9,6 @@ function MobileModalWrapper({ open, onClose, children }: ModalProps) {
     useEffect(() => {
         const handlePopState = (event: PopStateEvent) => {
             if (event.state.level === level.current && !open){
-                console.log(321);
                 window.history.back();
                 return ;
             }
