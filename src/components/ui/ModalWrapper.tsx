@@ -13,11 +13,13 @@ function MobileModalWrapper({ open, onClose, children }: ModalProps) {
                 return ;
             }
 
-            if (event.state.role === "band")
+            if (event.state.role === "band"){
                 return;
+            }
             
             if (open && event.state.level === level.current){
                 onClose ? onClose({}, "escapeKeyDown") : null;
+                level.current = 0;
                 window.history.back();
             }
         }
@@ -25,6 +27,7 @@ function MobileModalWrapper({ open, onClose, children }: ModalProps) {
         if (!open && prevState.current && window.history.state.role === "band" && window.history.state?.level === level.current){
             window.history.back();
             window.history.back();
+            level.current = 0;
             prevState.current = false;
             return ;
         }
