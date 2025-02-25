@@ -61,12 +61,17 @@ function ThemeSetting() {
 }
 
 function Settings() {
+    const theme = useTheme();
+
     return (
         <>
             <Box
                 sx={{
                     display: "flex",
                     flexDirection: "column",
+                    padding: "15px 10px",
+                    height: "100%",
+                    bgcolor: theme.palette.customBackgrounds?.paper
                 }}
             >
                 <Typography
@@ -301,6 +306,7 @@ function AnonymusMenu() {
                 sx={{
                     width: "100%",
                     height: "100%",
+                    padding: "15px 10px",
                 }}
             >
                 <HeaderMobile />
@@ -348,20 +354,30 @@ function AnonymusMenu() {
 } 
 
 function UserMenuMobile() {
+    const theme = useTheme();
+
     return (
         <>
-            <HeaderMobile />
             <Box
                 sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    rowGap: "7px",
-                    mt: 2,
+                    padding: "15px 10px",
+                    height: "100%",
+                    bgcolor: theme.palette.customBackgrounds?.paper
                 }}
             >
-                <UserWidgetMobile />
-                <AddMangaButton />
-                <ExitButton />
+                <HeaderMobile />
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        rowGap: "7px",
+                        mt: 2,
+                    }}
+                >
+                    <UserWidgetMobile />
+                    <AddMangaButton />
+                    <ExitButton />
+                </Box>
             </Box>
         </>
     )
