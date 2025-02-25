@@ -3,7 +3,7 @@ import { EMPTY_USER } from "../types/User";
 import UserContext from "../context/UserContext";
 import { Avatar, Box, Button, Typography, DrawerProps,Popover, PopoverProps } from "@mui/material";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import useDeviceDetect from "../hooks/useDeviceDetect";
+import { DEVICE, useDeviceDetect } from "../hooks/useDeviceDetect";
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
@@ -134,7 +134,7 @@ function HeaderMobile() {
 }
 
 
-function UserWidget() {
+function UserWidgetMobile() {
     const { user } = useContext(UserContext);
 
     const {onClose} = useContext(UserMenuContext);
@@ -179,9 +179,65 @@ function UserWidget() {
     )
 }
 
+function UserWidgetPC() {
+    const { user } = useContext(UserContext);
+
+    const {onClose} = useContext(UserMenuContext);
+
+    const theme = useTheme();
+
+    return (
+        <>
+            <Link to={`/profile/${user.id}`}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        p: "4px 6px",
+                        bgcolor: theme.palette.customBackgrounds?.widget2,
+                        alignItems: "center",
+                        borderRadius: "6px"
+                    }}
+                >
+                    <Avatar 
+                        src={user.avatar} 
+                        variant="square"
+                        sx={{
+                            width: "36px",
+                            height: "36px",
+                            borderRadius: "8px"
+                        }}
+                    />
+                    <Box
+                        sx={{
+                            ml: "15px"
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: "13px",
+                                color: theme.typography.subtitle1.color,
+                                textDecoration: "underline"
+                            }}
+                            onClick={() => {
+                                onClose();
+                            }}
+                        >
+                            Мой профиль
+                        </Typography>
+                        <Typography>{user.login}</Typography>
+                    </Box>
+                </Box>
+            </Link>
+        </>
+    )
+}
+
 
 function ExitButton() {
     const { setUser } = useContext(UserContext);
+
+    const { onClose } = useContext(UserMenuContext);
 
     const onLogout = () => {
         deleteAccessToken();
@@ -199,7 +255,7 @@ function ExitButton() {
             }}
             color="error"
             variant="text"
-            onClick={onLogout}
+            onClick={() => {onLogout(); onClose()}}
         >
             <ExitToAppIcon fontSize="small"/> 
             <Typography 
@@ -292,11 +348,11 @@ function UserMenuMobile() {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    rowGap: "8px",
+                    rowGap: "7px",
                     mt: 2,
                 }}
             >
-                <UserWidget />
+                <UserWidgetMobile />
                 <AddMangaButton />
                 <ExitButton />
             </Box>
@@ -307,8 +363,16 @@ function UserMenuMobile() {
 function UserMenuPC() {
     return (
         <>
-            <UserWidget />
-            <ExitButton />
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "7px",
+                }}
+            >
+                <UserWidgetPC />
+                <ExitButton />
+            </Box>
         </>
     )
 }
@@ -316,11 +380,11 @@ function UserMenuPC() {
 function UserMenu(){
     const { user } = useContext(UserContext);
 
-    const { device } = useDeviceDetect()
+    const device = useDeviceDetect()
 
     return (
         <>
-            {device === "mobile" ?
+            {device === DEVICE.MOBILE ?
                 <>
                     {user !== EMPTY_USER ?
                         <UserMenuMobile />
@@ -387,7 +451,15 @@ export function UserMenuPopover({open, onClose, anchorEl}: PopoverProps) {
                         padding: "10px",
                     }}
                 >
-                    <UserMenu />
+                    <UserMenuContext.Provider
+                        value={{
+                            onClose: () => {
+                                onClose ? onClose({}, "backdropClick") : null;
+                            }
+                        }}
+                    >
+                        <UserMenu />
+                    </UserMenuContext.Provider>
                 </Box>
             </Popover>
         </>

@@ -5,7 +5,8 @@ declare module '@mui/material/styles' {
         customBackgrounds?: {
             header?: string,
             footer?: string,
-            widget?: string,
+            widget1?: string,
+            widhet2?: string,
             paper?: string
         }
     }
@@ -14,7 +15,8 @@ declare module '@mui/material/styles' {
         customBackgrounds?: {
             header?: string,
             footer?: string,
-            widget?: string,
+            widget1?: string,
+            widget2?: string,
             paper?: string
         }
     }
@@ -62,7 +64,8 @@ export const lightTheme = createTheme(Object.assign(defaultTheme, {
         customBackgrounds: {
             header: "#FFF1AA",
             footer: "#FFD600",
-            widget: "#FFFFFF",
+            widget1: "#FFFFFF",
+            widget2: "#F6F6F6",
             paper: "#E9E9E9"
         },
     },
@@ -89,7 +92,8 @@ export const darkTheme = createTheme(Object.assign(defaultTheme, {
         customBackgrounds: {
             header: "#06090E",
             footer: "#06090E",
-            widget: "#2c2c2c",
+            widget1: "#2c2c2c",
+            widget2: "#2f2f2f",
             paper: "#171717"
         },
     },

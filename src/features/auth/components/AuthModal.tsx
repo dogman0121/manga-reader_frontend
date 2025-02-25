@@ -3,10 +3,14 @@ import Auth from "./Auth";
 import { useContext, useState } from "react";
 import UserContext from "../../../context/UserContext";
 import fetchUser from "../../../services/api/fetchUser";
+import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
+import MobileModal from "../../../components/ui/MobileModal";
 
 
 function AuthModal({open, onClose}: {open: boolean, onClose: Function}) {
     const [section, setSection] = useState("login");
+
+    const device = useDeviceDetect();
 
     const {setUser} = useContext(UserContext);
 
@@ -21,15 +25,33 @@ function AuthModal({open, onClose}: {open: boolean, onClose: Function}) {
     }
 
     return (
-        <Modal
-            open={open}
-            onClose={handleClose}
-        >
-            <Auth 
-                section={section}
-                onAuth={onAuth}
-            />
-        </Modal>
+        <>
+            {device === DEVICE.MOBILE ?
+                (
+                <MobileModal
+                    open={open}
+                    onClose={handleClose}
+                >
+                    <Auth 
+                        section={section}
+                        onAuth={onAuth}
+                    />
+                </MobileModal>
+            )
+                :
+            (
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                >
+                    <Auth 
+                        section={section}
+                        onAuth={onAuth}
+                    />
+                </Modal>
+            )
+            }
+        </>
     )
 }
 

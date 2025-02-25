@@ -7,7 +7,7 @@ import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
 import UserContext from "../../context/UserContext";
 import { EMPTY_USER } from "../../types/User";
-import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import AuthModal from "../../features/auth/components/AuthModal";
 import ThemeContext from "../../context/ThemeContext";
 import Header from "../../components/Header";
@@ -140,14 +140,14 @@ function AppHeader() {
 }
 
 function AppFooter() {
-    const {device} = useDeviceDetect();
+    const device = useDeviceDetect();
 
     return (
         <Footer>
             <Box 
                 sx={{
                     display: "flex",
-                    flexDirection: device == "mobile" ? "column" : "row",
+                    flexDirection: device === DEVICE.MOBILE ? "column" : "row",
                     justifyContent: "space-between",
                     rowGap: "30px"
                 }}

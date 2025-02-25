@@ -1,7 +1,6 @@
 import { Modal, Box, FormControl, InputLabel, OutlinedInput, InputAdornment, OutlinedInputProps } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
-import useDeviceDetect from "../../../hooks/useDeviceDetect";
 import { useState } from 'react'
 
 function SearchInput({ onInput }: OutlinedInputProps) {
@@ -45,30 +44,13 @@ function SearchInput({ onInput }: OutlinedInputProps) {
 }
 
 function SearchModal({open, onClose}: {open: boolean, onClose: Function}) {
-    
-    const { device } = useDeviceDetect();
-
-    const [query, setQuery] = useState("");
-
-    console.log(query);
+    const [_query, setQuery] = useState("");
     
     const handleClose = () => {
         onClose();
     }
 
-    const mobileStyles = {
-        position: "fixed",
-        left: 0,
-        top: 0,
-        width: "100%",
-        height: "100%",
-        bgcolor: 'background.paper',
-        pt: 2,
-        px: 2,
-        pb: 1,
-    }
-
-    const pcStyles = {
+    const styles = {
         position: "absolute",
         top: "10px",
         left: "50%",
@@ -90,7 +72,7 @@ function SearchModal({open, onClose}: {open: boolean, onClose: Function}) {
             onClose={handleClose}
         >
             <Box
-                sx={ device === "mobile" ? mobileStyles : pcStyles }
+                sx={{ ...styles }}
             >
                 <SearchInput 
                     onInput={(event: React.FormEvent) => {setQuery((event.target as HTMLInputElement).value)}}

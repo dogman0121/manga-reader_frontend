@@ -4,7 +4,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useEffect, useState } from "react";
-import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import { Outlet, Link } from 'react-router-dom'
 import { UserMenuDrawer } from "../../components/UserMenu";
 
@@ -12,7 +12,7 @@ import { UserMenuDrawer } from "../../components/UserMenu";
 function AppLayoutMobile() {
     const [navSection, setNavSection] = useState(0);
 
-    const { device } = useDeviceDetect();
+    const device = useDeviceDetect();
 
     const [ menuOpened, setMenuOpened ] = useState(false);
 
@@ -52,7 +52,7 @@ function AppLayoutMobile() {
     return (   
         <>
             <Outlet />
-            {device === "mobile" && (
+            {device === DEVICE.MOBILE && (
                 <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                     <BottomNavigation
                     showLabels

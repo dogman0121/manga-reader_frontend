@@ -11,7 +11,7 @@ export default function Widget({ onClick, sx, children }: BoxProps) {
                 ...sx,
                 padding: "10px",
                 borderRadius: "12px",
-                bgcolor: theme.palette.customBackgrounds?.widget,
+                bgcolor: theme.palette.customBackgrounds?.widget1,
                 display: "flex",
             }}
         >

@@ -15,7 +15,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme, darkTheme } from "./theme";
 import { CssBaseline } from "@mui/material";
 import AuthPage from "./features/auth/components/AuthPage";
-import useDeviceDetect from "./hooks/useDeviceDetect";
+import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
 import { HelmetProvider } from "react-helmet-async";
 
 
@@ -24,7 +24,7 @@ function App() {
 
   const [isDarkMode, setIsDarkMode] = useState(getColorScheme() === "dark");
 
-  const { device } = useDeviceDetect();
+  const device = useDeviceDetect();
 
   const setTheme = (theme: string) => {
       setIsDarkMode(!isDarkMode);
@@ -67,7 +67,7 @@ function App() {
                     <Route path="verify" element={<AuthPage section="verify" />}/>
                     <Route path="recovery" element={<AuthPage section="recovery"/>} />
                 </Route>
-                <Route path="/" element={device !== "mobile" ? <AppLayout /> : <AppLayoutMobile />}>
+                <Route path="/" element={device !== DEVICE.MOBILE ? <AppLayout /> : <AppLayoutMobile />}>
                     <Route index element={<Home/>} />
                     <Route path="manga/:id" element={<Title />} />
                     <Route path="*" element={<NotFound />} />

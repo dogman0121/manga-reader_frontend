@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 
+export enum DEVICE {
+    MOBILE,
+    PAD,
+    PC
+}
 
-
-const useDeviceDetect = () => {
+export const useDeviceDetect = () => {
     const getDeviceType = () => {
         if (window.innerWidth < 768)
-            return "mobile";
+            return DEVICE.MOBILE;
         else if (window.innerWidth < 1096)
-            return "pad"
+            return DEVICE.PAD
         else
-            return "pc";
+            return DEVICE.PC;
     }
 
     const [device, setDevice] = useState(getDeviceType());
@@ -21,7 +25,5 @@ const useDeviceDetect = () => {
         return () => {window.removeEventListener('resize', handleResize)};
     }, []);
   
-    return { device };
-  };
-
-export default useDeviceDetect
+    return device;
+};
