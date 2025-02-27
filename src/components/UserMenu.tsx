@@ -1,7 +1,19 @@
 import { useContext, useState } from "react";
 import { EMPTY_USER } from "../types/User";
 import UserContext from "../context/UserContext";
-import { Avatar, Box, Button, Typography, DrawerProps,Popover, PopoverProps } from "@mui/material";
+import { 
+    Avatar, 
+    Box, 
+    Button, 
+    Typography, 
+    DrawerProps,
+    Popover, 
+    PopoverProps, 
+    Accordion,
+    AccordionSummary, 
+    AccordionDetails,
+    Divider, 
+} from "@mui/material";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { DEVICE, useDeviceDetect } from "../hooks/useDeviceDetect";
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -16,13 +28,15 @@ import { deleteAccessToken, deleteRefreshToken } from "../utils/token";
 import Widget from "./ui/Widget";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { AuthContext } from "../features/auth/context/AuthContext";
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 
 
 const buttonWidgetStyle = {
     display: "flex",
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center"
 }
 
 
@@ -32,35 +46,27 @@ function ThemeSetting() {
     const { setTheme } = useContext(ThemeContext);
 
     return (
-        <Widget>
-            <Box
+        <Box
+            sx={buttonWidgetStyle}
+        >
+            <Typography>Тема</Typography>
+            <Checkbox 
                 sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    width: "100%",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    padding: 0
                 }}
-            >
-                <Typography>Тема</Typography>
-                <Checkbox 
-                    sx={{
-                        padding: 0
-                    }}
-                    checked={isDarkMode}
-                    onChange={
-                        (e: React.ChangeEvent<HTMLInputElement>) => { 
-                            setIsDarkMode(e.target.checked);
-                            e.target.checked ? setTheme("dark") : setTheme("light") 
-                        }
+                checked={isDarkMode}
+                onChange={
+                    (e: React.ChangeEvent<HTMLInputElement>) => { 
+                        setIsDarkMode(e.target.checked);
+                        e.target.checked ? setTheme("dark") : setTheme("light") 
                     }
-                />
-            </Box>
-        </Widget>
+                }
+            />
+        </Box>
     )
 }
 
-function Settings() {
+function SettingsMobile() {
     const theme = useTheme();
 
     return (
@@ -90,10 +96,81 @@ function Settings() {
                         rowGap: "7px"
                     }}
                 >
-                    <ThemeSetting />
+                    <Widget><ThemeSetting /></Widget>
                 </Box>
             </Box>
         </>
+    )
+}
+
+function SettingsPC() {
+    const theme = useTheme();
+
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "row",
+                p: "4px 6px",
+                bgcolor: theme.palette.customBackgrounds?.widget2,
+                alignItems: "center",
+                borderRadius: "6px"
+            }}
+        >
+            <Accordion
+                sx={{
+                    bgcolor: "transparent",
+                    backgroundImage: "none",
+                    boxShadow: "none",
+                    width: "100%"
+                }}
+            >
+                <AccordionSummary
+                    expandIcon={<KeyboardArrowDownRoundedIcon/>}
+                    sx={{
+                        p: "5px 0",
+                        minHeight: 0,
+
+                        "&.Mui-expanded": {
+                            minHeight: 0
+                        },
+
+                        "& .MuiAccordionSummary-content": {
+                            m: 0,
+                        },
+
+                        "& .MuiAccordionSummary-content.Mui-expanded": {
+                            m: 0
+                        }
+                    }}
+                >
+                    <SettingsIcon 
+                        sx={{
+                            width: "20px",
+                            color: theme.typography.subtitle1.color
+                        }}/>
+                    <Typography sx={{ml: "3px"}}>Настройки</Typography>
+                
+                </AccordionSummary>
+                <AccordionDetails
+                    sx={{
+                        p: "0 0 0 10px",
+                        display: "flex",
+                        flexDirection: "row"
+                    }}
+                >
+                    <Divider orientation="vertical" variant="middle" flexItem/>
+                    <Box
+                        sx={{
+                            p: "5px 5px 5px 10px",
+                            width: "100%"
+                        }}
+                    >
+                        <ThemeSetting />
+                    </Box>
+                </AccordionDetails>
+            </Accordion>
+        </Box>
     )
 }
 
@@ -133,7 +210,7 @@ function HeaderMobile() {
                 onClose={() => {setSettingsOpened(false)}}
                 anchor="right"
             >
-                <Settings />
+                <SettingsMobile />
             </MobileDrawer>
         </Box>
     )
@@ -232,7 +309,7 @@ function UserWidgetPC() {
                                 onClose();
                             }}
                         >
-                            Мой профиль
+                            в профиль
                         </Typography>
                         <Typography>{user.login}</Typography>
                     </Box>
@@ -397,6 +474,7 @@ function UserMenuPC() {
                 }}
             >
                 <UserWidgetPC />
+                <SettingsPC />
                 <ExitButton />
             </Box>
         </>
