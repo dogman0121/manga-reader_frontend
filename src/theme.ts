@@ -87,12 +87,13 @@ export const darkTheme = createTheme(Object.assign(defaultTheme, {
             main: "#D9D9D9"
         },
         background: {
+            default: "#171717",
             paper: "#171717"
         },
         customBackgrounds: {
             header: "#06090E",
             footer: "#06090E",
-            widget1: "#2c2c2c",
+            widget1: "#131313",
             widget2: "#2f2f2f",
             paper: "#171717"
         },

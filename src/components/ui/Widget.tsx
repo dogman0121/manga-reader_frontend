@@ -13,6 +13,7 @@ export default function Widget({ onClick, sx, children }: BoxProps) {
                 borderRadius: "12px",
                 bgcolor: theme.palette.customBackgrounds?.widget1,
                 display: "flex",
+                boxShadow: "none"
             }}
         >
             { children }

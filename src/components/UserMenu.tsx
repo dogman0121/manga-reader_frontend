@@ -69,7 +69,7 @@ function Settings() {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    padding: "15px 10px",
+                    padding: "10px 5px",
                     height: "100%",
                     bgcolor: theme.palette.customBackgrounds?.paper
                 }}
@@ -107,7 +107,8 @@ function HeaderMobile() {
             sx={{
                 display: "flex",
                 justifyContent:"end",
-                color: theme.typography.subtitle1.color
+                color: theme.typography.subtitle1.color,
+                p: "0 5px"
             }}
         >
             <Box
@@ -300,13 +301,16 @@ function AddMangaButton() {
 function AnonymusMenu() {
     const { openModal } = useContext(AuthContext);
 
+    const theme = useTheme()
+
     return (
         <>
             <Box
                 sx={{
                     width: "100%",
                     height: "100%",
-                    padding: "15px 10px",
+                    padding: "10px 5px",
+                    bgcolor: theme.palette.background.default,
                 }}
             >
                 <HeaderMobile />
@@ -321,7 +325,7 @@ function AnonymusMenu() {
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "center",
-                        alignItems: "center"
+                        alignItems: "center",
                     }}
                 >
                     <Box
@@ -355,7 +359,7 @@ function UserMenuMobile() {
         <>
             <Box
                 sx={{
-                    padding: "15px 10px",
+                    padding: "10px 5px",
                     height: "100%",
                     bgcolor: theme.palette.customBackgrounds?.paper
                 }}
