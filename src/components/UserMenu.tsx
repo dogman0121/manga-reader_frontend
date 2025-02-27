@@ -174,7 +174,7 @@ function UserWidgetMobile() {
                                 onClose();
                             }}
                         >
-                            перейти в профиль
+                            в профиль
                         </Typography>
                     </Box>
                 </Widget>
