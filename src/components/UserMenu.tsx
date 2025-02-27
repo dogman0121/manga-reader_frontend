@@ -149,7 +149,11 @@ function UserWidgetMobile() {
     return (
         <>
             <Link to={`/profile/${user.id}`}>
-                <Widget>
+                <Widget
+                    sx={{
+                        p: "15px 12px"
+                    }}
+                >
                     <Avatar 
                         src={user.avatar} 
                         variant="square"
