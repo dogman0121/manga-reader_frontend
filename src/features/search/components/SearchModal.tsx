@@ -1,7 +1,8 @@
 import { Modal, Box, FormControl, InputLabel, OutlinedInput, InputAdornment, OutlinedInputProps } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
-import { useState } from 'react'
+import useDebounce from "../../../hooks/useDebounce";
+import { searchService } from "../services/api/searchService";
 
 function SearchInput({ onInput }: OutlinedInputProps) {
     return (
@@ -44,11 +45,13 @@ function SearchInput({ onInput }: OutlinedInputProps) {
 }
 
 function SearchModal({open, onClose}: {open: boolean, onClose: Function}) {
-    const [_query, setQuery] = useState("");
-    
     const handleClose = () => {
         onClose();
     }
+
+    const search = useDebounce(async (query: string) => {
+        await searchService.search(query);
+    }, 500);
 
     const styles = {
         position: "absolute",
@@ -75,7 +78,7 @@ function SearchModal({open, onClose}: {open: boolean, onClose: Function}) {
                 sx={{ ...styles }}
             >
                 <SearchInput 
-                    onInput={(event: React.FormEvent) => {setQuery((event.target as HTMLInputElement).value)}}
+                    onInput={(event: React.FormEvent) => {search((event.target as HTMLInputElement).value)}}
                 />
             </Box>
         </Modal>

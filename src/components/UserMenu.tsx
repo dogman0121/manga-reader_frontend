@@ -309,7 +309,7 @@ function UserWidgetPC() {
                                 onClose();
                             }}
                         >
-                            в профиль
+                            Мой профиль
                         </Typography>
                         <Typography>{user.login}</Typography>
                     </Box>
