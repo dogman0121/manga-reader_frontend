@@ -5,11 +5,8 @@ import AppLayoutMobile from "./layouts/app-layout-mobile/AppLayoutMobile";
 import Home from "./pages/home/Home";
 import Title from "./pages/title/Title";
 import NotFound from "./pages/not-found/NotFound";
-import { useEffect, useState } from "react";
-import { EMPTY_USER } from "./types/User"
-import UserContext from "./context/UserContext"
+import { useState } from "react";
 import ThemeContext from "./context/ThemeContext"
-import fetchUser from "./services/api/fetchUser";
 import { getColorScheme, setColorScheme } from "./utils/colorScheme";
 import { ThemeProvider } from "@mui/material/styles";
 import { lightTheme, darkTheme } from "./theme";
@@ -17,11 +14,10 @@ import { CssBaseline } from "@mui/material";
 import AuthPage from "./features/auth/components/AuthPage";
 import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
 import { HelmetProvider } from "react-helmet-async";
+import AuthProvider from "./features/auth/components/AuthProvider";
 
 
 function App() {
-  const [user, setUser] = useState(EMPTY_USER);
-
   const [isDarkMode, setIsDarkMode] = useState(getColorScheme() === "dark");
 
   const device = useDeviceDetect();
@@ -30,18 +26,6 @@ function App() {
       setIsDarkMode(!isDarkMode);
       setColorScheme(theme);
   }
-
-  useEffect(() => {
-    const loadUser = async () => {
-      const user = await fetchUser();
-
-      setUser(user);
-    }
-
-    loadUser();
-
-    return () => {}
-  }, [])
 
   return (
     <>
@@ -53,12 +37,7 @@ function App() {
         >
           <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
             <CssBaseline />
-            <UserContext.Provider
-              value={{
-                user,
-                setUser
-              }}
-            >
+              <AuthProvider>
               <Routes>
                 <Route path="/auth" element={<AuthLayout />}>
                     <Route path="register" element={<AuthPage section="register" />}/>
@@ -73,7 +52,7 @@ function App() {
                     <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>
-            </UserContext.Provider>
+            </AuthProvider>
           </ThemeProvider>
         </ThemeContext.Provider>
       </HelmetProvider>

@@ -8,7 +8,6 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import MobileDrawer from "./ui/MobileDrawer";
-import AuthModal from "../features/auth/components/AuthModal";
 import { Checkbox } from "@mui/material";
 import { getColorScheme } from "../utils/colorScheme";
 import ThemeContext from "../context/ThemeContext";
@@ -16,6 +15,7 @@ import UserMenuContext from "../context/UserMenuContext";
 import { deleteAccessToken, deleteRefreshToken } from "../utils/token";
 import Widget from "./ui/Widget";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import { AuthContext } from "../features/auth/context/AuthContext";
 
 
 const buttonWidgetStyle = {
@@ -298,7 +298,7 @@ function AddMangaButton() {
 
 
 function AnonymusMenu() {
-    const [authModalOpened, setAuthModalOpened] = useState(false);
+    const { openModal } = useContext(AuthContext);
 
     return (
         <>
@@ -336,18 +336,13 @@ function AnonymusMenu() {
                         sx={{
                             mt: "10px"
                         }}
-                        onClick={(e) => {
-                            setAuthModalOpened(true);
-                            e.preventDefault();
+                        onClick={() => {
+                            openModal();
                         }}
                     >
                         Войти
                     </Button>
                 </Box>
-                <AuthModal 
-                    open={authModalOpened}
-                    onClose={setAuthModalOpened}
-                />
             </Box>
         </>
     )

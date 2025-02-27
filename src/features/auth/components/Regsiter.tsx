@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import styles from "./Auth.module.css"
 import { useState } from "react";
-import registerUser from "../services/api/registerUser";
+import { authService } from "../services/api/authService";
 
 
 function Register({ setSection }: { setSection: Function }) {
@@ -19,7 +19,7 @@ function Register({ setSection }: { setSection: Function }) {
 
     const handleRegister = async() => {
         if (password == repeatPassword){
-            const response = await registerUser(login, email, password);
+            const response = await authService.register(login, email, password);
 
             if (response.msg) {
                 switch(response.msg){

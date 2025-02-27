@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import verifyRegistration from "../services/api/verifyRegistration";
 import { saveAccessToken, saveRefreshToken } from "../../../utils/token";
+import { authService } from "../services/api/authService";
 
 function Verify() {
     useEffect(() => {
@@ -11,7 +11,7 @@ function Verify() {
         console.log(token);
 
         if (token !== null){
-            verifyRegistration(token)
+            authService.verify(token)
                 .then((json) => {
                     if (!json.msg) {
                         saveAccessToken(json.access_token);

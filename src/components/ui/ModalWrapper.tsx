@@ -2,8 +2,6 @@ import { ModalProps } from "@mui/material";
 import { useEffect, useRef } from "react";
 
 function MobileModalWrapper({ open, onClose, children }: ModalProps) {
-    const prevState = useRef(false);
-
     const level = useRef(0);
 
     useEffect(() => {
@@ -19,16 +17,13 @@ function MobileModalWrapper({ open, onClose, children }: ModalProps) {
             
             if (open && event.state.level === level.current){
                 onClose ? onClose({}, "escapeKeyDown") : null;
-                level.current = 0;
                 window.history.back();
             }
         }
 
-        if (!open && prevState.current && window.history.state.role === "band" && window.history.state?.level === level.current){
+        if (!open && window.history.state.role === "band" && window.history.state?.level === level.current){
             window.history.back();
             window.history.back();
-            level.current = 0;
-            prevState.current = false;
             return ;
         }
         
@@ -42,7 +37,6 @@ function MobileModalWrapper({ open, onClose, children }: ModalProps) {
         window.addEventListener("popstate", handlePopState);
 
         return () => {
-            prevState.current = open;
             window.removeEventListener("popstate", handlePopState);
         }
 

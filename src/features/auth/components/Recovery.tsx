@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import styles from "./Auth.module.css"
 import { useState } from "react";
-import recoveryPassword from "../services/api/recoveryPassword";
+import { authService } from "../services/api/authService";
 
 
 function Recovery({ setSection }: { setSection: Function}) {
@@ -23,7 +23,7 @@ function Recovery({ setSection }: { setSection: Function}) {
         if (!token)
             return document.location.href = "https://kanwoo.ru/";
 
-        const response = await recoveryPassword(token, password);
+        const response = await authService.recovery(token, password);
 
         if (response.msg === "Password updated")
             setSection("login");

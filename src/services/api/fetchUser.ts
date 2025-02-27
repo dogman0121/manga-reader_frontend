@@ -1,8 +1,8 @@
 import { EMPTY_USER } from "../../types/User";
-import FetchApi from "./FetchApi";
+import { apiClient } from "../../utils/apiClient";
 
 const fetchUser = async() => {
-    const response = await FetchApi("https://kanwoo.ru/api/user/me");
+    const response = await apiClient.get("/user/me");
 
     if (response.ok)
         return await response.json();

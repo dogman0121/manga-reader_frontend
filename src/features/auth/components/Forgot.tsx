@@ -2,15 +2,15 @@ import { Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import styles from "./Auth.module.css"
 import { useState } from "react";
-import getRecoveryMessage from "../services/api/getRecoveryMessage";
+import { authService } from "../services/api/authService";
+
 
 
 function Forgot({ setSection }: { setSection: Function }) {
     const [email, setEmail] = useState("");
 
     const handleForgot = async () => {
-        const response = await getRecoveryMessage(email);
-
+        const response = await authService.forgot(email);
         if (response.msg === "Email sent") {
             setSection("forgot_message");
         }

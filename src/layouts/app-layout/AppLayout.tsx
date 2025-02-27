@@ -8,7 +8,6 @@ import { useState, useContext, useRef } from "react";
 import UserContext from "../../context/UserContext";
 import { EMPTY_USER } from "../../types/User";
 import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
-import AuthModal from "../../features/auth/components/AuthModal";
 import ThemeContext from "../../context/ThemeContext";
 import Header from "../../components/Header";
 import Main from "../../components/Main";
@@ -16,6 +15,7 @@ import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import SearchModal from "../../features/search/components/SearchModal";
 import { UserMenuPopover } from "../../components/UserMenu";
+import { AuthContext } from "../../features/auth/context/AuthContext";
 
 
 function AppHeader() {
@@ -25,9 +25,9 @@ function AppHeader() {
 
     const { user } = useContext(UserContext);
 
-    const [checked, setChecked] = useState(getColorScheme() === "dark" ? true : false);
+    const { openModal } = useContext(AuthContext);
 
-    const [authModalOpened, setAuthModalOpened] = useState(false);
+    const [checked, setChecked] = useState(getColorScheme() === "dark" ? true : false);
 
     const [userMenuOpened, setUserMenuOpened] = useState(false);
 
@@ -80,7 +80,10 @@ function AppHeader() {
                                 каталог
                             </Link>
                         </Box>
-                        <Box component="li" onClick={() => {setSearchModalOpened(true)}}>
+                        <Box 
+                            component="li" 
+                            onClick={() => {setSearchModalOpened(true)}}
+                        >
                             поиск
                         </Box>
                     </Box>
@@ -104,7 +107,7 @@ function AppHeader() {
                             />
                             <Button 
                                 variant="contained" 
-                                onClick={() => {setAuthModalOpened(true)}}
+                                onClick={() => {openModal()}}
                                 sx={
                                     { 
                                         background: theme.palette.primary.main
@@ -133,7 +136,6 @@ function AppHeader() {
                 onClose={() => {setUserMenuOpened(false)}}
                 anchorEl={avatarRef.current}
             />
-            <AuthModal open={authModalOpened && user === EMPTY_USER} onClose={() => {setAuthModalOpened(false)}}/>
             <SearchModal open={searchModalOpened} onClose={() => {setSearchModalOpened(false)}}/>
         </Header>
     )
