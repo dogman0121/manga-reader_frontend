@@ -2,7 +2,6 @@ import { BoxProps, ToggleButton, ToggleButtonGroup, toggleButtonClasses, toggleB
 import { SECTIONS } from "./SearchProvider";
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
-import { useTheme } from "@mui/material/styles";
 
 function SearchSectionSelector({ sx }: BoxProps) {
     const { section, setSection } = useContext(SearchContext);
