@@ -19,7 +19,7 @@ function SearchProvider({ children }: { children: React.ReactNode }) {
 
     const [filters, setFilters] = useState<Map<string, number>>(new Map<string, number>());
 
-    const isLoading = useRef<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const timerId = useRef<number>(0);
 
@@ -30,18 +30,19 @@ function SearchProvider({ children }: { children: React.ReactNode }) {
             return () => {firstRender.current = false};
 
         if (query === ""){
-            isLoading.current = false;
+            setIsLoading(false);
+            setResults([]);
             return () => {}
         }
 
-        isLoading.current = true;
+        setIsLoading(true);
         
         timerId.current = setTimeout(async () => {
             const response = await searchService.search(query, section, filters);
 
             setResults(await response.json());
 
-            isLoading.current = false;
+            setIsLoading(false);
         }, 500);
 
         return () => {
@@ -60,7 +61,7 @@ function SearchProvider({ children }: { children: React.ReactNode }) {
                 setResults: setResults,
                 filters: filters,
                 setFilters: setFilters,
-                isLoading: isLoading.current
+                isLoading: isLoading
             }}
         >
             { children }

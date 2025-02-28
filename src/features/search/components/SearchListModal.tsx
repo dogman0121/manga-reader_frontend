@@ -57,9 +57,10 @@ function SearchListModal({ sx }: BoxProps) {
 
     const theme = useTheme();
 
-    if (isLoading)
+    if (isLoading){
         return <SearchMessage><CircularProgress /></SearchMessage>
-    
+    }
+
     return (
         <>
             <Box
