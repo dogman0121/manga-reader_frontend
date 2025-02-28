@@ -2,7 +2,7 @@ import { FormControl, InputLabel, OutlinedInput, InputAdornment } from "@mui/mat
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useContext } from "react";
-import SearchContext from "../context/searchContext";
+import SearchContext from "../context/SearchContext";
 
 
 function SearchInput() {

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import SearchContext from "../context/searchContext";
+import SearchContext from "../context/SearchContext";
 import { Box, BoxProps, CircularProgress } from "@mui/material";
 import Title from "../../../types/Title";
 import styles from "./Search.module.css"
