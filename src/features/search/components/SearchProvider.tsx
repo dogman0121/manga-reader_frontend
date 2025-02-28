@@ -29,8 +29,10 @@ function SearchProvider({ children }: { children: React.ReactNode }) {
         if (firstRender.current)
             return () => {firstRender.current = false};
 
-        if (query === "")
+        if (query === ""){
+            isLoading.current = false;
             return () => {}
+        }
 
         isLoading.current = true;
         
