@@ -33,25 +33,32 @@ function MangaItem({ item }: { item: Title }) {
     )
 }
 
+function SearchMessage({children}: {children: React.ReactNode}) {
+    const theme = useTheme()
+
+    return (
+        <Box
+            sx={{
+                widows: "100%",
+                minHeight: "100px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: theme.typography.subtitle1.color
+            }}
+        >
+            {children}
+        </Box>
+    )
+}
+
 function SearchListModal({ sx }: BoxProps) {
     const { isLoading, query, results } = useContext(SearchContext);
 
     const theme = useTheme();
 
     if (isLoading)
-        return (
-            <Box
-                sx={{
-                    widows: "100%",
-                    minHeight: "100px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <CircularProgress />
-            </Box>
-        )
+        return <SearchMessage><CircularProgress /></SearchMessage>
     
     return (
         <>
@@ -72,9 +79,9 @@ function SearchListModal({ sx }: BoxProps) {
                         }}
                     >
                         {query === "" ?
-                            <>Чтобы запустить поиск введите запрос</>
+                            <SearchMessage>Чтобы запустить поиск введите запрос</SearchMessage>
                             :
-                            <>По вашему запросу ничего не найдено</>
+                            <SearchMessage>По вашему запросу ничего не найдено</SearchMessage>
                         }
                     </Box>
                     :
