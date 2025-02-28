@@ -1,57 +1,13 @@
-import { Modal, Box, FormControl, InputLabel, OutlinedInput, InputAdornment, OutlinedInputProps } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
-import SearchIcon from '@mui/icons-material/Search';
-import useDebounce from "../../../hooks/useDebounce";
-import { searchService } from "../services/api/searchService";
-
-function SearchInput({ onInput }: OutlinedInputProps) {
-    return (
-        <FormControl
-            variant="outlined"
-            sx={{
-                width: "100%",
-            }}
-        >
-            <InputLabel 
-                htmlFor="search-input"
-            >
-            </InputLabel>
-            <OutlinedInput
-                id="search-input"
-                onInput={onInput}
-                startAdornment={
-                    <InputAdornment position="start">
-                        <SearchIcon fontSize="large"/>
-                    </InputAdornment>
-                }
-                endAdornment={
-                    <InputAdornment position="end">
-                        <CloseIcon />
-                    </InputAdornment>
-                }
-                sx={{
-                    borderRadius: "16px",
-                    padding: "0 10px", 
-                    "& input": {
-                        padding: "10px 0"
-                    }
-                }}
-                placeholder="Введите запрос"
-            >
-
-            </OutlinedInput>
-        </FormControl>
-    )
-}
+import { Modal, Box } from "@mui/material";
+import SearchInput from "./SearchInput";
+import SearchProvider from "./SearchProvider";
+import SearchSectionSelector from "./SearchSectionSelector";
+import SearchListModal from "./SearchListModal";
 
 function SearchModal({open, onClose}: {open: boolean, onClose: Function}) {
     const handleClose = () => {
         onClose();
     }
-
-    const search = useDebounce(async (query: string) => {
-        await searchService.search(query);
-    }, 500);
 
     const styles = {
         position: "absolute",
@@ -74,13 +30,23 @@ function SearchModal({open, onClose}: {open: boolean, onClose: Function}) {
             open={open}
             onClose={handleClose}
         >
-            <Box
-                sx={{ ...styles }}
-            >
-                <SearchInput 
-                    onInput={(event: React.FormEvent) => {search((event.target as HTMLInputElement).value)}}
-                />
-            </Box>
+            <SearchProvider>
+                <Box
+                    sx={{ ...styles }}
+                >
+                    <SearchInput/>
+                    <SearchSectionSelector 
+                        sx={{
+                            mt: "5px"
+                        }}
+                    />
+                    <SearchListModal 
+                        sx={{
+                            mt: "15px"
+                        }}
+                    />
+                </Box>
+            </SearchProvider>
         </Modal>
     )
 }
