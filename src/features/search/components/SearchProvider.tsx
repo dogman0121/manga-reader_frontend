@@ -29,6 +29,9 @@ function SearchProvider({ children }: { children: React.ReactNode }) {
         if (firstRender.current)
             return () => {firstRender.current = false};
 
+        if (query === "")
+            return () => {}
+
         isLoading.current = true;
         
         timerId.current = setTimeout(async () => {
