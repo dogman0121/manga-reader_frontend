@@ -11,8 +11,6 @@ function SearchSectionSelector({ sx }: BoxProps) {
         setSection(newValue);
     }
 
-    const theme = useTheme();
-
     return (
         <ToggleButtonGroup
             value={section}
