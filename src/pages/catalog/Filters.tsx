@@ -17,6 +17,11 @@ export function MultipleSelectFilter({name, placeholder, options}: {name: string
 
     return (
         <Autocomplete
+            sx={{
+                "& .MuiOutlinedInput-root": {
+                    p: "6px 9px"
+                }
+            }}
             multiple={true}
             options={options}
             getOptionLabel={(option) => option.name}
@@ -45,6 +50,14 @@ export function InputFilter({ name, placeholder }: {name: string, placeholder: s
 
     return (
         <TextField 
+            sx={{
+                "& .MuiOutlinedInput-root": {
+                    padding: "6px 9px"
+                },
+                "& input": {
+                    p: "7.5px 4px 7.5px 5px"
+                }
+            }}
             variant="outlined" 
             type="number"
             value={filters.get(name)?.[0]?.id.toString() || ""}
