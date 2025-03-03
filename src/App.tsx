@@ -15,6 +15,7 @@ import AuthPage from "./features/auth/components/AuthPage";
 import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
 import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./features/auth/components/AuthProvider";
+import Catalog from "./pages/catalog/Catalog";
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
                 <Route path="/" element={device !== DEVICE.MOBILE ? <AppLayout /> : <AppLayoutMobile />}>
                     <Route index element={<Home/>} />
                     <Route path="manga/:id" element={<Title />} />
+                    <Route path="catalog" element={<Catalog />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>

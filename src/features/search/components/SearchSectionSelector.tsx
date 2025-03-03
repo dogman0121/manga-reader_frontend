@@ -1,4 +1,4 @@
-import { BoxProps, ToggleButton, ToggleButtonGroup, toggleButtonClasses, toggleButtonGroupClasses } from "@mui/material";
+import { BoxProps, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import { SECTIONS } from "./SearchProvider";
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
@@ -16,21 +16,8 @@ function SearchSectionSelector({ sx }: BoxProps) {
             onChange={handleChoose}
             exclusive
             sx={{
-                [`& .${toggleButtonGroupClasses.grouped}`]: {
-                    border: 0,
-                    borderRadius: "6px",
-                    [`&.${toggleButtonGroupClasses.disabled}`]: {
-                      border: 0,
-                    },
-                },
-                [`& .${toggleButtonGroupClasses.middleButton},& .${toggleButtonGroupClasses.lastButton}`]:
-                {
-                    marginLeft: "5px",
-                    borderLeft: '1px solid transparent',
-                },
-                [`& .${toggleButtonClasses.root}`] : {
-                    padding: "3px 10px",
-                    fontSize: "13px",
+                "& .MuiToggleButton-root": {
+                    p: "3px 10px"
                 },
                 ...sx
             }}

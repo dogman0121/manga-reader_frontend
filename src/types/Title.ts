@@ -6,8 +6,15 @@ export default interface Title {
     description: string,
     poster: string,
     year?: number,
-    status?: string,
-    genres?: Array<Object>,
+    type?: {
+        id: number,
+        name: string
+    },
+    status?: {
+        id: number,
+        name: string
+    },
+    genres?: Array<{id: number, name: string}>,
     author?: Object,
     artist?: Object,
     publisher?: Object,

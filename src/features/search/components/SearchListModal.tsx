@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
-import { Box, BoxProps, CircularProgress } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 import Title from "../../../types/Title";
 import styles from "./Search.module.css"
 import { useTheme } from "@mui/material/styles";
+import { SECTIONS } from "./SearchProvider";
+import SearchList from "./SearchList";
 
 
 function MangaItem({ item }: { item: Title }) {
@@ -33,66 +35,26 @@ function MangaItem({ item }: { item: Title }) {
     )
 }
 
-function SearchMessage({children}: {children: React.ReactNode}) {
-    const theme = useTheme()
-
-    return (
-        <Box
-            sx={{
-                widows: "100%",
-                minHeight: "100px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                color: theme.typography.subtitle1.color
-            }}
-        >
-            {children}
-        </Box>
-    )
-}
-
-function SearchListModal({ sx }: BoxProps) {
-    const { isLoading, query, results } = useContext(SearchContext);
-
-    const theme = useTheme();
-
-    if (isLoading){
-        return <SearchMessage><CircularProgress /></SearchMessage>
-    }
+function SearchListModal({ sx }: { sx: SxProps }) {
+    const { section, results } = useContext(SearchContext);
 
     return (
         <>
-            <Box
-                sx={{
-                    ...sx
-                }}
-            >
-                {results.length === 0 ?
+            <SearchList sx={sx}>
+                {section === SECTIONS.MANGA && (
                     <Box
                         sx={{
-                            widows: "100%",
-                            minHeight: "100px",
                             display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            color: theme.typography.subtitle1.color
+                            flexDirection: "column",
+                            rowGap: "5px"
                         }}
                     >
-                        {query === "" ?
-                            <SearchMessage>Чтобы запустить поиск введите запрос</SearchMessage>
-                            :
-                            <SearchMessage>По вашему запросу ничего не найдено</SearchMessage>
-                        }
-                    </Box>
-                    :
-                    <> 
                         {results.map((result) => 
                             <MangaItem item={result} key={result.id}/>
                         )}
-                    </>
-                } 
-            </Box>
+                    </Box>
+                )} 
+            </SearchList>
         </>
     )
 }

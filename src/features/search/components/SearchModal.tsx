@@ -19,7 +19,7 @@ function SearchModal({open, onClose}: {open: boolean, onClose: Function}) {
         border: "none",
         borderRadius: "20px",
         padding: "12px 12px",
-        width: "500px",
+        width: "600px",
         "&:focus": {
           outline: "none"
         }

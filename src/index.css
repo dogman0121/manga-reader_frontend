@@ -12,6 +12,14 @@ input:-webkit-autofill {
     transition-property: background-color, color;
 }
 
+html, body {
+    scrollbar-gutter: stable;   
+}
+
+body {
+    overflow-x: hidden;
+} 
+
 ul { 
     list-style-type: none; 
     margin: 0;

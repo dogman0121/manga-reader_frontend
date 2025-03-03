@@ -13,11 +13,11 @@ export enum SECTIONS {
 function SearchProvider({ children }: { children: React.ReactNode }) {
     const [query, setQuery] = useState<string>("");
 
-    const [section, setSection] = useState<string>(SECTIONS.MANGA);
+    const [section, setSection] = useState<SECTIONS>(SECTIONS.MANGA);
 
     const [results, setResults] = useState<Array<Title>>([]);
 
-    const [filters, setFilters] = useState<Map<string, number>>(new Map<string, number>());
+    const [filters, setFilters] = useState<Map<string, Array<{id: number, name: string}>>>(new Map<string, Array<{id: number, name: string}>>());
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 

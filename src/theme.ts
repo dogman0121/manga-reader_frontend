@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import { toggleButtonGroupClasses } from "@mui/material";
 
 declare module '@mui/material/styles' {
     interface PaletteOptions {
@@ -49,6 +50,24 @@ export const defaultTheme = createTheme({
         MuiAccordion: {
             styleOverrides: {
                 root: {
+                }
+            }
+        },
+        MuiToggleButtonGroup: {
+            styleOverrides: {
+                root: {
+                    [`& .${toggleButtonGroupClasses.grouped}`]: {
+                        border: 0,
+                        borderRadius: "6px",
+                        [`&.${toggleButtonGroupClasses.disabled}`]: {
+                          border: 0,
+                        },
+                    },
+                    [`& .${toggleButtonGroupClasses.middleButton},& .${toggleButtonGroupClasses.lastButton}`]:
+                    {
+                        marginLeft: "5px",
+                        borderLeft: '1px solid transparent',
+                    },
                 }
             }
         }
