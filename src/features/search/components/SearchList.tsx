@@ -28,7 +28,8 @@ function SearchList({ sx, children }: {sx?: SxProps, children: React.ReactNode})
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    p: "50px 0"
+                    p: "50px 0",
+                    ...sx
                 }}
             >
                 По запросу {query} ничего не найдено.
@@ -36,9 +37,11 @@ function SearchList({ sx, children }: {sx?: SxProps, children: React.ReactNode})
         )
 
     return (
-        <>
+        <Box
+            sx={{...sx}}
+        >
             {children}
-        </>
+        </Box>
     )
 }
 

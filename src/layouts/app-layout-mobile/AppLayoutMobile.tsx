@@ -1,18 +1,15 @@
-import { Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { Box, Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useEffect, useState } from "react";
-import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import { Outlet, Link } from 'react-router-dom'
 import { UserMenuDrawer } from "../../components/UserMenu";
 
 
 function AppLayoutMobile() {
     const [navSection, setNavSection] = useState(0);
-
-    const device = useDeviceDetect();
 
     const [ menuOpened, setMenuOpened ] = useState(false);
 
@@ -51,45 +48,49 @@ function AppLayoutMobile() {
 
     return (   
         <>
-            <Outlet />
-            {device === DEVICE.MOBILE && (
-                <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                    <BottomNavigation
-                    showLabels
-                    value={navSection}
-                    onChange={(_event, newValue) => {
-                        setPrevPage(navSection);
-                        setNavSection(newValue);
-                    }}
-                    >
-                        <BottomNavigationAction 
-                            sx={actionStyles} 
-                            icon={
-                                <Link to="/">
-                                    <HomeRoundedIcon fontSize="medium"/>
-                                </Link>
-                            } 
-                        />
-                        <BottomNavigationAction 
-                            sx={actionStyles} 
-                            icon={
-                                <Link to="/search">
-                                    <SearchRoundedIcon fontSize="medium"/>
-                                </Link>
-                            } 
-                        />
-                        <BottomNavigationAction 
-                            sx={actionStyles} 
-                            icon={<NotificationsRoundedIcon fontSize="medium"/>} 
-                        />
-                        <BottomNavigationAction 
-                            sx={actionStyles} 
-                            icon={<MenuRoundedIcon fontSize="medium"/>} 
-                            onClick={() => {setMenuOpened(true)}}
-                        />
-                    </BottomNavigation>
-                </Paper>
-            )}
+            <Box
+                sx={{
+                    p: "10px 5px"
+                }}
+            >
+                <Outlet />
+            </Box>
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+                <BottomNavigation
+                showLabels
+                value={navSection}
+                onChange={(_event, newValue) => {
+                    setPrevPage(navSection);
+                    setNavSection(newValue);
+                }}
+                >
+                    <BottomNavigationAction 
+                        sx={actionStyles} 
+                        icon={
+                            <Link to="/">
+                                <HomeRoundedIcon fontSize="medium"/>
+                            </Link>
+                        } 
+                    />
+                    <BottomNavigationAction 
+                        sx={actionStyles} 
+                        icon={
+                            <Link to="/catalog">
+                                <SearchRoundedIcon fontSize="medium"/>
+                            </Link>
+                        } 
+                    />
+                    <BottomNavigationAction 
+                        sx={actionStyles} 
+                        icon={<NotificationsRoundedIcon fontSize="medium"/>} 
+                    />
+                    <BottomNavigationAction 
+                        sx={actionStyles} 
+                        icon={<MenuRoundedIcon fontSize="medium"/>} 
+                        onClick={() => {setMenuOpened(true)}}
+                    />
+                </BottomNavigation>
+            </Paper>
             <UserMenuDrawer 
                 open={menuOpened}
                 onClose={() => {
