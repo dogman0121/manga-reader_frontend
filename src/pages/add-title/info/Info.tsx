@@ -68,7 +68,7 @@ function Description() {
                             {...field}
                             fullWidth
                             multiline
-                            rows={5}
+                            minRows={5}
                             sx={{
                                 "& input": {
                                     p: "12px 15px"
