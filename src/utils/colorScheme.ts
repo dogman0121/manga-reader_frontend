@@ -1,6 +1,7 @@
-export const getColorScheme = () => {
-    if (localStorage.getItem("color-scheme"))
-        return localStorage.getItem("color-scheme");
+export const getColorScheme = (): "dark" | "light" => {
+    const colorScheme = localStorage.getItem("color-scheme")
+    if (colorScheme === "dark" || colorScheme == "light")
+        return colorScheme;
     return "light";
 }
 

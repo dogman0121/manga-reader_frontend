@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 import styles from "./AppLayout.module.css"
 import { SvgIcon, Box, Button  } from "@mui/material";
 import { Avatar, Checkbox } from "@mui/material";
@@ -19,8 +18,6 @@ import { AuthContext } from "../../features/auth/context/AuthContext";
 
 
 function AppHeader() {
-    const theme = useTheme();
-
     const { setTheme } = useContext(ThemeContext);
 
     const { user } = useContext(UserContext);
@@ -108,11 +105,6 @@ function AppHeader() {
                             <Button 
                                 variant="contained" 
                                 onClick={() => {openModal()}}
-                                sx={
-                                    { 
-                                        background: theme.palette.primary.main
-                                    }
-                                }
                             >
                                 Войти
                             </Button>

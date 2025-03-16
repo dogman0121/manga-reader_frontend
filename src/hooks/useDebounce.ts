@@ -1,10 +1,8 @@
-const useDebounce = (func: Function, delay: number) => {
-    let timerId: number;
-    
+const useDebounce = (func: Function, delay: number) => {    
     return function(this: any, ...args: any[]) {
-        clearTimeout(timerId);
+        clearTimeout(this.timerId);
 
-        timerId = setTimeout(() => {
+        this.timerId = setTimeout(() => {
             func(...args);
         }, delay)
     }

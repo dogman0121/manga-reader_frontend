@@ -1,4 +1,6 @@
-import { BoxProps, ToggleButton, ToggleButtonGroup} from "@mui/material";
+import { BoxProps, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import type {} from '@mui/material/themeCssVarsAugmentation';
+import { useTheme } from "@mui/material/styles";
 import { SECTIONS } from "./SearchProvider";
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
@@ -10,6 +12,8 @@ function SearchSectionSelector({ sx }: BoxProps) {
         setSection(newValue);
     }
 
+    const theme = useTheme();
+
     return (
         <ToggleButtonGroup
             value={section}
@@ -18,6 +22,13 @@ function SearchSectionSelector({ sx }: BoxProps) {
             sx={{
                 "& .MuiToggleButton-root": {
                     p: "3px 10px"
+                },
+                "& .Mui-selected": {
+                    bgcolor: theme.vars.palette.primary.main,
+                    color: "#000000",
+                    "&:hover": {
+                        bgcolor: `rgba(${theme.vars.palette.primary.mainChannel} / 0.75)`,
+                    }
                 },
                 ...sx
             }}

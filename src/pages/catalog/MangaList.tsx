@@ -13,7 +13,7 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
         <Link to={`/manga/${item.id}`}>
             {type === "grid" ?
                 <Box >
-                    <img src={item.poster} 
+                    <img src={item.main_poster} 
                         style={{
                             aspectRatio: 0.7,
                             width: "100%",
@@ -54,7 +54,7 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
                     }}
                 >
                     <img 
-                        src={item.poster} 
+                        src={item.main_poster} 
                         style={{
                             aspectRatio: 0.7,
                             borderRadius: "10px",

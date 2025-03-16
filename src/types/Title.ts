@@ -4,7 +4,9 @@ export default interface Title {
     id: number,
     name: string,
     description: string,
-    poster: string,
+    main_poster: string,
+    background: string,
+    posters: Array<string>,
     year?: number,
     type?: {
         id: number,
@@ -15,9 +17,9 @@ export default interface Title {
         name: string
     },
     genres?: Array<{id: number, name: string}>,
-    author?: Object,
-    artist?: Object,
-    publisher?: Object,
+    authors?: Object,
+    artists?: Object,
+    publishers?: Object,
     translators?: Array<Object>,
     creator?: User,
     created_at?: Date,

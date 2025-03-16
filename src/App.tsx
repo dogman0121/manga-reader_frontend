@@ -5,38 +5,45 @@ import AppLayoutMobile from "./layouts/app-layout-mobile/AppLayoutMobile";
 import Home from "./pages/home/Home";
 import Title from "./pages/title/Title";
 import NotFound from "./pages/not-found/NotFound";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ThemeContext from "./context/ThemeContext"
 import { getColorScheme, setColorScheme } from "./utils/colorScheme";
 import { ThemeProvider } from "@mui/material/styles";
-import { lightTheme, darkTheme } from "./theme";
+import getTheme from "./theme";
 import { CssBaseline } from "@mui/material";
 import AuthPage from "./features/auth/components/AuthPage";
 import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
 import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./features/auth/components/AuthProvider";
 import Catalog from "./pages/catalog/Catalog";
+import AddTitle from "./pages/add-title/AddTitle";
 
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(getColorScheme() === "dark");
-
   const device = useDeviceDetect();
 
-  const setTheme = (theme: string) => {
-      setIsDarkMode(!isDarkMode);
+  const [theme, setTheme] = useState<"dark" | "light">(getColorScheme());
+
+  const handleSetTheme = (theme: "dark" | "light") => {
       setColorScheme(theme);
+      setTheme(theme);
   }
+
+  useEffect(() => {
+    setColorScheme(getColorScheme());
+
+    return () => {}
+  }, [])
 
   return (
     <>
       <HelmetProvider>
         <ThemeContext.Provider
           value={{
-            setTheme
+            setTheme: handleSetTheme
           }}
         >
-          <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+          <ThemeProvider theme={getTheme(theme)}>
             <CssBaseline />
               <AuthProvider>
               <Routes>
@@ -50,6 +57,7 @@ function App() {
                 <Route path="/" element={device !== DEVICE.MOBILE ? <AppLayout /> : <AppLayoutMobile />}>
                     <Route index element={<Home/>} />
                     <Route path="manga/:id" element={<Title />} />
+                    <Route path="manga/add" element={<AddTitle/>} />
                     <Route path="catalog" element={<Catalog />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>

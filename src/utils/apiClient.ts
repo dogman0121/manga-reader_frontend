@@ -1,15 +1,39 @@
 import { tokenService } from "../features/auth/services/tokenService";
 
 class ApiClient {
-    baseUrl = "https://kanwoo.ru/api"
+    // baseUrl = "https://kanwoo.ru/api"
+    baseUrl = "http://127.0.0.1:5000/api"
 
-    async _sendRequest(url: string, method: string, body?: Object) {
-        const response = await this._fetch(url, method, body);
+    async _sendJsonRequest(url: string, method: string, body?: Object) {
+        const requestParams = {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }
+
+        const response = await this._fetch(url, method, requestParams);
 
         if (response.status === 401 && tokenService.getRefreshToken()){
             await this._refreshToken();
             
-            return this._fetch(url, method, body);
+            return this._fetch(url, method, requestParams);
+        }
+
+        return response;
+    }
+
+    async _sendFormRequest(url: string, method: string, form: FormData){
+        const requestParams = {
+            body: form
+        }
+
+        const response = await this._fetch(url, method, requestParams);
+
+        if (response.status === 401 && tokenService.getRefreshToken()){
+            await this._refreshToken();
+            
+            return this._fetch(url, method, requestParams);
         }
 
         return response;
@@ -32,31 +56,33 @@ class ApiClient {
         tokenService.saveRefreshToken(json.refresh_token);
     }
 
-    async _fetch(url: string, method: string, body?: Object) {
-        const headers: HeadersInit = new Headers({
-            "Content-Type": "application/json"
-        })
+    async _fetch(url: string, method: string, body?: RequestInit) {
+        const headers: HeadersInit = new Headers({ ...body?.headers });
 
         if (tokenService.getAccessToken())
-            headers.append("Authorization", `Bearer ${tokenService.getAccessToken()}`);
+            headers.set("Authorization", `Bearer ${tokenService.getAccessToken()}`);
 
         return await fetch(this.baseUrl + url, {
             method: method,
             headers: headers,
-            body: JSON.stringify(body)
+            body: body?.body
         })
     }
 
     async get(url: string) {
-        return this._sendRequest(url, "GET");
+        return this._sendJsonRequest(url, "GET");
     }
 
     async post(url: string, body: Object) {
-        return this._sendRequest(url, "POST", body);
+        return this._sendJsonRequest(url, "POST", body);
     }
 
     async put(url: string, body: Object) {
-        return this._sendRequest(url, "PUT", body);
+        return this._sendJsonRequest(url, "PUT", body);
+    }
+
+    async sendForm(url: string, form: FormData){
+        return this._sendFormRequest(url, "POST", form);
     }
 }
 
