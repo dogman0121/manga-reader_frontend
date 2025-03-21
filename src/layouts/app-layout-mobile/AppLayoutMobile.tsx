@@ -27,7 +27,7 @@ function AppLayoutMobile() {
 
             if (href === "/")
                 setNavSection(0);
-            if (href.startsWith("/search"))
+            if (href.startsWith("/catalog"))
                 setNavSection(1);
         }
         
@@ -50,19 +50,18 @@ function AppLayoutMobile() {
         <>
             <Box
                 sx={{
-                    p: "10px 5px"
+                    p: "10px 5px 66px"
                 }}
             >
                 <Outlet />
             </Box>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1000 }} elevation={3}>
                 <BottomNavigation
-                showLabels
-                value={navSection}
-                onChange={(_event, newValue) => {
-                    setPrevPage(navSection);
-                    setNavSection(newValue);
-                }}
+                    value={navSection}
+                    onChange={(_event, newValue) => {
+                        setPrevPage(navSection);
+                        setNavSection(newValue);
+                    }}
                 >
                     <BottomNavigationAction 
                         sx={actionStyles} 

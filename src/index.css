@@ -3,9 +3,11 @@ html:root {
     --mui-palette-primary-light: rgb(255, 214, 0);
     --mui-palette-primary-main: rgb(255, 214, 0);
     --mui-palette-primary-dark: rgb(255, 214, 0);
+    --mui-palette-primary-contrastText: #000000;
     --mui-palette-primary-mainChannel: 255 214 0;
     --mui-palette-secondary-main: #D9D9D9;
     --mui-palette-background-default: #FFFFFF;
+    --mui-paletter-info-text-color: #000000;
     --subtitle1-text-color: #606060;
     --body-color: #FFFFFF;
     --header-color: #FFF1AA;
@@ -18,7 +20,10 @@ html:root {
 }
 
 html:root[data-color-scheme="dark"] {
+    --mui-palette-primary-light: rgb(255, 214, 0);
     --mui-palette-primary-main: rgb(255, 214, 0);
+    --mui-palette-primary-dark: rgb(255, 214, 0);
+    --mui-palette-primary-contrastText: #000000;
     --mui-palette-primary-mainChannel: 255 214 0;
     --mui-palette-secondary-main: #2f2f2f;
     --mui-palette-background-default: #171717;
@@ -27,9 +32,9 @@ html:root[data-color-scheme="dark"] {
     --header-color: #06090E;
     --footer-color: #06090E;
     --text-color: #FFFFFF;
-    --widget1-color: #131313;
+    --widget1-color: #0e0e0e;
     --widget2-color: #2f2f2f;
-    --widget3-color: #131313;
+    --widget3-color: #121212;
     --paper-color: #171717;
 }
 

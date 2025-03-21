@@ -77,7 +77,7 @@ function SettingsMobile() {
                     flexDirection: "column",
                     padding: "10px 5px",
                     height: "100%",
-                    bgcolor: theme.palette.customBackgrounds?.paper
+                    bgcolor: theme.palette.customBackgrounds?.widget3
                 }}
             >
                 <Typography
@@ -442,7 +442,7 @@ function UserMenuMobile() {
                 sx={{
                     padding: "10px 5px",
                     height: "100%",
-                    bgcolor: theme.palette.customBackgrounds?.paper
+                    bgcolor: theme.palette.customBackgrounds?.widget3
                 }}
             >
                 <HeaderMobile />

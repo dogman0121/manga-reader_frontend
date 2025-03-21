@@ -1,8 +1,11 @@
 import { Box, GlobalStyles } from "@mui/material"
 import { Outlet } from "react-router-dom"
+import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 
 
 function FormLayout() {
+    const device = useDeviceDetect();
+
     return (
         <>
             <GlobalStyles styles={{
@@ -16,11 +19,10 @@ function FormLayout() {
             <Box
                 sx={{
                     maxWidth: "960px",
-                    m: "0 auto",
-                    p: "15px 20px 20px",
+                    p: device !== DEVICE.MOBILE ? "15px 20px 20px" : "5px 10px 10px",
                     bgcolor: "var(--paper-color)",
                     borderRadius: "16px",
-                    mt: "28px"
+                    mt: device !== DEVICE.MOBILE ? "28px" : undefined
                 }}
             >
                 <Outlet />

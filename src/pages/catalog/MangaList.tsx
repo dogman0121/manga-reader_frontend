@@ -5,6 +5,8 @@ import { Box, Typography, SxProps } from "@mui/material";
 import { useContext } from "react";
 import SearchContext from "../../features/search/context/SearchContext";
 import { VIEWS } from "./Catalog";
+import Poster from "../../components/ui/Poster";
+import { storageService } from "../../services/api/storageService";
 
 function MangaItem({ type, item }: {type: string, item: Title}) {
     const theme = useTheme();
@@ -13,12 +15,8 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
         <Link to={`/manga/${item.id}`}>
             {type === "grid" ?
                 <Box >
-                    <img src={item.main_poster} 
-                        style={{
-                            aspectRatio: 0.7,
-                            width: "100%",
-                            borderRadius: "8px"
-                        }}
+                    <Poster 
+                        src={storageService.getMangaUrl(item.main_poster || "")}
                     />
                     <Box>
                         <Box

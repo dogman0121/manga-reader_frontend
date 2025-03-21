@@ -3,6 +3,7 @@ import FormSelect from "../components/FormSelect";
 import { useFormContext, Controller } from "react-hook-form";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 
 
 const langOptions = [
@@ -18,6 +19,8 @@ const langOptions = [
 
 function NameTranslationsForm() {
     const {watch, control, setValue} = useFormContext();
+
+    const device = useDeviceDetect();
 
     const handleAddNameTranslation = () => {
         const name = watch("nameTranslation")
@@ -43,7 +46,10 @@ function NameTranslationsForm() {
                 sx={{
                     mt: "5px",
                     display: "flex",
-                    flexDirection: "row"
+                    flexWrap: device === DEVICE.MOBILE ? "wrap" : undefined,
+                    flexDirection: "row",
+                    columnGap: "5px",
+                    rowGap: "5px"
                 }}
             >
                 <Controller 
@@ -70,9 +76,6 @@ function NameTranslationsForm() {
                     render={({field}) => (
                         <FormSelect
                             {...field}
-                            sx={{
-                                ml: "5px",
-                            }}
                         > 
                             {langOptions.map((opt) => <MenuItem key={opt.id} value={opt.id}>{opt.name}</MenuItem>)}  
 
@@ -82,7 +85,6 @@ function NameTranslationsForm() {
                 <Button variant="contained"
                     sx={{
                         height: "47px",
-                        ml: "5px",
                         padding: "0 20px"
                     }}
                     onClick={handleAddNameTranslation}

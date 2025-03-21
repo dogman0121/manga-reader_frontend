@@ -10,9 +10,48 @@ import Type from "./Type";
 import Status from "./Status";
 import Year from "./Year";
 import Adult from "./Adult";
+import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 
 
-function Info() {
+function InfoMobile() {
+    return (
+        <>
+            <Name />
+            <NameTranslations />
+            <Description />
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    columnGap: "8px",
+                    rowGap: "10px"
+                }}
+            >
+                <Type/>
+                <Status />
+                <Year />
+                <Adult />
+            </Box>
+
+            <Genres />
+
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "7px"
+                }}
+            >
+                <Authors />
+                <Artists />
+                <Publishers />
+            </Box>
+            
+        </>
+    )
+}
+
+function InfoPC() {
     return (
         <>
             <Name />
@@ -46,6 +85,20 @@ function Info() {
                 <Publishers />
             </Box>
             
+        </>
+    )
+}
+
+function Info() {
+    const device = useDeviceDetect();
+
+    return (
+        <>
+            {device === DEVICE.MOBILE?
+                <InfoMobile />
+                : 
+                <InfoPC />
+            }
         </>
     )
 }

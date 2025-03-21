@@ -82,9 +82,9 @@ const getTheme = (mode: "dark" | "light") => {
                 header: "var(--header-color)",
                 footer: "var(--footer-color)",
                 widget1: "var(--widget1-color)",
-                widget2: "var(--windget2-color)",
-                widget3: "var(--windget2-color)",
-                paper: "var(--widget2-color)"
+                widget2: "var(--widget2-color)",
+                widget3: "var(--widget3-color)",
+                paper: "var(--paper-color)"
             },
         },
         typography: {

@@ -5,7 +5,7 @@ function Field({children}: {children: React.ReactNode}) {
         <Box
             sx={{
                 border: "1px solid #dadada",
-                p: "20px 25px",
+                p: "10px",
                 borderRadius: "12px",
                 mt: "8px"
             }}
