@@ -2,11 +2,12 @@ import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
 import { Box, SxProps } from "@mui/material";
 import Title from "../../../types/Title";
-import styles from "./Search.module.css"
 import { useTheme } from "@mui/material/styles";
 import { SECTIONS } from "./SearchProvider";
 import SearchList from "./SearchList";
 import { Link } from "react-router-dom";
+import Poster from "../../../components/ui/Poster";
+import { storageService } from "../../../services/api/storageService";
 
 
 function MangaItem({ item }: { item: Title }) {
@@ -24,7 +25,10 @@ function MangaItem({ item }: { item: Title }) {
                     bgcolor: theme.palette.customBackgrounds?.widget2
                 }}
             >
-                <img src={item.main_poster} className={styles.Modal_Image}/>
+                <Poster 
+                    src={storageService.getMangaUrl(item.main_poster || "")}
+                    width="55px"
+                />
                 <Box
                     sx={{
                         ml: "10px",

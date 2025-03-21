@@ -16,7 +16,9 @@ import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
 import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./features/auth/components/AuthProvider";
 import Catalog from "./pages/catalog/Catalog";
-import AddTitle from "./pages/add-title/AddTitle";
+import AddTitle from "./pages/title-form/AddTitle";
+import FormLayout from "./layouts/form-layout/FormLayout";
+import UpdateTitle from "./pages/title-form/UpdateTitle";
 
 
 function App() {
@@ -55,9 +57,12 @@ function App() {
                     <Route path="recovery" element={<AuthPage section="recovery"/>} />
                 </Route>
                 <Route path="/" element={device !== DEVICE.MOBILE ? <AppLayout /> : <AppLayoutMobile />}>
+                    <Route element={<FormLayout/>}>
+                        <Route path="manga/add" element={<AddTitle/>} />
+                        <Route path="manga/:id/edit" element={<UpdateTitle/>} />
+                    </Route>
                     <Route index element={<Home/>} />
                     <Route path="manga/:id" element={<Title />} />
-                    <Route path="manga/add" element={<AddTitle/>} />
                     <Route path="catalog" element={<Catalog />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>

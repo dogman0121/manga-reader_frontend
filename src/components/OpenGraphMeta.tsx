@@ -4,7 +4,7 @@ interface OpenGraphMetaProps {
   title: string;
   description: string;
   url: string;
-  image: string;
+  image?: string;
   siteName?: string;
 };
 

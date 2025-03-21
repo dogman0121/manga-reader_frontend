@@ -34,10 +34,8 @@ const getTheme = (mode: "dark" | "light") => {
                     root: {
                         borderRadius: "20px",
                         boxShadow: "none",
-                        color: "#000000",
                         "&:hover": {
                             boxShadow: "none",
-                            backgroundColor: "#FFD600"
                         },
                     }
                 }
@@ -95,7 +93,7 @@ const getTheme = (mode: "dark" | "light") => {
             },
             subtitle1: {
                 fontSize: "14px",
-                color: "#606060"            
+                color: "var(--subtitle1-text-color)"       
             }
         }
     })

@@ -344,13 +344,13 @@ function ExitButton() {
             onClick={() => {onLogout(); onClose()}}
         >
             <ExitToAppIcon fontSize="small"/> 
-            <Typography 
+            <Box
                 sx={{
                     ml: "5px"
                 }}
             >
                 Выход
-            </Typography>
+            </Box>
         </Button>
     )
 }

@@ -182,7 +182,6 @@ function AppLayout() {
             <AppHeader/>
             <Main>
                 <Outlet />
-                
             </Main>
             <AppFooter />
         </>
