@@ -52,6 +52,10 @@ input:-webkit-autofill {
     transition-property: background-color, color;
 }
 
+* {
+    touch-action: none;
+}
+
 html, body {
     scrollbar-gutter: stable;   
 }
