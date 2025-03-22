@@ -22,7 +22,9 @@ function FormLayout() {
                     p: device !== DEVICE.MOBILE ? "15px 20px 20px" : "5px 10px 10px",
                     bgcolor: "var(--paper-color)",
                     borderRadius: "16px",
-                    mt: device !== DEVICE.MOBILE ? "28px" : undefined
+                    mt: device !== DEVICE.MOBILE ? "28px" : undefined,
+
+                    mx: "auto"
                 }}
             >
                 <Outlet />

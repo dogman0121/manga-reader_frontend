@@ -13,10 +13,62 @@ import { getColorScheme } from "../../utils/colorScheme";
 import { storageService } from "../../services/api/storageService";
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import Poster from "../../components/ui/Poster";
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+
 
 enum ERROR {
     NOT_FOUND = 1,
     FORBIDDEN = 2
+}
+
+function TitleBar({ title }: {title: Title}) {
+    return (
+        <Box>
+            <Link to={`/manga/${title.id}`}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center"
+                    }}
+                >
+                    <WestRoundedIcon 
+                        sx={{
+                            color: "var(--subtitle1-text-color)",
+                            width: "20px",
+                            height: "20px"
+                        }}
+                    />
+                    <Typography
+                        variant="subtitle1"
+                        sx={{
+                            ml: "5px",
+                            fontSize: "14px",
+                            textTransform: "uppercase"
+                        }}
+                    >
+                        Вернуться к тайтлу
+                    </Typography>
+                </Box>
+            </Link>
+            <Box
+                sx={{
+                    mt: "5px",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    columnGap: "15px"
+                }}
+            >
+                <Poster
+                    src={storageService.getUrl(`manga/${title.main_poster}`)}
+                    width={"75px"}
+                />
+                <Box>
+                    {title.name}
+                </Box>
+            </Box>
+        </Box>
+    )
 }
 
 function UpdateTitle() {
@@ -25,6 +77,8 @@ function UpdateTitle() {
     const [title, setTitle] = useState<Title>(EMPTY_TITLE);
 
     const [error, setError] = useState<ERROR>();
+
+    const [snackBarOpened, setSnackBarOpened] = useState<boolean>(false);
 
     const fetchTitle = async() => {
         const response = await apiClient.get(`/manga/${id}`);
@@ -53,57 +107,26 @@ function UpdateTitle() {
         const form = compileFormData(data);
 
         apiClient.sendForm(`/manga/${title.id}/edit`, "PUT", form);
+
+        setSnackBarOpened(true);
     }
+
+    const handleClose = (
+        _event: React.SyntheticEvent | Event,
+        reason?: SnackbarCloseReason,
+        ) => {
+            if (reason === 'clickaway') {
+            return;
+            }
+    
+        setSnackBarOpened(false);
+    };
 
     return (
         <>
             <Box>
                 {title !== EMPTY_TITLE && ( 
-                    <Box>
-                        <Link to={`/manga/${title.id}`}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center"
-                                }}
-                            >
-                                <WestRoundedIcon 
-                                    sx={{
-                                        color: "var(--subtitle1-text-color)",
-                                        width: "20px",
-                                        height: "20px"
-                                    }}
-                                />
-                                <Typography
-                                    variant="subtitle1"
-                                    sx={{
-                                        ml: "5px",
-                                        fontSize: "14px",
-                                        textTransform: "uppercase"
-                                    }}
-                                >
-                                    Вернуться к тайтлу
-                                </Typography>
-                            </Box>
-                        </Link>
-                        <Box
-                            sx={{
-                                mt: "5px",
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                columnGap: "15px"
-                            }}
-                        >
-                            <Poster
-                                src={storageService.getUrl(`manga/${title.main_poster}`)}
-                                width={"75px"}
-                            />
-                            <Box>
-                                {title.name}
-                            </Box>
-                        </Box>
-                    </Box>
+                    <TitleBar title={title}/>
                 )}
                 <Box mt={"8px"}>
                     <TitleForm 
@@ -112,6 +135,12 @@ function UpdateTitle() {
                     />
                 </Box>
             </Box>
+            <Snackbar
+                autoHideDuration={6000}
+                open={snackBarOpened}
+                onClose={handleClose}
+                message="not archive"
+            />
             {error && (
                 <Modal
                     open={true}
