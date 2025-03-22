@@ -69,6 +69,7 @@ function DraggablePreviewPoster({ onDelete, poster } : {onDelete: React.EventHan
                         bgcolor: "secondary.main",
                         p: "2px",
                         borderRadius: "50%",
+                        touchAction: "none"
                     }}
                 />
                 <CloseRoundedIcon
@@ -91,7 +92,6 @@ function DraggableList() {
     const touchSensor = useSensor(
         TouchSensor, { 
             activationConstraint: { delay: 250, tolerance: 5 },
-            scrollableAncestors: [],
         });
 
     const sensors = useSensors(pointerSencor, touchSensor);
@@ -119,6 +119,9 @@ function DraggableList() {
         })(watch("posters")))
     }
 
+    const handleDragStart = () => {
+    }
+
     const handleDelete = (poster: Poster) => {
         if (poster === watch("mainPoster"))
             setValue("mainPoster", undefined);
@@ -133,6 +136,7 @@ function DraggableList() {
                 <DndContext 
                     autoScroll={{enabled: device !== DEVICE.MOBILE}}
                     onDragEnd={handleDragEnd} 
+                    onDragStart={handleDragStart}
                     collisionDetection={closestCenter} 
                     sensors={sensors}
                 >
