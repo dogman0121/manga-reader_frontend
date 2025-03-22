@@ -51,13 +51,9 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
                         columnGap: "15px",
                     }}
                 >
-                    <img 
-                        src={item.main_poster} 
-                        style={{
-                            aspectRatio: 0.7,
-                            borderRadius: "10px",
-                            width: "130px"
-                        }}
+                    <Poster 
+                        src={storageService.getMangaUrl(item.main_poster || "")}
+                        width="130px"
                     />
                     <Box
                         sx={{
