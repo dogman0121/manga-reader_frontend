@@ -24,6 +24,8 @@ function Modal({open, onClose, children, sx}: ModalProps) {
                         left: "50%",
                         top: "50%",
 
+                        maxWidth: "100%",
+
                         transform: "translate(-50%, -50%)",
 
                         "&:focus": {

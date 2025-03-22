@@ -20,7 +20,7 @@ function PosterBlockInput({ onAcceptFile } : { onAcceptFile: Function }){
         if (!cropper)
             return;
         
-        const dataURL = cropper.getCroppedCanvas({width: 245, height: 350}).toDataURL();
+        const dataURL = cropper.getCroppedCanvas({width: 1400, height: 2100}).toDataURL();
         const blobs = atob(dataURL.split(',')[1]);
 
         let array = [];
@@ -45,12 +45,14 @@ function PosterBlockInput({ onAcceptFile } : { onAcceptFile: Function }){
                         p: "20px 25px",
                         bgcolor: "var(--paper-color)",
                         borderRadius: "16px",
-                        width: "600px"
+                        width: "min(600px, 100vw)",
+                        display: "flex",
+                        flexDirection: "column",
                     }}
                 >
                     <Cropper 
                         style={{ height: 400, width: "100%" }}
-                        aspectRatio={2/3}
+                        aspectRatio={7/10}
                         ref={cropperRef}
                         cropBoxResizable={false}
                         cropBoxMovable={false}
@@ -62,7 +64,8 @@ function PosterBlockInput({ onAcceptFile } : { onAcceptFile: Function }){
                         variant="contained"
                         onClick={onCrop}
                         sx={{
-                            mt: "20px"
+                            mt: "20px",
+                            alignSelf: "flex-end"
                         }}
                     >
                         Обрезать

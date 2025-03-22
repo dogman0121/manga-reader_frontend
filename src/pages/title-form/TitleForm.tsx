@@ -47,8 +47,9 @@ export function compileFormData(data: AddTitleForm) {
     form.append("adult", data.adult.toString());
     form.append("year", data.year.toString());
 
-    if (data.posters?.indexOf(data.mainPoster) !== -1)
-        form.append("main_poster", data.posters?.indexOf(data.mainPoster).toString());
+
+    if (data.mainPoster)
+        form.append("main_poster", data.mainPoster.fileName);
 
     if (data.background?.file)
         form.append("background", data.background.file);
