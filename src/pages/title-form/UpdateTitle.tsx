@@ -115,6 +115,7 @@ function UpdateTitle() {
         const response = await apiClient.sendForm(`/manga/${title.id}/edit`, "PUT", form);
 
         if (response.ok){
+            setTitle(await response.json())
             setNotificationOpened(true);
             setNotificationVariant("success");
             setNotificationMessage("Изменения сохранены");
