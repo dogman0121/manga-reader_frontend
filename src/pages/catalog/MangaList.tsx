@@ -39,7 +39,7 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
                             sx={{
                                 fontSize:"14px",
                                 display: "-webkit-box",
-                                "-webkit-line-clamp": "3",
+                                "-webkit-line-clamp": "2",
                                 "-webkit-box-orient": "vertical",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis"
