@@ -15,10 +15,12 @@ import { storageService } from "../../services/api/storageService";
 export function parseTitleData<AddTitleForm>(title: Title) {
     return {
         name: title.name,
-        nameTranslation: title.nameTranslations?.name || "",
-        nameTranslationLang: title.nameTranslations?.lang || "ru",
+        nameTranslation: "",
+        nameTranslationLang: "ru",
         nameTranslations: new Map(
-            title.nameTranslations ? [[title.nameTranslations.lang, title.nameTranslations.name]] : []
+            title.nameTranslations?.length ? 
+            title.nameTranslations.map((translation) => ([translation.lang, translation.name])) :
+            []
         ),
         description: title.description || "",
         type: title.type?.id || 1,

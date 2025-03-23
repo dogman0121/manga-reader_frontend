@@ -9,10 +9,10 @@ export const EMPTY_TITLE : Title = {
 export default interface Title {
     id: number,
     name: string,
-    nameTranslations?: {
+    nameTranslations?: Array<{
         lang: string,
         name: string
-    },
+    }>,
     description?: string,
     main_poster?: string,
     background?: string,
