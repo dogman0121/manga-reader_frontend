@@ -1,8 +1,8 @@
 import { tokenService } from "../features/auth/services/tokenService";
 
 class ApiClient {
-    // baseUrl = "https://kanwoo.ru/api"
-    baseUrl = "http://127.0.0.1:5000/api"
+    baseUrl = "https://kanwoo.ru/api"
+    // baseUrl = "http://127.0.0.1:5000/api"
 
     async _sendJsonRequest(url: string, method: string, body?: Object) {
         const requestParams = {
