@@ -18,8 +18,8 @@ export function parseTitleData<AddTitleForm>(title: Title) {
         nameTranslation: "",
         nameTranslationLang: "ru",
         nameTranslations: new Map(
-            title.nameTranslations?.length ? 
-            title.nameTranslations.map((translation) => ([translation.lang, translation.name])) :
+            title.name_translations?.length ? 
+            title.name_translations.map((translation) => ([translation.lang, translation.name])) :
             []
         ),
         description: title.description || "",

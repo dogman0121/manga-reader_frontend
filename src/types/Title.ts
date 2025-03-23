@@ -9,7 +9,7 @@ export const EMPTY_TITLE : Title = {
 export default interface Title {
     id: number,
     name: string,
-    nameTranslations?: Array<{
+    name_translations?: Array<{
         lang: string,
         name: string
     }>,
