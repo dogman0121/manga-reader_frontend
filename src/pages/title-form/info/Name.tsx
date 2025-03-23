@@ -24,7 +24,7 @@ function Name(){
                             error={error ? true : false}
                             sx={{
                                 "& input": {
-                                    p: "12px 15px"
+                                    p: "10px 15px"
                                 }
                             }}
                             placeholder="Введите название"

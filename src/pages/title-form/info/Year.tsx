@@ -23,7 +23,7 @@ function Year() {
                             fullWidth
                             sx={{
                                 "& input": {
-                                    p: "12px 15px"
+                                    p: "10px 15px"
                                 }
                             }}
                             placeholder="Введите год"

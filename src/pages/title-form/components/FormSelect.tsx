@@ -4,7 +4,7 @@ import { Select } from "@mui/material"
 const FormSelect = styled(Select)({
     borderRadius: "16px",
     "& .MuiSelect-select": {
-        padding: "12px 15px",
+        padding: "10px 15px",
     }
 })
 

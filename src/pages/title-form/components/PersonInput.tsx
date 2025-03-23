@@ -64,8 +64,11 @@ function PersonInput({name}: {name: string}) {
                     {...params}
                     placeholder="Введите название"
                     sx={{
+                        "& .MuiOutlinedInput-root": {
+                            py: "7px"
+                        },
                         "& input": {
-                            py: "3px !important"
+                            py: "3px !important",
                         }
                     }}
                     slotProps={{

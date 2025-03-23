@@ -62,7 +62,7 @@ function NameTranslationsForm() {
                             fullWidth
                             sx={{
                                 "& input": {
-                                    p: "12px 15px"
+                                    p: "10px 15px"
                                 }
                             }}
                             placeholder="Введите название"
@@ -84,7 +84,7 @@ function NameTranslationsForm() {
                 />
                 <Button variant="contained"
                     sx={{
-                        height: "47px",
+                        height: "43px",
                         padding: "0 20px"
                     }}
                     onClick={handleAddNameTranslation}
