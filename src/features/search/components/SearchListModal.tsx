@@ -34,7 +34,7 @@ function MangaItem({ item }: { item: Title }) {
                         alignItems: "center"
                     }}
                 >
-                    <Box>{item.name}</Box>
+                    <Box fontSize={"15px"}>{item.name}</Box>
                 </Box>
             </Box>
         </Link>
