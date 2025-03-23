@@ -13,7 +13,6 @@ import { storageService } from "../../../services/api/storageService";
 function MangaItem({ item }: { item: Title }) {
     const theme = useTheme()
 
-    console.log(item);
     return (
         <Link to={`/manga/${item.id}`}>
             <Box
@@ -26,7 +25,7 @@ function MangaItem({ item }: { item: Title }) {
                 }}
             >
                 <Poster 
-                    src={storageService.getMangaUrl(item.main_poster || "")}
+                    src={item.main_poster?.thumbnail || ""}
                     width="55px"
                 />
                 <Box

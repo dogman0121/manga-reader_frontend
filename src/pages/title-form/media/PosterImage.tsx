@@ -1,6 +1,5 @@
 import {Box, BoxProps} from "@mui/material";
 import Poster from "../types/Poster";
-import { storageService } from "../../../services/api/storageService";
 
 
 function PosterImage({ onClick, poster }: BoxProps & {poster: Poster}) {
@@ -15,9 +14,9 @@ function PosterImage({ onClick, poster }: BoxProps & {poster: Poster}) {
             <img 
                 src={
                     poster.file ? 
-                    poster.fileUrl || URL.createObjectURL(poster.file) 
+                    URL.createObjectURL(poster.file) 
                     : 
-                    storageService.getUrl(`manga/${poster.fileName}`)
+                    poster.fileUrl
                 }
                 style={{
                     aspectRatio: "2/3",

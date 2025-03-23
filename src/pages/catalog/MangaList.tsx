@@ -16,7 +16,7 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
             {type === "grid" ?
                 <Box >
                     <Poster 
-                        src={storageService.getMangaUrl(item.main_poster || "")}
+                        src={item.main_poster?.medium || ""}
                     />
                     <Box>
                         <Box
@@ -52,7 +52,7 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
                     }}
                 >
                     <Poster 
-                        src={storageService.getMangaUrl(item.main_poster || "")}
+                        src={storageService.getMangaUrl(item.main_poster?.medium || "")}
                         width="130px"
                     />
                     <Box

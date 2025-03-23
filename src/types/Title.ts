@@ -1,4 +1,5 @@
 import Person from "./Person";
+import Poster from "./Poster";
 import { User } from "./User";
 
 export const EMPTY_TITLE : Title = {
@@ -14,9 +15,9 @@ export default interface Title {
         name: string
     }>,
     description?: string,
-    main_poster?: string,
+    main_poster?: Poster,
     background?: string,
-    posters?: Array<string>,
+    posters?: Array<Poster>,
     year?: number,
     type?: {
         id: number,
@@ -37,5 +38,8 @@ export default interface Title {
     translators?: Array<Object>,
     creator?: User,
     created_at?: Date,
-    chapters?: Array<Object>
+    chapters?: Array<Object>,
+    persmissions?: {
+        edit: boolean
+    }
 }

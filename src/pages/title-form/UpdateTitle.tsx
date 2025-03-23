@@ -15,6 +15,7 @@ import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import Poster from "../../components/ui/Poster";
 import { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Notification from "../../components/ui/Notification";
+import fetchTitle from "../../services/api/fetchTitle";
 
 
 enum ERROR {
@@ -61,7 +62,7 @@ function TitleBar({ title }: {title: Title}) {
                 }}
             >
                 <Poster
-                    src={storageService.getUrl(`manga/${title.main_poster}`)}
+                    src={storageService.getUrl(`manga/${title.id}/${title.main_poster?.small}`)}
                     width={"75px"}
                 />
                 <Box>
@@ -79,27 +80,20 @@ function UpdateTitle() {
 
     const [error, setError] = useState<ERROR>();
 
-    const fetchTitle = async() => {
-        const response = await apiClient.get(`/manga/${id}`);
-    
-        const json = await response.json();
+    const processTitle = async() => {
+        const title: Title = await fetchTitle(parseInt(id || ""));
 
-        if (response.status === 403 || 
-            !json.permissions?.edit || 
-            response.status == 401) {
+        if (!title.persmissions?.edit)
             setError(ERROR.FORBIDDEN);
-        }
 
-        if (response.status === 404){
+        if (title === EMPTY_TITLE)
             setError(ERROR.NOT_FOUND);
-            return setTitle(EMPTY_TITLE);
-        }
 
-        setTitle(json || EMPTY_TITLE);
+        setTitle(title);
     }
 
     useEffect(() => {
-        fetchTitle();
+        processTitle();
 
         return () => {};
     }, []);
