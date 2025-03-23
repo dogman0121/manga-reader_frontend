@@ -37,7 +37,12 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
                         </Box>
                         <Typography
                             sx={{
-                                fontSize:"14px"
+                                fontSize:"14px",
+                                display: "-webkit-box",
+                                "-webkit-line-clamp": "3",
+                                "-webkit-box-orient": "vertical",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis"
                             }}
                         >
                             {item.name}</Typography>
