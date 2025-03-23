@@ -14,6 +14,7 @@ import { storageService } from "../../services/api/storageService";
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import Poster from "../../components/ui/Poster";
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import Notification from "../../components/ui/Notification";
 
 
 enum ERROR {
@@ -78,14 +79,14 @@ function UpdateTitle() {
 
     const [error, setError] = useState<ERROR>();
 
-    const [snackBarOpened, setSnackBarOpened] = useState<boolean>(false);
-
     const fetchTitle = async() => {
         const response = await apiClient.get(`/manga/${id}`);
     
         const json = await response.json();
 
-        if (response.status === 403 || !json.permissions?.edit) {
+        if (response.status === 403 || 
+            !json.permissions?.edit || 
+            response.status == 401) {
             setError(ERROR.FORBIDDEN);
         }
 
@@ -103,12 +104,27 @@ function UpdateTitle() {
         return () => {};
     }, []);
 
-    const onSubmit: SubmitHandler<AddTitleForm> = (data) => {
+
+    const [notificationOpened, setNotificationOpened] = useState(false);
+    const [notificationVariant, setNotificationVariant] = useState<"success" | "error">("success");
+    const [notificationMessage, setNotificationMessage] = useState("");
+
+    const onSubmit: SubmitHandler<AddTitleForm> = async (data) => {
         const form = compileFormData(data);
 
-        apiClient.sendForm(`/manga/${title.id}/edit`, "PUT", form);
+        const response = await apiClient.sendForm(`/manga/${title.id}/edit`, "PUT", form);
 
-        setSnackBarOpened(true);
+        if (response.ok){
+            setNotificationOpened(true);
+            setNotificationVariant("success");
+            setNotificationMessage("Изменения сохранены");
+        } else {
+            setNotificationOpened(true);
+            setNotificationVariant("error");
+            setNotificationMessage("При отправке формы произошла ошибка");
+        }
+
+        setNotificationOpened(true);
     }
 
     const handleClose = (
@@ -119,7 +135,7 @@ function UpdateTitle() {
             return;
             }
     
-        setSnackBarOpened(false);
+        setNotificationOpened(false);
     };
 
     return (
@@ -135,11 +151,11 @@ function UpdateTitle() {
                     />
                 </Box>
             </Box>
-            <Snackbar
-                autoHideDuration={6000}
-                open={snackBarOpened}
+            <Notification
+                variant={notificationVariant}
+                open={notificationOpened}
                 onClose={handleClose}
-                message="not archive"
+                message={notificationMessage}
             />
             {error && (
                 <Modal
