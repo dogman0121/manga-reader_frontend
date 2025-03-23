@@ -13,7 +13,7 @@ import { getColorScheme } from "../../utils/colorScheme";
 import { storageService } from "../../services/api/storageService";
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import Poster from "../../components/ui/Poster";
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Notification from "../../components/ui/Notification";
 
 
