@@ -31,10 +31,10 @@ export function parseTitleData<AddTitleForm>(title: Title) {
         authors: title.authors || [],
         artists: title.artists || [],
         publishers: title.publishers || [],
-        mainPoster: title.main_poster ? { fileName: title.main_poster.filename, fileUrl: storageService.getUrl(`manga/${title.id}/${title.main_poster.small}`) } as Poster : undefined,
+        mainPoster: title.main_poster ? { fileName: title.main_poster.filename, fileUrl: title.main_poster.small } as Poster : undefined,
         background: title.background ? { fileName: title.background, fileUrl: storageService.getUrl(`manga/${title.background}`) } as Poster : undefined,
         new_posters: [],
-        posters: title.posters?.map(poster => ({ fileName: poster.filename, fileUrl: storageService.getUrl(`manga/${title.id}/${poster.small}`) } as Poster)) || []
+        posters: title.posters?.map(poster => ({ fileName: poster.filename, fileUrl: poster.small } as Poster)) || []
     } as AddTitleForm;
 }
 

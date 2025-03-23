@@ -83,7 +83,7 @@ function UpdateTitle() {
     const processTitle = async() => {
         const title: Title = await fetchTitle(parseInt(id || ""));
 
-        if (!title.persmissions?.edit)
+        if (!title.permissions?.edit)
             setError(ERROR.FORBIDDEN);
 
         if (title === EMPTY_TITLE)

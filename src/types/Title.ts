@@ -39,7 +39,7 @@ export default interface Title {
     creator?: User,
     created_at?: Date,
     chapters?: Array<Object>,
-    persmissions?: {
+    permissions?: {
         edit: boolean
     }
 }
