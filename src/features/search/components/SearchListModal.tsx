@@ -7,7 +7,6 @@ import { SECTIONS } from "./SearchProvider";
 import SearchList from "./SearchList";
 import { Link } from "react-router-dom";
 import Poster from "../../../components/ui/Poster";
-import { storageService } from "../../../services/api/storageService";
 
 
 function MangaItem({ item }: { item: Title }) {

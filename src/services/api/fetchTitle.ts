@@ -1,5 +1,4 @@
-import Title, { EMPTY_TITLE } from "../../types/Title";
-import Poster from "../../types/Poster";
+import { EMPTY_TITLE } from "../../types/Title";
 import { apiClient } from "../../utils/apiClient";
 
 const fetchTitle = async(titleId: number) => {
