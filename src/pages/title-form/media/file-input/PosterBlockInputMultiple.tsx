@@ -13,7 +13,7 @@ function BlockInputMultiple({ name } : { name: string }) {
         newArray.forEach(pposter => (flag = flag || file.name === pposter.file?.name))
 
         if (!flag)
-            newArray.push({fileName: file.name, file: file, fileUrl: URL.createObjectURL(file)});
+            newArray.push({fileName: file.name.split(".")[0], file: file, fileUrl: URL.createObjectURL(file)});
 
         setValue("posters", newArray);
     }
