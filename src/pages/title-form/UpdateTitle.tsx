@@ -62,7 +62,7 @@ function TitleBar({ title }: {title: Title}) {
                 }}
             >
                 <Poster
-                    src={storageService.getUrl(`manga/${title.id}/${title.main_poster?.small}`)}
+                    src={title.main_poster?.small || ""}
                     width={"75px"}
                 />
                 <Box>
