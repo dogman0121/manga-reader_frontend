@@ -10,7 +10,6 @@ import { Box, Typography } from "@mui/material";
 import Modal from "../../features/modal/Modal";
 import ErrorIcon from '@mui/icons-material/Error';
 import { getColorScheme } from "../../utils/colorScheme";
-import { storageService } from "../../services/api/storageService";
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import Poster from "../../components/ui/Poster";
 import { SnackbarCloseReason } from '@mui/material/Snackbar';
