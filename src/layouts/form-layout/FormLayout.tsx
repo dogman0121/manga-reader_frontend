@@ -1,10 +1,34 @@
-import { Box, GlobalStyles } from "@mui/material"
+import { Box, CircularProgress, GlobalStyles } from "@mui/material"
 import { Outlet } from "react-router-dom"
 import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
+import { useState } from "react";
+import FormStateContext from "./FormStateContext";
+import FormModal from "./FormModal";
 
 
 function FormLayout() {
     const device = useDeviceDetect();
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [messageOpened, setMessageOpened] = useState(false);
+    const [message, setMessage] = useState(<></>)
+
+    const mobileStyles = {
+        p: "5px 10px 10px",
+        mx: "auto",
+        maxWidth: "960px",
+        bgcolor: "var(--paper-color)",
+        borderRadius: "16px",
+    };
+
+    const pcStyles = {
+        p: "15px 20px 20px",
+        mt: "28px",
+        mx: "auto",
+        maxWidth: "960px",
+        bgcolor: "var(--paper-color)",
+        borderRadius: "16px",
+    }
 
     return (
         <>
@@ -17,18 +41,31 @@ function FormLayout() {
                 }
             }} />
             <Box
-                sx={{
-                    maxWidth: "960px",
-                    p: device !== DEVICE.MOBILE ? "15px 20px 20px" : "5px 10px 10px",
-                    bgcolor: "var(--paper-color)",
-                    borderRadius: "16px",
-                    mt: device !== DEVICE.MOBILE ? "28px" : undefined,
-
-                    mx: "auto"
-                }}
+                sx={device !== DEVICE.MOBILE ? pcStyles : mobileStyles}
             >
-                <Outlet />
+                <FormStateContext.Provider
+                    value={{
+                        setIsLoading,
+                        messageOpened,
+                        setMessageOpened,
+                        setMessage
+                    }}
+                >
+                    <Outlet />
+                </FormStateContext.Provider>
             </Box>
+            <FormModal
+                open={isLoading || messageOpened}
+            >
+                <>
+                    {isLoading && (
+                        <CircularProgress />
+                    )}
+                    {messageOpened && (
+                        {message}
+                    )}
+                </>
+            </FormModal>
         </>
     )
 }

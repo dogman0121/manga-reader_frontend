@@ -2,19 +2,19 @@ import { Link, useParams } from "react-router-dom";
 import TitleForm, { compileFormData, parseTitleData } from "./TitleForm";
 import { SubmitHandler } from "react-hook-form";
 import AddTitleForm from "./types/AddTitleForm";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { apiClient } from "../../utils/apiClient";
 import { useState } from "react";
 import Title, { EMPTY_TITLE } from "../../types/Title";
 import { Box, Typography } from "@mui/material";
-import Modal from "../../features/modal/Modal";
 import ErrorIcon from '@mui/icons-material/Error';
-import { getColorScheme } from "../../utils/colorScheme";
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import Poster from "../../components/ui/Poster";
 import { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Notification from "../../components/ui/Notification";
 import fetchTitle from "../../services/api/fetchTitle";
+import FormStateContext from "../../layouts/form-layout/FormStateContext";
+import FormModal from "../../layouts/form-layout/FormModal";
 
 
 enum ERROR {
@@ -79,16 +79,35 @@ function UpdateTitle() {
 
     const [error, setError] = useState<ERROR>();
 
+    const { setIsLoading } = useContext(FormStateContext);
+
+    const [notificationOpened, setNotificationOpened] = useState(false);
+    const [notificationVariant, setNotificationVariant] = useState<"success" | "error">("success");
+    const [notificationMessage, setNotificationMessage] = useState("");
+
+
     const processTitle = async() => {
-        const title: Title = await fetchTitle(parseInt(id || ""));
+        setIsLoading(true);
+        
+        try {
+            const title: Title = await fetchTitle(parseInt(id || ""));
 
-        if (!title.permissions?.edit)
-            setError(ERROR.FORBIDDEN);
+            if (!title.permissions?.edit)
+                setError(ERROR.FORBIDDEN);
 
-        if (title === EMPTY_TITLE)
-            setError(ERROR.NOT_FOUND);
+            if (title === EMPTY_TITLE)
+                setError(ERROR.NOT_FOUND);
 
-        setTitle(title);
+            setTitle(title);
+        } catch {
+            setIsLoading(false);
+
+            setNotificationOpened(true);
+            setNotificationVariant("error");
+            setNotificationMessage("При загрузке тайтла возникла ошибка.")
+        }
+
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -97,28 +116,31 @@ function UpdateTitle() {
         return () => {};
     }, []);
 
-
-    const [notificationOpened, setNotificationOpened] = useState(false);
-    const [notificationVariant, setNotificationVariant] = useState<"success" | "error">("success");
-    const [notificationMessage, setNotificationMessage] = useState("");
-
     const onSubmit: SubmitHandler<AddTitleForm> = async (data) => {
         const form = compileFormData(data);
 
-        const response = await apiClient.sendForm(`/manga/${title.id}/edit`, "PUT", form);
+        setIsLoading(true);
+        try {
+            const response = await apiClient.sendForm(`/manga/${title.id}/edit`, "PUT", form);
 
-        if (response.ok){
-            setTitle(await response.json())
+            if (response.ok){
+                setTitle(await response.json())
+                setNotificationVariant("success");
+                setNotificationMessage("Изменения сохранены");
+            } else {
+                setNotificationVariant("error");
+                setNotificationMessage("При отправке формы произошла ошибка");
+            }
+
             setNotificationOpened(true);
-            setNotificationVariant("success");
-            setNotificationMessage("Изменения сохранены");
-        } else {
-            setNotificationOpened(true);
+        } catch {
             setNotificationVariant("error");
             setNotificationMessage("При отправке формы произошла ошибка");
+            setIsLoading(false);
+            setNotificationOpened(true);
         }
 
-        setNotificationOpened(true);
+        setIsLoading(false);
     }
 
     const handleClose = (
@@ -152,13 +174,8 @@ function UpdateTitle() {
                 message={notificationMessage}
             />
             {error && (
-                <Modal
+                <FormModal
                     open={true}
-                    sx={{
-                        "& .MuiBackdrop-root": {
-                            bgcolor: getColorScheme() === "light" ? "rgb(255 255 255 / 50%)" : "rgba(0, 0, 0, 0.7)"
-                        }
-                    }}
                 >
                     <Box
                         sx={{
@@ -191,7 +208,7 @@ function UpdateTitle() {
                             )}
                         </Box>
                     </Box>
-                </Modal>
+                </FormModal>
             )}
         </>
     )

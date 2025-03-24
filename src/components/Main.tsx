@@ -5,7 +5,10 @@ import styles from "../App.module.css"
 export default function Main({ sx, children }: BoxProps) {
     return (
         <Box
-            sx={sx}
+            sx={{
+                position: "relative",
+                ...sx
+            }}
             component="main"
         >
             <Box
