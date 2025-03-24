@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import AuthLayout from "./layouts/auth-layout/AuthLayout";
 import AppLayout from "./layouts/app-layout/AppLayout";
-import AppLayoutMobile from "./layouts/app-layout-mobile/AppLayoutMobile";
+import AppLayoutMobile from "./layouts/app-layout/AppLayoutMobile";
 import Home from "./pages/home/Home";
 import Title from "./pages/title/Title";
 import NotFound from "./pages/not-found/NotFound";

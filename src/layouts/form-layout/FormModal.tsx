@@ -1,12 +1,19 @@
-import { styled } from "@mui/material";
-import Modal from "../../features/modal/Modal";
-import { getColorScheme } from "../../utils/colorScheme";
+import { useContext, useEffect } from "react";
+import MainBlurContext from "../app-layout/MainBlurContext";
 
 
-const FormModal = styled(Modal)({
-    "& .MuiBackdrop-root": {
-        bgcolor: getColorScheme() === "light" ? "rgb(255 255 255 / 50%)" : "rgba(0, 0, 0, 0.7)"
-    }
-}) 
+function FormModal({open, children}: {open: boolean, children: React.ReactNode}) {
+    const { setOpened, setContent } = useContext(MainBlurContext);
+
+
+    useEffect(() => {
+        setOpened(open);
+        setContent(children);
+    }, [open, children])
+
+    return (
+        <></>
+    )
+}
 
 export default FormModal;

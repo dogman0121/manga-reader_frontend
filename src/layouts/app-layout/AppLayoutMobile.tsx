@@ -6,6 +6,8 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useEffect, useState } from "react";
 import { Outlet, Link } from 'react-router-dom'
 import { UserMenuDrawer } from "../../components/UserMenu";
+import Blur from "../../components/Blur";
+import MainBlurContext from "./MainBlurContext";
 
 
 function AppLayoutMobile() {
@@ -46,6 +48,10 @@ function AppLayoutMobile() {
         fontSize: "12px",
     }
 
+    const [blurOpened, setBlurOpened] = useState<boolean>(false);
+
+    const [blurContent, setBlurContent] = useState<React.ReactNode>(<></>);
+
     return (   
         <>
             <Box
@@ -53,7 +59,17 @@ function AppLayoutMobile() {
                     p: "10px 5px 66px"
                 }}
             >
-                <Outlet />
+                <MainBlurContext.Provider
+                    value={{
+                        setOpened: setBlurOpened,
+                        setContent: setBlurContent
+                    }}
+                >
+                    <Outlet />
+                </MainBlurContext.Provider>
+                <Blur open={blurOpened}>
+                    {blurContent}
+                </Blur>
             </Box>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1000 }} elevation={3}>
                 <BottomNavigation

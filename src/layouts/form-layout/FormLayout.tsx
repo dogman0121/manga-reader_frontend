@@ -23,7 +23,6 @@ function FormLayout() {
 
     const pcStyles = {
         p: "15px 20px 20px",
-        mt: "28px",
         mx: "auto",
         maxWidth: "960px",
         bgcolor: "var(--paper-color)",
