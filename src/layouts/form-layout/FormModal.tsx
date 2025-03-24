@@ -5,10 +5,15 @@ import MainBlurContext from "../app-layout/MainBlurContext";
 function FormModal({open, children}: {open: boolean, children: React.ReactNode}) {
     const { setOpened, setContent } = useContext(MainBlurContext);
 
-
     useEffect(() => {
-        setOpened(open);
-        setContent(children);
+        if (open) {
+            setOpened(open);
+            setContent(children);
+        }
+
+        return () => {
+            setOpened(false);
+        }
     }, [open, children])
 
     return (

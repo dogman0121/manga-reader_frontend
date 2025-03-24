@@ -241,6 +241,8 @@ function AppLayout() {
             <AppMain>
                 <MainBlurContext.Provider
                     value={{
+                        opened: blurOpened,
+                        content: blurContent,
                         setOpened: setBlurOpened,
                         setContent: setBlurContent
                     }}

@@ -18,7 +18,7 @@ function Blur({open, children}: {open: boolean, children: React.ReactNode}) {
                         justifyContent: "center",
                         alignItems: "center",
 
-                        bgcolor: getColorScheme() === "light" ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.5)"
+                        bgcolor: getColorScheme() === "light" ? "rgba(255, 255, 255, 0.8)" : "rgba(0, 0, 0, 0.8)"
                     }}
                 >
                     {children}

@@ -61,6 +61,8 @@ function AppLayoutMobile() {
             >
                 <MainBlurContext.Provider
                     value={{
+                        opened: blurOpened,
+                        content: blurContent,
                         setOpened: setBlurOpened,
                         setContent: setBlurContent
                     }}

@@ -92,10 +92,12 @@ function UpdateTitle() {
         try {
             const title: Title = await fetchTitle(parseInt(id || ""));
 
+            setIsLoading(false);
+
             if (!title.permissions?.edit)
                 setError(ERROR.FORBIDDEN);
 
-            if (title === EMPTY_TITLE)
+            if (title === EMPTY_TITLE) 
                 setError(ERROR.NOT_FOUND);
 
             setTitle(title);
@@ -106,8 +108,6 @@ function UpdateTitle() {
             setNotificationVariant("error");
             setNotificationMessage("При загрузке тайтла возникла ошибка.")
         }
-
-        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -123,6 +123,8 @@ function UpdateTitle() {
         try {
             const response = await apiClient.sendForm(`/manga/${title.id}/edit`, "PUT", form);
 
+            setIsLoading(false);
+
             if (response.ok){
                 setTitle(await response.json())
                 setNotificationVariant("success");
@@ -134,13 +136,12 @@ function UpdateTitle() {
 
             setNotificationOpened(true);
         } catch {
+            setIsLoading(false);
+
             setNotificationVariant("error");
             setNotificationMessage("При отправке формы произошла ошибка");
-            setIsLoading(false);
             setNotificationOpened(true);
         }
-
-        setIsLoading(false);
     }
 
     const handleClose = (
@@ -173,43 +174,41 @@ function UpdateTitle() {
                 onClose={handleClose}
                 message={notificationMessage}
             />
-            {error && (
-                <FormModal
-                    open={true}
+            <FormModal
+                open={error === ERROR.NOT_FOUND || error === ERROR.FORBIDDEN}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        columnGap: "10px",
+                        alignItems: "center"
+                    }}
                 >
-                    <Box
+                    <ErrorIcon 
                         sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            columnGap: "10px",
-                            alignItems: "center"
+                            width: "35px",
+                            height: "35px",
+                            color: "#FF0000"
                         }}
+                    />
+                    <Box
                     >
-                        <ErrorIcon 
-                            sx={{
-                                width: "35px",
-                                height: "35px",
-                                color: "#FF0000"
-                            }}
-                        />
-                        <Box
-                        >
-                            {error == ERROR.NOT_FOUND && (
-                                <>
-                                    <Typography fontSize={18}>Упс... Такого тайтла нет!</Typography>
-                                    <Typography fontSize={14}>Проверьте правильность URL</Typography>
-                                </>
-                            )}
-                            {error === ERROR.FORBIDDEN && (
-                                <>
-                                    <Typography fontSize={18}>Упс... У вас нет доступа!</Typography>
-                                    <Typography fontSize={14}>Обратитесь к администраторам</Typography>
-                                </>
-                            )}
-                        </Box>
+                        {error == ERROR.NOT_FOUND && (
+                            <>
+                                <Typography fontSize={18}>Упс... Такого тайтла нет!</Typography>
+                                <Typography fontSize={14}>Проверьте правильность URL</Typography>
+                            </>
+                        )}
+                        {error === ERROR.FORBIDDEN && (
+                            <>
+                                <Typography fontSize={18}>Упс... У вас нет доступа!</Typography>
+                                <Typography fontSize={14}>Обратитесь к администраторам</Typography>
+                            </>
+                        )}
                     </Box>
-                </FormModal>
-            )}
+                </Box>
+            </FormModal>
         </>
     )
 }
