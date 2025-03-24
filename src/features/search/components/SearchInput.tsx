@@ -6,7 +6,7 @@ import SearchContext from "../context/SearchContext";
 
 
 function SearchInput() {
-    const { setQuery } = useContext(SearchContext);
+    const { query, setQuery } = useContext(SearchContext);
 
     return (
         <FormControl
@@ -21,6 +21,7 @@ function SearchInput() {
             </InputLabel>
             <OutlinedInput
                 id="search-input"
+                value={query}
                 onInput={(event: React.FormEvent) => {
                     setQuery((event.target as HTMLInputElement).value)
                 }}
@@ -31,7 +32,12 @@ function SearchInput() {
                 }
                 endAdornment={
                     <InputAdornment position="end">
-                        <CloseIcon />
+                        <CloseIcon 
+                            sx={{
+                                cursor: "pointer"
+                            }}
+                            onClick={() => {setQuery("")}}
+                        />
                     </InputAdornment>
                 }
                 sx={{

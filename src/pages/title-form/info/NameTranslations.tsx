@@ -1,9 +1,10 @@
-import { Box, Typography, TextField, MenuItem, Button } from "@mui/material";
+import { Box, Typography, MenuItem, Button } from "@mui/material";
 import FormSelect from "../components/FormSelect";
 import { useFormContext, Controller } from "react-hook-form";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
+import FormInput from "../components/FormInput";
 
 
 const langOptions = [
@@ -57,14 +58,9 @@ function NameTranslationsForm() {
                     control={control}
                     defaultValue=""
                     render={({ field }) => (
-                        <TextField 
+                        <FormInput
                             {...field}
                             fullWidth
-                            sx={{
-                                "& input": {
-                                    p: "10px 15px"
-                                }
-                            }}
                             placeholder="Введите название"
                         />
                     )}

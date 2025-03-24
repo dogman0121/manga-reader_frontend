@@ -1,5 +1,6 @@
-import { Box, Typography, TextField } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import { useFormContext, Controller } from "react-hook-form";
+import FormInput from "../components/FormInput";
 
 function Name(){
     const {formState:{errors}, control} = useFormContext();
@@ -18,15 +19,10 @@ function Name(){
                     rules={{required: true}}
                     defaultValue=""
                     render={({ field, fieldState:{error} }) => (
-                        <TextField 
+                        <FormInput 
                             {...field}
                             fullWidth
                             error={error ? true : false}
-                            sx={{
-                                "& input": {
-                                    p: "10px 15px"
-                                }
-                            }}
                             placeholder="Введите название"
                         />
                     )}
