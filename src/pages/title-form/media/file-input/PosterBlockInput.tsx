@@ -52,7 +52,7 @@ function PosterBlockInput({ onAcceptFile } : { onAcceptFile: Function }){
                 >
                     <Cropper 
                         style={{ height: 400, width: "100%" }}
-                        aspectRatio={7/10}
+                        aspectRatio={2/3}
                         ref={cropperRef}
                         cropBoxResizable={false}
                         cropBoxMovable={false}

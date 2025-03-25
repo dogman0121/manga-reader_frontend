@@ -3,7 +3,7 @@ function Poster({src, width}: {src: string, width?: string}){
         <img 
             src={src}
             style={{
-                aspectRatio: "7/10",
+                aspectRatio: "2/3",
                 width: width || "100%",
                 borderRadius: "4%"
             }}
