@@ -1,5 +1,5 @@
 interface Poster {
-    filename: string,
+    uuid: string,
     thumbnail: string,
     small: string,
     medium: string,
