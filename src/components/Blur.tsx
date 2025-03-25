@@ -13,6 +13,7 @@ function Blur({open, children}: {open: boolean, children: React.ReactNode}) {
 
                         left: "0",
                         top: "0",
+                        zIndex: "100",
 
                         display: "flex",
                         justifyContent: "center",
