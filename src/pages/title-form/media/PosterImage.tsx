@@ -13,10 +13,13 @@ function PosterImage({ onClick, poster }: BoxProps & {poster: Poster}) {
         >
             <img 
                 src={
-                    poster.file ? 
-                    URL.createObjectURL(poster.file) 
-                    : 
+                    poster.fileUrl ? 
                     poster.fileUrl
+                    :
+                    poster.file ?
+                    URL.createObjectURL(poster.file)
+                    :
+                    ""  
                 }
                 style={{
                     aspectRatio: "2/3",
