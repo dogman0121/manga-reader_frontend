@@ -16,7 +16,7 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
             {type === "grid" ?
                 <Box >
                     <Poster 
-                        src={item.main_poster?.medium || ""}
+                        src={item.main_poster?.small || ""}
                     />
                     <Box>
                         <Box
