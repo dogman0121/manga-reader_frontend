@@ -8,18 +8,17 @@ import fetchUser from "../../../services/api/fetchUser";
 function AuthProvider({ children }: { children: React.ReactNode }) {
     const [modalOpened, setModalOpened] = useState(false);
 
-    const [user, setUser] = useState<User>(EMPTY_USER);
+    const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
-        const loadUser = async () => {
-            const user = await fetchUser();
-
-            setUser(user);
-        }
-    
-        loadUser();
-    
-        return () => {}
+        fetchUser()
+            .then((u) => {
+                setUser(u);
+            })
+            .catch(() => {
+                setUser(EMPTY_USER);
+            })
+        
     }, [])
 
 

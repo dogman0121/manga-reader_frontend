@@ -223,6 +223,9 @@ function UserWidgetMobile() {
 
     const theme = useTheme();
 
+    if (user == null)
+        return <></>
+
     return (
         <>
             <Link to={`/profile/${user.id}`}>
@@ -271,6 +274,9 @@ function UserWidgetPC() {
     const {onClose} = useContext(UserMenuContext);
 
     const theme = useTheme();
+
+    if (user == null)
+        return (<></>)
 
     return (
         <>

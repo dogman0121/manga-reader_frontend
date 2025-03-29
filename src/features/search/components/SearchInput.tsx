@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, OutlinedInput, InputAdornment } from "@mui/material"
+import { FormControl, OutlinedInput, InputAdornment } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useContext } from "react";
@@ -15,10 +15,6 @@ function SearchInput() {
                 width: "100%",
             }}
         >
-            <InputLabel 
-                htmlFor="search-input"
-            >
-            </InputLabel>
             <OutlinedInput
                 id="search-input"
                 value={query}

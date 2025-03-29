@@ -117,36 +117,53 @@ function AppHeader() {
                             flexDirection: "row"
                         }}
                     >
-                        {user === EMPTY_USER && 
+                        {user != null && (
                             <>
-                                <Checkbox
-                                    checked={checked}
-                                    onChange={
-                                        (e: React.ChangeEvent<HTMLInputElement>) => { 
-                                            setChecked(e.target.checked);
-                                            e.target.checked ? setTheme("dark") : setTheme("light") 
-                                        }
-                                    }
-                                />
-                                <Button 
-                                    variant="contained" 
-                                    onClick={() => {openModal()}}
-                                >
-                                    Войти
-                                </Button>
+                                {user === EMPTY_USER && 
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            columnGap: "4px"
+                                        }}
+                                    >
+                                        <Checkbox
+                                            checked={checked}
+                                            onChange={
+                                                (e: React.ChangeEvent<HTMLInputElement>) => { 
+                                                    setChecked(e.target.checked);
+                                                    e.target.checked ? setTheme("dark") : setTheme("light") 
+                                                }
+                                            }
+                                            sx={{
+                                                height: "36px",
+                                                widows: "36px"
+                                            }}
+                                        />
+                                        <Button 
+                                            variant="contained" 
+                                            onClick={() => {openModal()}}
+                                            sx={{
+                                                height: "36px"
+                                            }}
+                                        >
+                                            Войти
+                                        </Button>
+                                    </Box>
+                                }
+                                { user !== EMPTY_USER &&
+                                    <Avatar 
+                                        ref={avatarRef}
+                                        src={user.avatar}
+                                        sx={{
+                                            width: "36px",
+                                            height: "36px"
+                                        }}
+                                        onClick={() => {setUserMenuOpened(true)}}
+                                    />
+                                }
                             </>
-                        }
-                        { user !== EMPTY_USER &&
-                            <Avatar 
-                                ref={avatarRef}
-                                src={user.avatar}
-                                sx={{
-                                    width: "36px",
-                                    height: "36px"
-                                }}
-                                onClick={() => {setUserMenuOpened(true)}}
-                            />
-                        }
+                        )}
                     </Box>
                 </Box>
                 <UserMenuPopover

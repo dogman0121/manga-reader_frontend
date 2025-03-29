@@ -3,7 +3,6 @@ import AuthLayout from "./layouts/auth-layout/AuthLayout";
 import AppLayout from "./layouts/app-layout/AppLayout";
 import AppLayoutMobile from "./layouts/app-layout/AppLayoutMobile";
 import Home from "./pages/home/Home";
-import Title from "./pages/title/Title";
 import NotFound from "./pages/not-found/NotFound";
 import { useEffect, useState } from "react";
 import ThemeContext from "./context/ThemeContext"
@@ -19,6 +18,8 @@ import Catalog from "./pages/catalog/Catalog";
 import AddTitle from "./pages/title-form/AddTitle";
 import FormLayout from "./layouts/form-layout/FormLayout";
 import UpdateTitle from "./pages/title-form/UpdateTitle";
+import CommentPage from "./pages/comment/CommentPage";
+import TitlePage from "./pages/title/TitlePage";
 
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
         >
           <ThemeProvider theme={getTheme(theme)}>
             <CssBaseline />
-              <AuthProvider>
+            <AuthProvider>
               <Routes>
                 <Route path="/auth" element={<AuthLayout />}>
                     <Route path="register" element={<AuthPage section="register" />}/>
@@ -62,8 +63,9 @@ function App() {
                         <Route path="manga/:id/edit" element={<UpdateTitle/>} />
                     </Route>
                     <Route index element={<Home/>} />
-                    <Route path="manga/:id" element={<Title />} />
+                    <Route path="manga/:id" element={<TitlePage />} />
                     <Route path="catalog" element={<Catalog />} />
+                    <Route path="comment/:id" element={<CommentPage />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>

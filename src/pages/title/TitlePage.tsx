@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-export default function Title() {
+export default function TitlePage() {
     const { id } = useParams();
 
     return (
