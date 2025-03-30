@@ -69,6 +69,10 @@ export function compileFormData(data: AddTitleForm) {
     })
     form.append("posters_order", JSON.stringify(postersOrder));
 
+    data.authors?.forEach((genre) => {
+        form.append("genres", genre.id.toString());
+    })
+
     data.authors?.forEach((author) => {
         form.append("authors", author.id.toString());
     })
