@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Stats from "./Stats";
 import Names from "./Names";
 import About from "./About";
@@ -14,9 +14,12 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import TitleContext from "../../../context/TitleContext";
 
 
 function RightSide() {
+    const title = useContext(TitleContext);
+
     const [section, setSection] = useState<string>('1');
     
     const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
@@ -68,7 +71,7 @@ function RightSide() {
             >
                 <Box
                     sx={{
-                        width: "645px",
+                        width: title.similar ? "645px" : null,
                         display: "flex",
                         flexDirection: "column",
                         rowGap: "20px"
