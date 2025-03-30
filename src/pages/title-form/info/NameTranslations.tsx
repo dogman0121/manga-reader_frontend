@@ -128,7 +128,8 @@ function NameTranslationsList() {
                             borderRadius: "6px",
                             display: "inline-flex",
                             flexDirection: "row",
-                            alignItems: "center"
+                            alignItems: "center",
+                            fontSize: "14px"
                         }}
                         key={key}
                     >
