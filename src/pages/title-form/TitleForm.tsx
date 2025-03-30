@@ -27,7 +27,7 @@ export function parseTitleData<AddTitleForm>(title: Title) {
         status: title.status?.id || 1,
         year: title.year || new Date().getFullYear(),
         adult: title.adult?.id || 1,
-        genres: title.genres?.map(({ id }) => id) || [],
+        genres: title.genres?.map(({ id, name }) => ({id: id, name: name})) || [],
         authors: title.authors || [],
         artists: title.artists || [],
         publishers: title.publishers || [],
@@ -56,10 +56,6 @@ export function compileFormData(data: AddTitleForm) {
     if (data.background?.file)
         form.append("background", data.background.file);
 
-    data.genres?.forEach((genre) => {
-        form.append("posters", genre.id.toString());
-    })
-
     let postersOrder: Array<string> = [];
     data.posters?.forEach((poster, _ind) => {
         if (poster.file)
@@ -69,7 +65,7 @@ export function compileFormData(data: AddTitleForm) {
     })
     form.append("posters_order", JSON.stringify(postersOrder));
 
-    data.authors?.forEach((genre) => {
+    data.genres?.forEach((genre) => {
         form.append("genres", genre.id.toString());
     })
 
