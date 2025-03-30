@@ -13,7 +13,7 @@ html:root {
     --header-color: #FFF1AA;
     --footer-color: rgb(255, 214, 0);
     --text-color: #000000;
-    --widget1-color: #FFFFFF;
+    --widget1-color: #F6F6F6;
     --widget2-color: #F6F6F6;
     --widget3-color: #F6F6F6;
     --paper-color: #FFFFFF;
@@ -32,8 +32,8 @@ html:root[data-color-scheme="dark"] {
     --header-color: #06090E;
     --footer-color: #06090E;
     --text-color: #FFFFFF;
-    --widget1-color: #0e0e0e;
-    --widget2-color: #1a1a1a;
+    --widget1-color: #1d1d1d;
+    --widget2-color: #333333;
     --widget3-color: #121212;
     --paper-color: #171717;
 }

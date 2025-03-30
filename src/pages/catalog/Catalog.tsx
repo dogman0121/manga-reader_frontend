@@ -30,7 +30,7 @@ function CatalogPC() {
             <Box
                 sx={{
                     fontSize: "48px",
-                    mt: "50px"
+                    mt: "15px"
                 }}
             >
                 Каталог

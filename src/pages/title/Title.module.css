@@ -1,0 +1,21 @@
+.Inner {
+    display: flex;
+    flex-direction: row;
+}
+
+.Left {
+    max-width: 240px;
+    min-width: 150px;
+    width: 100%;
+}
+
+.Right {
+    width: 100%;
+    margin-left: 25px;
+    max-width: 895px;
+    min-width: 400px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+}

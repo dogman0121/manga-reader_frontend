@@ -1,5 +1,7 @@
+import Genre from "./Genre";
 import Person from "./Person";
 import Poster from "./Poster";
+import Team from "./Team";
 import { User } from "./User";
 
 export const EMPTY_TITLE : Title = {
@@ -19,6 +21,10 @@ export default interface Title {
     background?: string,
     posters?: Array<Poster>,
     year?: number,
+    views?: number,
+    rating?: number,
+    rating_count?: number,
+    saves?: number,
     type?: {
         id: number,
         name: string
@@ -31,7 +37,7 @@ export default interface Title {
         id: number,
         name: string
     },
-    genres?: Array<{id: number, name: string}>,
+    genres?: Array<Genre>,
     authors?: Array<Person>,
     artists?: Array<Person>,
     publishers?: Array<Person>,
@@ -39,6 +45,8 @@ export default interface Title {
     creator?: User,
     created_at?: Date,
     chapters?: Array<Object>,
+    similar?: Array<Title>,
+    teams?: Array<Team>,
     permissions?: {
         edit: boolean
     }
