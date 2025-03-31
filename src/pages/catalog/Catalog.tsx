@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, ToggleButtonGroup, ToggleButton } from "@mui/material"
 import SearchInput from "../../features/search/components/SearchInput";
 import SearchProvider from "../../features/search/components/SearchProvider";
@@ -10,11 +10,28 @@ import CatalogFilters from "./CatalogFilters";
 import CatalogSorts from "./CatalogSorts";
 import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import MobileDrawer from "../../components/ui/MobileDrawer";
+import SearchContext from "../../features/search/context/SearchContext";
+import { searchService } from "../../features/search/services/api/searchService";
 
 
 export enum VIEWS {
     GRID = "grid",
     ROWS = "rows"
+}
+
+
+function CatalogWrapper({children}: {children: React.ReactNode}) {
+    const { query, section, filters } = useContext(SearchContext);
+
+    useEffect(() => {
+        window.history.pushState("", "",window.location.origin + window.location.pathname + "?" + searchService.compileParams(query, section, filters).toString())
+    }, [query, section, filters]);
+    
+    return (
+        <>
+            {children}
+        </>
+    )
 }
 
 
@@ -147,15 +164,15 @@ function Catalog() {
     const device = useDeviceDetect();
 
     return (
-        <>
-            <SearchProvider>
+        <SearchProvider>
+            <CatalogWrapper>
                 {device === DEVICE.MOBILE ?
                     <CatalogMobile/>
                     :
                     <CatalogPC/>
                 }
-            </SearchProvider>
-        </>
+            </CatalogWrapper>    
+        </SearchProvider>
     )
 }
 

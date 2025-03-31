@@ -39,8 +39,10 @@ export function InputFilter({ name, placeholder }: {name: string, placeholder: s
 
     const handleInput = (e: FormEvent) => {
         const val = (e.target as HTMLInputElement).value;
+
         if (val != "" && !parseInt(val.charAt(val.length-1)))
             return;
+        
         setFilters((prevFilters: Map<string, Array<{id: number, name: string}>>) => {
             const newFilters = new Map(prevFilters);
             newFilters.set(name, [{id: parseInt(val), name: ""}])
