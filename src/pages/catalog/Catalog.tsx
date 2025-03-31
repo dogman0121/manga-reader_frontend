@@ -21,12 +21,22 @@ export enum VIEWS {
 
 
 function CatalogWrapper({children}: {children: React.ReactNode}) {
-    const { query, section, filters } = useContext(SearchContext);
+    const { setQuery, query, setSection, section, setFilters, filters } = useContext(SearchContext);
+
+    useEffect(() => {
+        const [query, section, filters] = searchService.parseParams(new URL(window.location.href).searchParams);
+
+        setQuery(query);
+        setSection(section)
+        setFilters(filters);
+    }, [])
 
     useEffect(() => {
         window.history.pushState("", "",window.location.origin + window.location.pathname + "?" + searchService.compileParams(query, section, filters).toString())
     }, [query, section, filters]);
     
+
+
     return (
         <>
             {children}

@@ -27,7 +27,7 @@ export function MultipleSelectFilter({name, placeholder, options}: {name: string
             getOptionLabel={(option) => option.name}
             getOptionKey={(option) => option.id}
             onChange={handleGenres}
-            value={filters.get(name) || []}
+            value={filters.get(name)?.map((f) => options.find(el => el.id == f.id)).filter(el => el !== undefined) || []}
             isOptionEqualToValue={(option, value) => {return option.id === value.id}}
             renderInput={(params) => <TextField {...params} label={placeholder} />}
         />
@@ -42,7 +42,7 @@ export function InputFilter({ name, placeholder }: {name: string, placeholder: s
 
         if (val != "" && !parseInt(val.charAt(val.length-1)))
             return;
-        
+
         setFilters((prevFilters: Map<string, Array<{id: number, name: string}>>) => {
             const newFilters = new Map(prevFilters);
             newFilters.set(name, [{id: parseInt(val), name: ""}])
