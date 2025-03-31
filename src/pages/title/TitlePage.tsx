@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import Title from "../../types/Title"
+import Title, { EMPTY_TITLE } from "../../types/Title"
 import TitleContext from "../../context/TitleContext";
 import LeftSide from "./components/LeftSide";
 import RightSide from "./components/RightSide";
 import { Box, CircularProgress } from "@mui/material";
 import fetchTitle from "../../services/api/fetchTitle";
 import { useParams } from "react-router-dom";
+import NotFound from "../not-found/NotFound";
 
 // setTitle({
 //     id: 1,
@@ -86,7 +87,7 @@ function TitlePage() {
             <Box
                 sx={{
                     width: "100%",
-                    height: "100vh",
+                    height: "85vh",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center"
@@ -96,8 +97,8 @@ function TitlePage() {
             </Box>
         )
 
-    if (title === null) 
-        return (<>Null</>) 
+    if (title === null || title == EMPTY_TITLE) 
+        return (<NotFound />) 
 
     return (
         <TitleContext.Provider value={ title }>
