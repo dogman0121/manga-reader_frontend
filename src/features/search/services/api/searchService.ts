@@ -26,7 +26,7 @@ class SearchService {
     parseParams(params: URLSearchParams){
         let query = "";
 
-        let section = "";
+        let section = "manga";
 
         let filters = new Map<string, Array<{id: number, name: string}>>();
 
