@@ -3,7 +3,7 @@ import Title from "../../types/Title"
 import TitleContext from "../../context/TitleContext";
 import LeftSide from "./components/LeftSide";
 import RightSide from "./components/RightSide";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import fetchTitle from "../../services/api/fetchTitle";
 import { useParams } from "react-router-dom";
 
@@ -66,16 +66,35 @@ function TitlePage() {
 
     const [title, setTitle] = useState<Title | null>(null);
 
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
 
+        setIsLoading(true);
         fetchTitle(parseInt(id || ""))
         .then((t) => {
             setTitle(t);
+            setIsLoading(false);
         })
         
 
         return () => {}
     }, [])
+
+    if (isLoading)
+        return (
+            <Box
+                sx={{
+                    width: "100%",
+                    height: "100vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}
+            >
+                <CircularProgress />
+            </Box>
+        )
 
     if (title === null) 
         return (<>Null</>) 
