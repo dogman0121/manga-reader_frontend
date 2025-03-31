@@ -75,10 +75,20 @@ function CatalogPC() {
                                     }}
                                 >
                                     <ToggleButton value="grid">
-                                        <AppsRoundedIcon/>
+                                        <AppsRoundedIcon
+                                            sx={{
+                                                width: "28px",
+                                                height: "28px"
+                                            }}
+                                        />
                                     </ToggleButton>
                                     <ToggleButton value="row">
-                                        <TableRowsIcon/>
+                                        <TableRowsIcon
+                                            sx={{
+                                                width: "28px",
+                                                height: "28px"
+                                            }}
+                                        />
                                     </ToggleButton>
                                 </ToggleButtonGroup>
                             </Box>
