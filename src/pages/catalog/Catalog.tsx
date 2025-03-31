@@ -70,25 +70,15 @@ function CatalogPC() {
                                     onChange={handleView}
                                     sx={{
                                         "& .MuiToggleButton-root": {
-                                            p: "5px",
+                                            p: "3px",
                                         },
                                     }}
                                 >
                                     <ToggleButton value="grid">
-                                        <AppsRoundedIcon
-                                            sx={{
-                                                width: "28px",
-                                                height: "28px"
-                                            }}
-                                        />
+                                        <AppsRoundedIcon/>
                                     </ToggleButton>
                                     <ToggleButton value="row">
-                                        <TableRowsIcon
-                                            sx={{
-                                                width: "28px",
-                                                height: "28px"
-                                            }}
-                                        />
+                                        <TableRowsIcon/>
                                     </ToggleButton>
                                 </ToggleButtonGroup>
                             </Box>
