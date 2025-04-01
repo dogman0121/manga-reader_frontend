@@ -103,7 +103,8 @@ function Chapters() {
                 sx={{
                     width: "100%",
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    p: "30px 0"
                 }}
             >
                 <Typography fontSize={"24px"}>Глав нет!</Typography>
