@@ -7,7 +7,6 @@ import { Box, CircularProgress } from "@mui/material";
 import fetchTitle from "../../services/api/fetchTitle";
 import { useParams } from "react-router-dom";
 import NotFound from "../not-found/NotFound";
-import { set } from "react-hook-form";
 
 // setTitle({
 //     id: 1,
