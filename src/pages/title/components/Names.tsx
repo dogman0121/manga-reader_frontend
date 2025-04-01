@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import TitleContext from "../../../context/TitleContext";
-import { Box, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Typography } from "@mui/material";
 
 
 function Names() {
@@ -13,17 +13,18 @@ function Names() {
                 flexDirection: "column"
             }}
         >
-            <Typography
-                sx={{
-                    fontSize: "18px"
-                }}
-            > Please, leave me / 나를 버려주세요 </Typography>
+            <Breadcrumbs>
+                <Typography>манхва</Typography>
+                <Typography>2020</Typography>
+                <Typography>выпускается</Typography>
+            </Breadcrumbs>
             <Typography
                 sx={{
                     fontSize: "28px",
                     lineHeight: "1em"
                 }}
             > {manga?.name} </Typography>
+            
         </Box>        
     )
 }

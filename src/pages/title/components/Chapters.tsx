@@ -18,7 +18,7 @@ function ChapterItem({ chapter}: { chapter: Chapter}) {
                     mt: "5px",
 
                     padding: "12px 14px",
-                    backgroundColor: "var(--paper-color)",
+                    backgroundColor: "var(--widget1-color)",
                     borderRadius: "12px"
                 }}
             >
@@ -98,7 +98,17 @@ function Chapters() {
     const manga = useContext(TitleContext);
 
     if (!manga || !manga.teams)
-        return null;
+        return (
+            <Box
+                sx={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center"
+                }}
+            >
+                <Typography fontSize={"24px"}>Глав нет!</Typography>
+            </Box>
+        );
 
     return (
         <>

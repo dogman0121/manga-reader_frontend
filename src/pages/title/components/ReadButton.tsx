@@ -5,7 +5,8 @@ function ReadButton() {
     return (
         <Button 
             sx={{
-                width: "150px",
+                width: "160px",
+                borderRadius: "12px",
                 height: "45px"
             }}
             variant="contained"

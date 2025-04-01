@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { toggleButtonGroupClasses } from "@mui/material";
+import { Padding } from "@mui/icons-material";
 
 declare module '@mui/material/styles' {
     interface PaletteOptions {
@@ -74,7 +75,7 @@ const getTheme = (mode: "dark" | "light") => {
                         },
                     }
                 }
-            }
+            },
         },
         palette: {
             mode,

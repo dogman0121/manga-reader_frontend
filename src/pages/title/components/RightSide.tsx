@@ -15,6 +15,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import TitleContext from "../../../context/TitleContext";
+import OtherNames from "./OtherNames";
 
 
 function RightSide() {
@@ -51,7 +52,11 @@ function RightSide() {
                     justifyContent: "space-between"
                 }}
             >
-                <Names />
+                <Box>
+                    <Names />
+                    <Stats />
+                </Box>
+                
                 <Box
                     sx={{
                         display: "flex",
@@ -71,23 +76,23 @@ function RightSide() {
             >
                 <Box
                     sx={{
-                        width: title.similar ? "645px" : null,
+                        width: title.similar ? "645px" : "100%",
                         display: "flex",
                         flexDirection: "column",
                         rowGap: "20px"
                     }}
                 >
-                    <Stats />
                     <About />
                     <GenresList />
+                    <OtherNames />
                     { device === DEVICE.PAD && <Similar />}
                     <TabContext value={section}>
                         <TabList onChange={handleChange}>
                             <Tab label="Главы" value="1" />
                             <Tab label="Комментарии" value="2" />
                         </TabList>
-                        <TabPanel value="1"><Comments /></TabPanel>
-                        <TabPanel value="2"><Chapters /></TabPanel>
+                        <TabPanel value="1" sx={{p: "0"}}><Chapters /></TabPanel>
+                        <TabPanel value="2" sx={{p: "0"}}><Comments /></TabPanel>
                     </TabContext>
                 </Box>
                 { device === DEVICE.PC && (

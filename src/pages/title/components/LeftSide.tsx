@@ -13,6 +13,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Poster from "../../../components/ui/Poster";
 import { Box } from "@mui/material";
+import OtherNames from "./OtherNames";
 
 
 function ContentMobile(){
@@ -27,6 +28,7 @@ function ContentMobile(){
             <Names />
             <About />
             <GenresList />
+            <OtherNames />
             <Similar />
             <TabContext value={section}>
                 <TabList onChange={handleChange}>

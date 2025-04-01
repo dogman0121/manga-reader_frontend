@@ -44,7 +44,8 @@ function Stats() {
             sx={{
                 display: "flex",
                 flexDirection: "row",
-                columnGap: "50px"
+                columnGap: "50px",
+                m: "20px 0"
             }}
         >
             <StatsItem>
