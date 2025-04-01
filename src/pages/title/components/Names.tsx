@@ -14,9 +14,9 @@ function Names() {
             }}
         >
             <Breadcrumbs>
-                <Typography>манхва</Typography>
-                <Typography>2020</Typography>
-                <Typography>выпускается</Typography>
+                <Typography>{manga.type?.name || "нет"}</Typography>
+                <Typography>{manga.year || "2025"}</Typography>
+                <Typography>{manga.status?.name || "нет"}</Typography>
             </Breadcrumbs>
             <Typography
                 sx={{
