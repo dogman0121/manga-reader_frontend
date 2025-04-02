@@ -28,7 +28,7 @@ function GenresList() {
     const manga = useContext(TitleContext);
 
     if (!manga || !manga?.genres)
-        return null;
+        return <></>;
 
     return (
         <Box

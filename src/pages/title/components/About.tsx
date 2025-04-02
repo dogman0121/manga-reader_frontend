@@ -13,6 +13,9 @@ function About() {
 
     const [big, setBig] = useState(false);
 
+    if (!title?.description)
+        return <></>
+
     useEffect(() => {
         const lineHeight = parseFloat(window.getComputedStyle(textRef.current as HTMLDivElement).lineHeight);
         const height = parseFloat(window.getComputedStyle(textRef.current as HTMLDivElement).height);
