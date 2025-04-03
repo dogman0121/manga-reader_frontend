@@ -1,16 +1,17 @@
 import { useContext } from "react";
 import TitleContext from "../../../context/TitleContext";
-import { Box, Breadcrumbs, Typography } from "@mui/material";
+import { Box, Breadcrumbs, SxProps, Typography } from "@mui/material";
 
 
-function Names() {
+function Names({sx}: {sx?: SxProps}) {
     const manga = useContext(TitleContext);
 
     return (
         <Box
             sx={{
                 display: "flex",
-                flexDirection: "column"
+                flexDirection: "column",
+                ...sx
             }}
         >
             <Breadcrumbs>

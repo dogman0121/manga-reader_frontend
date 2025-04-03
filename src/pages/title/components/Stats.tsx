@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import TitleContext from "../../../context/TitleContext";
 import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import { Box, Typography } from "@mui/material";
+import { Box, SxProps, Typography } from "@mui/material";
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 
 function StatsItem({children}: {children: React.ReactNode}) {
@@ -36,7 +36,7 @@ function StatsText({children}: {children: React.ReactNode}){
 }
 
 
-function Stats() {
+function Stats({sx}: {sx?: SxProps}) {
     const manga = useContext(TitleContext);
 
     return (
@@ -45,7 +45,8 @@ function Stats() {
                 display: "flex",
                 flexDirection: "row",
                 columnGap: "50px",
-                m: "20px 0"
+                m: "20px 0",
+                ...sx
             }}
         >
             <StatsItem>
