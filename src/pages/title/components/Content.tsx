@@ -28,7 +28,7 @@ function ContentMobile(){
         <Box>
             <Box
                 sx={{
-                    p: "50px 0 10px",
+                    p: "40px 0 10px",
                     display: "flex",
                     justifyContent: "center"
                 }}
