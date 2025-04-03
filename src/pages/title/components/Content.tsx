@@ -28,11 +28,14 @@ function ContentMobile(){
         <Box>
             <Box
                 sx={{
-                    p: "40px 50px 10px"
+                    p: "50px 0 10px",
+                    display: "flex",
+                    justifyContent: "center"
                 }}
             >
                 <Poster 
                     src={manga.main_poster?.medium || ""}
+                    width="min(60%, 270px)"
                 />
             </Box>
             <Names 
@@ -43,7 +46,7 @@ function ContentMobile(){
             <Stats 
                 sx={{
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "space-around",
                 }}
             />
             <TabContext value={section}>
