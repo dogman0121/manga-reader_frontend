@@ -1,4 +1,3 @@
-import { EMPTY_TITLE } from "../../types/Title";
 import { apiClient } from "../../utils/apiClient";
 
 const fetchTitle = async(titleId: number) => {
@@ -8,7 +7,7 @@ const fetchTitle = async(titleId: number) => {
         return await response.json();
     }
     else { 
-        return EMPTY_TITLE;
+        return null;
     }
 }
 

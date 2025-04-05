@@ -63,10 +63,13 @@ class CommentService {
     async fetchAnswers(commentId: number, page=1) {
         const response = await apiClient.get(`/comments?parent=${commentId}&page=${page}`);
 
-        if (response.ok)
-            return await response.json() as Array<Comment>
+        return await response.json();
+    }
 
-        return [] as Array<Comment>
+    async fetchTitleComments(titleId: number, page: number = 1) {
+        const response = await apiClient.get(`/comments?manga=${titleId}&page=${page}`);
+
+        return await response.json();
     }
 
     async sendAnswer(commentId: number, text: string) {

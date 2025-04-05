@@ -5,10 +5,13 @@ import CommentContext from "../context/CommentContext";
 import CommentBlock from "./CommentBlock";
 import Comment from "../../../types/Comment";
 import SubdirectoryArrowRightRoundedIcon from '@mui/icons-material/SubdirectoryArrowRightRounded';
+import CommentList from "./CommentList";
 
 function CommentAnswers({ open }: {open: Boolean}) {
     const { id, answers_count } = useContext(CommentContext);
     
+    const [isLoading, setIsLoading] = useState(false);
+
     const [page, setPage] = useState<number>(1);
 
     const [answers, setAnswers] = useState<Array<Comment>>([]);
@@ -17,10 +20,12 @@ function CommentAnswers({ open }: {open: Boolean}) {
 
     useEffect(() => {
         if (open && lastPage.current !== page) {
+            setIsLoading(true);
             commentService.fetchAnswers(id, page)
-                .then((l) => {
-                    setAnswers((prev) => [...prev, ...l] as Comment[])
+                .then(({data}) => {
+                    setAnswers((prev) => [...prev, ...data] as Comment[])
                     lastPage.current = page;
+                    setIsLoading(false);
                 })
         }
     }, [open, page]);
@@ -36,8 +41,8 @@ function CommentAnswers({ open }: {open: Boolean}) {
                             rowGap: "4px"
                         }}
                     >
-                        {answers.map((comment: Comment) => <CommentBlock key={comment.id} comment={comment} />)}
-                        {answers.length < answers_count && (
+                        <CommentList comments={answers} />
+                        {answers.length < answers_count && !isLoading && (
                             <Box
                                 sx={{
                                     mt: "5px",

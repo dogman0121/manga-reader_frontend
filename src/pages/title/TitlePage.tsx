@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Title, { EMPTY_TITLE } from "../../types/Title"
+import Title from "../../types/Title"
 import TitleContext from "../../context/TitleContext";
 import { Box, CircularProgress } from "@mui/material";
 import fetchTitle from "../../services/api/fetchTitle";
@@ -72,6 +72,7 @@ function TitlePage() {
     useEffect(() => {
 
         setIsLoading(true);
+
         fetchTitle(parseInt(id || ""))
         .then((t) => {
             setTitle(t);
@@ -97,7 +98,7 @@ function TitlePage() {
             </Box>
         )
 
-    if (title === null || title == EMPTY_TITLE) 
+    if (title === null) 
         return (<NotFound />) 
 
     return (
