@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import { useState, useEffect, useContext, useRef } from "react";
 import { commentService } from "../service/api/commentService";
 import CommentContext from "../context/CommentContext";
-import CommentBlock from "./CommentBlock";
 import Comment from "../../../types/Comment";
 import SubdirectoryArrowRightRoundedIcon from '@mui/icons-material/SubdirectoryArrowRightRounded';
 import CommentList from "./CommentList";
