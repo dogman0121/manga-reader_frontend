@@ -52,7 +52,7 @@ class CommentService {
 
 
     async fetchComment(commentId: number) {
-        const response = await apiClient.get(`/comment/${commentId}`);
+        const response = await apiClient.get(`/comments/${commentId}`);
 
         if (response.ok)
             return await response.json() as Comment;
@@ -61,7 +61,7 @@ class CommentService {
     }
 
     async fetchAnswers(commentId: number, page=1) {
-        const response = await apiClient.get(`/comment?parent=${commentId}&page=${page}`);
+        const response = await apiClient.get(`/comments?parent=${commentId}&page=${page}`);
 
         if (response.ok)
             return await response.json() as Array<Comment>
@@ -70,7 +70,7 @@ class CommentService {
     }
 
     async sendAnswer(commentId: number, text: string) {
-        const response = await apiClient.post("/comment", {
+        const response = await apiClient.post("/comments", {
             parent: commentId,
             text: text
         })
@@ -78,7 +78,21 @@ class CommentService {
         if (response.ok)
             return await response.json() as Comment;
 
-        return undefined;
+        return null;
+    }
+
+    async sendTitleComment(titleId: number, text: string){
+        const response = await apiClient.post("/comments", {
+            manga: titleId,
+            text: text
+        })
+
+        if (response.ok) {
+            const json = await response.json();
+            return json.data;
+        }
+
+        return null;
     }
 }
 

@@ -2,27 +2,27 @@ import { apiClient } from "../../../../utils/apiClient";
 
 class AuthService {
     async login(login: string, password: string) {
-        const response = await apiClient.post("/user/login", {login, password});
+        const response = await apiClient.post("/users/login", {login, password});
         return await response.json();
     }
     
     async register(login: string, email: string, password: string) {
-        const response = await apiClient.post("/user.register", {login, email, password})
+        const response = await apiClient.post("/users/register", {login, email, password})
         return await response.json();
     }
 
     async forgot(email: string) {
-        const response = await apiClient.post("/user/forgot", {email})
+        const response = await apiClient.post("/users/forgot", {email})
         return await response.json();
     }
 
     async recovery(token: string, password: string) {
-        const response = await apiClient.post("/user/forgot", {token, password})
+        const response = await apiClient.post("/users/forgot", {token, password})
         return await response.json();
     }
 
     async verify(token: string) {
-        const response = await apiClient.post("/user/forgot", {token})
+        const response = await apiClient.post("/users/forgot", {token})
         return await response.json();
     }
 }

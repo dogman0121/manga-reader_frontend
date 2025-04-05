@@ -2,7 +2,7 @@ import { EMPTY_USER } from "../../types/User";
 import { apiClient } from "../../utils/apiClient";
 
 const fetchUser = async() => {
-    const response = await apiClient.get("/user/me");
+    const response = await apiClient.get("/users/me");
 
     if (response.ok)
         return await response.json();

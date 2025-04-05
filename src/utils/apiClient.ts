@@ -1,8 +1,8 @@
 import { tokenService } from "../features/auth/services/tokenService";
 
 class ApiClient {
-    baseUrl = "https://kanwoo.ru/api"
-    //baseUrl = "http://127.0.0.1:5000/api"
+    //baseUrl = "https://kanwoo.ru/api/v1"
+    baseUrl = "http://127.0.0.1:5000/api/v1"
 
     async _sendJsonRequest(url: string, method: string, body?: Object) {
         const requestParams = {
@@ -40,7 +40,7 @@ class ApiClient {
     }
 
     async _refreshToken() {
-        const response = await fetch(this.baseUrl + "/user/refresh", {
+        const response = await fetch(this.baseUrl + "/users/refresh", {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${tokenService.getRefreshToken()}`

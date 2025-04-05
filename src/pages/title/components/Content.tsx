@@ -13,6 +13,7 @@ import Similar from "./Similar";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import Chapters from "./Chapters";
 import Stats from "./Stats";
+import Comments from "./Comments";
 
 
 function ContentMobile(){
@@ -70,7 +71,7 @@ function ContentMobile(){
                     </Box>
                 </TabPanel>
                 <TabPanel value="2"><Chapters /></TabPanel>
-                <TabPanel value="3">321321</TabPanel>
+                <TabPanel value="3" sx={{p:"20px 5px"}}><Comments /></TabPanel>
             </TabContext>
         </Box>
     )
