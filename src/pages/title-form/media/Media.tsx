@@ -6,7 +6,6 @@ import Field from "./Field";
 import MainPoster from "./MainPoster";
 import BlockInput from "./file-input/BlockInput";
 import Poster from "../types/Poster";
-import { storageService } from "../../../services/api/storageService";
 import DraggableList from "./DraggableList";
 
 
