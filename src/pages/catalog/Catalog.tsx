@@ -12,7 +12,7 @@ import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import MobileDrawer from "../../components/ui/MobileDrawer";
 import SearchContext from "../../features/search/context/SearchContext";
 import { searchService } from "../../features/search/services/api/searchService";
-import { Content } from "../../layouts/app-layout/AppLayout";
+import { AppContent } from "../../layouts/app-layout/AppLayout";
 
 
 export enum VIEWS {
@@ -54,7 +54,7 @@ function CatalogPC() {
     }
 
     return (
-        <Content>
+        <>
             <Box
                 sx={{
                     fontSize: "40px",
@@ -119,7 +119,7 @@ function CatalogPC() {
                     </Box>
                 </Box>
             </Box>
-        </Content>
+        </>
     )
 }
 
@@ -176,15 +176,18 @@ function Catalog() {
     const device = useDeviceDetect();
 
     return (
-        <SearchProvider>
-            <CatalogWrapper>
-                {device === DEVICE.MOBILE ?
-                    <CatalogMobile/>
-                    :
-                    <CatalogPC/>
-                }
-            </CatalogWrapper>    
-        </SearchProvider>
+        <AppContent>
+            <SearchProvider>
+                <CatalogWrapper>
+                    {device === DEVICE.MOBILE ?
+                        <CatalogMobile/>
+                        :
+                        <CatalogPC/>
+                    }
+                </CatalogWrapper>    
+            </SearchProvider>
+        </AppContent>
+        
     )
 }
 

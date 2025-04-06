@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import AuthLayout from "./layouts/auth-layout/AuthLayout";
 import AppLayout from "./layouts/app-layout/AppLayout";
-import AppLayoutMobile from "./layouts/app-layout/AppLayoutMobile";
 import Home from "./pages/home/Home";
 import NotFound from "./pages/not-found/NotFound";
 import { useEffect, useState } from "react";
@@ -11,7 +10,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import getTheme from "./theme";
 import { CssBaseline } from "@mui/material";
 import AuthPage from "./features/auth/components/AuthPage";
-import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
 import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./features/auth/components/AuthProvider";
 import Catalog from "./pages/catalog/Catalog";
@@ -23,8 +21,6 @@ import TitlePage from "./pages/title/TitlePage";
 
 
 function App() {
-  const device = useDeviceDetect();
-
   const [theme, setTheme] = useState<"dark" | "light">(getColorScheme());
 
   const handleSetTheme = (theme: "dark" | "light") => {
@@ -57,7 +53,7 @@ function App() {
                     <Route path="verify" element={<AuthPage section="verify" />}/>
                     <Route path="recovery" element={<AuthPage section="recovery"/>} />
                 </Route>
-                <Route path="/" element={device !== DEVICE.MOBILE ? <AppLayout /> : <AppLayoutMobile />}>
+                <Route path="/" element={<AppLayout />}>
                     <Route element={<FormLayout/>}>
                         <Route path="manga/add" element={<AddTitle/>} />
                         <Route path="manga/:id/edit" element={<UpdateTitle/>} />

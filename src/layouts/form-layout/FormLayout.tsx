@@ -4,6 +4,7 @@ import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import { useState } from "react";
 import FormStateContext from "./FormStateContext";
 import FormModal from "./FormModal";
+import { AppContent } from "../app-layout/AppLayout";
 
 
 function FormLayout() {
@@ -30,7 +31,7 @@ function FormLayout() {
     }
 
     return (
-        <>
+        <AppContent>
             <GlobalStyles styles={{
                 "html:root": {
                     "--mui-palette-background-default": "#E9E9E9"
@@ -65,7 +66,7 @@ function FormLayout() {
                     )}
                 </>
             </FormModal>
-        </>
+        </AppContent>
     )
 }
 

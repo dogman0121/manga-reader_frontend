@@ -19,6 +19,16 @@ export function ContentMobile({children}: {children: React.ReactNode}) {
     )
 }
 
+export function Content({children}: {children: React.ReactNode}) {
+    return (
+        <Box sx={{
+            pb: "61px"
+        }}>
+            {children}
+        </Box>
+    )
+}
+
 function AppLayoutMobile() {
     const [navSection, setNavSection] = useState(0);
 
@@ -63,7 +73,7 @@ function AppLayoutMobile() {
 
     return (   
         <>
-            <ContentMobile>
+            <Content>
                 <MainBlurContext.Provider
                     value={{
                         opened: blurOpened,
@@ -77,7 +87,7 @@ function AppLayoutMobile() {
                 <Blur open={blurOpened}>
                     {blurContent}
                 </Blur>
-            </ContentMobile>
+            </Content>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1000 }} elevation={3}>
                 <BottomNavigation
                     value={navSection}

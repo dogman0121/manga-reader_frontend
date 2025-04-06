@@ -6,7 +6,7 @@ import CommentBlock from "../../features/comment/component/CommentBlock";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles"
 import SkeletonCommentBlock from "../../features/comment/component/SkeletonCommentBlock";
-import { Content } from "../../layouts/app-layout/AppLayout";
+import { AppContent } from "../../layouts/app-layout/AppLayout";
 
 
 export default function CommentPage() {
@@ -28,7 +28,7 @@ export default function CommentPage() {
     
 
     return (
-        <Content>
+        <AppContent>
             <Box
                 sx={{
                     maxWidth: "700px",
@@ -44,6 +44,6 @@ export default function CommentPage() {
                     <CommentBlock comment={comment} />
                 }
             </Box>
-        </Content>
+        </AppContent>
     )
 }

@@ -14,7 +14,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import Chapters from "./Chapters";
 import Stats from "./Stats";
 import Comments from "./Comments";
-import { Content as AppContent } from "../../../layouts/app-layout/AppLayout";
+import { AppContent } from "../../../layouts/app-layout/AppLayout";
 
 
 function ContentMobile(){
@@ -27,7 +27,7 @@ function ContentMobile(){
     };
 
     return (
-        <Box>
+        <>
             <Box
                 sx={{
                     p: "40px 0 10px",
@@ -74,7 +74,7 @@ function ContentMobile(){
                 <TabPanel value="2"><Chapters /></TabPanel>
                 <TabPanel value="3" sx={{p:"20px 5px"}}><Comments /></TabPanel>
             </TabContext>
-        </Box>
+        </>
     )
 }
 
