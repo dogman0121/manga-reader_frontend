@@ -12,7 +12,7 @@ import MainBlurContext from "./MainBlurContext";
 export function ContentMobile({children}: {children: React.ReactNode}) {
     return (
         <Box sx={{
-            p: "10px 5px 66px"
+            p: "10px 5px 5px"
         }}>
             {children}
         </Box>
