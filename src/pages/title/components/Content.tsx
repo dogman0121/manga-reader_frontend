@@ -134,7 +134,7 @@ function Content() {
                         rgba(${theme.vars.palette.background.defaultChannel} / 1)), 
                         url('${background}')
                     `,
-                    backgroundSize: "initial",
+                    backgroundSize: "cover",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
                     backgroundPositionY: "0"
