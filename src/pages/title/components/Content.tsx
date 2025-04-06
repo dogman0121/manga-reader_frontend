@@ -107,7 +107,7 @@ function Content() {
                     linear-gradient(rgba(${theme.palette.background.defaultChannel} /0.95), 
                     rgba(${theme.palette.background.defaultChannel} / 1)), 
                     url('${background}')`,
-                backgroundSize: "contain",
+                backgroundSize: "initial",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundPositionY: "0"
