@@ -20,7 +20,7 @@ function PreviewWrapper({ onDelete, poster } : {onDelete: React.EventHandler<Syn
             }}
         >
             <img 
-                src={poster.file ? poster.fileUrl || URL.createObjectURL(poster.file) : storageService.getUrl(`manga/${poster.fileName}`)} 
+                src={poster.file ? poster.fileUrl || URL.createObjectURL(poster.file) : poster.fileName} 
                 style={{
                     borderRadius: "8px",
                     maxHeight: "210px",
