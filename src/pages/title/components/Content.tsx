@@ -98,6 +98,8 @@ function Content() {
 
     const {background} = useContext(TitleContext);
 
+    const filter = device == DEVICE.MOBILE ? 0.8 : 0.9
+
     const theme = useTheme();
 
     return (
@@ -130,7 +132,7 @@ function Content() {
                     height: "600px",
                     zIndex: "-1",
                     background: `
-                        linear-gradient(rgba(${theme.vars.palette.background.defaultChannel} /0.95), 
+                        linear-gradient(rgba(${theme.vars.palette.background.defaultChannel} / ${filter}), 
                         rgba(${theme.vars.palette.background.defaultChannel} / 1)), 
                         url('${background}')
                     `,
