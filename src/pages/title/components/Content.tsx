@@ -102,6 +102,16 @@ function Content() {
 
     return (
         <Box
+            // sx={{
+            //     background: `
+            //         linear-gradient(rgba(${theme.palette.background.defaultChannel} /0.95), 
+            //         rgba(${theme.palette.background.defaultChannel} / 1)), 
+            //         url('${background}')`,
+            //     backgroundSize: "initial",
+            //     backgroundPosition: "center",
+            //     backgroundRepeat: "no-repeat",
+            //     backgroundPositionY: "0"
+            // }}
         >
             <AppContent>
                 {device == DEVICE.MOBILE ?
@@ -112,29 +122,24 @@ function Content() {
             </AppContent>
             {background && (
                 <Box
-                    sx={{
-                        position: "absolute",
-                        left: 0,
-                        top: 0,
-                        width: "100%",
-                        zIndex: "-1",
-                    }}
-                >
-                    <img src={background} style={{width: "100%", height: "100%"}} />
-                    <Box 
-                        sx={{
-                            position: "absolute",
-                            top: "0",
-                            left: "0",
-                            width: "100%",
-                            height: "100%",
-                            background: `linear-gradient(rgba(${theme.vars.palette.background.defaultChannel} / 0.95), rgba(${theme.vars.palette.background.defaultChannel} / 1))`,
-                            backgroundSize: "initial",
-                            backgroundPosition: "center",
-                            backgroundRepeat: "no-repeat",
-                            backgroundPositionY: "0"
-                        }}
-                    />
+                sx={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    width: "100%",
+                    height: "600px",
+                    zIndex: "-1",
+                    background: `
+                        linear-gradient(rgba(${theme.vars.palette.background.defaultChannel} /0.95), 
+                        rgba(${theme.vars.palette.background.defaultChannel} / 1)), 
+                        url('${background}')
+                    `,
+                    backgroundSize: "initial",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPositionY: "0"
+                }}
+            >
             </Box>
             )}
         </Box>
