@@ -81,7 +81,7 @@ function TitlePage() {
         
 
         return () => {}
-    }, [])
+    }, [id])
 
     if (isLoading)
         return (
