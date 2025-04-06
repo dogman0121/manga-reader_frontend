@@ -84,7 +84,7 @@ function ContentPC() {
             sx={{
                 display: "flex",
                 flexDirection: "row",
-                pt: "30px"
+                py: "30px"
             }}
         >
             <LeftSide />
