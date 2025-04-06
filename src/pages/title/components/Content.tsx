@@ -1,5 +1,5 @@
 import { useDeviceDetect, DEVICE } from "../../../hooks/useDeviceDetect";
-import { Box, Tab } from "@mui/material";
+import { Box, Tab, useTheme } from "@mui/material";
 import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
 import TitleContext from "../../../context/TitleContext";
@@ -14,6 +14,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import Chapters from "./Chapters";
 import Stats from "./Stats";
 import Comments from "./Comments";
+import { Content as AppContent } from "../../../layouts/app-layout/AppLayout";
 
 
 function ContentMobile(){
@@ -95,14 +96,30 @@ function ContentPC() {
 function Content() {
     const device = useDeviceDetect();
 
+    const {background} = useContext(TitleContext);
+
+    const theme = useTheme();
+
     return (
-        <>
-            {device == DEVICE.MOBILE ?
-                <ContentMobile/>
-                :
-                <ContentPC/>
-            }
-        </>
+        <Box
+            sx={{
+                background: `
+                    linear-gradient(rgba(${theme.palette.background.defaultChannel} /0.95), 
+                    rgba(${theme.palette.background.defaultChannel} / 1)), 
+                    url('${background}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat"
+            }}
+        >
+            <AppContent>
+                {device == DEVICE.MOBILE ?
+                    <ContentMobile/>
+                    :
+                    <ContentPC/>
+                }
+            </AppContent>
+        </Box>
     )
 }
 

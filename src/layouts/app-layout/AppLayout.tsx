@@ -17,7 +17,7 @@ import { useTheme } from "@mui/material/styles";
 import MainBlurContext from "./MainBlurContext";
 
 
-function Content({children}: {children: React.ReactNode}) {
+export function Content({children}: {children: React.ReactNode}) {
     return (
         <Box
             sx={{
@@ -186,7 +186,7 @@ function AppFooter() {
         <Box
             sx={{
                 background: theme.palette.customBackgrounds?.footer,
-                py: "20px"
+                py: "20px",
             }}
             component="footer"
         >
@@ -234,14 +234,11 @@ function AppMain({children}: {children: React.ReactNode}) {
     return (
         <Box
             sx={{
-                py: "20px",
                 position: "relative"
             }}
             component="main"
         >
-            <Content>
-                {children}
-            </Content>
+            {children}
         </Box>
     )
 }

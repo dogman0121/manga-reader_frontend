@@ -6,7 +6,8 @@ html:root {
     --mui-palette-primary-contrastText: #000000;
     --mui-palette-primary-mainChannel: 255 214 0;
     --mui-palette-secondary-main: #D9D9D9;
-    --mui-palette-background-default: #FFFFFF;
+    --mui-palette-background-default: rgba(255, 255, 255);
+    --mui-palette-background-defaultChannel: 255 255 255;
     --mui-paletter-info-text-color: #000000;
     --subtitle1-text-color: #606060;
     --body-color: #FFFFFF;
@@ -26,7 +27,8 @@ html:root[data-color-scheme="dark"] {
     --mui-palette-primary-contrastText: #000000;
     --mui-palette-primary-mainChannel: 255 214 0;
     --mui-palette-secondary-main: #2f2f2f;
-    --mui-palette-background-default: #171717;
+    --mui-palette-background-default: rgba(23, 23, 23);
+    --mui-palette-background-defaultChannel: 23 23 23;
     --subtitle1-text-color: #dcdcdc;
     --body-color: #171717;
     --header-color: #06090E;

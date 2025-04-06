@@ -6,6 +6,7 @@ import CommentBlock from "../../features/comment/component/CommentBlock";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles"
 import SkeletonCommentBlock from "../../features/comment/component/SkeletonCommentBlock";
+import { Content } from "../../layouts/app-layout/AppLayout";
 
 
 export default function CommentPage() {
@@ -27,20 +28,22 @@ export default function CommentPage() {
     
 
     return (
-        <Box
-            sx={{
-                maxWidth: "700px",
-                m: "0 auto",
-                p: "15px 20px",
-                border: `1px solid ${theme.vars.palette.secondary.main}`,
-                borderRadius: "12px"
-            }}
-        >
-            {isLoaing ?
-                <SkeletonCommentBlock />
-                :
-                <CommentBlock comment={comment} />
-            }
-        </Box>
+        <Content>
+            <Box
+                sx={{
+                    maxWidth: "700px",
+                    m: "0 auto",
+                    p: "15px 20px",
+                    border: `1px solid ${theme.vars.palette.secondary.main}`,
+                    borderRadius: "12px"
+                }}
+            >
+                {isLoaing ?
+                    <SkeletonCommentBlock />
+                    :
+                    <CommentBlock comment={comment} />
+                }
+            </Box>
+        </Content>
     )
 }

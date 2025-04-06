@@ -12,6 +12,7 @@ import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import MobileDrawer from "../../components/ui/MobileDrawer";
 import SearchContext from "../../features/search/context/SearchContext";
 import { searchService } from "../../features/search/services/api/searchService";
+import { Content } from "../../layouts/app-layout/AppLayout";
 
 
 export enum VIEWS {
@@ -53,10 +54,10 @@ function CatalogPC() {
     }
 
     return (
-        <>
+        <Content>
             <Box
                 sx={{
-                    fontSize: "48px",
+                    fontSize: "40px",
                     mt: "15px"
                 }}
             >
@@ -117,7 +118,7 @@ function CatalogPC() {
                     </Box>
                 </Box>
             </Box>
-        </>
+        </Content>
     )
 }
 

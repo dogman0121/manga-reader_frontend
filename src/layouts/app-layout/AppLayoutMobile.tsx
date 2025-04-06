@@ -9,6 +9,15 @@ import { UserMenuDrawer } from "../../components/UserMenu";
 import Blur from "../../components/Blur";
 import MainBlurContext from "./MainBlurContext";
 
+export function ContentMobile({children}: {children: React.ReactNode}) {
+    return (
+        <Box sx={{
+            p: "10px 5px 66px"
+        }}>
+            {children}
+        </Box>
+    )
+}
 
 function AppLayoutMobile() {
     const [navSection, setNavSection] = useState(0);
@@ -54,11 +63,7 @@ function AppLayoutMobile() {
 
     return (   
         <>
-            <Box
-                sx={{
-                    p: "10px 5px 66px"
-                }}
-            >
+            <ContentMobile>
                 <MainBlurContext.Provider
                     value={{
                         opened: blurOpened,
@@ -72,7 +77,7 @@ function AppLayoutMobile() {
                 <Blur open={blurOpened}>
                     {blurContent}
                 </Blur>
-            </Box>
+            </ContentMobile>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1000 }} elevation={3}>
                 <BottomNavigation
                     value={navSection}
