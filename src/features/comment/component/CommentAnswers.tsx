@@ -7,7 +7,7 @@ import SubdirectoryArrowRightRoundedIcon from '@mui/icons-material/SubdirectoryA
 import CommentList from "./CommentList";
 
 function CommentAnswers({ open }: {open: Boolean}) {
-    const { id, answers_count } = useContext(CommentContext);
+    const { comment } = useContext(CommentContext);
     
     const [isLoading, setIsLoading] = useState(false);
 
@@ -20,7 +20,7 @@ function CommentAnswers({ open }: {open: Boolean}) {
     useEffect(() => {
         if (open && lastPage.current !== page) {
             setIsLoading(true);
-            commentService.fetchAnswers(id, page)
+            commentService.fetchAnswers(comment.id, page)
                 .then(({data}) => {
                     setAnswers((prev) => [...prev, ...data] as Comment[])
                     lastPage.current = page;
@@ -41,7 +41,7 @@ function CommentAnswers({ open }: {open: Boolean}) {
                         }}
                     >
                         <CommentList comments={answers} />
-                        {answers.length < answers_count && !isLoading && (
+                        {answers.length < comment.answers_count && !isLoading && (
                             <Box
                                 sx={{
                                     mt: "5px",

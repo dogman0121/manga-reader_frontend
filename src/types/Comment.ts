@@ -5,7 +5,9 @@ export const EMPTY_COMMENT: Comment = {
     text: "",
     user: EMPTY_USER,
     created_at: new Date(0),
-    answers_count: 0
+    answers_count: 0,
+    up_votes: 0,
+    down_votes: 0,
 }
 
 interface Comment {
@@ -13,7 +15,10 @@ interface Comment {
     text: string,
     user: User
     created_at: Date | string,
-    answers_count: number
+    answers_count: number,
+    up_votes: number,
+    down_votes: number,
+    user_vote ?: number
 }
 
 export default Comment;

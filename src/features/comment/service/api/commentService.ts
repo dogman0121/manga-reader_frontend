@@ -97,6 +97,11 @@ class CommentService {
 
         return null;
     }
+
+    async sendVote(commentId: number, voteType: number) {
+        const response = await apiClient.post(`/comments/${commentId}/votes`, {vote: voteType})
+        return await response.json()
+    }
 }
 
 export const commentService = new CommentService();
