@@ -109,7 +109,7 @@ function CommentOptions(
                 <Typography>{comment.up_votes - comment.down_votes}</Typography>
                 <Box
                     sx={{
-                        p: "3px",
+                        p: "5px",
                         lineHeight: "0",
                         borderRadius: "50%",
                         background: comment.user_vote == 1 ? "var(--widget1-color)" : undefined
