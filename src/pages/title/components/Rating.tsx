@@ -35,6 +35,7 @@ function Rating({rating}: {rating: number}){
                     borderRadius: "10px",
                     padding: "0.2px 6px 0.3px 6px",
                     fontSize: "14px",
+                    color:"white"
                 }}
                 data-stars="${this.rating}"
             >
