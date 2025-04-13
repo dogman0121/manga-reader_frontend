@@ -1,5 +1,5 @@
 import { useDeviceDetect, DEVICE } from "../../../hooks/useDeviceDetect";
-import { Box, Tab, useTheme } from "@mui/material";
+import { Box, Paper, Tab, useTheme } from "@mui/material";
 import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
 import TitleContext from "../../../context/TitleContext";
@@ -15,6 +15,7 @@ import Chapters from "./Chapters";
 import Stats from "./Stats";
 import Comments from "./Comments";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
+import RatingButton from "./Rating";
 
 
 function ContentMobile(){
@@ -32,13 +33,23 @@ function ContentMobile(){
                 sx={{
                     p: "40px 0 10px",
                     display: "flex",
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    position: "relative"
                 }}
             >
                 <Poster 
                     src={title.main_poster?.medium || ""}
                     width="min(60%, 270px)"
                 />
+                <Paper
+                    sx={{
+                        position: "absolute",
+                        bottom: "10px",
+                        borderRadius: "12px"
+                    }}
+                >
+                    <RatingButton />
+                </Paper>
             </Box>
             <Names 
                 sx={{
