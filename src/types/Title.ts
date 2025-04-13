@@ -49,5 +49,6 @@ export default interface Title {
     teams?: Array<Team>,
     permissions?: {
         edit: boolean
-    }
+    },
+    user_rating?: number
 }

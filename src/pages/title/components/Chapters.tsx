@@ -95,9 +95,9 @@ function TeamList({ teams }: {teams: Array<Team>}) {
 }
 
 function Chapters() {
-    const manga = useContext(TitleContext);
+    const { title } = useContext(TitleContext);
 
-    if (!manga || !manga.teams)
+    if (!title || !title.teams)
         return (
             <Box
                 sx={{
@@ -126,7 +126,7 @@ function Chapters() {
                     <SwapVertRoundedIcon/>
                 </Box>
             </Box>
-            <TeamList teams = {manga.teams}/>
+            <TeamList teams = {title.teams}/>
             <ChaptersList/>
         </>
     )

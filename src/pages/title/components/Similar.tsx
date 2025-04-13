@@ -34,9 +34,9 @@ function SimilarItem({ manga }: {manga: Title}) {
 
 
 function Similar() {
-    const manga = useContext(TitleContext);
+    const {title} = useContext(TitleContext);
 
-    if (!manga || !manga.similar)
+    if (!title || !title.similar)
         return null;
 
     return (
@@ -47,7 +47,7 @@ function Similar() {
                     mt: "5px"
                 }}
             >
-                {manga.similar.map((title) => <SimilarItem key={title.id} manga={title}/>) }
+                {title.similar.map((title) => <SimilarItem key={title.id} manga={title}/>) }
             </Box>
         </Box>
     )

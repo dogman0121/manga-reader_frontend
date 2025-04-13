@@ -19,7 +19,7 @@ import OtherNames from "./OtherNames";
 
 
 function RightSide() {
-    const title = useContext(TitleContext);
+    const { title } = useContext(TitleContext);
 
     const [section, setSection] = useState<string>('1');
     

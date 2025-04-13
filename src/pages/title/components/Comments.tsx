@@ -10,7 +10,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 
 function Comments() {
-    const {id} = useContext(TitleContext);
+    const { title } = useContext(TitleContext);
 
     const [comments, setComments] = useState<Array<Comment>>([]);
 
@@ -19,13 +19,13 @@ function Comments() {
     const [page, setPage] = useState(1);
 
     const onSend = async(text: string) => {
-        const comment = await commentService.sendTitleComment(id, text);
+        const comment = await commentService.sendTitleComment(title.id, text);
         
         setComments((prev) => {const newAr = Array.from(prev);newAr.unshift(comment); return newAr});
     }
 
     useEffect(() => {
-        commentService.fetchTitleComments(id, page)
+        commentService.fetchTitleComments(title.id, page)
             .then(({data}) => {
                 if (data.length < 8)
                     setHasMore(false);

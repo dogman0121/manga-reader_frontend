@@ -3,9 +3,9 @@ import { useContext } from "react";
 import TitleContext from "../../../context/TitleContext";
 
 function OtherNames() {
-    const { name_translations } = useContext(TitleContext);
+    const { title } = useContext(TitleContext);
     
-    if (name_translations?.length == 0)
+    if (title.name_translations?.length == 0)
         return <></>
 
     return (
@@ -17,7 +17,7 @@ function OtherNames() {
         >
             <Typography>Другие названия</Typography>
             <Breadcrumbs>
-                {name_translations?.map(name => <Typography variant="subtitle1" fontSize={"16px"} key={name.lang}>{name.name}</Typography>)}
+                {title.name_translations?.map(name => <Typography variant="subtitle1" fontSize={"16px"} key={name.lang}>{name.name}</Typography>)}
             </Breadcrumbs>
         </Box>
     )

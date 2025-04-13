@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import Title from "../../types/Title"
 import TitleContext from "../../context/TitleContext";
 import { Box, CircularProgress } from "@mui/material";
-import fetchTitle from "../../services/api/fetchTitle";
 import { useParams } from "react-router-dom";
 import NotFound from "../not-found/NotFound";
 import Content from "./components/Content";
+import { titleService } from "../../services/api/titleService";
 
 // setTitle({
 //     id: 1,
@@ -73,7 +73,7 @@ function TitlePage() {
 
         setIsLoading(true);
 
-        fetchTitle(parseInt(id || ""))
+        titleService.fetchTitle(parseInt(id || ""))
         .then((t) => {
             setTitle(t);
             setIsLoading(false);
@@ -102,7 +102,7 @@ function TitlePage() {
         return (<NotFound />) 
 
     return (
-        <TitleContext.Provider value={ title }>
+        <TitleContext.Provider value={{title: title }}>
             <Content />
         </TitleContext.Provider>
     )

@@ -12,9 +12,9 @@ import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import Poster from "../../components/ui/Poster";
 import { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Notification from "../../components/ui/Notification";
-import fetchTitle from "../../services/api/fetchTitle";
 import FormStateContext from "../../layouts/form-layout/FormStateContext";
 import FormModal from "../../layouts/form-layout/FormModal";
+import { titleService } from "../../services/api/titleService";
 
 
 enum ERROR {
@@ -90,7 +90,7 @@ function UpdateTitle() {
         setIsLoading(true);
         
         try {
-            const title: Title = await fetchTitle(parseInt(id || ""));
+            const title: Title = await titleService.fetchTitle(parseInt(id || ""));
 
             setIsLoading(false);
 

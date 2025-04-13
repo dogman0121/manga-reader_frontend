@@ -5,7 +5,7 @@ import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 
 
 function Names({sx}: {sx?: SxProps}) {
-    const manga = useContext(TitleContext);
+    const {title} = useContext(TitleContext);
 
     const device = useDeviceDetect();
 
@@ -18,9 +18,9 @@ function Names({sx}: {sx?: SxProps}) {
             }}
         >
             <Breadcrumbs>
-                <Typography>{manga.type?.name || "нет"}</Typography>
-                <Typography>{manga.year || "2025"}</Typography>
-                <Typography>{manga.status?.name || "нет"}</Typography>
+                <Typography>{title.type?.name || "нет"}</Typography>
+                <Typography>{title.year || "2025"}</Typography>
+                <Typography>{title.status?.name || "нет"}</Typography>
             </Breadcrumbs>
             <Typography
                 sx={{
@@ -28,7 +28,7 @@ function Names({sx}: {sx?: SxProps}) {
                     lineHeight: "1em",
                     textAlign: device == DEVICE.MOBILE ? "center" : "left"
                 }}
-            > {manga?.name} </Typography>
+            > {title?.name} </Typography>
             
         </Box>        
     )

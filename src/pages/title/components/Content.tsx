@@ -18,7 +18,7 @@ import { AppContent } from "../../../layouts/app-layout/AppLayout";
 
 
 function ContentMobile(){
-    const manga = useContext(TitleContext);
+    const { title } = useContext(TitleContext);
 
     const [section, setSection] = useState<string>('1');
     
@@ -36,7 +36,7 @@ function ContentMobile(){
                 }}
             >
                 <Poster 
-                    src={manga.main_poster?.medium || ""}
+                    src={title.main_poster?.medium || ""}
                     width="min(60%, 270px)"
                 />
             </Box>
@@ -96,7 +96,7 @@ function ContentPC() {
 function Content() {
     const device = useDeviceDetect();
 
-    const {background} = useContext(TitleContext);
+    const { title } = useContext(TitleContext);
 
     const filter = device == DEVICE.MOBILE ? 0.8 : 0.9
 
@@ -122,7 +122,7 @@ function Content() {
                     <ContentPC/>
                 }
             </AppContent>
-            {background && (
+            {title.background && (
                 <Box
                 sx={{
                     position: "absolute",
@@ -134,7 +134,7 @@ function Content() {
                     background: `
                         linear-gradient(rgba(${theme.vars.palette.background.defaultChannel} / ${filter}), 
                         rgba(${theme.vars.palette.background.defaultChannel} / 1)), 
-                        url('${background}')
+                        url('${title.background}')
                     `,
                     backgroundSize: "cover",
                     backgroundPosition: "center",

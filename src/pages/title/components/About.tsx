@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 function About() {
     const [open, setOpen] = useState(false);
 
-    const title = useContext(TitleContext);
+    const { title } = useContext(TitleContext);
 
     const textRef = useRef<HTMLDivElement | null>(null);
 

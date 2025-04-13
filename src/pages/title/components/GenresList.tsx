@@ -25,9 +25,9 @@ function GenreItem({ genre } : { genre: Genre}) {
 }
 
 function GenresList() {
-    const manga = useContext(TitleContext);
+    const { title } = useContext(TitleContext);
 
-    if (!manga || !manga?.genres)
+    if (!title || !title?.genres)
         return <></>;
 
     return (
@@ -39,7 +39,7 @@ function GenresList() {
                 rowGap: "5px"
             }}
         >
-            {manga.genres.map((genre) => <GenreItem key={genre.id} genre={genre} />)}
+            {title.genres.map((genre) => <GenreItem key={genre.id} genre={genre} />)}
         </Box>
     )
 }

@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 
 
 function LeftSide() {
-    const manga = useContext(TitleContext);
+    const {title} = useContext(TitleContext);
 
     return (
         <Box
@@ -18,7 +18,7 @@ function LeftSide() {
             }}
         >
             <Poster 
-                src={manga.main_poster?.medium || ""}
+                src={title.main_poster?.medium || ""}
             />
             <SaveButton/>
         </Box>

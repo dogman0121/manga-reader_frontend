@@ -37,7 +37,7 @@ function StatsText({children}: {children: React.ReactNode}){
 
 
 function Stats({sx}: {sx?: SxProps}) {
-    const manga = useContext(TitleContext);
+    const {title} = useContext(TitleContext);
 
     return (
         <Box
@@ -56,7 +56,7 @@ function Stats({sx}: {sx?: SxProps}) {
                         height: "28px"
                     }}
                 />
-                <StatsText>{manga?.rating}</StatsText>
+                <StatsText>{title?.rating}</StatsText>
             </StatsItem>
             <StatsItem>
                 <BookmarksOutlinedIcon
@@ -65,11 +65,11 @@ function Stats({sx}: {sx?: SxProps}) {
                         height: "20px"
                     }}
                 />
-                <StatsText>{manga?.saves}</StatsText>
+                <StatsText>{title?.saves}</StatsText>
             </StatsItem>
             <StatsItem>
                 <VisibilityOutlinedIcon/>
-                <StatsText>{manga?.views}</StatsText>
+                <StatsText>{title?.views}</StatsText>
             </StatsItem>
         </Box>
     )
