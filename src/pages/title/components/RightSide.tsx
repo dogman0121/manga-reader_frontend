@@ -64,7 +64,15 @@ function RightSide() {
                     }}
                 >
                     <ReadButton />
-                    <RatingButton />
+                    <Box
+                        sx={{
+                            p: "0 15px",
+                            mt: "4px"
+                        }}
+                    >
+                        <RatingButton />
+                    </Box>
+                    
                 </Box>
             </Box>
             <Box

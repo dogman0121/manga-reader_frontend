@@ -49,7 +49,8 @@ function ContentMobile(){
                         sx={{
                             position: "absolute",
                             bottom: "10px",
-                            borderRadius: "12px"
+                            borderRadius: "6px",
+                            p: "0 10px"
                         }}
                     >
                         <RatingButton />
