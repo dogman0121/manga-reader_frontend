@@ -16,6 +16,9 @@ import Stats from "./Stats";
 import Comments from "./Comments";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import RatingButton from "./Rating";
+import WestIcon from '@mui/icons-material/West';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from "react-router-dom";
 
 
 function ContentMobile(){
@@ -27,8 +30,20 @@ function ContentMobile(){
         setSection(newValue);
     };
 
+    const navigate = useNavigate();
+
     return (
         <>
+            <Box
+                sx={{
+                    p: "5px 10px",
+                    display: "flex",
+                    justifyContent: "space-between"
+                }}
+            >
+                <WestIcon sx={{width: "25px", height: "25px"}} onClick={()=>{navigate(-1)}}/>
+                <MoreVertIcon sx={{width: "25px", height: "25px"}}/>
+            </Box>
             <Box
                 sx={{
                     p: "40px 0 10px",
