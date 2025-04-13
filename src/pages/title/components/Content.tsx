@@ -32,24 +32,29 @@ function ContentMobile(){
             <Box
                 sx={{
                     p: "40px 0 10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    position: "relative"
                 }}
             >
-                <Poster 
-                    src={title.main_poster?.medium || ""}
-                    width="min(60%, 270px)"
-                />
-                <Paper
+                <Box
                     sx={{
-                        position: "absolute",
-                        bottom: "10px",
-                        borderRadius: "12px"
+                        display: "flex",
+                        justifyContent: "center",
+                        position: "relative"
                     }}
                 >
-                    <RatingButton />
-                </Paper>
+                    <Poster 
+                        src={title.main_poster?.medium || ""}
+                        width="min(60%, 270px)"
+                    />
+                    <Paper
+                        sx={{
+                            position: "absolute",
+                            bottom: "10px",
+                            borderRadius: "12px"
+                        }}
+                    >
+                        <RatingButton />
+                    </Paper>
+                </Box>
             </Box>
             <Names 
                 sx={{

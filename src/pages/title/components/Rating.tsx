@@ -132,15 +132,10 @@ function RatingButton() {
             <Box
                 sx={{
                     alignSelf: "end",
-
-                    padding: "0 15px",
                     
                     display: "flex",
                     justifyContent: "center",
                     
-                    marginTop: "4px",
-                    
-                    backgroundColor: "var(--dropdown-background)",
                     borderRadius: "6px",
                     height: "30px",
 
