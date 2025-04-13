@@ -18,9 +18,11 @@ function CommentBlock({ comment }: {comment: Comment}) {
 
     const onAnswerSend = (text: string) => {
         commentService.sendAnswer(comment.id, text)
-            .then(() => {
-                setAnswersOpened(true);
-                comment.answers_count++;
+            .then(({error}) => {
+                if (!error){
+                    setAnswersOpened(true);
+                    comment.answers_count++;
+                }
             })
     }
 

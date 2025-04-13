@@ -1,5 +1,4 @@
 import { apiClient } from "../../../../utils/apiClient";
-import Comment from "../../../../types/Comment";
 
 class CommentService {
     formatTimedelta(timeDelta: number) {
@@ -75,10 +74,7 @@ class CommentService {
             text: text
         })
 
-        if (response.ok)
-            return await response.json() as Comment;
-
-        return null;
+        return await response.json();
     }
 
     async sendTitleComment(titleId: number, text: string){
@@ -86,13 +82,8 @@ class CommentService {
             manga: titleId,
             text: text
         })
-
-        if (response.ok) {
-            const json = await response.json();
-            return json.data;
-        }
-
-        return null;
+        
+        return await response.json();
     }
 
     async sendVote(commentId: number, voteType: number) {
