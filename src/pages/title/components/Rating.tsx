@@ -120,6 +120,7 @@ function RatingButton() {
         const response = await titleService.sendRating(title.id, rating);
 
         if (!response.error){
+            setModalOpened(false);
             if (proxiRating == rating)
                 return setProxiRating(undefined);
 
