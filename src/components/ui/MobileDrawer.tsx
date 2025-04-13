@@ -16,6 +16,7 @@ export default function MobileDrawer({open, onClose, anchor, children, sx}: Draw
                     sx={{
                         width: "75vw",
                         height: "100%",
+                        bgcolor: "var(--widget3-color)",
                         ...sx
                     }}
                 >
