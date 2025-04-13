@@ -33,7 +33,7 @@ function CatalogWrapper({children}: {children: React.ReactNode}) {
     }, [])
 
     useEffect(() => {
-        window.history.pushState("", "",window.location.origin + window.location.pathname + "?" + searchService.compileParams(query, section, filters).toString())
+        window.history.replaceState("", "",window.location.origin + window.location.pathname + "?" + searchService.compileParams(query, section, filters).toString())
     }, [query, section, filters]);
     
 
