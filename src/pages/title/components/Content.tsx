@@ -46,7 +46,7 @@ function ContentMobile(){
             </Box>
             <Box
                 sx={{
-                    p: "40px 0 10px",
+                    p: "30px 0 10px",
                 }}
             >
                 <Box
