@@ -35,7 +35,7 @@ function CommentBlock({ comment }: {comment: Comment}) {
             >
                 <Box minWidth={"40px"}>
                     <Avatar
-                        src={comment.user.avatar}
+                        src={comment.user?.avatar}
                         alt={comment.user.login}
                         sx={{width: "40px", height: "40px"}}
                     />

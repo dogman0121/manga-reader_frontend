@@ -1,5 +1,5 @@
 import { apiClient } from "../../../../utils/apiClient";
-import Comment, { EMPTY_COMMENT } from "../../../../types/Comment";
+import Comment from "../../../../types/Comment";
 
 class CommentService {
     formatTimedelta(timeDelta: number) {
@@ -54,10 +54,7 @@ class CommentService {
     async fetchComment(commentId: number) {
         const response = await apiClient.get(`/comments/${commentId}`);
 
-        if (response.ok)
-            return await response.json() as Comment;
-        
-        return EMPTY_COMMENT;
+        return await response.json();
     }
 
     async fetchAnswers(commentId: number, page=1) {

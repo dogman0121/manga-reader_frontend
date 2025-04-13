@@ -19,8 +19,8 @@ export default function CommentPage() {
 
     useEffect(() => {
         commentService.fetchComment(parseInt(id || ""))
-            .then((c: Comment) => {
-                setComment(c);
+            .then( ( {data} ) => {
+                setComment(data);
                 setIsLoading(false);
             })
     }, [])
