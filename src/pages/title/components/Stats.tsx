@@ -56,7 +56,7 @@ function Stats({sx}: {sx?: SxProps}) {
                         height: "28px"
                     }}
                 />
-                <StatsText>{title?.rating}</StatsText>
+                <StatsText>{title.rating} ({title.rating_count})</StatsText>
             </StatsItem>
             <StatsItem>
                 <BookmarksOutlinedIcon
