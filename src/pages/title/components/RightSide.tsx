@@ -66,7 +66,7 @@ function RightSide() {
                     <ReadButton />
                     <Box
                         sx={{
-                            alignSelf: "end",
+                            p: "0 10px 0 15px",
                             mt: "4px"
                         }}
                     >
