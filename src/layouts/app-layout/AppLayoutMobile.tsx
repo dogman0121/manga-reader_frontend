@@ -8,6 +8,7 @@ import { Outlet, Link } from 'react-router-dom'
 import { UserMenuDrawer } from "../../components/UserMenu";
 import Blur from "../../components/Blur";
 import MainBlurContext from "./MainBlurContext";
+import { AppRoutes } from "../../routes";
 
 export function ContentMobile({children}: {children: React.ReactNode}) {
     return (
@@ -46,9 +47,9 @@ function AppLayoutMobile() {
 
             const href = (event.currentTarget as Window).location.pathname;
 
-            if (href === "/")
+            if (href === AppRoutes.HOME)
                 setNavSection(0);
-            if (href.startsWith("/catalog"))
+            if (href.startsWith(AppRoutes.CATALOG))
                 setNavSection(1);
         }
         
@@ -99,7 +100,7 @@ function AppLayoutMobile() {
                     <BottomNavigationAction 
                         sx={actionStyles} 
                         icon={
-                            <Link to="/">
+                            <Link to={AppRoutes.HOME}>
                                 <HomeRoundedIcon fontSize="medium"/>
                             </Link>
                         } 
@@ -107,7 +108,7 @@ function AppLayoutMobile() {
                     <BottomNavigationAction 
                         sx={actionStyles} 
                         icon={
-                            <Link to="/catalog">
+                            <Link to={AppRoutes.CATALOG}>
                                 <SearchRoundedIcon fontSize="medium"/>
                             </Link>
                         } 

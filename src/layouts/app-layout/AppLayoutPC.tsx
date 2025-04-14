@@ -15,6 +15,7 @@ import { AuthContext } from "../../features/auth/context/AuthContext";
 import Blur from "../../components/Blur";
 import { useTheme } from "@mui/material/styles";
 import MainBlurContext from "./MainBlurContext";
+import { AppRoutes } from "../../routes";
 
 
 export function ContentPC({children}: {children: React.ReactNode}) {
@@ -86,7 +87,7 @@ function AppHeader() {
                             display: "flex"
                         }}
                     >   
-                        <Link to="/">
+                        <Link to={AppRoutes.HOME}>
                             <SvgIcon 
                                 viewBox="0 0 96 96"
                                 sx={{
@@ -114,7 +115,7 @@ function AppHeader() {
                         >
                             
                             <Box component="li">
-                                <Link to="/catalog">
+                                <Link to={AppRoutes.CATALOG}>
                                     каталог
                                 </Link>
                             </Box>

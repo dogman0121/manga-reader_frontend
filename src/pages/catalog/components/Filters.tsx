@@ -1,5 +1,5 @@
 import { FormEvent, useContext } from "react";
-import SearchContext from "../../features/search/context/SearchContext";
+import SearchContext from "../../../features/search/context/SearchContext";
 import { Autocomplete, Box, Typography, TextField } from "@mui/material";
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 

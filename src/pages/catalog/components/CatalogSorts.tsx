@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import SearchContext from "../../features/search/context/SearchContext";
-import { SECTIONS } from "../../features/search/components/SearchProvider";
+import SearchContext from "../../../features/search/context/SearchContext";
+import { SECTIONS } from "../../../features/search/components/SearchProvider";
 
 export enum SORTS {
     POPULARITY = "popularity",

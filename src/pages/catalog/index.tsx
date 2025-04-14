@@ -5,9 +5,9 @@ import SearchProvider from "../../features/search/components/SearchProvider";
 import SearchSectionSelector from "../../features/search/components/SearchSectionSelector";
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import AppsRoundedIcon from '@mui/icons-material/AppsRounded';
-import CatalogList from "./CatalogList";
-import CatalogFilters from "./CatalogFilters";
-import CatalogSorts from "./CatalogSorts";
+import CatalogList from "./components/CatalogList";
+import CatalogFilters from "./components/CatalogFilters";
+import CatalogSorts from "./components/CatalogSorts";
 import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import MobileDrawer from "../../components/ui/MobileDrawer";
 import SearchContext from "../../features/search/context/SearchContext";
@@ -172,7 +172,7 @@ function CatalogMobile() {
     )
 }
 
-function Catalog() {
+export default function Catalog() {
     const device = useDeviceDetect();
 
     return (
@@ -187,8 +187,5 @@ function Catalog() {
                 </CatalogWrapper>    
             </SearchProvider>
         </AppContent>
-        
     )
 }
-
-export default Catalog;

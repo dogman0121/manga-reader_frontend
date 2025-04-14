@@ -63,7 +63,7 @@ import { titleService } from "../../services/api/titleService";
 
 
 function TitlePage() {
-    const {id} = useParams();
+    const {mangaId} = useParams();
 
     const [title, setTitle] = useState<Title | null>(null);
 
@@ -73,7 +73,7 @@ function TitlePage() {
 
         setIsLoading(true);
 
-        titleService.fetchTitle(parseInt(id || ""))
+        titleService.fetchTitle(parseInt(mangaId || ""))
         .then((t) => {
             setTitle(t);
             setIsLoading(false);
@@ -81,7 +81,7 @@ function TitlePage() {
         
 
         return () => {}
-    }, [id])
+    }, [mangaId])
 
     if (isLoading)
         return (

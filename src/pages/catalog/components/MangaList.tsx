@@ -1,18 +1,19 @@
-import Title from "../../types/Title";
+import Title from "../../../types/Title";
 import { useTheme } from "@mui/material";
 import { Link } from 'react-router-dom'
 import { Box, Typography, SxProps } from "@mui/material";
 import { useContext } from "react";
-import SearchContext from "../../features/search/context/SearchContext";
-import { VIEWS } from "./Catalog";
-import Poster from "../../components/ui/Poster";
+import SearchContext from "../../../features/search/context/SearchContext";
+import { VIEWS } from "..";
+import Poster from "../../../components/ui/Poster";
+import { generatePath, MangaRoutes } from "../../../routes";
 
 
 function MangaItem({ type, item }: {type: string, item: Title}) {
     const theme = useTheme();
 
     return (
-        <Link to={`/manga/${item.id}`}>
+        <Link to={generatePath(MangaRoutes.ITEM, {mangaId: item.id})}>
             {type === "grid" ?
                 <Box >
                     <Poster 

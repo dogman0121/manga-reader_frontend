@@ -4,6 +4,7 @@ import { commentService } from "../service/api/commentService";
 import { useContext } from "react";
 import CommentContext from "../context/CommentContext";
 import { Link } from "react-router-dom"
+import { CommentRoutes, generatePath, UserRoutes } from "../../../routes";
 
 function CommentBody() {
     const {comment} = useContext(CommentContext);
@@ -26,8 +27,8 @@ function CommentBody() {
                 }}
             >
                 <Box>
-                    <Link to={`/profile/${comment.user.id}`}><Typography>{comment.user.login}</Typography></Link>
-                    <Link to={`/comment/${comment.id}`}>
+                    <Link to={generatePath(UserRoutes.ITEM, {userId: comment.user.id})}><Typography>{comment.user.login}</Typography></Link>
+                    <Link to={generatePath(CommentRoutes.ITEM, {commentId: comment.id})}>
                         <Typography 
                             variant="subtitle1"
                             lineHeight={1.2}
