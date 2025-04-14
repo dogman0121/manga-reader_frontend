@@ -60,13 +60,13 @@ function RightSide() {
                 <Box
                     sx={{
                         display: "flex",
-                        flexDirection: "column"
+                        flexDirection: "column",
+                        alignItems: "center"
                     }}
                 >
                     <ReadButton />
                     <Box
                         sx={{
-                            p: "0 10px 0 15px",
                             mt: "4px"
                         }}
                     >
