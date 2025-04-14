@@ -73,7 +73,7 @@ function TitleBar({ title }: {title: Title}) {
 }
 
 function UpdateTitle() {
-    const { id } = useParams();
+    const { mangaId } = useParams();
 
     const [title, setTitle] = useState<Title>(EMPTY_TITLE);
 
@@ -90,7 +90,7 @@ function UpdateTitle() {
         setIsLoading(true);
         
         try {
-            const title: Title = await titleService.fetchTitle(parseInt(id || ""));
+            const title: Title = await titleService.fetchTitle(parseInt(mangaId || ""));
 
             setIsLoading(false);
 
