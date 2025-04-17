@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { EMPTY_USER } from "../types/User";
-import UserContext from "../context/UserContext";
+import UserContext from "../context/UserAuthContext";
 import { 
     Avatar, 
     Box, 

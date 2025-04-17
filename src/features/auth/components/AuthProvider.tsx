@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { AuthContext } from "../context/AuthContext"
 import AuthModal from "./AuthModal"
 import { User, EMPTY_USER } from "../../../types/User";
-import UserContext from "../../../context/UserContext";
+import UserContext from "../../../context/UserAuthContext";
 import fetchUser from "../../../services/api/fetchUser";
 
 function AuthProvider({ children }: { children: React.ReactNode }) {

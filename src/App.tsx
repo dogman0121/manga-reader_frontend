@@ -18,8 +18,8 @@ import CommentPage from "./pages/comment/CommentPage";
 import Home from "./pages/home/Home";
 import NotFound from "./pages/not-found/NotFound";
 import TitlePage from "./pages/title/TitlePage";
-import UsersPage from "./pages/users";
-import { AppRoutes, AuthRoutes, MangaRoutes } from "./routes";
+import UserPage from "./pages/UserProfile";
+import { AppRoutes, AuthRoutes, MangaRoutes, UserRoutes } from "./routes";
 
 
 function App() {
@@ -63,7 +63,7 @@ function App() {
                     </Route>
                     <Route index element={<Home/>} />
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />
-                    <Route path={AppRoutes.USER} element={<UsersPage />} />
+                    <Route path={UserRoutes.ITEM} element={<UserPage />} />
                     <Route path={AppRoutes.COMMENT} element={<CommentPage />} />
                     <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
                 </Route>

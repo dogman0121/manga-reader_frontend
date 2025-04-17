@@ -1,7 +1,7 @@
 import Modal from "@mui/material/Modal";
 import Auth from "./Auth";
 import { useContext, useState } from "react";
-import UserContext from "../../../context/UserContext";
+import UserContext from "../../../context/UserAuthContext";
 import fetchUser from "../../../services/api/fetchUser";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import MobileModal from "../../../components/ui/MobileModal";

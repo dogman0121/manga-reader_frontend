@@ -4,7 +4,7 @@ import { SvgIcon, Box, Button  } from "@mui/material";
 import { Avatar, Checkbox } from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
-import UserContext from "../../context/UserContext";
+import UserContext from "../../context/UserAuthContext";
 import { EMPTY_USER } from "../../types/User";
 import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import ThemeContext from "../../context/ThemeContext";
