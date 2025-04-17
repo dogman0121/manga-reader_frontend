@@ -5,7 +5,7 @@ function Poster({src, width}: {src: string, width?: string}){
             style={{
                 aspectRatio: "2/3",
                 width: width || "100%",
-                borderRadius: "6% / 4%"
+                borderRadius: "3% / 2%"
             }}
         />
     )
