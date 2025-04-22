@@ -22,7 +22,7 @@ function PreviewWrapper({ onDelete, poster } : {onDelete: React.EventHandler<Syn
                 src={poster.file ? poster.fileUrl || URL.createObjectURL(poster.file) : poster.fileName} 
                 style={{
                     borderRadius: "8px",
-                    maxHeight: "210px",
+                    maxHeight: "180px",
                     maxWidth: "auto"
                 }}
                 onDragOver={(event) => {event.preventDefault(); event.dataTransfer.dropEffect = "none"}}
