@@ -14,7 +14,7 @@ function PreviewWrapper({ onDelete, poster } : {onDelete: React.EventHandler<Syn
         <Box 
             sx={{
                 position: "relative",
-                maxHeight: "210px",
+                maxHeight: "180px",
                 maxWidth: "100%"
             }}
         >
