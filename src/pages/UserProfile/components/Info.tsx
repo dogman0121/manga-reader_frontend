@@ -84,7 +84,7 @@ function InfoPC() {
 
                 display: "flex",
                 flexDirection: "row",
-                columnGap: "50px"
+                columnGap: "40px"
             }}
         >
             <Avatar
