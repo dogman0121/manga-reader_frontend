@@ -7,6 +7,7 @@ import { apiClient } from "../../utils/apiClient";
 import Title from "../../types/Title";
 import { useContext } from "react";
 import FormStateContext from "../../layouts/form-layout/FormStateContext";
+import { AppContent } from "../../layouts/app-layout/AppLayout";
 
 
 
@@ -33,7 +34,7 @@ function AddTitle() {
     }
 
     return (
-        <>
+        <AppContent>
             <OpenGraphMeta
                 title="Добавить мангу | kanwoo"
                 description="Здесь вы можете добавить мангу"
@@ -42,7 +43,7 @@ function AddTitle() {
             <Box>
                 <TitleForm onSubmit={onSubmit}/>
             </Box>
-        </>
+        </AppContent>
     )
 }
 

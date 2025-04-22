@@ -15,6 +15,7 @@ import Notification from "../../components/ui/Notification";
 import FormStateContext from "../../layouts/form-layout/FormStateContext";
 import FormModal from "../../layouts/form-layout/FormModal";
 import { titleService } from "../../services/api/titleService";
+import { AppContent } from "../../layouts/app-layout/AppLayout";
 
 
 enum ERROR {
@@ -156,7 +157,7 @@ function UpdateTitle() {
     };
 
     return (
-        <>
+        <AppContent>
             <Box>
                 {title !== EMPTY_TITLE && ( 
                     <TitleBar title={title}/>
@@ -209,7 +210,7 @@ function UpdateTitle() {
                     </Box>
                 </Box>
             </FormModal>
-        </>
+        </AppContent>
     )
 }
 
