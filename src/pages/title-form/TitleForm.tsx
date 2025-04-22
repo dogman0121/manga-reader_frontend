@@ -11,7 +11,7 @@ import AddTitleForm from "./types/AddTitleForm";
 import Title from "../../types/Title";
 import Poster from "./types/Poster";
 import { storageService } from "../../services/api/storageService";
-import AppLayout, { AppContent } from "../../layouts/app-layout/AppLayout";
+import { AppContent } from "../../layouts/app-layout/AppLayout";
 
 
 export function parseTitleData<AddTitleForm>(title: Title) {
