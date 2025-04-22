@@ -12,7 +12,6 @@ import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./features/auth/components/AuthProvider";
 import Catalog from "./pages/catalog";
 import AddTitle from "./pages/title-form/AddTitle";
-import FormLayout from "./layouts/form-layout/FormLayout";
 import UpdateTitle from "./pages/title-form/UpdateTitle";
 import CommentPage from "./pages/comment/CommentPage";
 import Home from "./pages/home/Home";
@@ -64,8 +63,8 @@ function App() {
                     </Route>
                     <Route index element={<Home/>} />
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />
-                    <Route path={UserRoutes.ITEM} element={<UserProfile />} />
-                    <Route element={<FormLayout/>}>
+                    <Route>
+                        <Route path={UserRoutes.ITEM} element={<UserProfile />} />
                         <Route path={UserRoutes.SETTINGS} element={<UserProfileSettings />} />
                     </Route>
                     <Route path={AppRoutes.COMMENT} element={<CommentPage />} />
