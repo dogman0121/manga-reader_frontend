@@ -11,6 +11,7 @@ import AddTitleForm from "./types/AddTitleForm";
 import Title from "../../types/Title";
 import Poster from "./types/Poster";
 import { storageService } from "../../services/api/storageService";
+import AppLayout, { AppContent } from "../../layouts/app-layout/AppLayout";
 
 
 export function parseTitleData<AddTitleForm>(title: Title) {
@@ -104,54 +105,57 @@ function TitleForm({ onSubmit, initialValue }: { onSubmit: SubmitHandler<AddTitl
     }, [initialValue])
 
     return (
-        <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
-                <TabContext
-                    value={tab}
-                >
-                    <TabList 
-                        onChange={handleChangeTab}
+        <AppContent>
+            <FormProvider {...methods}>
+                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                    <TabContext
+                        value={tab}
+                    >
+                        <TabList 
+                            onChange={handleChangeTab}
+                            sx={{
+                                "& button": {
+                                    color: theme.typography.body1.color,
+                                }
+                            }}
+                        >
+                            <Tab label="Информация" value="1" />
+                            <Tab label="Медиа" value="2" />
+                        </TabList>
+                        <TabPanel 
+                            value="1"
+                            sx={{
+                                p: 0,
+                                mt: "25px",
+                                display: "flex",
+                                flexDirection: "column",
+                                rowGap: "25px"
+                            }}
+                        >
+                            <Info />
+                        </TabPanel>
+                        <TabPanel
+                            value="2"
+                            sx={{
+                                p: 0,
+                            }}
+                        >
+                            <Media />
+                        </TabPanel>
+                    </TabContext>
+                    <Button 
+                        type="submit" 
+                        variant="contained"
                         sx={{
-                            "& button": {
-                                color: theme.typography.body1.color,
-                            }
+                            mt: "20px"
                         }}
                     >
-                        <Tab label="Информация" value="1" />
-                        <Tab label="Медиа" value="2" />
-                    </TabList>
-                    <TabPanel 
-                        value="1"
-                        sx={{
-                            p: 0,
-                            mt: "25px",
-                            display: "flex",
-                            flexDirection: "column",
-                            rowGap: "25px"
-                        }}
-                    >
-                        <Info />
-                    </TabPanel>
-                    <TabPanel
-                        value="2"
-                        sx={{
-                            p: 0,
-                        }}
-                    >
-                        <Media />
-                    </TabPanel>
-                </TabContext>
-                <Button 
-                    type="submit" 
-                    variant="contained"
-                    sx={{
-                        mt: "20px"
-                    }}
-                >
-                    Отправить
-                </Button> 
-            </form>
-        </FormProvider>        
+                        Отправить
+                    </Button> 
+                </form>
+            </FormProvider>       
+        </AppContent>
+         
     )
 }
 

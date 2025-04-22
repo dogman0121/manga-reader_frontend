@@ -145,7 +145,7 @@ function DraggableList() {
                             display: "grid",
                             columnGap: "10px",
                             rowGap: "8px",
-                            gridTemplateColumns: "repeat(auto-fill, 140px)"
+                            gridTemplateColumns: "repeat(auto-fill, 120px)"
                         }}
                     >
                         <PosterBlockInputMultiple name="posters"/>

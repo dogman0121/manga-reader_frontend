@@ -13,7 +13,7 @@ import { AppRoutes } from "../../routes";
 export function ContentMobile({children}: {children: React.ReactNode}) {
     return (
         <Box sx={{
-            p: "10px 5px 5px"
+            p: "10px 10px 5px"
         }}>
             {children}
         </Box>

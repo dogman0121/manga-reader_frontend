@@ -11,7 +11,7 @@ import ProfileProvider from "./components/ProfileProvider"
 import Info from "./components/Info"
 
 
-function UserPage() {
+export default function UserProfile() {
     const { userId } = useParams();
 
     const [user, setUser] = useState<User | null>(null);
@@ -43,5 +43,3 @@ function UserPage() {
         </AppContent>
     )
 }
-
-export default UserPage

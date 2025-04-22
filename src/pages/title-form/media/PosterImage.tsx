@@ -6,8 +6,8 @@ function PosterImage({ onClick, poster }: BoxProps & {poster: Poster}) {
     return (
         <Box
             sx={{
-                width: "140px",
-                height: "210px"
+                aspectRatio: "2/3",
+                width: "120px",
             }}
             onClick={onClick}
         >

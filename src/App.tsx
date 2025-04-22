@@ -18,8 +18,9 @@ import CommentPage from "./pages/comment/CommentPage";
 import Home from "./pages/home/Home";
 import NotFound from "./pages/not-found/NotFound";
 import TitlePage from "./pages/title/TitlePage";
-import UserPage from "./pages/UserProfile";
+import UserProfile from "./pages/UserProfile";
 import { AppRoutes, AuthRoutes, MangaRoutes, UserRoutes } from "./routes";
+import UserProfileSettings from "./pages/UserProfileSettings";
 
 
 function App() {
@@ -56,14 +57,17 @@ function App() {
                     <Route path={AuthRoutes.RECOVERY} element={<AuthPage section="recovery"/>} />
                 </Route>
                 <Route element={<AppLayout />}>
-                    <Route path={MangaRoutes.ITEM} element={<TitlePage />} />
-                    <Route element={<FormLayout/>}>
+                    <Route>
+                        <Route path={MangaRoutes.ITEM} element={<TitlePage />} />
                         <Route path={MangaRoutes.ADD} element={<AddTitle/>} />
                         <Route path={MangaRoutes.EDIT} element={<UpdateTitle/>} />
                     </Route>
                     <Route index element={<Home/>} />
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />
-                    <Route path={UserRoutes.ITEM} element={<UserPage />} />
+                    <Route path={UserRoutes.ITEM} element={<UserProfile />} />
+                    <Route element={<FormLayout/>}>
+                        <Route path={UserRoutes.SETTINGS} element={<UserProfileSettings />} />
+                    </Route>
                     <Route path={AppRoutes.COMMENT} element={<CommentPage />} />
                     <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
                 </Route>

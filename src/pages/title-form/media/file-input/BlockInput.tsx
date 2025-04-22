@@ -21,7 +21,7 @@ function BlockInput({ onAcceptFile } : { onAcceptFile: Function }) {
             {...getRootProps()}
             sx={{
                 aspectRatio: "2/3",
-                width: "140px",
+                width: "120px",
             }}
         >
             <Box

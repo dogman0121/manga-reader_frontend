@@ -52,7 +52,7 @@ function MainPoster() {
                     <Box 
                         sx={{
                             aspectRatio: "2/3",
-                            width: "140px",
+                            width: "120px",
                             height: "100%",
                             p: "20px 10px",
                             border: "2px dashed #D9D9D9",
