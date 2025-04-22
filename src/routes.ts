@@ -27,6 +27,7 @@ export enum MangaRoutes {
 
 export enum UserRoutes {
     ITEM = `${AppRoutes.USER}/:userId`,
+    SETTINGS = `${AppRoutes.USER}/:userId/settings`
 }
 
 export enum CommentRoutes {

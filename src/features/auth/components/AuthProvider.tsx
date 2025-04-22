@@ -12,10 +12,14 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         fetchUser()
-            .then((u) => {
-                setUser(u);
+            .then(({data: user}) => {
+                if (user)
+                    setUser(user);
+                else
+                    setUser(EMPTY_USER);
             })
             .catch(() => {
+                console.log(123);
                 setUser(EMPTY_USER);
             })
         

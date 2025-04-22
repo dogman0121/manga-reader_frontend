@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Title from "../../types/Title"
 import TitleContext from "../../context/TitleContext";
-import { Box, CircularProgress } from "@mui/material";
 import { useParams } from "react-router-dom";
 import NotFound from "../not-found/NotFound";
 import Content from "./components/Content";
 import { titleService } from "../../services/api/titleService";
+import PageLoader from "../../components/ui/PageLoader";
 
 // setTitle({
 //     id: 1,
@@ -84,19 +84,7 @@ function TitlePage() {
     }, [mangaId])
 
     if (isLoading)
-        return (
-            <Box
-                sx={{
-                    width: "100%",
-                    height: "85vh",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}
-            >
-                <CircularProgress />
-            </Box>
-        )
+        return <PageLoader />
 
     if (title === null) 
         return (<NotFound />) 

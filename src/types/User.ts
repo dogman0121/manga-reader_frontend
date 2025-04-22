@@ -4,6 +4,7 @@ export interface User {
     email: string,
     avatar: string,
     role: number
+    subscribed?: boolean
 }
 
 export const EMPTY_USER: User = {
