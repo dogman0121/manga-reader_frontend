@@ -88,7 +88,7 @@ function InfoPC() {
             }}
         >
             <Avatar
-                src="https://cover.imglib.info/uploads/users/8753756/9dff5cc7-aef8-4b9e-9d3e-6b5efc23a4f5.jpg"
+                src={user?.avatar}
                 sx={{width: "100px", height: "100px"}}
             />
             <Box

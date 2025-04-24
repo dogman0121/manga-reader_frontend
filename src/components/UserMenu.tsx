@@ -29,6 +29,7 @@ import Widget from "./ui/Widget";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { AuthContext } from "../features/auth/context/AuthContext";
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import { generatePath, UserRoutes } from "../routes";
 
 
 const buttonWidgetStyle = {
@@ -228,7 +229,7 @@ function UserWidgetMobile() {
 
     return (
         <>
-            <Link to={`/profile/${user.id}`}>
+            <Link to={generatePath(UserRoutes.ITEM, {userId: user.id})}>
                 <Widget
                     sx={{
                         p: "15px 12px"
