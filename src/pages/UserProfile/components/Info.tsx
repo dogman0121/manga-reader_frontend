@@ -5,7 +5,7 @@ import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import ActionButtons from "./ActionButtons";
 
 function InfoMobile() {
-    const { user } = useContext(UserProfileContext);
+    const { user: profileUser } = useContext(UserProfileContext);
 
     return (
         <Box
@@ -26,7 +26,7 @@ function InfoMobile() {
                 }}
             >
                 <Avatar
-                    src="https://cover.imglib.info/uploads/users/8753756/9dff5cc7-aef8-4b9e-9d3e-6b5efc23a4f5.jpg"
+                    src={profileUser?.avatar}
                     sx={{width: "70px", height: "70px"}}
                 />
                 <Box
@@ -39,7 +39,7 @@ function InfoMobile() {
                     }}
                 >
                     <Box>
-                        <Typography fontSize={"18px"}>{user?.login}</Typography>
+                        <Typography fontSize={"18px"}>{profileUser?.login}</Typography>
                         <Box
                             sx={{
                                 display: "flex",
@@ -65,6 +65,7 @@ function InfoMobile() {
                     </Box>
                 </Box>
             </Box>
+            <Box>{profileUser?.about}</Box>
             <Box>
                 <Button variant="text">Подписаться</Button>
             </Box>
@@ -81,52 +82,62 @@ function InfoPC() {
                 maxWidth: "1060px",
                 p: "30px 30px",
                 mx: "auto",
-
                 display: "flex",
-                flexDirection: "row",
-                columnGap: "40px"
+                flexDirection: "column",
+                rowGap: "20px"
             }}
         >
-            <Avatar
-                src={user?.avatar}
-                sx={{width: "100px", height: "100px"}}
-            />
             <Box
                 sx={{
-                    width: "100%",
+                    
+
                     display: "flex",
                     flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center"
+                    columnGap: "40px"
                 }}
             >
-                <Box>
-                    <Typography fontSize={"18px"}>{user?.login}</Typography>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            columnGap: "20px"
-                        }}
-                    >
+                <Avatar
+                    src={user?.avatar}
+                    sx={{width: "100px", height: "100px"}}
+                />
+                <Box
+                    sx={{
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                    }}
+                >
+                    <Box>
+                        <Typography fontSize={"18px"}>{user?.login}</Typography>
                         <Box
-                            
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                columnGap: "20px"
+                            }}
                         >
-                            <Typography fontSize="14px" textTransform="uppercase" variant="subtitle1">Подписчики</Typography>
-                            <Typography>0</Typography>
-                        </Box>
-                        <Box>
-                            <Typography fontSize="14px" textTransform="uppercase" variant="subtitle1">Посты</Typography>
-                            <Typography>0</Typography>
-                        </Box>
-                        <Box>
-                            <Typography fontSize="14px" textTransform="uppercase" variant="subtitle1">Подписки</Typography>
-                            <Typography>0</Typography>
+                            <Box
+                                
+                            >
+                                <Typography fontSize="14px" textTransform="uppercase" variant="subtitle1">Подписчики</Typography>
+                                <Typography>0</Typography>
+                            </Box>
+                            <Box>
+                                <Typography fontSize="14px" textTransform="uppercase" variant="subtitle1">Посты</Typography>
+                                <Typography>0</Typography>
+                            </Box>
+                            <Box>
+                                <Typography fontSize="14px" textTransform="uppercase" variant="subtitle1">Подписки</Typography>
+                                <Typography>0</Typography>
+                            </Box>
                         </Box>
                     </Box>
+                    <ActionButtons />
                 </Box>
-                <ActionButtons />
             </Box>
+            <Box>{user?.about}</Box>
         </Box>
     )
 }
