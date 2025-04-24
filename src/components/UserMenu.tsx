@@ -281,7 +281,7 @@ function UserWidgetPC() {
 
     return (
         <>
-            <Link to={`/profile/${user.id}`}>
+            <Link to={generatePath(UserRoutes.ITEM, {userId: user.id})}>
                 <Box
                     sx={{
                         display: "flex",
