@@ -3,7 +3,8 @@ export interface User {
     login: string,
     email: string,
     avatar: string,
-    role: number
+    role: number,
+    about: string,
     subscribed?: boolean
 }
 
@@ -12,5 +13,6 @@ export const EMPTY_USER: User = {
     login: "",
     email: "",
     avatar: "",
+    about: "",
     role: 0
 } 

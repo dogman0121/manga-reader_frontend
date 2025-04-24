@@ -48,6 +48,30 @@ const getTheme = (mode: "dark" | "light") => {
                                 borderRadius: "16px",
                             },
                         },
+                        "& input": {
+                            padding: "10px 15px"
+                        }
+                    }
+                }
+            },
+            MuiSelect: {
+                styleOverrides: {
+                    root: {
+                        "& .MuiSelect-select": {
+                            padding: "10px 15px",
+                        }
+                    }
+                }
+            },
+            MuiAutocomplete: {
+                styleOverrides: {
+                    root: {
+                        '& .MuiOutlinedInput-root': {
+                            padding: "7px 14px"
+                        },
+                        "& input": {
+                            padding: "3px 0 !important"
+                        }
                     }
                 }
             },

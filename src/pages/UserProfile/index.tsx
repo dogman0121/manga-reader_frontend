@@ -34,7 +34,7 @@ export default function UserProfile() {
 
     return (
         <AppContent>
-            <ProfileProvider user={user} >
+            <ProfileProvider user={user} setUser={setUser}>
                 <Box>
                     <Info />
                     <Sections />

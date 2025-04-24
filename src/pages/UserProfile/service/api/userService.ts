@@ -15,6 +15,12 @@ class UserService {
         const response = await apiClient.delete(`/users/${userId}/subscribe`, {});
         return await response.json();
     }
+
+    async updateUser(userId: number, data: FormData){
+        const response = await apiClient.sendForm(`/users/${userId}`, "PUT", data);
+
+        return await response.json();
+    }
 }
 
 const userService = new UserService();

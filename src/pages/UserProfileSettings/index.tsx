@@ -2,8 +2,16 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AppContent } from '../../layouts/app-layout/AppLayout';
+import Info from './components/Info';
+import Security from './components/Security';
+import { User } from '../../types/User';
+import userService from '../UserProfile/service/api/userService';
+import { useParams } from 'react-router-dom';
+import PageLoader from '../../components/ui/PageLoader';
+import NotFound from '../not-found/NotFound';
+import ProfileProvider from '../UserProfile/components/ProfileProvider';
 
 
 export default function UserProfileSettings() {
@@ -13,9 +21,29 @@ export default function UserProfileSettings() {
         setTab(newValue);
     };
 
+    const { userId } = useParams();
+
+    const [user, setUser] = useState<User | null>(null);
+
+    const [isLoading, setIsLoading] = useState(true);
+    
+    useEffect(() => {
+        userService.fetchUser(parseInt(userId || "", 10))
+            .then(({data}) => {
+                setUser(data as User);
+                setIsLoading(false);
+            })
+    }, [userId])
+
+    if (isLoading)
+        return <PageLoader />
+
+    if (user == null)
+        return <NotFound />
+
     return (
         <AppContent>
-            <form>
+            <ProfileProvider user={user} setUser={setUser} >
                 <TabContext
                     value={tab}
                 >
@@ -35,7 +63,7 @@ export default function UserProfileSettings() {
                             rowGap: "25px"
                         }}
                     >
-                        34534
+                        <Info />
                     </TabPanel>
                     <TabPanel
                         value="2"
@@ -43,10 +71,10 @@ export default function UserProfileSettings() {
                             p: 0,
                         }}
                     >
-                        dfdgf
+                        <Security />
                     </TabPanel>
                 </TabContext>
-            </form>
+            </ProfileProvider>
         </AppContent>
     )
 }

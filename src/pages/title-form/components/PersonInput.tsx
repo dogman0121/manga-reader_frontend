@@ -63,14 +63,6 @@ function PersonInput({name}: {name: string}) {
                 <TextField 
                     {...params}
                     placeholder="Введите название"
-                    sx={{
-                        "& .MuiOutlinedInput-root": {
-                            py: "7px"
-                        },
-                        "& input": {
-                            py: "3px !important",
-                        }
-                    }}
                     slotProps={{
                         input: {
                             ...params.InputProps,

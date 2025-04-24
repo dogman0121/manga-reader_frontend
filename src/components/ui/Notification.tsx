@@ -20,7 +20,7 @@ function Notification({
         <Snackbar open={open} autoHideDuration={6000} onClose={onClose} anchorOrigin={{vertical: "bottom", horizontal: "center"}}>
             <Box
                 sx={{
-                    bgcolor: "var(--paper-color)",
+                    bgcolor: "var(--widget1-color)",
                     p: "15px 10px",
                     display: "flex",
                     flexDirection: "row",
