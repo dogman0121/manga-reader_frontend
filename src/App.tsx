@@ -18,8 +18,9 @@ import Home from "./pages/home/Home";
 import NotFound from "./pages/not-found/NotFound";
 import TitlePage from "./pages/title/TitlePage";
 import UserProfile from "./pages/UserProfile";
-import { AppRoutes, AuthRoutes, MangaRoutes, UserRoutes } from "./routes";
+import { AppRoutes, AuthRoutes, MangaRoutes, TeamRoutes, UserRoutes } from "./routes";
 import UserProfileSettings from "./pages/UserProfileSettings";
+import TeamProfile from "./pages/TeamProfile";
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
                         <Route path={UserRoutes.ITEM} element={<UserProfile />} />
                         <Route path={UserRoutes.SETTINGS} element={<UserProfileSettings />} />
                     </Route>
+                    <Route path={TeamRoutes.ITEM} element={<TeamProfile />}/>
                     <Route path={AppRoutes.COMMENT} element={<CommentPage />} />
                     <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
                 </Route>

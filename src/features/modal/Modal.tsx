@@ -1,5 +1,9 @@
 import ModalContext from "./ModalContext";
-import { Modal as MuiModal, Box, ModalProps } from "@mui/material";
+import { Modal as MuiModal, Box, ModalProps as MuiModalProps} from "@mui/material";
+
+
+export interface ModalProps extends MuiModalProps {
+}
 
 
 function Modal({open, onClose, children, sx}: ModalProps) {
@@ -23,6 +27,7 @@ function Modal({open, onClose, children, sx}: ModalProps) {
                         position: "absolute",
                         left: "50%",
                         top: "50%",
+                        p: "0 10px",
 
                         maxWidth: "100%",
 

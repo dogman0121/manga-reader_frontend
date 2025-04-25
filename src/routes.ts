@@ -7,6 +7,7 @@ export enum AppRoutes {
     USER = '/user',
     POST = '/post',
     SETTINGS = '/settings',
+    TEAM = '/team',
     AUTH = '/auth',
     NOT_FOUND = '*'
 }
@@ -34,6 +35,9 @@ export enum CommentRoutes {
     ITEM = `${AppRoutes.COMMENT}/:commentId`,
 }
 
+export enum TeamRoutes {
+    ITEM = `${AppRoutes.TEAM}/:teamId`
+}
   
 /**
  * Заменяет параметры в пути на реальные значения

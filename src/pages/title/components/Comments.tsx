@@ -1,11 +1,11 @@
-import { Box, CircularProgress } from "@mui/material";
+import { Box } from "@mui/material";
 import CommentInput from "../../../features/comment/component/CommentInput";
 import { useContext, useEffect, useState } from "react";
 import TitleContext from "../../../context/TitleContext";
 import { commentService } from "../../../features/comment/service/api/commentService";
 import CommentList from "../../../features/comment/component/CommentList";
 import Comment from "../../../types/Comment";
-import InfiniteScroll from "react-infinite-scroll-component";
+import DynamicScroll from "../../../components/DynamicScroll";
 
 
 
@@ -43,17 +43,15 @@ function Comments() {
             }}
         >
             <CommentInput open={true} onSend={onSend}/>
-            <InfiniteScroll 
-                dataLength={8}
+            <DynamicScroll
+                dataLength={comments.length}
                 hasMore={hasMore}
                 next={() =>{
                     setPage((page) => page+1)
                 }}
-                loader={<Box sx={{display: "flex", justifyContent: "center"}}><CircularProgress /></Box>}
-                style={{overflow: "none"}}
             >
                 <CommentList comments={comments}/>
-            </InfiniteScroll>
+            </DynamicScroll>
             
         </Box>
     )
