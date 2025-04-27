@@ -22,7 +22,7 @@ class AuthService {
     }
 
     async verify(token: string) {
-        const response = await apiClient.post("/users/forgot", {token})
+        const response = await apiClient.post("/users/verify", {token})
         return await response.json();
     }
 }
