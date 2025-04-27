@@ -16,6 +16,7 @@ const Input = styled(TextField)(({ theme }) => ({
       },
     },
     '& input': {
+      '-webkit-text-fill-color': `${theme.vars.font.body1} !important`,
       color: theme.vars.font.body1
     }
 }))
