@@ -15,6 +15,9 @@ const Input = styled(TextField)(({ theme }) => ({
         borderColor: theme.vars.font.body1,
       },
     },
+    '& input': {
+      color: theme.vars.font.body1
+    }
 }))
 
 export default Input;
