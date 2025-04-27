@@ -8,6 +8,7 @@ import UserList from "./UserList";
 interface UserListModalProps extends ModalProps {
     title?: string
     users: Array<User>,
+    onScrollEnd: Function,
     length: number
 }
 
@@ -16,7 +17,8 @@ export default function UserListModal({
     title,
     users,
     length,
-    onClose
+    onClose,
+    onScrollEnd
 }: UserListModalProps) {
     const theme = useTheme();
 
@@ -61,17 +63,22 @@ export default function UserListModal({
                     id="scrollable-list"
                     sx={{
                         maxHeight: "300px",
-                        overflowY: "scroll"
+                        overflowY: "auto"
                     }}
                 >
-                    <DynamicScroll
-                        dataLength={users.length}
-                        hasMore={users.length < length}
-                        next={() => {console.log(234234)}}
-                        scrollableTarget={"scrollable-list"}
-                    >
-                        <UserList users={users}/>
-                    </DynamicScroll>
+                    {users.length > 0 ?
+                        <DynamicScroll
+                            dataLength={users.length}
+                            hasMore={users.length < length}
+                            next={onScrollEnd}
+                            scrollableTarget={"scrollable-list"}
+                        >
+                            <UserList users={users}/>
+                        </DynamicScroll>
+                        :
+                        <Typography p="10px 5px" textAlign ="center">Тут ничего нет</Typography>
+                    }
+                    
                 </Box>
 
             </Box>

@@ -21,6 +21,12 @@ class UserService {
 
         return await response.json();
     }
+
+    async getSubscribers(userId: number, page: number = 1){
+        const response = await apiClient.get(`/users/${userId}/subscribers?page=${page}`);
+
+        return await response.json();
+    }
 }
 
 const userService = new UserService();

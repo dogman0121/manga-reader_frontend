@@ -20,7 +20,9 @@ import TitlePage from "./pages/title/TitlePage";
 import UserProfile from "./pages/UserProfile";
 import { AppRoutes, AuthRoutes, MangaRoutes, TeamRoutes, UserRoutes } from "./routes";
 import UserProfileSettings from "./pages/UserProfileSettings";
-import TeamProfile from "./pages/TeamProfile";
+import TeamIndex from "./pages/teams";
+import TeamCreate from "./pages/teams/create";
+import TeamEdit from "./pages/teams/edit";
 
 
 function App() {
@@ -58,17 +60,21 @@ function App() {
                 </Route>
                 <Route element={<AppLayout />}>
                     <Route>
-                        <Route path={MangaRoutes.ITEM} element={<TitlePage />} />
+                        <Route path={MangaRoutes.INDEX} element={<TitlePage />} />
                         <Route path={MangaRoutes.ADD} element={<AddTitle/>} />
                         <Route path={MangaRoutes.EDIT} element={<UpdateTitle/>} />
                     </Route>
                     <Route index element={<Home/>} />
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />
                     <Route>
-                        <Route path={UserRoutes.ITEM} element={<UserProfile />} />
+                        <Route path={UserRoutes.INDEX} element={<UserProfile />} />
                         <Route path={UserRoutes.SETTINGS} element={<UserProfileSettings />} />
                     </Route>
-                    <Route path={TeamRoutes.ITEM} element={<TeamProfile />}/>
+                    <Route>
+                        <Route path={TeamRoutes.INDEX} element={<TeamIndex />}/>
+                        <Route path={TeamRoutes.ADD} element={<TeamCreate />}/>
+                        <Route path={TeamRoutes.EDIT} element={<TeamEdit />}/>
+                    </Route>
                     <Route path={AppRoutes.COMMENT} element={<CommentPage />} />
                     <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
                 </Route>

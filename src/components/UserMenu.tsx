@@ -229,7 +229,7 @@ function UserWidgetMobile() {
 
     return (
         <>
-            <Link to={generatePath(UserRoutes.ITEM, {userId: user.id})}>
+            <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})}>
                 <Widget
                     sx={{
                         p: "15px 12px"
@@ -281,7 +281,7 @@ function UserWidgetPC() {
 
     return (
         <>
-            <Link to={generatePath(UserRoutes.ITEM, {userId: user.id})}>
+            <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})}>
                 <Box
                     sx={{
                         display: "flex",

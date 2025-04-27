@@ -3,11 +3,11 @@ export enum AppRoutes {
     HOME = '/',
     CATALOG = '/catalog',
     MANGA = '/manga',
-    COMMENT = '/comment',
-    USER = '/user',
-    POST = '/post',
+    COMMENT = '/comments',
+    USER = '/users',
+    POST = '/posts',
     SETTINGS = '/settings',
-    TEAM = '/team',
+    TEAM = '/teams',
     AUTH = '/auth',
     NOT_FOUND = '*'
 }
@@ -22,21 +22,23 @@ export enum AuthRoutes {
 
 export enum MangaRoutes {
     ADD = `${AppRoutes.MANGA}/add`,
-    ITEM = `${AppRoutes.MANGA}/:mangaId`,
+    INDEX = `${AppRoutes.MANGA}/:mangaId`,
     EDIT = `${AppRoutes.MANGA}/:mangaId/edit`,
 }
 
 export enum UserRoutes {
-    ITEM = `${AppRoutes.USER}/:userId`,
+    INDEX = `${AppRoutes.USER}/:userId`,
     SETTINGS = `${AppRoutes.USER}/:userId/settings`
 }
 
 export enum CommentRoutes {
-    ITEM = `${AppRoutes.COMMENT}/:commentId`,
+    INDEX = `${AppRoutes.COMMENT}/:commentId`,
 }
 
 export enum TeamRoutes {
-    ITEM = `${AppRoutes.TEAM}/:teamId`
+    INDEX = `${AppRoutes.TEAM}/:teamId`,
+    ADD = `${AppRoutes.TEAM}/add`,
+    EDIT = `${AppRoutes.TEAM}/:teamId/edit`
 }
   
 /**

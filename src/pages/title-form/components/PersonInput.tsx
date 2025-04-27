@@ -12,7 +12,7 @@ function PersonInput({name}: {name: string}) {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const timerId = useRef<number>(0);
+    const timerId = useRef<undefined | ReturnType<typeof setTimeout>>(undefined);
 
     useEffect(() => {
         if (search === ""){

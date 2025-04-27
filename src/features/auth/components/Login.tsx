@@ -1,9 +1,9 @@
 import { Box, Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
 import styles from "./Auth.module.css"
 import { useState } from "react";
 import { tokenService } from "../services/tokenService";
 import { authService } from "../services/api/authService";
+import Input from "./Input";
 
 function Login({ setSection, onSuccess }: { setSection: Function, onSuccess?: Function}) {
     const [wrongForm, setWrongForm] = useState(false);
@@ -40,7 +40,7 @@ function Login({ setSection, onSuccess }: { setSection: Function, onSuccess?: Fu
             <Box
                 className={styles.Form}
             >
-                <TextField
+                <Input
                     error={wrongForm}
                     label="Login"
                     variant="outlined"
@@ -49,7 +49,7 @@ function Login({ setSection, onSuccess }: { setSection: Function, onSuccess?: Fu
                     onInput={(e) => {setLogin((e.target as HTMLInputElement).value)}}
                 />
 
-                <TextField
+                <Input
                     error={wrongForm}
                     label="Password"
                     variant="outlined"

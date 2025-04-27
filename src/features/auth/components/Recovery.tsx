@@ -1,5 +1,5 @@
-import { Box, Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
+import { Box, Button} from "@mui/material";
+import Input from "./Input";
 import styles from "./Auth.module.css"
 import { useState } from "react";
 import { authService } from "../services/api/authService";
@@ -42,7 +42,7 @@ function Recovery({ setSection }: { setSection: Function}) {
             <Box
                 className={styles.Form}
             >
-                <TextField
+                <Input
                     error={wrongForm}
                     label="Password"
                     variant="outlined"
@@ -52,7 +52,7 @@ function Recovery({ setSection }: { setSection: Function}) {
                     onInput={(e) => {setPassword((e.target as HTMLInputElement).value)}}
                 />
 
-                <TextField
+                <Input
                     error={wrongForm}
                     label="Repeat Password"
                     variant="outlined"

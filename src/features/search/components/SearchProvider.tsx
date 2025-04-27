@@ -21,7 +21,7 @@ function SearchProvider({ children }: { children: React.ReactNode }) {
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const timerId = useRef<number>(0);
+    const timerId = useRef<undefined | ReturnType<typeof setTimeout>>(undefined);
 
     const firstRender = useRef<boolean>(true);
 

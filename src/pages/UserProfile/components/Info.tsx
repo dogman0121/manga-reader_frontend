@@ -1,8 +1,66 @@
 import { Avatar, Box, Button, Typography } from "@mui/material"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import UserProfileContext from "../context/UserProfileContext"
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import ActionButtons from "./ActionButtons";
+import UserListModal from "../../../components/UserListModal";
+import userService from "../service/api/userService";
+import { User } from "../../../types/User";
+
+function Stats() {
+    const { user: profileUser } = useContext(UserProfileContext);
+
+    if (!profileUser)
+        return null;
+
+    const [subscribers, setSubscribers] = useState<Array<User>>([]);
+    const [subscribersOpened, setSubscribersOpened] = useState(false);
+    const [subscribersPage, setSubscribersPage] = useState(1);
+
+    useEffect(() => {
+        userService.getSubscribers(profileUser.id, subscribersPage)
+            .then(({data}) => {
+                setSubscribers((prev) => [...prev, ...data])
+                console.log(subscribers)
+            })
+    }, [subscribersPage])
+
+
+    return (
+        <>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: "20px"
+                }}
+            >
+                <Box
+                    onClick={()=>{setSubscribersOpened(true)}} sx={{cursor: "pointer"}}
+                >
+                    <Typography fontSize="12px" textTransform="uppercase" variant="subtitle1">Подписчики</Typography>
+                    <Typography>{profileUser.subscribers_count}</Typography>
+                </Box>
+                <Box>
+                    <Typography fontSize="12px" textTransform="uppercase" variant="subtitle1">Посты</Typography>
+                    <Typography>0</Typography>
+                </Box>
+                <Box>
+                    <Typography fontSize="12px" textTransform="uppercase" variant="subtitle1">Подписки</Typography>
+                    <Typography>0</Typography>
+                </Box>
+            </Box>
+            <UserListModal 
+                open={subscribersOpened} 
+                onClose={() => {setSubscribersOpened(false)}} 
+                users={subscribers} title="Подписчики"
+                length={profileUser.subscribers_count}
+                onScrollEnd={() => {setSubscribersPage(prev => ++prev)}}
+                children={<></>}
+            />
+        </>
+    )
+}
 
 function InfoMobile() {
     const { user: profileUser } = useContext(UserProfileContext);
@@ -40,28 +98,7 @@ function InfoMobile() {
                 >
                     <Box>
                         <Typography fontSize={"18px"}>{profileUser?.login}</Typography>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                columnGap: "20px"
-                            }}
-                        >
-                            <Box
-                                
-                            >
-                                <Typography fontSize="12px" textTransform="uppercase" variant="subtitle1">Подписчики</Typography>
-                                <Typography>0</Typography>
-                            </Box>
-                            <Box>
-                                <Typography fontSize="12px" textTransform="uppercase" variant="subtitle1">Посты</Typography>
-                                <Typography>0</Typography>
-                            </Box>
-                            <Box>
-                                <Typography fontSize="12px" textTransform="uppercase" variant="subtitle1">Подписки</Typography>
-                                <Typography>0</Typography>
-                            </Box>
-                        </Box>
+                        <Stats />
                     </Box>
                 </Box>
             </Box>
@@ -111,28 +148,7 @@ function InfoPC() {
                 >
                     <Box>
                         <Typography fontSize={"18px"}>{user?.login}</Typography>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                columnGap: "20px"
-                            }}
-                        >
-                            <Box
-                                
-                            >
-                                <Typography fontSize="14px" textTransform="uppercase" variant="subtitle1">Подписчики</Typography>
-                                <Typography>0</Typography>
-                            </Box>
-                            <Box>
-                                <Typography fontSize="14px" textTransform="uppercase" variant="subtitle1">Посты</Typography>
-                                <Typography>0</Typography>
-                            </Box>
-                            <Box>
-                                <Typography fontSize="14px" textTransform="uppercase" variant="subtitle1">Подписки</Typography>
-                                <Typography>0</Typography>
-                            </Box>
-                        </Box>
+                        <Stats />
                     </Box>
                     <ActionButtons />
                 </Box>

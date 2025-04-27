@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 function UserItem({user}: {user: User}) {
 
     return (
-        <Link to={generatePath(UserRoutes.ITEM, {userId: user.id})}>
+        <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})}>
             <Box
                 sx={{
                     display: "flex",

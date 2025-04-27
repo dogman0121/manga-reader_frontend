@@ -13,7 +13,7 @@ function MangaItem({ type, item }: {type: string, item: Title}) {
     const theme = useTheme();
 
     return (
-        <Link to={generatePath(MangaRoutes.ITEM, {mangaId: item.id})}>
+        <Link to={generatePath(MangaRoutes.INDEX, {mangaId: item.id})}>
             {type === "grid" ?
                 <Box >
                     <Poster 

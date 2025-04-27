@@ -27,8 +27,8 @@ function CommentBody() {
                 }}
             >
                 <Box>
-                    <Link to={generatePath(UserRoutes.ITEM, {userId: comment.user.id})}><Typography>{comment.user.login}</Typography></Link>
-                    <Link to={generatePath(CommentRoutes.ITEM, {commentId: comment.id})}>
+                    <Link to={generatePath(UserRoutes.INDEX, {userId: comment.user.id})}><Typography>{comment.user.login}</Typography></Link>
+                    <Link to={generatePath(CommentRoutes.INDEX, {commentId: comment.id})}>
                         <Typography 
                             variant="subtitle1"
                             lineHeight={1.2}

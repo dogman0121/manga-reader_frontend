@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box"
-import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import styles from "./Auth.module.css"
 import { useState } from "react";
 import { authService } from "../services/api/authService";
+import Input from "./Input";
 
 
 function Register({ setSection }: { setSection: Function }) {
@@ -58,7 +58,7 @@ function Register({ setSection }: { setSection: Function }) {
             <Box
                 className={styles.Form}
             >
-                <TextField
+                <Input
                     error={wrongForm !== 0}
                     label="Login"
                     variant="outlined"
@@ -66,7 +66,7 @@ function Register({ setSection }: { setSection: Function }) {
                     className={styles.Input}
                     onInput={(e) => {setLogin((e.target as HTMLInputElement).value)}}
                 />
-                <TextField
+                <Input
                     error={wrongForm !== 0}
                     label="Email"
                     variant="outlined"
@@ -75,7 +75,7 @@ function Register({ setSection }: { setSection: Function }) {
                     className={styles.Input}
                     onInput={(e) => {setEmail((e.target as HTMLInputElement).value)}}
                 />
-                <TextField
+                <Input
                     error={wrongForm !== 0}
                     label="Password"
                     variant="outlined"
@@ -84,7 +84,7 @@ function Register({ setSection }: { setSection: Function }) {
                     className={styles.Input}
                     onInput={(e) => {setPassword((e.target as HTMLInputElement).value)}}
                 />
-                <TextField
+                <Input
                     error={wrongForm !== 0}
                     label="Repeat password"
                     variant="outlined"

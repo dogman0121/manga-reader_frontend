@@ -1,8 +1,8 @@
 import { Box, Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
 import styles from "./Auth.module.css"
 import { useState } from "react";
 import { authService } from "../services/api/authService";
+import Input from "./Input";
 
 
 
@@ -22,7 +22,7 @@ function Forgot({ setSection }: { setSection: Function }) {
             <Box
                 className={styles.Form}
             >
-                <TextField
+                <Input
                     label="Email"
                     variant="outlined"
                     color="secondary"

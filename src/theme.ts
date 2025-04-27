@@ -48,9 +48,6 @@ const getTheme = (mode: "dark" | "light") => {
                                 borderRadius: "16px",
                             },
                         },
-                        "& input": {
-                            padding: "10px 15px"
-                        }
                     }
                 }
             },
