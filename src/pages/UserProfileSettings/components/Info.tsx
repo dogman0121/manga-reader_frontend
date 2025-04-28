@@ -130,7 +130,7 @@ export default function Info() {
                 aspectRatio={1}
                 width={200}
                 height={200}
-                url={imgUrl}
+                src={imgUrl}
                 open={cropperOpened}
                 onClose={() => {setCropperOpened(false)}}
                 onCrop={onCrop}

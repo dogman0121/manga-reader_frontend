@@ -49,7 +49,7 @@ function BlockInput({ onAcceptFile } : { onAcceptFile: Function }) {
                     }}    
                 >
                     <UploadFileIcon fontSize="medium"/>
-                    <Box 
+                    <Typography 
                         sx={{
                             textAlign: "center", 
                             fontSize:"15px", 
@@ -58,7 +58,7 @@ function BlockInput({ onAcceptFile } : { onAcceptFile: Function }) {
                         }}
                     >
                         Добавить<br/>файл
-                    </Box>
+                    </Typography>
                 </Typography>
             </Box>
         </Box>

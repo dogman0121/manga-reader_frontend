@@ -6,7 +6,7 @@ import "cropperjs/dist/cropper.css";
 import {v4 as uuidv4} from 'uuid';
 
 interface ImageCropperProps {
-    url: string,
+    src: string,
     width: number,
     height: number,
     aspectRatio: number,
@@ -15,7 +15,7 @@ interface ImageCropperProps {
     onCrop: Function
 }
 
-export default function ImageCropper({url, open, onClose, width, height, aspectRatio, onCrop}: ImageCropperProps) {
+export default function ImageCropper({src, open, onClose, width, height, aspectRatio, onCrop}: ImageCropperProps) {
     const cropperRef = useRef<ReactCropperElement | null>(null);
 
     const handleCrop = () => {
@@ -60,7 +60,7 @@ export default function ImageCropper({url, open, onClose, width, height, aspectR
                     cropBoxMovable={false}
                     viewMode={1}
                     dragMode="move"
-                    src={url}
+                    src={src}
                 />
                 <Button 
                     variant="contained"
