@@ -135,7 +135,7 @@ function InfoPC() {
             >
                 <Avatar
                     src={user?.avatar}
-                    sx={{width: "100px", height: "100px"}}
+                    sx={{width: "120px", height: "120px"}}
                 />
                 <Box
                     sx={{
