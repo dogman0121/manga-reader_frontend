@@ -1,9 +1,10 @@
-import { useForm, Controller, Control } from 'react-hook-form'
-import TextField from '../../../../components/ui/TextField'
+import { useForm } from 'react-hook-form'
 import { useState } from "react";
 import ImageInput from "../../../../components/ui/ImageInput";
 import ImageCropper from "../../../../components/ImageCropper";
-import { Box, Button, TextFieldProps, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import FormInput from '../../../../features/form/FormInput';
+import FormTextarea from '../../../../features/form/FormTextarea';
 
 interface InfoFormProps {
     id: number,
@@ -54,43 +55,6 @@ function PosterInput() {
         </>
     )
 }
-
-interface FormInputProps {
-    title: string, 
-    control: Control<any, any>, 
-    name: string, 
-    placeholder: string
-}
-
-function FormInput({title, control, name,  ...rest} : FormInputProps & TextFieldProps) {
-    return (
-        <Box>
-            <Typography>{title}</Typography>
-            <Controller 
-                name={name}
-                control={control}
-                render={({field}) => (
-                    <TextField
-                        {...field}
-                        fullWidth
-                        {...rest}
-                    />  
-                )}
-            />
-        </Box>
-    )
-}
-
-function FormTextarea(props: FormInputProps & TextFieldProps) {
-    return (
-        <FormInput 
-            {...props}
-            multiline
-            minRows={3}
-        />
-    )
-}
-
 
 export default function Info() {
     const {control, handleSubmit} = useForm<InfoFormProps>();

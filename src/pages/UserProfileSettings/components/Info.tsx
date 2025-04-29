@@ -1,5 +1,5 @@
-import { Box, Avatar, TextField, Button } from "@mui/material";
-import { useForm, Controller } from "react-hook-form";
+import { Box, Avatar, Button } from "@mui/material";
+import { useForm } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 import { useContext, useEffect, useState } from "react";
 import ImageCropper from "../../../components/ImageCropper";
@@ -7,6 +7,8 @@ import UserProfileContext from "../../UserProfile/context/UserProfileContext";
 import userService from "../../UserProfile/service/api/userService";
 import UserAuthContext from "../../../context/UserAuthContext";
 import Notification from "../../../components/ui/Notification";
+import FormInput from "../../../features/form/FormInput";
+import FormTextarea from "../../../features/form/FormTextarea";
 
 
 interface InfoForm {
@@ -96,32 +98,17 @@ export default function Info() {
                         width: "100%"
                     }}
                 >
-                    <Controller 
+                    <FormInput 
+                        title="Логин"
                         name="login"
+                        placeholder="Введите логин"
                         control={control}
-                        defaultValue=""
-                        render={({field}) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                placeholder="Логин"
-                            />
-                        )}
+                        fullWidth
                     />
-
-                    <Controller 
+                    <FormTextarea 
                         name="about"
                         control={control}
-                        defaultValue=""
-                        render={({field}) => (
-                            <TextField
-                                {...field}
-                                fullWidth
-                                multiline
-                                minRows={3}
-                                placeholder="О себе"
-                            />
-                        )}
+                        title="О себе"
                     />
                 </Box>
             </Box>
