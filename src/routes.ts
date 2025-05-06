@@ -26,6 +26,12 @@ export enum MangaRoutes {
     EDIT = `${AppRoutes.MANGA}/:mangaId/edit`,
 }
 
+export enum ChapterRoutes {
+    INDEX = `${MangaRoutes.INDEX}/chapters/:chapterId`,
+    ADD = `${MangaRoutes.INDEX}/chapters/add`,
+    EDIT = `${MangaRoutes.INDEX}/chapters/:chapterId/edit`
+}
+
 export enum UserRoutes {
     INDEX = `${AppRoutes.USER}/:userId`,
     SETTINGS = `${AppRoutes.USER}/:userId/settings`

@@ -1,37 +1,24 @@
-import { Box, Typography, TextField } from "@mui/material"
+import { Box } from "@mui/material"
 import { useFormContext, Controller } from "react-hook-form";
+import FormTextarea from "../../../features/form/FormTextarea";
 
 function Description() {
     const {control} = useFormContext();
 
     return (
         <Box>
-            <Typography>Описание</Typography>
-            <Box
-                sx={{
-                    mt: "5px"
-                }}
-            >
-                <Controller 
-                    name="description"
-                    control={control}
-                    defaultValue=""
-                    render={({ field }) => (
-                        <TextField 
-                            {...field}
-                            fullWidth
-                            multiline
-                            minRows={5}
-                            sx={{
-                                "& input": {
-                                    p: "12px 15px"
-                                }
-                            }}
-                            placeholder="Введите описание"
-                        />
-                    )}
-                />
-            </Box>
+            <Controller 
+                name="description"
+                control={control}
+                render={({field}) => (
+                    <FormTextarea 
+                        {...field}
+                        title="Описание"
+                        defaultValue=""
+                        placeholder="Введите описание"
+                    />
+                )}
+            />
         </Box>
     )
 }

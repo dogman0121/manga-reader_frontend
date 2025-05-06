@@ -18,11 +18,14 @@ import Home from "./pages/home/Home";
 import NotFound from "./pages/not-found/NotFound";
 import TitlePage from "./pages/title/TitlePage";
 import UserProfile from "./pages/UserProfile";
-import { AppRoutes, AuthRoutes, MangaRoutes, TeamRoutes, UserRoutes } from "./routes";
+import { AppRoutes, AuthRoutes, ChapterRoutes, MangaRoutes, TeamRoutes, UserRoutes } from "./routes";
 import UserProfileSettings from "./pages/UserProfileSettings";
 import TeamIndex from "./pages/teams";
 import TeamCreate from "./pages/teams/create";
 import TeamEdit from "./pages/teams/edit";
+import ChapterIndex from "./pages/chapters";
+import ChapterCreate from "./pages/chapters/create";
+import ChapterEdit from "./pages/chapters/edit";
 
 
 function App() {
@@ -63,6 +66,9 @@ function App() {
                         <Route path={MangaRoutes.INDEX} element={<TitlePage />} />
                         <Route path={MangaRoutes.ADD} element={<AddTitle/>} />
                         <Route path={MangaRoutes.EDIT} element={<UpdateTitle/>} />
+                        <Route path={ChapterRoutes.INDEX} element={<ChapterIndex/>} />
+                        <Route path={ChapterRoutes.ADD} element={<ChapterCreate/>} />
+                        <Route path={ChapterRoutes.EDIT} element={<ChapterEdit/>} />
                     </Route>
                     <Route index element={<Home/>} />
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />

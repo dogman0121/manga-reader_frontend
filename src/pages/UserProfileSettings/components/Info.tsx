@@ -1,5 +1,5 @@
 import { Box, Avatar, Button } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 import { useContext, useEffect, useState } from "react";
 import ImageCropper from "../../../components/ImageCropper";
@@ -98,17 +98,27 @@ export default function Info() {
                         width: "100%"
                     }}
                 >
-                    <FormInput 
-                        title="Логин"
+                    <Controller 
                         name="login"
-                        placeholder="Введите логин"
                         control={control}
-                        fullWidth
+                        render={({field}) => (
+                            <FormInput 
+                                {...field}
+                                title="Логин"
+                                placeholder="Введите логин"
+                                fullWidth
+                            />
+                        )}
                     />
-                    <FormTextarea 
+                    <Controller 
                         name="about"
                         control={control}
-                        title="О себе"
+                        render={({field}) => (
+                            <FormTextarea
+                                {...field} 
+                                title="О себе"
+                            />
+                        )}
                     />
                 </Box>
             </Box>

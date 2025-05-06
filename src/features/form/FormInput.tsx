@@ -1,39 +1,42 @@
-import { Control, Controller } from "react-hook-form";
-import { Box, Typography, TextField, TextFieldProps } from "@mui/material";
+import { Box, Typography, TextField, TextFieldProps, styled } from "@mui/material";
 
+
+const MyTextField = styled(TextField)({
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderRadius: "12px",
+        },
+    },
+    "& input": {
+        padding: "8px 15px"
+    },
+})
 
 export interface FormInputProps {
-    title: string, 
-    control: Control<any, any>, 
-    name: string, 
+    title?: string, 
 }
 
-export default function FormInput({title, control, name,  sx, ...rest} : FormInputProps & TextFieldProps) {
+export default function FormInput({title, name, className, sx, ...rest} : FormInputProps & TextFieldProps) {
+
     return (
-        <Box>
-            <Typography>{title}</Typography>
-            <Controller 
-                name={name}
-                control={control}
-                render={({field}) => (
-                    <TextField
-                        {...field}
-                        fullWidth
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderRadius: "16px",
-                                },
-                            },
-                            "& input": {
-                                padding: "10px 15px"
-                            },
-                            ...sx
-                        }}
-                        {...rest}
-                    />  
-                )}
-            />
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: title ? "5px" : undefined,
+                ...sx
+            }}
+        >
+            {title && (
+                <Typography>{title}</Typography>
+            )}
+            <MyTextField
+                {...rest}
+                fullWidth
+                sx={{
+                    ...sx
+                }}
+            />  
         </Box>
     )
 }

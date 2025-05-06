@@ -1,13 +1,13 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Chapter from "../../../types/Chapter";
-import { User } from "../../../types/User";
 import TitleContext from "../../../context/TitleContext";
 import { Link } from "react-router-dom"
-import Team from "../../../types/Team";
 import { Box, Typography } from "@mui/material";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
-import Poster from "../../../components/ui/Poster";
+import Translation from "../../../types/Translation";
+import { ListItem } from "../../../components/ListItem";
+import { chapterService } from "../../../modules/chapters/service/api/chapterService";
 
 
 function ChapterItem({ chapter}: { chapter: Chapter}) {
@@ -29,23 +29,7 @@ function ChapterItem({ chapter}: { chapter: Chapter}) {
 }
 
 
-function ChaptersList() {
-    const chapters: Array<Chapter> = [
-        {
-            id: 1,
-            tome: 1,
-            chapter: 1,
-            title: 1,
-            team: 1,
-            date: "123",
-            creator: {
-                id: 1,
-                login: "asds",
-                email: "dfsdf",
-            } as User
-        }
-    ]
-
+function ChaptersList({chapters}: {chapters: Array<Chapter>}) {
     return (
         <Box mt={"10px"}>
             { chapters.map((chapter) => <ChapterItem key={chapter.id} chapter={chapter}/>) }
@@ -53,7 +37,7 @@ function ChaptersList() {
     )
 }
 
-function TeamItem({ team }: { team: Team }) {
+function Translator({translation, onChoose}: {translation: Translation, onChoose: Function}) {
     return (
         <Box
             sx={{
@@ -61,35 +45,27 @@ function TeamItem({ team }: { team: Team }) {
                 flexDirection: "row",
 
                 padding: "6px 8px",
-                backgroundColor: "var(--dropdown-background)",
 
-                borderRadius: "6px"
+                borderRadius: "6px",
+                border: "1px solid #D9D9D9"
             }}
-        >
-            <Poster width="30px" src={team.poster} />
-            <Box
-                sx={{
-                    margin: "auto 0",
-                    padding: "0 20px"
-                }}
-            >
-                Team
-            </Box>
-        </Box>
-    )
-}
 
-function TeamList({ teams }: {teams: Array<Team>}) {
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "row",
-
-                columnGap: "15px"
-            }}
+            onClick={() => {onChoose()}}
         >
-            {teams.map((team) => <TeamItem team={team}/>)}
+            {translation.translator_type == "user" && (
+                <ListItem 
+                    img={translation.translator.avatar}
+                    title={translation.translator.login}
+                    subtitle={`Кол-во глав: ${translation.chapters_count}`}
+                />
+            )}
+            {translation.translator_type == "team" && (
+                <ListItem 
+                    img={translation.translator.poster}
+                    title={translation.translator.name}
+                    subtitle={`Кол-во глав: ${translation.chapters_count}`}
+                />
+            )}
         </Box>
     )
 }
@@ -97,7 +73,7 @@ function TeamList({ teams }: {teams: Array<Team>}) {
 function Chapters() {
     const { title } = useContext(TitleContext);
 
-    if (!title || !title.teams)
+    if (!title || !title.translations?.length)
         return (
             <Box
                 sx={{
@@ -110,6 +86,16 @@ function Chapters() {
                 <Typography fontSize={"24px"}>Глав нет!</Typography>
             </Box>
         );
+
+    const [translation, setTranslation] = useState<Translation>(title.translations[0]);
+    const [chapters, setChapters] = useState<Array<Chapter>>([]);
+
+    useEffect(() => {
+        chapterService.getTranslationChapters(translation.id)
+            .then(({data}) => {
+                setChapters(data);
+            })
+    }, [translation])
 
     return (
         <>
@@ -126,8 +112,23 @@ function Chapters() {
                     <SwapVertRoundedIcon/>
                 </Box>
             </Box>
-            <TeamList teams = {title.teams}/>
-            <ChaptersList/>
+            <Box
+                sx={{
+                    display: "flex",
+
+                    columnGap: "10px",
+                    flexDirection: "row",
+                }}
+            >
+                {title.translations.map(translation => (
+                    <Translator 
+                        key={translation.translator.id} 
+                        translation={translation} 
+                        onChoose={() => {setTranslation(translation)}}
+                    />
+                ))}
+            </Box>
+            <ChaptersList chapters={chapters}/>
         </>
     )
 }

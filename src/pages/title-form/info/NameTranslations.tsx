@@ -1,10 +1,10 @@
 import { Box, Typography, MenuItem, Button } from "@mui/material";
-import FormSelect from "../components/FormSelect";
 import { useFormContext, Controller } from "react-hook-form";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
-import FormInput from "../components/FormInput";
+import FormInput from "../../../features/form/FormInput";
+import FormSelect from "../../../features/form/FormSelect";
 
 
 const langOptions = [
@@ -50,18 +50,20 @@ function NameTranslationsForm() {
                     flexWrap: device === DEVICE.MOBILE ? "wrap" : undefined,
                     flexDirection: "row",
                     columnGap: "5px",
-                    rowGap: "5px"
+                    rowGap: "5px",
                 }}
             >
                 <Controller 
                     name="nameTranslation"
                     control={control}
-                    defaultValue=""
-                    render={({ field }) => (
+                    render={({field}) => (
                         <FormInput
                             {...field}
-                            fullWidth
+                            defaultValue=""
                             placeholder="Введите название"
+                            sx={{
+                                width: "100%"
+                            }}
                         />
                     )}
                 />
@@ -72,9 +74,8 @@ function NameTranslationsForm() {
                     render={({field}) => (
                         <FormSelect
                             {...field}
-                        > 
-                            {langOptions.map((opt) => <MenuItem key={opt.id} value={opt.id}>{opt.name}</MenuItem>)}  
-
+                        >
+                            {langOptions.map((opt) => <MenuItem key={opt.id} value={opt.id}>{opt.name}</MenuItem>)}
                         </FormSelect>
                     )}
                 />

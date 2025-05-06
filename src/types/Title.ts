@@ -2,6 +2,7 @@ import Genre from "./Genre";
 import Person from "./Person";
 import Poster from "./Poster";
 import Team from "./Team";
+import Translation from "./Translation";
 import { User } from "./User";
 
 export const EMPTY_TITLE : Title = {
@@ -41,7 +42,7 @@ export default interface Title {
     authors?: Array<Person>,
     artists?: Array<Person>,
     publishers?: Array<Person>,
-    translators?: Array<Object>,
+    translations?: Array<Translation>,
     creator?: User,
     created_at?: Date,
     chapters?: Array<Object>,

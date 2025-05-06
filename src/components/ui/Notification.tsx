@@ -1,4 +1,4 @@
-import { Snackbar, Box, SnackbarCloseReason } from "@mui/material"
+import { Snackbar, Box, SnackbarCloseReason, Paper } from "@mui/material"
 import { SyntheticEvent } from "react"
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -18,9 +18,9 @@ function Notification({
     }){
     return (
         <Snackbar open={open} autoHideDuration={6000} onClose={onClose} anchorOrigin={{vertical: "bottom", horizontal: "center"}}>
-            <Box
+            <Paper
                 sx={{
-                    bgcolor: "var(--widget1-color)",
+                    //bgcolor: "var(--widget1-color)",
                     p: "15px 10px",
                     display: "flex",
                     flexDirection: "row",
@@ -40,7 +40,7 @@ function Notification({
                 <Box>
                     { message }
                 </Box>
-            </Box>
+            </Paper>
         </Snackbar>
     )
 }

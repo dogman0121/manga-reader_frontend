@@ -1,6 +1,6 @@
-import { Box, Typography, MenuItem } from "@mui/material"
+import { Box, MenuItem } from "@mui/material"
 import { useFormContext, Controller } from "react-hook-form";
-import FormSelect from "../components/FormSelect";
+import FormSelect from "../../../features/form/FormSelect";
 
 
 function Status() {
@@ -8,25 +8,22 @@ function Status() {
 
     return (
         <Box>
-            <Typography>Статус</Typography>
-            <Controller
+            <Controller 
                 control={control}
                 name="status"
                 defaultValue="1"
-                render={({ field }) => (
+                render={({field}) => (
                     <FormSelect
-                        sx={{
-                            mt: " 5px"
-                        }}
-                        fullWidth
                         {...field}
+                        title="Статус"
+                        fullWidth
                     >
                         <MenuItem value="1">не начат</MenuItem>
                         <MenuItem value="2">выпускается</MenuItem>
                         <MenuItem value="3">заброшен</MenuItem>
                         <MenuItem value="4">завершен</MenuItem>
                     </FormSelect>
-                )} 
+                )}
             />
         </Box>
     )

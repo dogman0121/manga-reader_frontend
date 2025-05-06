@@ -1,13 +1,13 @@
 import { Box, Typography } from "@mui/material"
 import { useFormContext, Controller } from "react-hook-form";
-import FormInput from "../components/FormInput";
+import FormInput from "../../../features/form/FormInput";
 
 function Name(){
     const {formState:{errors}, control} = useFormContext();
 
     return (
         <Box>
-            <Typography>Название (на русском)</Typography>
+            <Typography></Typography>
             <Box
                 sx={{
                     mt: "5px"
@@ -16,13 +16,12 @@ function Name(){
                 <Controller 
                     name="name"
                     control={control}
-                    rules={{required: true}}
-                    defaultValue=""
-                    render={({ field, fieldState:{error} }) => (
-                        <FormInput 
+                    render={({field}) => (
+                        <FormInput
                             {...field}
+                            title="Название (на русском)"
+                            defaultValue=""
                             fullWidth
-                            error={error ? true : false}
                             placeholder="Введите название"
                         />
                     )}

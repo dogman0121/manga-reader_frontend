@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { useState } from "react";
 import ImageInput from "../../../../components/ui/ImageInput";
 import ImageCropper from "../../../../components/ImageCropper";
@@ -81,17 +81,27 @@ export default function Info() {
                         rowGap: "5px"
                     }}
                 >
-                    <FormInput
-                        title="Название"
-                        placeholder='Введите название'
+                    <Controller
                         name='name' 
-                        control={control}
+                        control={control} 
+                        render={({field}) => (
+                            <FormInput
+                                {...field}
+                                title="Название"
+                                placeholder='Введите название'
+                            />
+                        )}
                     />
-                    <FormTextarea
+                    <Controller
                         name="about"
-                        title="Описание"
-                        placeholder='Описание здесь'
-                        control={control}
+                        control={control} 
+                        render={({field}) => (
+                            <FormTextarea
+                                {...field}
+                                title="Описание"
+                                placeholder='Описание здесь'
+                            />
+                        )}
                     />
                 </Box>
             </Box>
@@ -103,23 +113,38 @@ export default function Info() {
                     mt: "15px"
                 }}
             >
-                <FormInput
-                    title="Ссылка вконтакте"
-                    placeholder='Введите название'
+                <Controller
                     name='vk_link' 
-                    control={control}
+                    control={control} 
+                    render={({field}) => (
+                        <FormInput
+                            {...field}
+                            title="Ссылка вконтакте"
+                            placeholder='Введите название' 
+                        />
+                    )}
                 />
-                <FormInput
-                    title="Ссылка телеграм"
-                    placeholder='Введите название'
+                <Controller
                     name='tg_link' 
-                    control={control}
+                    control={control} 
+                    render={({field}) => (
+                        <FormInput
+                            {...field}
+                            title="Ссылка телеграм"
+                            placeholder='Введите название'
+                        />
+                    )}
                 />
-                <FormInput
-                    title="Ссылка дискорд"
-                    placeholder='Введите название'
-                    name='discord_link' 
-                    control={control}
+                <Controller
+                    name='discord_link'  
+                    control={control} 
+                    render={({field}) => (
+                        <FormInput
+                            {...field}
+                            title="Ссылка дискорд"
+                            placeholder='Введите название'
+                        />
+                    )}
                 />
             </Box>
             <Button variant="contained" sx={{mt: "20px"}} type="submit">Отправить</Button>

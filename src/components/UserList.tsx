@@ -1,8 +1,9 @@
-import { Avatar, Box, SxProps, Typography } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 import { User } from "../types/User";
 import { generatePath, UserRoutes } from "../routes";
 import { Link } from "react-router-dom";
 import React from "react";
+import { ListItem } from "./ListItem";
 
 type UserItemProps = {
     user: User,
@@ -10,54 +11,23 @@ type UserItemProps = {
     sx?: SxProps
 }
 
-function UserItem({user, endAdornment, sx}: UserItemProps) {
+export function UserItem({user, endAdornment}: UserItemProps) {
 
     return (
         <Box
             sx={{
-                display: "flex",
+                display: 'flex',
                 flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                ...sx
+                justifyContent: "center",
+                alignItems: "center"
             }}
         >
             <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})}>
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        columnGap: "10px",
-                        alignItems: "center",
-                        borderRadius: "6px",
-                    }}
-                >
-                    <Avatar 
-                        sx={{
-                            width: "40px",
-                            height: "40px"
-                        }}
-                        src={user.avatar}
-                    />
-                    <Box>
-                        <Typography fontSize={"16px"}>
-                            {user.login}
-                        </Typography>
-                        <Typography 
-                            variant="subtitle1" 
-                            sx={{
-                                lineHeight: "1.4",
-                                maxWidth: "300px",
-                                whiteSpace: "nowrap",
-                                wordBreak: "break-all",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis"
-                            }}
-                        >
-                            {user.about}
-                        </Typography>
-                    </Box>
-                </Box>
+                <ListItem 
+                    title={user.login}
+                    subtitle={user.about}
+                    img={user.avatar}
+                />
             </Link>
             {endAdornment}
         </Box>

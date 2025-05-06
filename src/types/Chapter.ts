@@ -1,3 +1,4 @@
+import Team from "./Team";
 import { User } from "./User"
 
 interface Chapter {
@@ -6,7 +7,7 @@ interface Chapter {
     tome: number,
     chapter: number,
     title: number,
-    team: number,
+    team: Team,
     date: string
     creator: User
 }
