@@ -1,18 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import Chapter from "../../../types/Chapter";
 import TitleContext from "../../../context/TitleContext";
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Box, Typography } from "@mui/material";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
 import Translation from "../../../types/Translation";
 import { ListItem } from "../../../components/ListItem";
 import { chapterService } from "../../../modules/chapters/service/api/chapterService";
+import { ChapterRoutes, generatePath } from "../../../routes";
 
 
 function ChapterItem({ chapter}: { chapter: Chapter}) {
+    const {mangaId} = useParams()
+
     return (
-        <Link to={`/chapters/${chapter.id}`}>
+        <Link to={generatePath(ChapterRoutes.INDEX, {mangaId: mangaId || "", chapterId: chapter.id})}>
             <Box
                 sx={{
                     mt: "5px",

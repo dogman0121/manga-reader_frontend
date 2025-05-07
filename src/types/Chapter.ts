@@ -1,3 +1,4 @@
+import Page from "./Page";
 import Team from "./Team";
 import { User } from "./User"
 
@@ -9,7 +10,8 @@ interface Chapter {
     title: number,
     team: Team,
     date: string
-    creator: User
+    creator: User,
+    pages: Array<Page>
 }
 
 export default Chapter;
