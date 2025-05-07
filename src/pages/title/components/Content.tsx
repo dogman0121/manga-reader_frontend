@@ -103,7 +103,7 @@ function ContentMobile(){
                         <Similar />
                     </Box>
                 </TabPanel>
-                <TabPanel value="2"><Chapters /></TabPanel>
+                <TabPanel value="2" sx={{p:"20px 5px"}}><Chapters /></TabPanel>
                 <TabPanel value="3" sx={{p:"20px 5px"}}><Comments /></TabPanel>
             </TabContext>
         </>
