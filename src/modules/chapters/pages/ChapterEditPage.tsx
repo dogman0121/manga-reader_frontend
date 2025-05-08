@@ -72,6 +72,7 @@ export default function ChapterEditPage(){
 
     return (
         <AppContent>
+            <h1>Редактирование главы</h1>
             <TabContext
                 value={tab}
             >

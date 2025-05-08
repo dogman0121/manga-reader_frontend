@@ -22,6 +22,7 @@ export default function ChapterCreatePage() {
 
     return (
         <AppContent>
+            <h1>Добавление главы</h1>
             <TabContext
                 value={tab}
             >
