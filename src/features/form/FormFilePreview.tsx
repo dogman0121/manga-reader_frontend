@@ -36,7 +36,17 @@ export default function FormFilePreviewDraggable({ onDelete, file } : {onDelete:
                 position: "relative",
             }}
         >
-            <Poster src={file.src} width="100%"/>
+            <Box
+                sx={{
+                    aspectRatio: "2/3",
+                    width: "100%",
+                    borderRadius: "3% / 2%",
+                    backgroundImage: `url(${file.src})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundPositionY: "center",
+                    backgroundSize: "100% auto",
+                }}
+            ></Box>
             <Box
                 sx={{
                     position: "absolute",
