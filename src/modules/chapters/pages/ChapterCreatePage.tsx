@@ -6,6 +6,7 @@ import { useState } from "react";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import SingleChapter from '../components/form/SingleChapterForm';
 import { chapterService } from '../service/api/chapterService';
+import { Typography } from '@mui/material';
 
 
 export default function ChapterCreatePage() {
@@ -22,7 +23,7 @@ export default function ChapterCreatePage() {
 
     return (
         <AppContent>
-            <h1>Добавление главы</h1>
+            <Typography fontSize={"40px"} lineHeight={1}>Добавление главы</Typography>
             <TabContext
                 value={tab}
             >
