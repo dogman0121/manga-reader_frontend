@@ -23,7 +23,7 @@ export default function ChapterCreatePage() {
 
     return (
         <AppContent>
-            <Typography fontSize={"40px"} lineHeight={1}>Добавление главы</Typography>
+            <Typography fontSize={"40px"} lineHeight={1} mt={"30px"}>Добавление главы</Typography>
             <TabContext
                 value={tab}
             >

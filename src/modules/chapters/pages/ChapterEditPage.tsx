@@ -72,7 +72,7 @@ export default function ChapterEditPage(){
 
     return (
         <AppContent>
-            <Typography fontSize={"40px"} lineHeight={1}>Редактирование главы</Typography>
+            <Typography fontSize={"40px"} lineHeight={1} mt={"30px"}>Редактирование главы</Typography>
             <TabContext
                 value={tab}
             >
