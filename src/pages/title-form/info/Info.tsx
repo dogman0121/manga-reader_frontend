@@ -90,7 +90,7 @@ function InfoPC() {
 }
 
 function Info() {
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     return (
         <>

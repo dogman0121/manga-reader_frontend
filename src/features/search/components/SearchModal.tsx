@@ -17,7 +17,7 @@ function SearchModal({open, onClose}: {open: boolean, onClose: Function}) {
         bgcolor: 'background.paper',
         boxShadow: 24,
         border: "none",
-        borderRadius: "20px",
+        borderRadius: "12px",
         padding: "12px 12px",
         width: "600px",
         "&:focus": {
@@ -30,7 +30,7 @@ function SearchModal({open, onClose}: {open: boolean, onClose: Function}) {
             open={open}
             onClose={handleClose}
         >
-            <SearchProvider>
+            <SearchProvider emptyQuery={false}>
                 <Box
                     sx={{ ...styles }}
                 >

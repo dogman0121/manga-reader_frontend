@@ -9,7 +9,7 @@ interface SearchContextProps {
     setResults: Function,
     section: string,
     setSection: Function,
-    filters: Map<string, Array<{id: number, name: string}>>,
+    filters: Map<string, string[]>,
     setFilters: Function,
     isLoading: boolean
 }
@@ -21,7 +21,7 @@ const SearchContext = createContext<SearchContextProps>({
     setResults: () => {},
     section: SECTIONS.MANGA,
     setSection: () => {},
-    filters: new Map<string, Array<{id: number, name: string}>>(),
+    filters: new Map<string, string[]>(),
     setFilters: () => {},
     isLoading: false
 });

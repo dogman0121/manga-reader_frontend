@@ -21,7 +21,7 @@ const langOptions = [
 function NameTranslationsForm() {
     const {watch, control, setValue} = useFormContext();
 
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     const handleAddNameTranslation = () => {
         const name = watch("nameTranslation")

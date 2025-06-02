@@ -1,9 +1,32 @@
-import { BoxProps, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { BoxProps, styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import type {} from '@mui/material/themeCssVarsAugmentation';
-import { useTheme } from "@mui/material/styles";
 import { SECTIONS } from "./SearchProvider";
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
+
+const SectionToggleGroup = styled(ToggleButtonGroup)(({theme}) => ({
+    columnGap: theme.spacing(1),
+}))
+
+const SectionToggleButton = styled(ToggleButton)(({theme}) => ({
+    padding: `3px ${theme.spacing(2)}`,
+    textTransform: "none",
+    border: "none",
+    borderRadius: "6px",
+    backgroundColor: theme.palette.background.paper,
+
+    "&.MuiToggleButtonGroup-firstButton": {
+        borderRight: "inherit",
+        borderTopRightRadius: "inherit",
+        borderBottomRightRadius:"inherit",
+    },
+
+    "&.MuiToggleButtonGroup-lastButton": {
+        borderLeft: "inherit",
+        borderTopLeftRadius: "inherit",
+        borderBottomLeftRadius: "inherit",
+    }
+}))
 
 function SearchSectionSelector({ sx }: BoxProps) {
     const { section, setSection } = useContext(SearchContext);
@@ -12,30 +35,18 @@ function SearchSectionSelector({ sx }: BoxProps) {
         setSection(newValue);
     }
 
-    const theme = useTheme();
-
     return (
-        <ToggleButtonGroup
+        <SectionToggleGroup
             value={section}
             onChange={handleChoose}
             exclusive
             sx={{
-                "& .MuiToggleButton-root": {
-                    p: "3px 10px"
-                },
-                "& .Mui-selected": {
-                    bgcolor: theme.vars.palette.primary.main,
-                    color: "#000000",
-                    "&:hover": {
-                        bgcolor: `rgba(${theme.vars.palette.primary.mainChannel} / 0.75)`,
-                    }
-                },
                 ...sx
             }}
         >
-            <ToggleButton value={SECTIONS.MANGA}>манга</ToggleButton>
-            <ToggleButton value={SECTIONS.TEAM}>команды</ToggleButton>
-        </ToggleButtonGroup>
+            <SectionToggleButton value={SECTIONS.MANGA}>манга</SectionToggleButton>
+            <SectionToggleButton value={SECTIONS.TEAM}>команды</SectionToggleButton>
+        </SectionToggleGroup>
     )
 }
 

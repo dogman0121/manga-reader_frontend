@@ -20,12 +20,12 @@ function MangaItem({ item }: { item: Title }) {
                     flexDirection: "row",
                     p: "6px 10px",
                     borderRadius: "6px",
-                    bgcolor: theme.palette.customBackgrounds?.widget2
+                    bgcolor: theme.palette.customBackgrounds.widget1
                 }}
             >
                 <Poster 
                     src={item.main_poster?.thumbnail || ""}
-                    width="55px"
+                    width="50px"
                 />
                 <Box
                     sx={{

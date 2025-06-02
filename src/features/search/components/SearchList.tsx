@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { Children, useContext } from "react";
 import SearchContext from "../context/SearchContext";
 import { Box, CircularProgress, SxProps } from "@mui/material";
 
@@ -10,11 +10,11 @@ function SearchList({ sx, children }: {sx?: SxProps, children: React.ReactNode})
         return (
             <Box
                 sx={{
+                    width: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    p: "50px 0",
-                    ...sx
+                    p: "50px 0"
                 }}
             >
                 <CircularProgress />
@@ -25,11 +25,11 @@ function SearchList({ sx, children }: {sx?: SxProps, children: React.ReactNode})
         return (
             <Box
                 sx={{
+                    width: "100%",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    p: "50px 0",
-                    ...sx
+                    p: "50px 0"
                 }}
             >
                 По запросу {query} ничего не найдено.
@@ -40,7 +40,7 @@ function SearchList({ sx, children }: {sx?: SxProps, children: React.ReactNode})
         <Box
             sx={{...sx}}
         >
-            {children}
+            {Children.map(children, (child) => child)}
         </Box>
     )
 }

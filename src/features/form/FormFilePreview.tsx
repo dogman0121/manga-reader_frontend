@@ -7,7 +7,6 @@ import {
 
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
-import Poster from "../../components/ui/Poster";
 import FormFile from "./types/File";
 
 

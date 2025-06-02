@@ -11,12 +11,12 @@ export default function MobileDrawer({open, onClose, anchor, children, sx}: Draw
                 open={open}
                 onClose={onClose}
                 anchor={anchor}
+                elevation={0}
             >
                 <Box
                     sx={{
                         width: "75vw",
                         height: "100%",
-                        bgcolor: "var(--widget3-color)",
                         ...sx
                     }}
                 >

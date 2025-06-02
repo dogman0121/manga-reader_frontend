@@ -159,7 +159,7 @@ function InfoPC() {
 }
 
 export default function Info() {
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     return (
         <>

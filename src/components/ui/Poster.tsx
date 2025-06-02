@@ -5,15 +5,14 @@ function Poster({src, width}: {src: string, width?: string}){
         <Box
             sx={{
                 width: width || "100%",
-                borderRadius: "3% / 2%",
             }}
         >
             <img
                 src={src}
                 style={{
                     aspectRatio: "2/3",
+                    borderRadius: "3% / 2%",
                     width: "100%",
-                    height: "100%"
                 }} 
             />
         </Box>

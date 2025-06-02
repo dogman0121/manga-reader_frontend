@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Children } from "react";
 import SearchContext from "../context/SearchContext";
 import { searchService } from "../services/api/searchService";
 import Title from "../../../types/Title";
@@ -10,26 +10,26 @@ export enum SECTIONS {
 
 }
 
-function SearchProvider({ children }: { children: React.ReactNode }) {
+function SearchProvider({ children, emptyQuery}: { children: React.ReactNode, emptyQuery: boolean }) {
     const [query, setQuery] = useState<string>("");
 
     const [section, setSection] = useState<SECTIONS>(SECTIONS.MANGA);
 
     const [results, setResults] = useState<Array<Title>>([]);
 
-    const [filters, setFilters] = useState<Map<string, Array<{id: number, name: string}>>>(new Map<string, Array<{id: number, name: string}>>());
+    const [filters, setFilters] = useState<Map<string, string[]>>(new Map<string, string[]>());
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const timerId = useRef<undefined | ReturnType<typeof setTimeout>>(undefined);
 
-    const firstRender = useRef<boolean>(true);
+    // const firstRender = useRef<boolean>(true);
 
     useEffect(() => {
-        if (firstRender.current)
-            return () => {firstRender.current = false};
+        // if (firstRender.current)
+        //     return () => {firstRender.current = false};
 
-        if (query === ""){
+        if (!emptyQuery && query === ""){
             setIsLoading(false);
             setResults([]);
             return () => {}
@@ -38,9 +38,9 @@ function SearchProvider({ children }: { children: React.ReactNode }) {
         setIsLoading(true);
         
         timerId.current = setTimeout(async () => {
-            const response = await searchService.search(query, section, filters);
+            const {data} = await searchService.search(query, section, filters);
 
-            setResults(await response.json());
+            setResults(data || []);
 
             setIsLoading(false);
         }, 500);
@@ -64,7 +64,7 @@ function SearchProvider({ children }: { children: React.ReactNode }) {
                 isLoading: isLoading
             }}
         >
-            { children }
+            { Children.map(children, (child) => child) }
         </SearchContext.Provider>
     )
 }

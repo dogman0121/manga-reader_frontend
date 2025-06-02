@@ -1,13 +1,14 @@
 import { apiClient } from "../../../../utils/apiClient";
 
 class SearchService {    
-    async search(query: string, section: string, filters?: Map<string, Array<{id: number, name: string}>>) {
+    async search(query: string, section: string, filters?: Map<string, string[]>) {
         const params = this.compileParams(query, section, filters);
         
-        return await apiClient.get("/search?" + new URLSearchParams(params).toString())
+        const response = await apiClient.get("/search?" + new URLSearchParams(params).toString())
+        return await response.json();
     }
 
-    compileParams(query: string, section: string, filters?: Map<string, Array<{id: number, name: string}>>) {
+    compileParams(query: string, section: string, filters?: Map<string, string[]>) {
         const params = new URLSearchParams();
 
         if (query) params.set("query", query);
@@ -16,7 +17,7 @@ class SearchService {
         
         filters?.forEach((value, key) => {
             value.forEach((option) => {
-                params.append(key, option.id.toString())
+                params.append(key, option);
             })
         })
 
@@ -28,7 +29,7 @@ class SearchService {
 
         let section = "manga";
 
-        let filters = new Map<string, Array<{id: number, name: string}>>();
+        let filters = new Map<string, string[]>();
 
         for (let [name, val] of params.entries()){
             if (name == "query")
@@ -37,7 +38,7 @@ class SearchService {
                 section = val;
             else {
                 const lst = filters.get(name) || [];
-                lst.push({id: parseInt(val || ""), name: ""})
+                lst.push(val)
 
                 filters.set(name, lst);
             }

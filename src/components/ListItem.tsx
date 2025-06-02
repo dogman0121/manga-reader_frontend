@@ -25,7 +25,7 @@ export function ListItem({img, title, subtitle}: ListItemProps) {
                 src={img}
             />
             <Box>
-                <Typography fontSize={"16px"}>
+                <Typography fontSize={"14px"}>
                     {title}
                 </Typography>
                 {subtitle && (
@@ -33,6 +33,7 @@ export function ListItem({img, title, subtitle}: ListItemProps) {
                         variant="subtitle1" 
                         sx={{
                             lineHeight: "1.4",
+                            fontSize: "12px",
                             maxWidth: "300px",
                             whiteSpace: "nowrap",
                             wordBreak: "break-all",

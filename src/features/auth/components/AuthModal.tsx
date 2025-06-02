@@ -10,7 +10,7 @@ import MobileModal from "../../../components/ui/MobileModal";
 function AuthModal({open, onClose}: {open: boolean, onClose: Function}) {
     const [section, setSection] = useState("login");
 
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     const {setUser} = useContext(UserContext);
 

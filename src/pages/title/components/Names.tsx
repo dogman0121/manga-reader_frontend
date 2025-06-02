@@ -7,7 +7,7 @@ import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 function Names({sx}: {sx?: SxProps}) {
     const {title} = useContext(TitleContext);
 
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     return (
         <Box

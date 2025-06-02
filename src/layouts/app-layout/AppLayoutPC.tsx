@@ -10,7 +10,7 @@ import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import ThemeContext from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
 import SearchModal from "../../features/search/components/SearchModal";
-import { UserMenuPopover } from "../../components/UserMenu";
+import { UserMenuPopover } from "../../features/user-menu/UserMenu";
 import { AuthContext } from "../../features/auth/context/AuthContext";
 import Blur from "../../components/Blur";
 import { useTheme } from "@mui/material/styles";
@@ -22,7 +22,7 @@ export function ContentPC({children}: {children: React.ReactNode}) {
     return (
         <Box
             sx={{
-                p: "20px",
+                p: "35px 20px 15px",
                 maxWidth: "1240px",
 
                 margin: "0 auto",
@@ -33,7 +33,7 @@ export function ContentPC({children}: {children: React.ReactNode}) {
     )
 }
 
-function Content({children}: {children: React.ReactNode}) {
+export function Content({children}: {children: React.ReactNode}) {
     return (
         <Box
             sx={{
@@ -194,7 +194,7 @@ function AppHeader() {
 }
 
 function AppFooter() {
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     const theme = useTheme();
 

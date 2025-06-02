@@ -27,7 +27,7 @@ function RightSide() {
         setSection(newValue);
     };
 
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     if (device === DEVICE.MOBILE)
         return null;

@@ -5,7 +5,7 @@ import {ContentPC} from "./AppLayoutPC";
 import { ContentMobile } from "./AppLayoutMobile";
 
 export function AppContent({children}: {children: React.ReactNode}) {
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     return (
         <>
@@ -19,7 +19,7 @@ export function AppContent({children}: {children: React.ReactNode}) {
 }
 
 function AppLayout() {
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
     
     return (
         <>

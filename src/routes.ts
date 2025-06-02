@@ -2,7 +2,7 @@
 export enum AppRoutes {
     HOME = '/',
     CATALOG = '/catalog',
-    MANGA = '/manga',
+    TITLE = '/manga',
     COMMENT = '/comments',
     USER = '/users',
     POST = '/posts',
@@ -20,16 +20,16 @@ export enum AuthRoutes {
     FORGOT = `${AppRoutes.AUTH}/forgot`
 }
 
-export enum MangaRoutes {
-    ADD = `${AppRoutes.MANGA}/add`,
-    INDEX = `${AppRoutes.MANGA}/:mangaId`,
-    EDIT = `${AppRoutes.MANGA}/:mangaId/edit`,
+export enum TitleRoutes {
+    ADD = `${AppRoutes.TITLE}/add`,
+    INDEX = `${AppRoutes.TITLE}/:titleId`,
+    EDIT = `${AppRoutes.TITLE}/:titleId/edit`,
 }
 
 export enum ChapterRoutes {
-    INDEX = `${MangaRoutes.INDEX}/chapters/:chapterId`,
-    ADD = `${MangaRoutes.INDEX}/chapters/add`,
-    EDIT = `${MangaRoutes.INDEX}/chapters/:chapterId/edit`
+    INDEX = `${TitleRoutes.INDEX}/chapters/:chapterId`,
+    ADD = `${TitleRoutes.INDEX}/chapters/add`,
+    EDIT = `${TitleRoutes.INDEX}/chapters/:chapterId/edit`
 }
 
 export enum UserRoutes {

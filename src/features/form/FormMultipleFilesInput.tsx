@@ -34,7 +34,7 @@ function FilesList({files, onChange}: {files: Array<FormFile>, onChange: Functio
 
     const sensors = useSensors(pointerSencor, touchSensor);
 
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     function handleDragEnd(event: DragEndEvent) {
         const {active, over} = event;

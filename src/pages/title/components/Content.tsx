@@ -126,7 +126,7 @@ function ContentPC() {
 }
 
 function Content() {
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     const { title } = useContext(TitleContext);
 

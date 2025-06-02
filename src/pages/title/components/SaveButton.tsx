@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 
 
 function SaveButton(){
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
     const [saved, setSaved] = useState(false);
 
     return (

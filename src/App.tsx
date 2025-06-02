@@ -16,9 +16,8 @@ import UpdateTitle from "./pages/title-form/UpdateTitle";
 import CommentPage from "./pages/comment/CommentPage";
 import Home from "./pages/home/Home";
 import NotFound from "./pages/not-found/NotFound";
-import TitlePage from "./pages/title/TitlePage";
 import UserProfile from "./pages/UserProfile";
-import { AppRoutes, AuthRoutes, ChapterRoutes, MangaRoutes, TeamRoutes, UserRoutes } from "./routes";
+import { AppRoutes, AuthRoutes, ChapterRoutes, TeamRoutes, TitleRoutes, UserRoutes } from "./routes";
 import UserProfileSettings from "./pages/UserProfileSettings";
 import TeamIndex from "./pages/teams";
 import TeamCreate from "./pages/teams/create";
@@ -26,6 +25,8 @@ import TeamEdit from "./pages/teams/edit";
 import ChapterIndex from "./pages/chapters";
 import ChapterCreate from "./pages/chapters/create";
 import ChapterEdit from "./pages/chapters/edit";
+import TitleIndex from "./pages/title";
+import ChapterLayout from "./modules/chapters/layounts/ChapterLayout";
 
 
 function App() {
@@ -54,6 +55,13 @@ function App() {
             <CssBaseline />
             <AuthProvider>
               <Routes>
+                <Route>
+                    <Route element={<ChapterLayout />}>
+                      <Route path={ChapterRoutes.INDEX} element={<ChapterIndex/>} />
+                    </Route>
+                    <Route path={ChapterRoutes.ADD} element={<ChapterCreate/>} />
+                    <Route path={ChapterRoutes.EDIT} element={<ChapterEdit/>} />
+                </Route>
                 <Route element={<AuthLayout />}>
                     <Route path={AuthRoutes.REGISTER} element={<AuthPage section="register" />}/>
                     <Route path={AuthRoutes.FORGOT} element={<AuthPage section="forgot" />}/>
@@ -63,12 +71,9 @@ function App() {
                 </Route>
                 <Route element={<AppLayout />}>
                     <Route>
-                        <Route path={MangaRoutes.INDEX} element={<TitlePage />} />
-                        <Route path={MangaRoutes.ADD} element={<AddTitle/>} />
-                        <Route path={MangaRoutes.EDIT} element={<UpdateTitle/>} />
-                        <Route path={ChapterRoutes.INDEX} element={<ChapterIndex/>} />
-                        <Route path={ChapterRoutes.ADD} element={<ChapterCreate/>} />
-                        <Route path={ChapterRoutes.EDIT} element={<ChapterEdit/>} />
+                        <Route path={TitleRoutes.INDEX} element={<TitleIndex />} />
+                        <Route path={TitleRoutes.ADD} element={<AddTitle/>} />
+                        <Route path={TitleRoutes.EDIT} element={<UpdateTitle/>} />
                     </Route>
                     <Route index element={<Home/>} />
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />

@@ -1,4 +1,5 @@
 import { apiClient } from "../../../../utils/apiClient";
+import { deleteAccessToken, deleteRefreshToken } from "../../utils/token";
 
 class AuthService {
     async login(login: string, password: string) {
@@ -24,6 +25,11 @@ class AuthService {
     async verify(token: string) {
         const response = await apiClient.post("/users/verify", {token})
         return await response.json();
+    }
+
+    async logout() {
+        deleteAccessToken();
+        deleteRefreshToken();
     }
 }
 

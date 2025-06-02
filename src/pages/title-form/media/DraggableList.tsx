@@ -128,7 +128,7 @@ function DraggableList() {
         setValue("posters", ((prev:Array<Poster>) => prev.filter(pposter => (pposter != poster)))(watch("posters")))
     }
 
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
     return (
         <Box>
             <Typography>Постеры</Typography>

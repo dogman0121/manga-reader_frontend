@@ -1,9 +1,21 @@
-import { FormControl, OutlinedInput, InputAdornment } from "@mui/material"
+import { FormControl, OutlinedInput, InputAdornment, styled } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
 
+
+const SearchOutlinedInput = styled(OutlinedInput)(({theme}) => ({
+    borderRadius: "16px",
+    padding: `0 ${theme.spacing(3)}`, 
+    backgroundColor: theme.palette.background.paper,
+    "& input": {
+        padding: "10px 0",
+        lineHeight: "20px",
+        height: "auto",
+        fontSize: "16px"
+    }
+}));
 
 function SearchInput() {
     const { query, setQuery } = useContext(SearchContext);
@@ -15,7 +27,7 @@ function SearchInput() {
                 width: "100%",
             }}
         >
-            <OutlinedInput
+            <SearchOutlinedInput
                 id="search-input"
                 value={query}
                 onInput={(event: React.FormEvent) => {
@@ -23,7 +35,7 @@ function SearchInput() {
                 }}
                 startAdornment={
                     <InputAdornment position="start">
-                        <SearchIcon fontSize="large"/>
+                        <SearchIcon fontSize="large" />
                     </InputAdornment>
                 }
                 endAdornment={
@@ -37,16 +49,12 @@ function SearchInput() {
                     </InputAdornment>
                 }
                 sx={{
-                    borderRadius: "16px",
-                    padding: "0 10px", 
-                    "& input": {
-                        padding: "10px 0"
-                    }
+                    
                 }}
                 placeholder="Введите запрос"
             >
 
-            </OutlinedInput>
+            </SearchOutlinedInput>
         </FormControl>
     )
 }

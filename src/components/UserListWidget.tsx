@@ -51,7 +51,7 @@ export default function UserListWidget({
                             borderRadius: "6px",
                             textAlign: "center",
                             "&:hover": {
-                                bgcolor: theme.vars.palette.customBackgrounds?.widget2
+                                bgcolor: theme.vars.palette.customBackgrounds?.widget1
                             }
                         }}
                     >

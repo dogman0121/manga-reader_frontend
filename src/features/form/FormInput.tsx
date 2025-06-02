@@ -12,14 +12,15 @@ const MyTextField = styled(TextField)({
     },
 })
 
-export interface FormInputProps {
+export type FormInputProps = {
     title?: string, 
-}
+} & TextFieldProps;
 
-export default function FormInput({title, name, className, sx, ...rest} : FormInputProps & TextFieldProps) {
+export default function FormInput({title, name, className, sx, ...rest} : FormInputProps) {
 
     return (
         <Box
+            className={className}
             sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -28,14 +29,11 @@ export default function FormInput({title, name, className, sx, ...rest} : FormIn
             }}
         >
             {title && (
-                <Typography>{title}</Typography>
+                <Typography className="InputTitle">{title}</Typography>
             )}
             <MyTextField
                 {...rest}
                 fullWidth
-                sx={{
-                    ...sx
-                }}
             />  
         </Box>
     )

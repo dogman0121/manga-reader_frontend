@@ -8,7 +8,7 @@ import { AppContent } from "../app-layout/AppLayout";
 
 
 function FormLayout() {
-    const device = useDeviceDetect();
+    const { device } = useDeviceDetect();
 
     const [isLoading, setIsLoading] = useState(false);
     const [messageOpened, setMessageOpened] = useState(false);
