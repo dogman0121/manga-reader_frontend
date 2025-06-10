@@ -13,6 +13,9 @@ import { searchService } from "../../../features/search/services/api/searchServi
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MobileDrawer from "../../../components/ui/MobileDrawer";
+import MobileModal from "../../../components/ui/MobileModal";
+import SearchList from "../../../features/search/components/SearchList";
+import SearchListModal from "../../../features/search/components/SearchListModal";
 
 function CatalogPagePC() {
     const theme = useTheme();
@@ -64,6 +67,8 @@ function CatalogPageMobile() {
 
     const [filtersOpened, setFiltersOpened] = useState(false);
 
+    const [modalOpened, setModalOpened] = useState(false);
+
     return (
         <>
             <SearchProvider emptyQuery={true}>
@@ -77,7 +82,9 @@ function CatalogPageMobile() {
                         }}
                     >
                         <ArrowBackRoundedIcon />
-                        <SearchInput />
+                        <SearchInput 
+                            onClick={() => {setModalOpened(true)}}
+                        />
                         <MoreVertRoundedIcon 
                             onClick={() => {setFiltersOpened(true)}}
                         />
@@ -101,6 +108,35 @@ function CatalogPageMobile() {
                 >
                     <Filters />
                 </MobileDrawer>
+                <MobileModal
+                    open={modalOpened}
+                    onClose={() => {setModalOpened(false)}}
+                >
+                    <Box
+                        sx={{
+                            width: "100vw",
+                            height: "100vh",
+                            bgcolor: theme.palette.background.paper
+                        }}
+                    >
+                        <AppContent>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    alignItems: "center",
+                                    columnGap: theme.spacing(2)
+                                }}
+                            >
+                                <ArrowBackRoundedIcon 
+                                    onClick={() => {setModalOpened(false)}}
+                                />
+                                <SearchInput/>
+                            </Box>
+                            <SearchListModal sx={{mt: theme.spacing(3)}}/>
+                        </AppContent>
+                    </Box>
+                </MobileModal>
             </SearchProvider>
         </>
     )

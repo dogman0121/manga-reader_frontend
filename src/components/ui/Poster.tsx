@@ -4,7 +4,7 @@ function Poster({src, width}: {src: string, width?: string}){
     return (
         <Box
             sx={{
-                width: width || "100%",
+                maxWidth: width || "100%",
             }}
         >
             <img

@@ -1,4 +1,4 @@
-import { FormControl, OutlinedInput, InputAdornment, styled } from "@mui/material"
+import { FormControl, OutlinedInput, InputAdornment, styled, BoxProps, Box } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useContext } from "react";
@@ -18,7 +18,7 @@ const SearchOutlinedInputPC = styled(OutlinedInput)(({theme}) => ({
     }
 }));
 
-function SearchInputPC() {
+function SearchInputPC({...props}: BoxProps) {
     const { query, setQuery } = useContext(SearchContext);
 
     return (
@@ -28,34 +28,37 @@ function SearchInputPC() {
                 width: "100%",
             }}
         >
-            <SearchOutlinedInputPC
-                id="search-input"
-                value={query}
-                onInput={(event: React.FormEvent) => {
-                    setQuery((event.target as HTMLInputElement).value)
-                }}
-                startAdornment={
-                    <InputAdornment position="start">
-                        <SearchIcon fontSize="large" />
-                    </InputAdornment>
-                }
-                endAdornment={
-                    <InputAdornment position="end">
-                        <CloseIcon 
-                            sx={{
-                                cursor: "pointer"
-                            }}
-                            onClick={() => {setQuery("")}}
-                        />
-                    </InputAdornment>
-                }
-                sx={{
-                    
-                }}
-                placeholder="Введите запрос"
-            >
+            <Box {...props}>
+                <SearchOutlinedInputPC
+                    id="search-input"
+                    value={query}
+                    fullWidth
+                    onInput={(event: React.FormEvent) => {
+                        setQuery((event.target as HTMLInputElement).value)
+                    }}
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <SearchIcon fontSize="large" />
+                        </InputAdornment>
+                    }
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <CloseIcon 
+                                sx={{
+                                    cursor: "pointer"
+                                }}
+                                onClick={() => {setQuery("")}}
+                            />
+                        </InputAdornment>
+                    }
+                    sx={{
+                        
+                    }}
+                    placeholder="Введите запрос"
+                >
 
-            </SearchOutlinedInputPC>
+                </SearchOutlinedInputPC>
+            </Box>
         </FormControl>
     )
 }
@@ -72,7 +75,7 @@ const SearchOutlinedInputMobile = styled(OutlinedInput)(({theme}) => ({
     }
 }));
 
-function SearchInputMobile( ) {
+function SearchInputMobile({sx, ...props}: BoxProps) {
     const { query, setQuery } = useContext(SearchContext);
 
     return (
@@ -82,43 +85,51 @@ function SearchInputMobile( ) {
                 width: "100%",
             }}
         >
-            <SearchOutlinedInputMobile
-                id="search-input"
-                value={query}
-                onInput={(event: React.FormEvent) => {
-                    setQuery((event.target as HTMLInputElement).value)
-                }}
-                endAdornment={
-                    <InputAdornment position="end">
-                        <CloseIcon 
-                            sx={{
-                                width: "20px",
-                                height: "20px",
-                                cursor: "pointer"
-                            }}
-                            onClick={() => {setQuery("")}}
-                        />
-                    </InputAdornment>
-                }
+            <Box 
                 sx={{
-                    
+                    width: "100%",
+                    ...sx
                 }}
-                placeholder="Поиск"
-            >
+                {...props}>
+                <SearchOutlinedInputMobile
+                    id="search-input"
+                    fullWidth
+                    value={query}
+                    onInput={(event: React.FormEvent) => {
+                        setQuery((event.target as HTMLInputElement).value)
+                    }}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <CloseIcon 
+                                sx={{
+                                    width: "20px",
+                                    height: "20px",
+                                    cursor: "pointer"
+                                }}
+                                onClick={() => {setQuery("")}}
+                            />
+                        </InputAdornment>
+                    }
+                    sx={{
+                        
+                    }}
+                    placeholder="Поиск"
+                >
 
-            </SearchOutlinedInputMobile>
+                </SearchOutlinedInputMobile>
+            </Box>
         </FormControl>
     )
 }
 
-function SearchInput() {
+function SearchInput({...props}: BoxProps) {
     const {device} = useDeviceDetect();
     
     return (
         <>
-            {device == DEVICE.MOBILE && <SearchInputMobile />}
-            {device == DEVICE.PC && <SearchInputPC />}
-            {device == DEVICE.PAD && <SearchInputPC />}
+            {device == DEVICE.MOBILE && <SearchInputMobile {...props}/>}
+            {device == DEVICE.PC && <SearchInputPC {...props}/>}
+            {device == DEVICE.PAD && <SearchInputPC {...props}/>}
         </>
     )
 }

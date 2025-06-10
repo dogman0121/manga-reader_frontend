@@ -41,7 +41,7 @@ function MangaItem({ item }: { item: Title }) {
     )
 }
 
-function SearchListModal({ sx }: { sx: SxProps }) {
+function SearchListModal({ sx }: { sx?: SxProps }) {
     const { section, results } = useContext(SearchContext);
 
     return (
