@@ -14,7 +14,6 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MobileDrawer from "../../../components/ui/MobileDrawer";
 import MobileModal from "../../../components/ui/MobileModal";
-import SearchList from "../../../features/search/components/SearchList";
 import SearchListModal from "../../../features/search/components/SearchListModal";
 
 function CatalogPagePC() {
