@@ -15,6 +15,7 @@ import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MobileDrawer from "../../../components/ui/MobileDrawer";
 import MobileModal from "../../../components/ui/MobileModal";
 import SearchListModal from "../../../features/search/components/SearchListModal";
+import { useNavigate } from "react-router-dom";
 
 function CatalogPagePC() {
     const theme = useTheme();
@@ -62,6 +63,8 @@ function CatalogPagePC() {
 function CatalogPageMobile() {
     const theme = useTheme();
 
+    const navigate = useNavigate();
+
     const { section } = useContext(SearchContext);
 
     const [filtersOpened, setFiltersOpened] = useState(false);
@@ -80,7 +83,9 @@ function CatalogPageMobile() {
                             columnGap: theme.spacing(2)
                         }}
                     >
-                        <ArrowBackRoundedIcon />
+                        <ArrowBackRoundedIcon 
+                            onClick={() => {navigate(-1)}}
+                        />
                         <SearchInput 
                             onClick={() => {setModalOpened(true)}}
                         />
