@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import Title from "../../../types/Title";
+import Title from "../../../pages/title/types/Title";
 import { SECTIONS } from "../components/SearchProvider";
 
 interface SearchContextProps {

@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, Typography } from "@mui/material";
+import { Box, MenuItem, Typography, useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import FormInput from "../../../../features/form/FormInput";
 import { Controller, useForm } from "react-hook-form";
@@ -10,7 +10,9 @@ import UserAuthContext from "../../../../context/UserAuthContext";
 import { mockTeams } from "../../../../mocks/team.mock";
 import { ListItem } from "../../../../components/ListItem";
 import { useParams } from "react-router-dom";
-import Chapter from "../../../../types/Chapter";
+import Chapter from "../../types/Chapter";
+import FormFile from "../../../../features/form/types/FormFile";
+import Button from "../../../../components/ui/Button";
 
 
 interface ChapterFormProps {
@@ -22,8 +24,10 @@ interface ChapterFormProps {
     author: string
 }
 
-export default function SingleChapterForm({chapter, onSend}: {chapter?: Chapter, onSend: Function}) {
-    const {mangaId} = useParams();
+export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter | null, onSend: Function}) {
+    const {titleId} = useParams();
+
+    const theme = useTheme();
 
     const { user:currentUser } = useContext(UserAuthContext);
 
@@ -51,7 +55,7 @@ export default function SingleChapterForm({chapter, onSend}: {chapter?: Chapter,
     const onSubmit = (d: ChapterFormProps) => {
         const formData = new FormData();
 
-        formData.append("manga", mangaId || "");
+        formData.append("manga", titleId || "");
 
         formData.append("tome", d.tome.toString());
         formData.append("chapter", d.chapter.toString());
@@ -62,8 +66,7 @@ export default function SingleChapterForm({chapter, onSend}: {chapter?: Chapter,
         for (let page of d.new_pages)
             formData.append("new_page", page)
 
-        if (d.new_pages.length > 0)
-            formData.append("pages_order", JSON.stringify(d.pages_order))
+        formData.append("pages_order", JSON.stringify(d.pages_order))
 
         if (d.author.startsWith("user"))
             formData.append("user", d.author.split("/")[1])
@@ -79,7 +82,7 @@ export default function SingleChapterForm({chapter, onSend}: {chapter?: Chapter,
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    rowGap: "20px"
+                    rowGap: theme.spacing(3)
                 }}
             >
                 <Grid container spacing={1.5} columns={{md: 12, xs: 1}}>
@@ -174,7 +177,15 @@ export default function SingleChapterForm({chapter, onSend}: {chapter?: Chapter,
                         </FormSelect>
                     )}
                 />
-                <FormMultipleFilesInput title="Страницы" onInput={handleChange}/>
+                <FormMultipleFilesInput 
+                    title="Страницы" 
+                    onInput={handleChange}
+                    defaultValue={chapter?.pages.map((page) => ({
+                        uuid: page.uuid, 
+                        fileName: page.filename, 
+                        src: page.link
+                    } as FormFile))}
+                />
             </Box>
             <Button sx={{mt: "15px"}} variant="contained" type="submit">Отправить</Button>
         </form>

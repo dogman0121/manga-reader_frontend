@@ -11,6 +11,14 @@ class ChapterService {
         return await response.json();
     }
 
+    async deleteChapter(chapterId: number) {
+        const response = await apiClient.delete(`/chapters/${chapterId}`);
+        if (response.ok) {
+            return;
+        }
+        return await response.json();
+    }
+
     async getChapter(chapterId: number) {
         const response = await apiClient.get(`/chapters/${chapterId}`);
         return await response.json();

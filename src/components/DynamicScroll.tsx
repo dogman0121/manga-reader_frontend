@@ -1,4 +1,5 @@
 import { Box, CircularProgress } from "@mui/material";
+import { Children } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface DynamicScrollProps {
@@ -26,7 +27,7 @@ export default function DynamicScroll({
             style={{overflow: "none"}}
             scrollableTarget={scrollableTarget}
         >
-            {children}
+            {Children.map(children, child => child)}
         </InfiniteScroll>
     )
 }

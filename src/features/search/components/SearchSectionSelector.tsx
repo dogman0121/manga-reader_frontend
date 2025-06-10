@@ -14,6 +14,7 @@ const SectionToggleButton = styled(ToggleButton)(({theme}) => ({
     border: "none",
     borderRadius: "6px",
     backgroundColor: theme.palette.background.paper,
+    lineHeight: "1.4",
 
     "&.MuiToggleButtonGroup-firstButton": {
         borderRight: "inherit",
@@ -25,14 +26,15 @@ const SectionToggleButton = styled(ToggleButton)(({theme}) => ({
         borderLeft: "inherit",
         borderTopLeftRadius: "inherit",
         borderBottomLeftRadius: "inherit",
-    }
+    },
 }))
 
 function SearchSectionSelector({ sx }: BoxProps) {
     const { section, setSection } = useContext(SearchContext);
 
     const handleChoose = (_event: React.MouseEvent<HTMLElement>, newValue: string) => {
-        setSection(newValue);
+        if (newValue !== null)
+            setSection(newValue);
     }
 
     return (

@@ -6,29 +6,59 @@ import { useState } from "react";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import SingleChapter from '../components/form/SingleChapterForm';
 import { chapterService } from '../service/api/chapterService';
-import { Typography } from '@mui/material';
+import { Breadcrumbs, Typography, useTheme } from '@mui/material';
+import { Link, useParams } from 'react-router-dom';
+import { generatePath, TitleRoutes } from '../../../routes';
 
 
 export default function ChapterCreatePage() {
     const [tab, setTab] = useState("1");
+
+    const theme = useTheme();
+
+    const {titleId} = useParams();
     
     const handleChangeTab = (_event: React.SyntheticEvent, newValue: string) => {
         setTab(newValue);
     };
 
     const handleAdd = async (form: FormData) => {
-        const response = await chapterService.addChapter(form);
-        console.log(response);
+        await chapterService.addChapter(form);
     } 
 
     return (
         <AppContent>
-            <Typography fontSize={"40px"} lineHeight={1} mt={"30px"}>Добавление главы</Typography>
+            {/* <PageHeader>Добавление главы</PageHeader> */}
+            <Breadcrumbs>
+                <Link
+                    to={generatePath(TitleRoutes.INDEX, {titleId: titleId || ""})}
+                >
+                    <Typography
+                        sx={{
+                            color: theme.typography.caption.color,
+                            "&:hover": {
+                                textDecoration: "underline"
+                            }
+                        }}
+                    >
+                        Атака титанов
+                    </Typography>
+                </Link>
+                <Typography
+                    sx={{color: theme.typography.caption.color,}}
+                >Добавление главы</Typography>
+            </Breadcrumbs>
             <TabContext
                 value={tab}
             >
                 <TabList 
                     onChange={handleChangeTab}
+                    sx={{
+                        mt: theme.spacing(1),
+                        "& .MuiTab-root": {
+                            textTransform: "capitalize"
+                        }
+                    }} 
                 >
                     <Tab label="Одиночное" value="1" />
                     <Tab label="Множественное" value="2" />
@@ -37,13 +67,12 @@ export default function ChapterCreatePage() {
                     value="1"
                     sx={{
                         p: 0,
-                        mt: "25px",
+                        mt: theme.spacing(3),
                         display: "flex",
                         flexDirection: "column",
-                        rowGap: "25px"
                     }}
                 >
-                    <SingleChapter onSend={handleAdd}/>
+                    <SingleChapter chapter={null} onSend={handleAdd}/>
                 </TabPanel>
                 <TabPanel
                     value="2"
@@ -51,7 +80,7 @@ export default function ChapterCreatePage() {
                         p: 0,
                     }}
                 >
-                    12312
+                    В разработке
                 </TabPanel>
             </TabContext>
         </AppContent>

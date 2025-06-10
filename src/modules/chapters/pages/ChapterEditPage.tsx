@@ -4,20 +4,25 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { useEffect, useState } from "react";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
-import SingleChapter from '../components/form/SingleChapterForm';
+import SingleChapterForm from '../components/form/SingleChapterForm';
 import { chapterService } from '../service/api/chapterService';
-import { useParams } from 'react-router-dom';
-import Chapter from '../../../types/Chapter';
+import { Link, useParams } from 'react-router-dom';
+import Chapter from '../types/Chapter';
 import PageLoader from '../../../components/ui/PageLoader';
 import FormModal from '../../../layouts/form-layout/FormModal';
-import { Box, Typography } from '@mui/material';
+import { Box, Breadcrumbs, Typography, useTheme } from '@mui/material';
 import ErrorIcon from '@mui/icons-material/Error';
 import NotFound from '../../../pages/not-found/NotFound';
 import Notification from '../../../components/ui/Notification';
 import FormLoader from '../../../features/form/FormLoader';
+import { generatePath, TitleRoutes } from '../../../routes';
 
 export default function ChapterEditPage(){
     const {chapterId} = useParams();
+
+    const theme = useTheme();
+
+    const {titleId} = useParams();
 
     const [tab, setTab] = useState("1");
     
@@ -25,7 +30,7 @@ export default function ChapterEditPage(){
         setTab(newValue);
     };
 
-    const [chapter, setChapter] = useState<Chapter | undefined>(undefined);
+    const [chapter, setChapter] = useState<Chapter | null>(null);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -72,27 +77,51 @@ export default function ChapterEditPage(){
 
     return (
         <AppContent>
-            <Typography fontSize={"40px"} lineHeight={1} mt={"30px"}>Редактирование главы</Typography>
+            {/* <PageHeader>Редактирование главы</PageHeader> */}
+            <Breadcrumbs>
+                <Link 
+                    to={generatePath(TitleRoutes.INDEX, {titleId: titleId || ""})}
+                >
+                    <Typography
+                        sx={{
+                            color: theme.typography.caption.color,
+                            "&:hover": {
+                                textDecoration: "underline"
+                            }
+                        }}
+                    >
+                        Атака титанов
+                    </Typography>
+                </Link>
+                <Typography
+                    sx={{color: theme.typography.caption.color,}}
+                >Редактирование главы</Typography>
+            </Breadcrumbs>
             <TabContext
                 value={tab}
             >
-                <TabList 
+                <TabList
+                    sx={{
+                        mt: theme.spacing(1),
+                        "& .MuiTab-root": {
+                            textTransform: "capitalize"
+                        }
+                    }} 
                     onChange={handleChangeTab}
                 >
-                    <Tab label="Одиночное" value="1" />
-                    <Tab label="Множественное" value="2" />
+                    <Tab label="Одиночное" value="1"/>
+                    <Tab label="Множественное" value="2"/>
                 </TabList>
                 <TabPanel 
                     value="1"
                     sx={{
                         p: 0,
-                        mt: "25px",
+                        mt: theme.spacing(3),
                         display: "flex",
                         flexDirection: "column",
-                        rowGap: "25px"
                     }}
                 >
-                    <SingleChapter chapter={chapter} onSend={handleEdit}/>
+                    <SingleChapterForm chapter={chapter} onSend={handleEdit}/>
                 </TabPanel>
                 <TabPanel
                     value="2"

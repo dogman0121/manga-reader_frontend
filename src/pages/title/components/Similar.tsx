@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Title from "../../../types/Title";
+import Title from "../types/Title";
 import { Box, Typography } from "@mui/material";
 import Poster from "../../../components/ui/Poster";
 import TitleContext from "../../../context/TitleContext";

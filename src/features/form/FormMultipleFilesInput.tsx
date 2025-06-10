@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Typography, useTheme } from "@mui/material"
 import FormField from "./FormField"
 import { useEffect, useState } from "react";
 import FormFileInput from "./FormFileInput";
@@ -18,11 +18,12 @@ import {
     useSensor,
     useSensors,
 } from "@dnd-kit/core";
-import FormFile from "./types/File";
+import FormFile from "./types/FormFile";
 
 interface FormMultipleInput {
     title?: string,
     onInput?: Function
+    defaultValue?: Array<FormFile>
 }
 
 function FilesList({files, onChange}: {files: Array<FormFile>, onChange: Function}) {
@@ -71,16 +72,18 @@ function FilesList({files, onChange}: {files: Array<FormFile>, onChange: Functio
             sensors={sensors}
         >
             <SortableContext items={files.map(file => ({id: file.uuid}))}>
-                {files.map(file => <FormFilePreviewDraggable key={file.uuid} onDelete={() => {handleDelete(file.uuid)}} file={file}/>)}
+                    {files.map(file => <FormFilePreviewDraggable key={file.uuid} onDelete={() => {handleDelete(file.uuid)}} file={file}/>)}
             </SortableContext>
         </DndContext>
     )
 }
 
-export default function FormMultipleFilesInput({onInput, title}: FormMultipleInput) {
-    const [files, setFiles] = useState<Array<FormFile>>([]);
+export default function FormMultipleFilesInput({onInput, title, defaultValue}: FormMultipleInput) {
+    const [files, setFiles] = useState<Array<FormFile>>(defaultValue || []);
 
     const {getRootProps, getInputProps, acceptedFiles} = useDropzone();
+
+    const theme = useTheme()
 
     useEffect(() => {        
         setFiles(prev => {
@@ -108,7 +111,7 @@ export default function FormMultipleFilesInput({onInput, title}: FormMultipleInp
     }, [files]);
 
     const handleChange = (files: Array<FormFile>) => {
-        setFiles(() => {return files});
+        setFiles(files);
     }
 
     return (
@@ -120,9 +123,9 @@ export default function FormMultipleFilesInput({onInput, title}: FormMultipleInp
                 <Box
                     sx={{
                         display: "grid",
-                        columnGap: "10px",
-                        rowGap: "8px",
-                        gridTemplateColumns: "repeat(auto-fill, 150px)"
+                        columnGap: theme.spacing(2),
+                        rowGap: theme.spacing(1),
+                        gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))"
                     }}
                 >
                     <FilesList onChange={handleChange} files={Array.from(files)} />

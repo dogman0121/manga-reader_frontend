@@ -1,6 +1,6 @@
 import Page from "./Page";
-import Team from "./Team";
-import { User } from "./User"
+import Team from "../../../types/Team";
+import { User } from "../../../types/User"
 
 interface Chapter {
     id: number,
@@ -11,7 +11,9 @@ interface Chapter {
     team: Team,
     date: string
     creator: User,
-    pages: Array<Page>
+    pages: Array<Page>,
+    next_chapter?: Chapter,
+    previous_chapter?: Chapter
 }
 
 export default Chapter;

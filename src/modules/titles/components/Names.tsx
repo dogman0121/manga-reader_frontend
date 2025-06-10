@@ -9,7 +9,7 @@ const MyBreadcrumbs = styled(Breadcrumbs)(({theme}) => ({
 }))
 
 function Names({sx, className, ...props}: BoxProps) {
-    const title = useTitle();
+    const { title } = useTitle();
 
     if (!title)
         return null;

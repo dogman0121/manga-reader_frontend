@@ -77,15 +77,15 @@ class ApiClient {
         return this._sendJsonRequest(url, "POST", body);
     }
 
-    async put(url: string, body: Object) {
+    async put(url: string, body?: Object) {
         return this._sendJsonRequest(url, "PUT", body);
     }
 
-    async patch(url: string, body: Object) {
+    async patch(url: string, body?: Object) {
         return this._sendJsonRequest(url, "PATCH", body);
     }
 
-    async delete(url: string, body: Object) {
+    async delete(url: string, body?: Object) {
         return this._sendJsonRequest(url, "DELETE", body);
     }
 

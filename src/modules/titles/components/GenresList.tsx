@@ -26,7 +26,7 @@ function GenreItem({ genre } : { genre: Genre}) {
 }
 
 function GenresList() {
-    const title = useTitle();
+    const { title } = useTitle();
 
     if (!title?.genres || title.genres.length == 0)
         return null;

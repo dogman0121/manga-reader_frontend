@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FormFile from "../types/File";
+import FormFile from "../types/FormFile";
 
 export default function useFileInput(){
     // const [acceptedFiles, setAcceptedFiles] = useState<Array<File>>([]);

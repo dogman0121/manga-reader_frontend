@@ -7,7 +7,7 @@ import useTitle from "../hooks/useTitle";
 function About() {
     const [open, setOpen] = useState(false);
 
-    const title = useTitle();
+    const { title } = useTitle();
 
     const theme = useTheme();
 

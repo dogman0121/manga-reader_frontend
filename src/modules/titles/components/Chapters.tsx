@@ -1,43 +1,74 @@
-import { useEffect, useState } from "react";
-import Chapter from "../../../types/Chapter";
+import { useContext, useEffect, useState } from "react";
+import Chapter from "../../chapters/types/Chapter";
 import { Link, useParams } from "react-router-dom"
 import { Box, Typography, useTheme } from "@mui/material";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
-import Translation from "../../../types/Translation";
+import Translation from "../../../pages/title/types/Translation";
 import { ListItem } from "../../../components/ListItem";
 import { chapterService } from "../../../modules/chapters/service/api/chapterService";
 import { ChapterRoutes, generatePath } from "../../../routes";
 import useTitle from "../hooks/useTitle";
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import Notification from "../../../components/ui/Notification";
+import TitleContext from "../context/TitleContext";
 
 
-function ChapterItem({ chapter}: { chapter: Chapter}) {
-    const {titleId} = useParams()
+function ChapterItem({ 
+    chapter, 
+    editable,
+    onDelete,
+}: { 
+    chapter: Chapter, 
+    editable?: boolean,
+    onDelete?: Function
+}) {
+    const {titleId} = useParams();
 
     const theme = useTheme();
 
     return (
-        <Link to={generatePath(ChapterRoutes.INDEX, {titleId: titleId || "", chapterId: chapter.id})}>
-            <Box
-                sx={{
-                    mt: "5px",
+        <Box
+            sx={{
+                mt: "5px",
 
-                    padding: "12px 14px",
-                    backgroundColor: theme.palette.secondary.main,
-                    borderRadius: "12px"
-                }}
-            >
-                Том {chapter.tome} Глава {chapter.chapter}
-            </Box>
-        </Link>
-    )
-}
+                padding: "12px 14px",
+                backgroundColor: theme.palette.secondary.main,
+                borderRadius: "12px",
 
-
-function ChaptersList({chapters}: {chapters: Array<Chapter>}) {
-    return (
-        <Box mt={"10px"}>
-            { chapters.map((chapter) => <ChapterItem key={chapter.id} chapter={chapter}/>) }
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center"
+            }}
+        >
+            <Link to={generatePath(ChapterRoutes.INDEX, {titleId: titleId || "", chapterId: chapter.id})}>
+                <Typography>
+                    Том {chapter.tome} Глава {chapter.chapter}
+                </Typography> 
+            </Link>
+            {editable && (
+                <Box
+                    sx={{
+                        display: "flex",
+                        columnGap: theme.spacing(2),
+                        alignItems: "center"
+                    }}
+                >
+                    <Link 
+                        style={{display: "flex"}}
+                        to={generatePath(ChapterRoutes.EDIT, {titleId: titleId || "", chapterId: chapter.id})}
+                    >
+                        <EditRoundedIcon sx={{width: "18px", height: "18px"}}/>
+                    </Link>
+                    <DeleteRoundedIcon 
+                        sx={{width: "18px", height: "18px", cursor: "pointer"}}
+                        onClick={() => {onDelete ? onDelete(chapter.id) : null}}    
+                    />
+                </Box>
+            )}
+            
         </Box>
     )
 }
@@ -75,24 +106,59 @@ function Translator({translation, onChoose}: {translation: Translation, onChoose
     )
 }
 
+function ChaptersHeader() {
+    const { title } = useTitle();
+
+    if (!title)
+        return null;
+
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between"
+            }}
+        >
+            <Typography>Список глав</Typography>
+            <Box>
+                <Link to={generatePath(ChapterRoutes.ADD, {titleId: title.id})}>
+                    <AddRoundedIcon/>
+                </Link>
+                <SwapVertRoundedIcon/>
+            </Box>
+        </Box>
+
+    )
+}
+
 function Chapters() {
-    const title = useTitle();
+    const { title } = useContext(TitleContext);
+
+    if (!title)
+        return null;
 
     const theme = useTheme()
 
-    if (!title || !title.translations?.length)
+    if (!title.translations?.length) {
         return (
-            <Box
-                sx={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    p: `${theme.spacing(6)} 0`
-                }}
-            >
-                <Typography fontSize={"20px"}>Глав нет!</Typography>
-            </Box>
-        );
+            <>
+                <ChaptersHeader />
+                <Box
+                    sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        p: `${theme.spacing(6)} 0`
+                    }}
+                >
+                    <Typography fontSize={"20px"}>Глав нет!</Typography>
+                </Box>
+            </>
+        )
+    }
+
+    const [errorDeleting, setErrorDeleting] = useState(false);
 
     const [translation, setTranslation] = useState<Translation>(title.translations[0]);
     const [chapters, setChapters] = useState<Array<Chapter>>([]);
@@ -104,21 +170,21 @@ function Chapters() {
             })
     }, [translation])
 
+    const handleDelete = async (chapterId: number) => {
+        const response = await chapterService.deleteChapter(chapterId);
+
+        if (response){
+            setErrorDeleting(true);
+        }
+        else {
+            const newChapters = chapters.filter((chapter) => chapter.id != chapterId)
+            setChapters(newChapters)
+        }
+    }   
+
     return (
         <>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between"
-                }}
-            >
-                <Typography>Список глав</Typography>
-                <Box>
-                    <AddRoundedIcon/>
-                    <SwapVertRoundedIcon/>
-                </Box>
-            </Box>
+            <ChaptersHeader /> 
             <Box
                 sx={{
                     display: "flex",
@@ -135,7 +201,23 @@ function Chapters() {
                     />
                 ))}
             </Box>
-            <ChaptersList chapters={chapters}/>
+            <Box mt={"10px"}>
+                { chapters.map((chapter) => (
+                    <ChapterItem 
+                        key={chapter.id} 
+                        chapter={chapter} 
+                        editable={translation.permissions?.add_chapters == true}
+                        onDelete={handleDelete}
+                        />
+                    ) 
+                )}
+            </Box>
+            <Notification 
+                open={errorDeleting}
+                onClose={() => {setErrorDeleting(false)}}
+                variant="error" 
+                message="Произошла ошибка"
+            />
         </>
     )
 }

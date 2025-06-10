@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Title from "../../types/Title"
+import Title from "./types/Title"
 import TitleContext from "../../context/TitleContext";
 import { useParams } from "react-router-dom";
 import NotFound from "../not-found/NotFound";

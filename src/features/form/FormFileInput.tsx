@@ -27,7 +27,7 @@ export default function FormFileInput({
                     width: width,
                     height: height,
                     aspectRatio: form != "rectangle" ? "1/1" : aspectRatio,
-                    borderRadius: form == 'circle' ? "50%" : undefined, 
+                    borderRadius: form == 'circle' ? "50%" : "8px", 
                     border: "thin dashed var(--subtitle1-text-color)",
                 }}
             >
@@ -47,14 +47,14 @@ export default function FormFileInput({
                         <><Box
                             sx={{
                                 textAlign: "center",
-                                fontSize: "15px",
+                                fontSize: "14px",
                                 mt: "5px",
                                 lineHeight: 1.2
                             }}
                         >
                             Добавить файл
                         </Box>
-                        <Typography variant="subtitle1">
+                        <Typography variant="subtitle1" fontSize={"14px"}>
                             (.zip, .rar, .png. jpg)
                         </Typography></>
                     )}

@@ -3,9 +3,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
+import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 
 
-const SearchOutlinedInput = styled(OutlinedInput)(({theme}) => ({
+const SearchOutlinedInputPC = styled(OutlinedInput)(({theme}) => ({
     borderRadius: "16px",
     padding: `0 ${theme.spacing(3)}`, 
     backgroundColor: theme.palette.background.paper,
@@ -17,7 +18,7 @@ const SearchOutlinedInput = styled(OutlinedInput)(({theme}) => ({
     }
 }));
 
-function SearchInput() {
+function SearchInputPC() {
     const { query, setQuery } = useContext(SearchContext);
 
     return (
@@ -27,7 +28,7 @@ function SearchInput() {
                 width: "100%",
             }}
         >
-            <SearchOutlinedInput
+            <SearchOutlinedInputPC
                 id="search-input"
                 value={query}
                 onInput={(event: React.FormEvent) => {
@@ -54,8 +55,71 @@ function SearchInput() {
                 placeholder="Введите запрос"
             >
 
-            </SearchOutlinedInput>
+            </SearchOutlinedInputPC>
         </FormControl>
+    )
+}
+
+const SearchOutlinedInputMobile = styled(OutlinedInput)(({theme}) => ({
+    borderRadius: "16px",
+    padding: `0 ${theme.spacing(2)}`, 
+    backgroundColor: theme.palette.background.paper,
+    "& input": {
+        padding: "5px 0",
+        lineHeight: "20px",
+        height: "auto",
+        fontSize: "14px"
+    }
+}));
+
+function SearchInputMobile( ) {
+    const { query, setQuery } = useContext(SearchContext);
+
+    return (
+        <FormControl
+            variant="outlined"
+            sx={{
+                width: "100%",
+            }}
+        >
+            <SearchOutlinedInputMobile
+                id="search-input"
+                value={query}
+                onInput={(event: React.FormEvent) => {
+                    setQuery((event.target as HTMLInputElement).value)
+                }}
+                endAdornment={
+                    <InputAdornment position="end">
+                        <CloseIcon 
+                            sx={{
+                                width: "20px",
+                                height: "20px",
+                                cursor: "pointer"
+                            }}
+                            onClick={() => {setQuery("")}}
+                        />
+                    </InputAdornment>
+                }
+                sx={{
+                    
+                }}
+                placeholder="Поиск"
+            >
+
+            </SearchOutlinedInputMobile>
+        </FormControl>
+    )
+}
+
+function SearchInput() {
+    const {device} = useDeviceDetect();
+    
+    return (
+        <>
+            {device == DEVICE.MOBILE && <SearchInputMobile />}
+            {device == DEVICE.PC && <SearchInputPC />}
+            {device == DEVICE.PAD && <SearchInputPC />}
+        </>
     )
 }
 

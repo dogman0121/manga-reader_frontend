@@ -16,6 +16,7 @@ import Blur from "../../components/Blur";
 import { useTheme } from "@mui/material/styles";
 import MainBlurContext from "./MainBlurContext";
 import { AppRoutes } from "../../routes";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 
 export function ContentPC({children}: {children: React.ReactNode}) {
@@ -130,9 +131,12 @@ function AppHeader() {
                     <Box
                         sx={{
                             display: "flex",
-                            flexDirection: "row"
+                            flexDirection: "row",
+                            alignItems: "center",
+                            columnGap: theme.spacing(3)
                         }}
                     >
+                        <NotificationsIcon />
                         {user != null && (
                             <>
                                 {user === EMPTY_USER && 

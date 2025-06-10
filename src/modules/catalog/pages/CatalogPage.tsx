@@ -1,15 +1,18 @@
-import { Box, Paper, useTheme } from "@mui/material";
+import { Box, Divider, Paper, useTheme } from "@mui/material";
 import PageHeader from "../../../components/ui/PageHeader";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import SearchInput from "../../../features/search/components/SearchInput";
 import SearchSectionSelector from "../../../features/search/components/SearchSectionSelector";
-import { Children, useContext, useEffect } from "react";
+import { Children, useContext, useEffect, useState } from "react";
 import SearchContext from "../../../features/search/context/SearchContext";
 import SearchProvider, { SECTIONS } from "../../../features/search/components/SearchProvider";
 import MangaResults from "../components/MangaResults";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import Filters from "../components/Filters";
 import { searchService } from "../../../features/search/services/api/searchService";
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
+import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
+import MobileDrawer from "../../../components/ui/MobileDrawer";
 
 function CatalogPagePC() {
     const theme = useTheme();
@@ -55,7 +58,52 @@ function CatalogPagePC() {
 }
 
 function CatalogPageMobile() {
-    return <></>
+    const theme = useTheme();
+
+    const { section } = useContext(SearchContext);
+
+    const [filtersOpened, setFiltersOpened] = useState(false);
+
+    return (
+        <>
+            <SearchProvider emptyQuery={true}>
+                <AppContent>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            columnGap: theme.spacing(2)
+                        }}
+                    >
+                        <ArrowBackRoundedIcon />
+                        <SearchInput />
+                        <MoreVertRoundedIcon 
+                            onClick={() => {setFiltersOpened(true)}}
+                        />
+                    </Box>
+                    <SearchSectionSelector
+                        sx={{
+                            mt: theme.spacing(2)
+                        }}
+                    />
+                </AppContent>
+                <Divider />
+                <AppContent>
+                    <>
+                        {section == SECTIONS.MANGA && <MangaResults />}
+                    </>
+                </AppContent>
+                <MobileDrawer
+                    open={filtersOpened}
+                    onClose={() => {setFiltersOpened(false)}}
+                    anchor="right"
+                >
+                    <Filters />
+                </MobileDrawer>
+            </SearchProvider>
+        </>
+    )
 }
 
 function CatalogWrapper({children}: {children: React.ReactNode}) {

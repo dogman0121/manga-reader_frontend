@@ -2,7 +2,7 @@ import { Box, Breadcrumbs, Typography, useTheme } from "@mui/material";
 import useTitle from "../hooks/useTitle";
 
 function OtherNames() {
-    const title = useTitle();
+    const { title } = useTitle();
 
     const theme = useTheme();
     

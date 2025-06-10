@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Media from "./media/Media";
 import Info from "./info/Info";
 import AddTitleForm from "./types/AddTitleForm";
-import Title from "../../types/Title";
+import Title from "../title/types/Title";
 import Poster from "./types/Poster";
 import { storageService } from "../../services/api/storageService";
 

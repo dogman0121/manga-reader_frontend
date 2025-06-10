@@ -1,4 +1,4 @@
-import { Box, Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { Box, Paper, BottomNavigation, BottomNavigationAction, useTheme } from "@mui/material";
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -13,7 +13,7 @@ import { AppRoutes } from "../../routes";
 export function ContentMobile({children}: {children: React.ReactNode}) {
     return (
         <Box sx={{
-            p: "10px 10px 5px"
+            p: "10px"
         }}>
             {children}
         </Box>
@@ -21,9 +21,13 @@ export function ContentMobile({children}: {children: React.ReactNode}) {
 }
 
 export function Content({children}: {children: React.ReactNode}) {
+    const theme = useTheme();
+    
     return (
         <Box sx={{
-            pb: "61px"
+            pb: "52px",
+            bgcolor: theme.palette.background.paper,
+            height: "100%"
         }}>
             {children}
         </Box>

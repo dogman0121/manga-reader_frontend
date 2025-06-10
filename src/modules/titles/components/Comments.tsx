@@ -1,16 +1,19 @@
 import { Box } from "@mui/material";
 import CommentInput from "../../../features/comment/component/CommentInput";
-import { useContext, useEffect, useState } from "react";
-import TitleContext from "../../../context/TitleContext";
+import { useEffect, useState } from "react";
 import { commentService } from "../../../features/comment/service/api/commentService";
 import CommentList from "../../../features/comment/component/CommentList";
 import Comment from "../../../types/Comment";
 import DynamicScroll from "../../../components/DynamicScroll";
+import useTitle from "../hooks/useTitle";
 
 
 
 function Comments() {
-    const { title } = useContext(TitleContext);
+    const { title } = useTitle();
+
+    if (!title)
+        return null;
 
     const [comments, setComments] = useState<Array<Comment>>([]);
 

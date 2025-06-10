@@ -1,9 +1,9 @@
-import Genre from "./Genre";
-import Person from "./Person";
-import Poster from "./Poster";
-import Team from "./Team";
+import Genre from "../../../types/Genre";
+import Person from "../../../types/Person";
+import Poster from "../../../types/Poster";
+import Team from "../../../types/Team";
 import Translation from "./Translation";
-import { User } from "./User";
+import { User } from "../../../types/User";
 
 export const EMPTY_TITLE : Title = {
     id: 0,

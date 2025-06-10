@@ -31,6 +31,8 @@ function CommentBody() {
                     <Link to={generatePath(CommentRoutes.INDEX, {commentId: comment.id})}>
                         <Typography 
                             variant="subtitle1"
+                            color="#545454"
+                            fontSize={"12px"}
                             lineHeight={1.2}
                         >
                             {commentService.formatTimedelta(new Date().getTime() - new Date(comment.created_at).getTime())} назад

@@ -127,7 +127,7 @@ export const getTheme = (mode: "light" | "dark") => {
     return lightTheme;
 }
 
-const lightTheme = createTheme({
+export const lightTheme = createTheme({
     palette: {
         mode: "light",
         primary: {
@@ -152,11 +152,14 @@ const lightTheme = createTheme({
         body1: {
             fontSize: "14px",
             color: "#000000"
+        },
+        caption: {
+            color: "#606060"
         }
     }
 })
 
-const darkTheme = createTheme({
+export const darkTheme = createTheme({
     palette: {
         mode: "dark",
         primary: {
@@ -182,6 +185,9 @@ const darkTheme = createTheme({
         body1: {
             fontSize: "14px",
             color: "#e1e1e0"
+        },
+        caption: {
+            color: "#BCBCBC"
         }
     }
 })

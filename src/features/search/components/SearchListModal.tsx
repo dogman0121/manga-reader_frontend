@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
 import { Box, SxProps } from "@mui/material";
-import Title from "../../../types/Title";
+import Title from "../../../pages/title/types/Title";
 import { useTheme } from "@mui/material/styles";
 import { SECTIONS } from "./SearchProvider";
 import SearchList from "./SearchList";

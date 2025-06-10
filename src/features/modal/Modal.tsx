@@ -1,3 +1,4 @@
+import { Children } from "react";
 import ModalContext from "./ModalContext";
 import { Modal as MuiModal, Box, ModalProps as MuiModalProps} from "@mui/material";
 
@@ -11,10 +12,6 @@ function Modal({open, onClose, children, sx}: ModalProps) {
         <MuiModal
             open={open}
             onClose={onClose}
-
-            sx={{
-                ...sx
-            }}
         >
             <ModalContext.Provider
                 value={{
@@ -36,9 +33,10 @@ function Modal({open, onClose, children, sx}: ModalProps) {
                         "&:focus": {
                         outline: "none"
                         },
+                        ...sx
                     }}
                 >
-                    {children}
+                    {Children.map(children, (child) => child)}
                 </Box>
             </ModalContext.Provider>
         </MuiModal>

@@ -4,7 +4,7 @@ import OpenGraphMeta from "../../components/OpenGraphMeta";
 import AddTitleForm from "./types/AddTitleForm";
 import TitleForm, { compileFormData } from "./TitleForm";
 import { apiClient } from "../../utils/apiClient";
-import Title from "../../types/Title";
+import Title from "../title/types/Title";
 import { useContext } from "react";
 import FormStateContext from "../../layouts/form-layout/FormStateContext";
 import { AppContent } from "../../layouts/app-layout/AppLayout";

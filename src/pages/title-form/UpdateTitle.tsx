@@ -5,7 +5,7 @@ import AddTitleForm from "./types/AddTitleForm";
 import { useContext, useEffect } from "react";
 import { apiClient } from "../../utils/apiClient";
 import { useState } from "react";
-import Title, { EMPTY_TITLE } from "../../types/Title";
+import Title, { EMPTY_TITLE } from "../title/types/Title";
 import { Box, Typography } from "@mui/material";
 import ErrorIcon from '@mui/icons-material/Error';
 import WestRoundedIcon from '@mui/icons-material/WestRounded';

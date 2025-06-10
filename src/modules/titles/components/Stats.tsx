@@ -37,7 +37,7 @@ function StatsText({children}: {children: React.ReactNode}){
 
 
 function Stats({sx}: {sx?: SxProps}) {
-    const title = useTitle();
+    const { title } = useTitle();
 
     if (!title)
         return null;

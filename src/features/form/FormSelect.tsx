@@ -3,12 +3,13 @@ import { Box, Select, SelectProps, SxProps, Typography } from "@mui/material"
 import { Children } from "react";
 
 
-const MySelect = styled(Select)({
+const MySelect = styled(Select)(({theme}) => ({
     borderRadius: "12px",
+    backgroundColor: theme.palette.background.paper,
     "& .MuiSelect-select": {
         padding: "8px 15px",
     }
-})
+}))
 
 export type FormSelectProps = {
     title?: string,

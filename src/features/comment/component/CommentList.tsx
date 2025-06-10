@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import Comment from "../../../types/Comment";
 import CommentBlock from "./CommentBlock";
 
-function CommentList({ comments }: {comments: Array<Comment>}) {
+function CommentList({ comments }: {comments: Comment[]}) {
     return (
         <Box
             sx={{

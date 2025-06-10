@@ -7,7 +7,7 @@ import {
 
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
-import FormFile from "./types/File";
+import FormFile from "./types/FormFile";
 
 
 export default function FormFilePreviewDraggable({ onDelete, file } : {onDelete: React.EventHandler<SyntheticEvent>, file:FormFile}) {

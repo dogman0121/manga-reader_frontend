@@ -47,7 +47,7 @@ function CommentBlock({ comment }: {comment: Comment}) {
                         width: "100%",
                         display: "flex",
                         flexDirection: "column",
-                        rowGap: "7px"
+                        rowGap: "5px"
                     }}
                 >
                     <CommentBody />

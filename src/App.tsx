@@ -26,7 +26,6 @@ import ChapterIndex from "./pages/chapters";
 import ChapterCreate from "./pages/chapters/create";
 import ChapterEdit from "./pages/chapters/edit";
 import TitleIndex from "./pages/title";
-import ChapterLayout from "./modules/chapters/layounts/ChapterLayout";
 
 
 function App() {
@@ -56,11 +55,9 @@ function App() {
             <AuthProvider>
               <Routes>
                 <Route>
-                    <Route element={<ChapterLayout />}>
+                    <Route>
                       <Route path={ChapterRoutes.INDEX} element={<ChapterIndex/>} />
                     </Route>
-                    <Route path={ChapterRoutes.ADD} element={<ChapterCreate/>} />
-                    <Route path={ChapterRoutes.EDIT} element={<ChapterEdit/>} />
                 </Route>
                 <Route element={<AuthLayout />}>
                     <Route path={AuthRoutes.REGISTER} element={<AuthPage section="register" />}/>
@@ -70,6 +67,8 @@ function App() {
                     <Route path={AuthRoutes.RECOVERY} element={<AuthPage section="recovery"/>} />
                 </Route>
                 <Route element={<AppLayout />}>
+                    <Route path={ChapterRoutes.ADD} element={<ChapterCreate/>} />
+                    <Route path={ChapterRoutes.EDIT} element={<ChapterEdit/>} />
                     <Route>
                         <Route path={TitleRoutes.INDEX} element={<TitleIndex />} />
                         <Route path={TitleRoutes.ADD} element={<AddTitle/>} />

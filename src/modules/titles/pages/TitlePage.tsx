@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect"
 import { useParams } from "react-router-dom";
-import Title from "../../../types/Title";
+import Title from "../../../pages/title/types/Title";
 import { titleService } from "../service/api/titleService";
 import TitleProvider from "../components/TitleProvider";
 import PageLoader from "../../../components/ui/PageLoader";
@@ -21,11 +21,14 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Chapters from "../components/Chapters";
 import Comments from "../components/Comments";
+import OpenGraphMeta from "../../../components/OpenGraphMeta";
+import { generatePath, TitleRoutes } from "../../../routes";
+
 
 function TitlePagePC() {
     const theme= useTheme();
 
-    const title = useTitle();
+    const { title } = useTitle();
 
     const [section, setSection] = useState<string>('1');
         
@@ -97,7 +100,7 @@ function TitlePagePC() {
                     height: "600px",
                     zIndex: "-1",
                     background: `
-                        linear-gradient(rgba(${theme.palette.background.defaultChannel} / 0.8), 
+                        linear-gradient(rgba(${theme.palette.background.defaultChannel} / 0.9), 
                         rgba(${theme.palette.background.defaultChannel} / 1)), 
                         url('${title.background}')
                     `,
@@ -150,10 +153,19 @@ export default function TitlePage() {
         return <NotFound />
 
     return (
-        <TitleProvider title={title}>
-            {device == DEVICE.MOBILE && <TitlePageMobile />}
-            {device == DEVICE.PAD && <TitlePagePC/>}
-            {device == DEVICE.PC && <TitlePagePC/>}
-        </TitleProvider>
+        <>
+            <OpenGraphMeta 
+                title={`Читать ${title.type?.name} ${title.name} онлайн | kanwoo`}
+                url={generatePath(TitleRoutes.INDEX, {titleId: title.id})}
+                image={title.main_poster?.small || ""}
+                description={title.description || ""}
+
+            />
+            <TitleProvider title={title} setTitle={setTitle}>
+                {device == DEVICE.MOBILE && <TitlePageMobile />}
+                {device == DEVICE.PAD && <TitlePagePC/>}
+                {device == DEVICE.PC && <TitlePagePC/>}
+            </TitleProvider>
+        </>
     )
 }

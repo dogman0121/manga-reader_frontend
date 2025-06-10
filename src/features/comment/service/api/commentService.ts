@@ -68,6 +68,12 @@ class CommentService {
         return await response.json();
     }
 
+    async fetchChapterComments(chapterId: number, page:number = 1) {
+        const response = await apiClient.get(`/comments?chapter=${chapterId}&page=${page}`)
+
+        return await response.json();
+    }
+
     async sendAnswer(commentId: number, text: string) {
         const response = await apiClient.post("/comments", {
             parent: commentId,
@@ -80,6 +86,15 @@ class CommentService {
     async sendTitleComment(titleId: number, text: string){
         const response = await apiClient.post("/comments", {
             manga: titleId,
+            text: text
+        })
+        
+        return await response.json();
+    }
+
+    async sendChapterComment(chapterId: number, text: string) {
+        const response = await apiClient.post("/comments", {
+            chapter: chapterId,
             text: text
         })
         
