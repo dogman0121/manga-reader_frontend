@@ -68,7 +68,7 @@ const SearchOutlinedInputMobile = styled(OutlinedInput)(({theme}) => ({
     padding: `0 ${theme.spacing(2)}`, 
     backgroundColor: theme.palette.background.paper,
     "& input": {
-        padding: "5px 0",
+        padding: "8px 0",
         lineHeight: "20px",
         height: "auto",
         fontSize: "14px"
