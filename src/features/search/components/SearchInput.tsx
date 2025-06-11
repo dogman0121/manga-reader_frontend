@@ -4,7 +4,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
-import { useSearchParams } from "react-router-dom";
 import { getColorScheme } from "../../../utils/colorScheme";
 
 
@@ -124,8 +123,6 @@ function SearchInputDisabledMobile({sx, ...props}: BoxProps) {
 
 function SearchInputMobile({sx, ...props}: BoxProps) {
     const { query, setQuery } = useContext(SearchContext);
-
-    const theme = useTheme();
 
     return (
         <FormControl
