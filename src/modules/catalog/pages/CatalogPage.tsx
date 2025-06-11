@@ -3,7 +3,7 @@ import PageHeader from "../../../components/ui/PageHeader";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import SearchInput, { SearchInputDisabled } from "../../../features/search/components/SearchInput";
 import SearchSectionSelector from "../../../features/search/components/SearchSectionSelector";
-import { Children, useContext, useEffect, useRef, useState } from "react";
+import { Children, useContext, useEffect, useState } from "react";
 import SearchContext from "../../../features/search/context/SearchContext";
 import SearchProvider, { SECTIONS } from "../../../features/search/components/SearchProvider";
 import MangaResults from "../components/MangaResults";
@@ -70,8 +70,6 @@ function CatalogPageMobile() {
     const [filtersOpened, setFiltersOpened] = useState(false);
 
     const [modalOpened, setModalOpened] = useState(false);
-
-    const inputRef = useRef(null)
 
     return (
         <>
