@@ -1,9 +1,11 @@
-import { FormControl, OutlinedInput, InputAdornment, styled, BoxProps, Box } from "@mui/material"
+import { FormControl, OutlinedInput, InputAdornment, styled, BoxProps, Box, useTheme, Typography } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import { useContext } from "react";
 import SearchContext from "../context/SearchContext";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
+import { useSearchParams } from "react-router-dom";
+import { getColorScheme } from "../../../utils/colorScheme";
 
 
 const SearchOutlinedInputPC = styled(OutlinedInput)(({theme}) => ({
@@ -65,18 +67,65 @@ function SearchInputPC({...props}: BoxProps) {
 
 const SearchOutlinedInputMobile = styled(OutlinedInput)(({theme}) => ({
     borderRadius: "20px",
+    height: "34.6px",
     padding: `0 ${theme.spacing(2)} 0 ${theme.spacing(3)}`, 
     backgroundColor: theme.palette.background.paper,
     "& input": {
         padding: "6px 0",
-        lineHeight: "20px",
-        height: "auto",
         fontSize: "14px"
     }
 }));
 
+
+function SearchInputDisabledMobile({sx, ...props}: BoxProps) {
+    const theme = useTheme();
+
+    const {query, setQuery} = useContext(SearchContext);
+
+    const color = getColorScheme() == "light" ? "0, 0, 0" : "255, 255, 255"; 
+
+    return(
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "100%",
+
+                border: `1px solid rgba(${color}, 0.23)`,
+
+                p: "6px 10px 6px 14px",
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: "20px",
+                ...sx
+            }}
+            {...props}
+        >
+            {query != "" ?
+                <Typography>{query}</Typography>
+                :
+                <Typography
+                    color={`rgba(${color}, 0.42)`}
+                >Поиск</Typography>
+            }
+            <CloseIcon 
+                sx={{
+                    width: "20px",
+                    height: "20px",
+                    cursor: "pointer"
+                }}
+                onClick={() => {setQuery("")}}
+            />
+        </Box>
+    )
+}
+
+
 function SearchInputMobile({sx, ...props}: BoxProps) {
     const { query, setQuery } = useContext(SearchContext);
+
+    const theme = useTheme();
 
     return (
         <FormControl
@@ -95,6 +144,7 @@ function SearchInputMobile({sx, ...props}: BoxProps) {
                     id="search-input"
                     fullWidth
                     value={query}
+                    autoFocus
                     onInput={(event: React.FormEvent) => {
                         setQuery((event.target as HTMLInputElement).value)
                     }}
@@ -119,6 +169,16 @@ function SearchInputMobile({sx, ...props}: BoxProps) {
                 </SearchOutlinedInputMobile>
             </Box>
         </FormControl>
+    )
+}
+
+export function SearchInputDisabled({...props}: BoxProps) {
+    const {device} = useDeviceDetect();
+    
+    return (
+        <>
+            {device == DEVICE.MOBILE && <SearchInputDisabledMobile {...props}/>}
+        </>
     )
 }
 
