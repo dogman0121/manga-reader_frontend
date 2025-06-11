@@ -64,11 +64,11 @@ function SearchInputPC({...props}: BoxProps) {
 }
 
 const SearchOutlinedInputMobile = styled(OutlinedInput)(({theme}) => ({
-    borderRadius: "16px",
-    padding: `0 ${theme.spacing(2)}`, 
+    borderRadius: "20px",
+    padding: `0 ${theme.spacing(2)} 0 ${theme.spacing(3)}`, 
     backgroundColor: theme.palette.background.paper,
     "& input": {
-        padding: "8px 0",
+        padding: "6px 0",
         lineHeight: "20px",
         height: "auto",
         fontSize: "14px"
