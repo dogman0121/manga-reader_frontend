@@ -76,7 +76,7 @@ const SearchOutlinedInputMobile = styled(OutlinedInput)(({theme}) => ({
 }));
 
 
-function SearchInputDisabledMobile({sx, ...props}: BoxProps) {
+function SearchInputDisabledMobile({sx, onClick, ...props}: BoxProps) {
     const theme = useTheme();
 
     const {query, setQuery} = useContext(SearchContext);
@@ -101,13 +101,18 @@ function SearchInputDisabledMobile({sx, ...props}: BoxProps) {
             }}
             {...props}
         >
-            {query != "" ?
-                <Typography>{query}</Typography>
-                :
-                <Typography
-                    color={`rgba(${color}, 0.42)`}
-                >Поиск</Typography>
-            }
+            <Box
+                sx={{width: "100%"}}
+                onClick={onClick}
+            >
+                {query != "" ?
+                    <Typography>{query}</Typography>
+                    :
+                    <Typography
+                        color={`rgba(${color}, 0.42)`}
+                    >Поиск</Typography>
+                }
+            </Box>
             <CloseIcon 
                 sx={{
                     width: "20px",
