@@ -7,7 +7,7 @@ const MyTextField = styled(TextField)(({theme}) => ({
         borderRadius: "12px",
     },
     "& input": {
-        padding: "8px 15px"
+        padding: "5px 15px"
     },
 }))
 

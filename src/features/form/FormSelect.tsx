@@ -7,7 +7,7 @@ const MySelect = styled(Select)(({theme}) => ({
     borderRadius: "12px",
     backgroundColor: theme.palette.background.paper,
     "& .MuiSelect-select": {
-        padding: "8px 15px",
+        padding: "5px 15px",
     }
 }))
 

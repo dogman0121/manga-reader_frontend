@@ -8,7 +8,7 @@ import { getColorScheme } from "../../../utils/colorScheme";
 
 
 const SearchOutlinedInputPC = styled(OutlinedInput)(({theme}) => ({
-    borderRadius: "16px",
+    borderRadius: "30px",
     padding: `0 ${theme.spacing(3)}`, 
     backgroundColor: theme.palette.background.paper,
     "& input": {
