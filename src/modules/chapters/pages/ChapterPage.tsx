@@ -87,8 +87,9 @@ function Header({onOpenOptions}: {onOpenOptions: () => void}) {
 
     useEffect(() => {
         const hideHeader = throttle(() => {
+            if (window.scrollY)
+                return setHiddenHeader(false);
             if (document.body.scrollHeight <= (window.innerHeight + window.scrollY + 100)){
-                console.log(123);
                 return setHiddenHeader(false);
             }
 
