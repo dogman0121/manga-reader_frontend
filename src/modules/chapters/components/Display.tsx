@@ -109,6 +109,7 @@ function HorizontalDisplay({
                 setPageIndex((ind) => ind+1)
                 window.scrollTo(0, 0);
             }
+            event.stopPropagation();
         }
         else if (sector == SECTOR.LEFT) {
             if (pageIndex - 1 < 0){
@@ -123,6 +124,7 @@ function HorizontalDisplay({
                 setPageIndex((ind) => ind-1);
                 window.scrollTo(0, 0);
             }
+            event.stopPropagation();
         }
     }
 

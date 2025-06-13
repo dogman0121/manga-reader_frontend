@@ -124,7 +124,7 @@ function ReaderSettingsMobile({open, onClose}: {open: boolean, onClose: Function
     return (
         <Backdrop
             open={open}
-            onClick={() => {onClose}}
+            onClick={() => {onClose()}}
         >    
             <Box
                 sx={{
