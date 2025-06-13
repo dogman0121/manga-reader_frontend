@@ -88,6 +88,7 @@ function Header({onOpenOptions}: {onOpenOptions: () => void}) {
     useEffect(() => {
         const hideHeader = throttle(() => {
             if (document.body.scrollHeight <= (window.innerHeight + window.scrollY + 100)){
+                console.log(123);
                 return setHiddenHeader(false);
             }
 
@@ -98,7 +99,7 @@ function Header({onOpenOptions}: {onOpenOptions: () => void}) {
             setHiddenHeader((q) => !q);
         }
 
-        //window.addEventListener("click", showHeader);
+        window.addEventListener("click", showHeader);
         window.addEventListener("scroll", hideHeader);
 
         return () => {
@@ -111,16 +112,17 @@ function Header({onOpenOptions}: {onOpenOptions: () => void}) {
     return (
         <>
             <HeaderInner onOpenOptions={onOpenOptions}/>
-            <HeaderInner 
-                onOpenOptions={onOpenOptions}
-                sx={{
-                    position: "fixed",
-                    top: 0,
-                    visibility: hiddenHeader ? 0 : 100,
-                    width: "100vw",
-                    transition: ".2s"
-                }}
-            />
+            {!hiddenHeader && (
+                <HeaderInner 
+                    onOpenOptions={onOpenOptions}
+                    sx={{
+                        position: "fixed",
+                        top: 0,
+                        width: "100vw",
+                        transition: ".2s"
+                    }}
+                />
+            )}
         </>
     )
 }
