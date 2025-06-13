@@ -26,7 +26,7 @@ import { titleService } from "../../titles/service/api/titleService";
 import Title from "../../../pages/title/types/Title";
 import TitleProvider from "../../titles/components/TitleProvider";
 
-function HeaderInner({sx}: {sx?: SxProps}) {
+function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => void}) {
     const theme = useTheme();
 
     const navigate = useNavigate();
@@ -66,7 +66,11 @@ function HeaderInner({sx}: {sx?: SxProps}) {
                     <Typography>ТОМ {chapter?.tome || "-"} ГЛАВА {chapter?.chapter || "-"}</Typography>
                     <MoreVertRoundedIcon sx={{width: "24px", height: "24px"}}
                         ref={optionsAnchor}
-                        onClick={() => {setOptionsOpened(true)}}
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            onOpenOptions();
+                            setOptionsOpened(q => !q);
+                        }}
                     />
                 </Box>
             </Content>
@@ -78,13 +82,14 @@ function HeaderInner({sx}: {sx?: SxProps}) {
     )
 }
 
-function Header() {
+function Header({onOpenOptions}: {onOpenOptions: () => void}) {
     const [hiddenHeader, setHiddenHeader] = useState(true);
 
     useEffect(() => {
         const hideHeader = throttle(() => {
-            if (document.body.scrollHeight <= (window.innerHeight + window.scrollY))
+            if (document.body.scrollHeight <= (window.innerHeight + window.scrollY + 100)){
                 return setHiddenHeader(false);
+            }
 
             setHiddenHeader(true);
         }, 100)
@@ -93,7 +98,7 @@ function Header() {
             setHiddenHeader((q) => !q);
         }
 
-        window.addEventListener("click", showHeader);
+        //window.addEventListener("click", showHeader);
         window.addEventListener("scroll", hideHeader);
 
         return () => {
@@ -105,12 +110,13 @@ function Header() {
 
     return (
         <>
-            <HeaderInner />
+            <HeaderInner onOpenOptions={onOpenOptions}/>
             <HeaderInner 
+                onOpenOptions={onOpenOptions}
                 sx={{
                     position: "fixed",
                     top: 0,
-                    opacity: hiddenHeader ? 0 : 100,
+                    visibility: hiddenHeader ? 0 : 100,
                     width: "100vw",
                     transition: ".2s"
                 }}
@@ -189,6 +195,8 @@ export default function ChapterPage() {
 
     const theme = getTheme(getColorScheme());
 
+    const [hidden, setHidden] = useState(false);
+
     const getChapter = async(chapterId: number) => {
         const {data} = await chapterService.getChapter(chapterId);
 
@@ -251,6 +259,24 @@ export default function ChapterPage() {
             setCurrChapter(newChapter);   
         }
     }
+    
+    useEffect(() => {
+        const hideOptions = throttle(() => {
+            if (document.body.scrollHeight <= (window.innerHeight + window.scrollY + 10))
+                return setHidden(false);
+
+            if (window.scrollY == 0)
+                setHidden(false);
+            else
+                setHidden(true);
+        }, 100)
+
+        window.addEventListener("scroll", hideOptions)
+
+        return () => {
+            window.removeEventListener("scroll", hideOptions);
+        }
+    }, [])
 
     if (currChapter == null || title == null)
         return null;
@@ -268,11 +294,14 @@ export default function ChapterPage() {
                     <TitleProvider title={title} setTitle={setTitle}>
                         <ChapterProvider setChapter={setCurrChapter} chapter={currChapter}>
                             <Box component={"header"}>
-                                <Header />
+                                <Header onOpenOptions={() => {setHidden(true)}}/>
                             </Box>
                             <Box component={"main"}
                                 sx={{
                                     bgcolor: theme.palette.customBackgrounds.footer
+                                }}
+                                onClick={() => {
+                                    setHidden(q => !q)
                                 }}
                             >
                                 {isLoading ?
@@ -286,7 +315,8 @@ export default function ChapterPage() {
                                         }
                                     </>
                                 }
-                                <NavButtons 
+                                <NavButtons
+                                    open={!hidden} 
                                     onPrevious={onPrevButton}
                                     onNext={onNextButton}
                                     onShowComments={onShowComments}

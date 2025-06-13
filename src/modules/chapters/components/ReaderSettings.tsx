@@ -118,47 +118,55 @@ function ReaderSettingsPC({...props}: DrawerProps) {
 }
 
 
-function ReaderSettingsMobile({open, onClose}: {open: boolean, onClose: Function}) {
+function ReaderSettingsMobile({open, onClose}: {open: boolean, onClose: () => void}) {
     const theme = useTheme();
 
     return (
-        <Backdrop
-            open={open}
-            onClick={() => {onClose()}}
-        >    
-            <Box
+        <>
+            <Backdrop
+                open={open}
+                onClick={onClose}
                 sx={{
-                    px: theme.spacing(3),
-                    width: "100%",
-                    position: "absolute",
-                    bottom: theme.spacing(4),
+                    zIndex: theme.zIndex.drawer + 1,
+                    transition: 'opacity 0.3s ease',
+                    opacity: open ? 1 : 0,
+                    pointerEvents: open ? 'auto' : 'none'
                 }}
-                onClick={(event) => {event.stopPropagation()}}
-            >
+            >    
                 <Box
                     sx={{
-                        p: theme.spacing(3),
-                        bgcolor: theme.palette.background.paper,
-                        borderRadius: "12px"
+                        px: theme.spacing(3),
+                        width: "100%",
+                        position: "absolute",
+                        bottom: theme.spacing(4),
                     }}
+                    onClick={(event) => {event.stopPropagation()}}
                 >
-                    <SettingsInner />
+                    <Box
+                        sx={{
+                            p: theme.spacing(3),
+                            bgcolor: theme.palette.background.paper,
+                            borderRadius: "12px"
+                        }}
+                    >
+                        <SettingsInner />
+                    </Box>
                 </Box>
-            </Box>
-        </Backdrop>
+            </Backdrop>
+        </>
     )
 }
 
 
-export default function ReaderSettings({open, onClose}: {open: boolean, onClose: Function}) {
+export default function ReaderSettings({open, onClose}: {open: boolean, onClose: () => void}) {
     const {device} = useDeviceDetect();
 
     return (
         <>
             {device == DEVICE.PC ?
-                <ReaderSettingsPC open={open} onClose={() => {onClose()}}/>
+                <ReaderSettingsPC open={open} onClose={onClose}/>
                 :
-                <ReaderSettingsMobile open={open} onClose={() => {onClose()}}/>
+                <ReaderSettingsMobile open={open} onClose={onClose}/>
             }
         </>
     )

@@ -3,9 +3,8 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import ChatBubbleOutlineRoundedIcon from '@mui/icons-material/ChatBubbleOutlineRounded';
 import { getColorScheme } from "../../../utils/colorScheme";
 import { Box, IconButton, styled, useTheme } from "@mui/material"
-import { MouseEventHandler, useEffect, useState } from "react"
+import { MouseEventHandler } from "react"
 import useChapter from '../hooks/useChapter';
-import { throttle } from "lodash";
 
 const NavButton = styled(IconButton)((_theme) => ({
     width: "48px",
@@ -26,10 +25,12 @@ const NavButton = styled(IconButton)((_theme) => ({
 }))
 
 export default function NavButtons({
+    open,
     onPrevious, 
     onNext, 
     onShowComments
 }: {
+    open: boolean
     onPrevious: MouseEventHandler<HTMLButtonElement>,
     onNext: MouseEventHandler<HTMLButtonElement>,
     onShowComments: MouseEventHandler<HTMLButtonElement>
@@ -38,32 +39,6 @@ export default function NavButtons({
 
     const { chapter } = useChapter();
 
-    const [hidden, setHidden] = useState(false);
-
-    useEffect(() => {
-        const hideOptions = throttle(() => {
-            if (document.body.scrollHeight <= (window.innerHeight + window.scrollY))
-                return setHidden(false);
-
-            if (window.scrollY == 0)
-                setHidden(false);
-            else
-                setHidden(true);
-        }, 100)
-
-        const showOptions = () => {
-            setHidden((q) => !q);
-        }
-
-        window.addEventListener("click", showOptions);
-        window.addEventListener("scroll", hideOptions)
-
-        return () => {
-            window.removeEventListener("click", showOptions);
-            window.removeEventListener("scroll", hideOptions);
-        }
-    }, [])
-
     return (
         <Box
             sx={{
@@ -71,20 +46,21 @@ export default function NavButtons({
                 display: "flex",
                 justifyContent: "center",
                 position: "sticky",
+                opacity: open ? 1 : 0,
                 pb: theme.spacing(4),
                 bottom: 0
             }}
         >
             <Box
                 sx={{
-                    opacity: hidden ? 0 : 100,
                     transition: ".2s",
                     display: "flex",
                     flexDirection: "row",
                     columnGap: theme.spacing(3),
                 }}
             >
-                <NavButton disabled={chapter?.previous_chapter == null}
+                <NavButton 
+                    disabled={chapter?.previous_chapter == null || !open}
                     onClick={onPrevious}
                 >
                     <ArrowBackIosRoundedIcon />
@@ -99,7 +75,8 @@ export default function NavButtons({
                         }}
                     />
                 </NavButton>
-                <NavButton disabled={chapter?.next_chapter == null}
+                <NavButton 
+                    disabled={chapter?.next_chapter == null || !open}
                     onClick={onNext}
                 >
                     <ArrowForwardIosRoundedIcon 
