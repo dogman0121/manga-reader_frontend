@@ -112,17 +112,17 @@ function Header({onOpenOptions}: {onOpenOptions: () => void}) {
     return (
         <>
             <HeaderInner onOpenOptions={onOpenOptions}/>
-            {!hiddenHeader && (
-                <HeaderInner 
-                    onOpenOptions={onOpenOptions}
-                    sx={{
-                        position: "fixed",
-                        top: 0,
-                        width: "100vw",
-                        transition: ".2s"
-                    }}
-                />
-            )}
+            <HeaderInner 
+                onOpenOptions={onOpenOptions}
+                sx={{
+                    position: "fixed",
+                    top: 0,
+                    transform: hiddenHeader ? "translateY(-100%)" : "translateY(0%)",
+                    opacity: hiddenHeader ? 0 : 100,
+                    width: "100vw",
+                    transition: ".2s"
+                }}
+            />
         </>
     )
 }
