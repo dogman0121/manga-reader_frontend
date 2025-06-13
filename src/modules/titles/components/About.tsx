@@ -3,9 +3,12 @@ import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import { Box, useTheme } from "@mui/material";
 import useTitle from "../hooks/useTitle";
+import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 
 function About() {
     const [open, setOpen] = useState(false);
+
+    const {device} = useDeviceDetect();
 
     const { title } = useTitle();
 
@@ -49,7 +52,7 @@ function About() {
                     width: "100%",
                     overflowWrap: "break-word",
                     overflowY: "hidden",
-                    fontSize: "16px"
+                    fontSize: device == DEVICE.MOBILE ? "14px" : "16px" 
                 }}
                 ref={textRef}
             >

@@ -216,7 +216,7 @@ function TitlePageMobile() {
                                 rowGap: theme.spacing(3)
                             }}
                         >
-                            <About />
+                            <About/>
                             <GenresList />
                             <OtherNames />
                             <Similar />
