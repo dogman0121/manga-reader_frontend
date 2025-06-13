@@ -133,6 +133,7 @@ function ReaderSettingsMobile({open, onClose}: {open: boolean, onClose: Function
                     position: "absolute",
                     bottom: theme.spacing(4),
                 }}
+                onClick={(event) => {event.stopPropagation()}}
             >
                 <Box
                     sx={{
