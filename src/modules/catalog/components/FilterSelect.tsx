@@ -8,6 +8,7 @@ const MySelect = styled(FormSelect)(() => ({
         lineHeight: "16px"
     },
     '& .MuiOutlinedInput-root': {
+        backgroundColor: "transparent",
         '& fieldset': {
             borderRadius: "12px",
         },

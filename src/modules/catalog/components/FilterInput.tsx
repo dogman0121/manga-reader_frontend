@@ -5,9 +5,10 @@ import { ChangeEvent } from "react";
 
 const MyInput = styled(FormInput)(() => ({
     '& .InputTitle': {
-        lineHeight: "16px"
+        lineHeight: "16px",
     },
     '& .MuiOutlinedInput-root': {
+        backgroundColor: "transparent !important",
         '& fieldset': {
             borderRadius: "12px",
         },
