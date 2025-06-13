@@ -125,7 +125,7 @@ function ReaderSettingsMobile({open, onClose}: {open: boolean, onClose: () => vo
         <>
             <Backdrop
                 open={open}
-                onClick={onClose}
+                onClick={(event) => {event.stopPropagation();onClose();}}
                 sx={{
                     zIndex: theme.zIndex.drawer + 1,
                     transition: 'opacity 0.3s ease',

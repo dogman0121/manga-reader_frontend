@@ -36,8 +36,6 @@ function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => vo
     const optionsAnchor = useRef(null);
 
     const {chapter} = useChapter();
-    
-    const [isOptionsOpened, setOptionsOpened] = useState(false);
 
     return (
         <Box
@@ -69,15 +67,10 @@ function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => vo
                         onClick={(event) => {
                             event.stopPropagation();
                             onOpenOptions();
-                            setOptionsOpened(q => !q);
                         }}
                     />
                 </Box>
             </Content>
-            <ReaderSettings 
-                onClose={() => {setOptionsOpened(false)}}
-                open={isOptionsOpened}
-            />
         </Box>
     )
 }
@@ -199,6 +192,8 @@ export default function ChapterPage() {
 
     const [hidden, setHidden] = useState(false);
 
+    const [isOptionsOpened, setOptionsOpened] = useState(false);
+
     const getChapter = async(chapterId: number) => {
         const {data} = await chapterService.getChapter(chapterId);
 
@@ -296,7 +291,7 @@ export default function ChapterPage() {
                     <TitleProvider title={title} setTitle={setTitle}>
                         <ChapterProvider setChapter={setCurrChapter} chapter={currChapter}>
                             <Box component={"header"}>
-                                <Header onOpenOptions={() => {setHidden(true)}}/>
+                                <Header onOpenOptions={() => {setHidden(true);  setOptionsOpened(q => !q)}}/>
                             </Box>
                             <Box component={"main"}
                                 sx={{
@@ -324,6 +319,10 @@ export default function ChapterPage() {
                                     onShowComments={onShowComments}
                                 />
                             </Box>
+                            <ReaderSettings 
+                                onClose={() => {setOptionsOpened(false)}}
+                                open={isOptionsOpened}
+                            />
                             <Modal
                                 open={commentsOpened}
                                 onClose={() => {setCommentsOpened(false)}}
