@@ -71,10 +71,8 @@ function HeaderInner({sx}: {sx?: SxProps}) {
                 </Box>
             </Content>
             <ReaderSettings 
-                elevation={0}
                 onClose={() => {setOptionsOpened(false)}}
                 open={isOptionsOpened}
-                anchor="right"
             />
         </Box>
     )
@@ -166,6 +164,14 @@ export function Footer() {
         </Box>
     )
 }
+
+// function ChapterPagePC() {
+
+// }
+
+// function ChapterPageMobile() {
+
+// }
 
 export default function ChapterPage() {
     const [currChapter, setCurrChapter] = useState<Chapter | null>(null);

@@ -1,6 +1,9 @@
-import { Box, Drawer, DrawerProps, ToggleButtonGroup, ToggleButton, styled, useTheme, Typography, Switch } from "@mui/material";
+import { Box, DrawerProps, ToggleButtonGroup, ToggleButton, styled, useTheme, Typography, Switch, Backdrop } from "@mui/material";
+import Drawer from "../../../components/ui/Drawer";
+
 import { ChangeEvent, useContext } from "react";
 import ReaderSettingsContext from "../context/ReaderSettingsContext";
+import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 
 const OptionsList = styled(ToggleButtonGroup)(({ theme }) => ({
     borderRadius: "12px",
@@ -34,8 +37,8 @@ const Option = styled(ToggleButton)(({ theme }) => ({
     }
 }))
 
-export default function ReaderSettings({...props}: DrawerProps) {
-    const theme = useTheme();
+function SettingsInner() {
+    const theme = useTheme()
 
     const {settings, setSettings} = useContext(ReaderSettingsContext);
 
@@ -54,52 +57,108 @@ export default function ReaderSettings({...props}: DrawerProps) {
         setSettings(s);
     }
 
+
+    return (
+        <>
+            <Typography textAlign={"center"} fontSize={"16px"}>Настройки</Typography>
+            <Box 
+                sx={{
+                    mt: theme.spacing(4),
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: theme.spacing(3)
+                }}    
+            >
+                <Box>
+                    <Typography>Режим чтения</Typography>
+                    <OptionsList 
+                        exclusive
+                        sx={{mt: "5px"}}
+                        value={settings.readingMode}
+                        onChange={handleChangeReadingMode}
+                    >
+                        <Option value="horizontal">Горизонтальный</Option>
+                        <Option value="vertical">Вертикальный</Option>
+                    </OptionsList>
+                </Box>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between"
+                    }}
+                >
+                    <Typography>Бесконечная глава</Typography>
+                    <Switch 
+                        onChange={handleChangeInfinityChapter} 
+                        checked={settings.infinityChapter}
+                    />
+                </Box>
+            </Box>
+        </>
+    )
+}
+
+function ReaderSettingsPC({...props}: DrawerProps) {
     return (
         <Drawer
+            anchor="right"
+            elevation={0}
             {...props}
         >
             <Box
                 sx={{
                     width: "400px",
-                    padding: `${theme.spacing(5)} ${theme.spacing(3)}`
                 }}
             >
-                <Typography textAlign={"center"} fontSize={"16px"}>Настройки</Typography>
-                <Box 
-                    sx={{
-                        mt: theme.spacing(4),
-                        display: "flex",
-                        flexDirection: "column",
-                        rowGap: theme.spacing(3)
-                    }}    
-                >
-                    <Box>
-                        <Typography>Режим чтения</Typography>
-                        <OptionsList 
-                            exclusive
-                            sx={{mt: "5px"}}
-                            value={settings.readingMode}
-                            onChange={handleChangeReadingMode}
-                        >
-                            <Option value="horizontal">Горизонтальный</Option>
-                            <Option value="vertical">Вертикальный</Option>
-                        </OptionsList>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between"
-                        }}
-                    >
-                        <Typography>Бесконечная глава</Typography>
-                        <Switch 
-                            onChange={handleChangeInfinityChapter} 
-                            checked={settings.infinityChapter}
-                        />
-                    </Box>
-                </Box>
+                <SettingsInner />
             </Box>
         </Drawer>
+    )
+}
+
+
+function ReaderSettingsMobile({open, onClose}: {open: boolean, onClose: Function}) {
+    const theme = useTheme();
+
+    return (
+        <Backdrop
+            open={open}
+            onClick={() => {onClose}}
+        >    
+            <Box
+                sx={{
+                    px: theme.spacing(3),
+                    width: "100%",
+                    position: "absolute",
+                    bottom: theme.spacing(4),
+                }}
+            >
+                <Box
+                    sx={{
+                        p: theme.spacing(3),
+                        bgcolor: theme.palette.background.paper,
+                        borderRadius: "12px"
+                    }}
+                >
+                    <SettingsInner />
+                </Box>
+            </Box>
+        </Backdrop>
+    )
+}
+
+
+export default function ReaderSettings({open, onClose}: {open: boolean, onClose: Function}) {
+    const {device} = useDeviceDetect();
+
+    return (
+        <>
+            {device == DEVICE.PC ?
+                <ReaderSettingsPC open={open} onClose={() => {onClose()}}/>
+                :
+                <ReaderSettingsMobile open={open} onClose={() => {onClose()}}/>
+            }
+        </>
     )
 }
