@@ -83,7 +83,7 @@ function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => vo
 }
 
 function Header({onOpenOptions}: {onOpenOptions: () => void}) {
-    const [hiddenHeader, setHiddenHeader] = useState(true);
+    const [hiddenHeader, setHiddenHeader] = useState(false);
 
     useEffect(() => {
         const hideHeader = throttle(() => {
@@ -111,7 +111,6 @@ function Header({onOpenOptions}: {onOpenOptions: () => void}) {
 
     return (
         <>
-            <HeaderInner onOpenOptions={onOpenOptions}/>
             <HeaderInner 
                 onOpenOptions={onOpenOptions}
                 sx={{

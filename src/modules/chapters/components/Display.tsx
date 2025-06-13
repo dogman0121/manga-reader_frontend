@@ -20,7 +20,12 @@ function PagesContainer({children}: {children?: any}) {
         <Box
             sx={{
                 bgcolor: theme.palette.background.paper,
-                width: "100%"
+                width: "100%",
+                minHeight: "100vh",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center"
             }}
         >
             {Children.map(children, child => child)}
