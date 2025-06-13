@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material/styles";
-
 declare module '@mui/material/styles' {
     interface TypeBackground {
         defaultChannel?: string;
@@ -192,37 +191,28 @@ export const darkTheme = createTheme({
     }
 })
 
-// const darkTheme = createTheme(Object.assign(defaultTheme, {
-//     palette: {
-//         mode: "dark",
-//         primary: {
-//             main: "#FFD600"
-//         },
-//         secondary: {
-//             main: "#2f2f2f"
-//         },
-//         background: {
-//             default: "#171717",
-//             paper: "#171717"
-//         },
-//         customBackgrounds: {
-//             header: "#06090E",
-//             footer: "#06090E",
-//             widget1: "#131313",
-//             widget2: "#2f2f2f",
-//             widget3: "#131313",
-//             paper: "#171717"
-//         },
-//     },
-//     typography: {
-//         body1: {
-//             color: "#FFFFFF"
-//         },
-//         subtitle1: {
-//             fontSize: "14px",
-//             color: "#D9D9D9"            
-//         }
-//     }
-// }));
+
+export const getMobileTheme = (mode: "light" | "dark") => {
+    if (mode == "dark")
+        return darkMobileTheme;
+    return lightMobileTheme;
+}
+
+const darkMobileTheme = createTheme({
+    ...darkTheme, 
+});
+
+
+const lightMobileTheme = createTheme({
+    ...lightTheme, 
+    palette: {
+        ...lightTheme.palette,
+        background: {
+            ...lightTheme.palette.background,
+            default: "#FFFFFF",
+            defaultChannel: "255  255 255"
+        }
+    }
+})
 
 export default getTheme;

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ThemeContext from "./context/ThemeContext"
 import { getColorScheme, setColorScheme } from "./utils/colorScheme";
 import { ThemeProvider } from "@mui/material/styles";
-import getTheme from "./theme";
+import getTheme, { getMobileTheme } from "./theme";
 import { CssBaseline } from "@mui/material";
 import AuthPage from "./features/auth/components/AuthPage";
 import { HelmetProvider } from "react-helmet-async";
@@ -26,10 +26,13 @@ import ChapterIndex from "./pages/chapters";
 import ChapterCreate from "./pages/chapters/create";
 import ChapterEdit from "./pages/chapters/edit";
 import TitleIndex from "./pages/title";
+import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
 
 
 function App() {
   const [theme, setTheme] = useState<"dark" | "light">(getColorScheme());
+
+  const {device} = useDeviceDetect();
 
   const handleSetTheme = (theme: "dark" | "light") => {
       setColorScheme(theme);
@@ -50,7 +53,7 @@ function App() {
             setTheme: handleSetTheme
           }}
         >
-          <ThemeProvider theme={getTheme(theme)}>
+          <ThemeProvider theme={device == DEVICE.MOBILE ? getMobileTheme(theme) : getTheme(theme)}>
             <CssBaseline />
             <AuthProvider>
               <Routes>

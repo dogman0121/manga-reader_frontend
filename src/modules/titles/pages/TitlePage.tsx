@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Title from "../../../pages/title/types/Title";
 import { titleService } from "../service/api/titleService";
 import TitleProvider from "../components/TitleProvider";
@@ -124,6 +124,8 @@ function TitlePageMobile() {
 
     const theme = useTheme();
 
+    const navigate = useNavigate();
+
     const [section, setSection] = useState<string>('1');
         
     const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
@@ -134,102 +136,128 @@ function TitlePageMobile() {
         return null;
 
     return (
-        <AppContent>
-            <Box>
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between"
-                    }}
-                >
-                    <WestRoundedIcon />
-                    <MoreVertRoundedIcon />
-                </Box>
-                <Box
-                    sx={{
-                        mt: theme.spacing(7)
-                    }}
-                >
+        <Box>
+            <AppContent>
+                <Box>
                     <Box
                         sx={{
-                            position: "relative",
                             display: "flex",
-                            margin: "0 auto",
-
-                            minWidth: "160px",
-                            maxWidth: "200px",
-                            width: "50%"
+                            justifyContent: "space-between"
+                        }}
+                    >
+                        <WestRoundedIcon 
+                            onClick={() => {navigate(-1)}}
+                        />
+                        <MoreVertRoundedIcon />
+                    </Box>
+                    <Box
+                        sx={{
+                            mt: theme.spacing(7)
                         }}
                     >
                         <Box
                             sx={{
+                                position: "relative",
                                 display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                position: "absolute",
-                                right: 0,
-                                top: 0,
-                                transform: "translate(30%, -30%)",
+                                margin: "0 auto",
 
-                                width: "40px",
-                                height: "40px",
-
-                                borderRadius: "50%",
-                                background: "#FF0000",
-                                fontSize: "24px",
-                                color: "#FFFFFF"
+                                minWidth: "160px",
+                                maxWidth: "200px",
+                                width: "50%"
                             }}
                         >
-                            10
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    position: "absolute",
+                                    right: 0,
+                                    top: 0,
+                                    transform: "translate(30%, -30%)",
+
+                                    width: "40px",
+                                    height: "40px",
+
+                                    borderRadius: "50%",
+                                    background: "#FF0000",
+                                    fontSize: "24px",
+                                    color: "#FFFFFF"
+                                }}
+                            >
+                                10
+                            </Box>
+                            <Poster 
+                                src={title.main_poster?.medium || ""}
+                            />
                         </Box>
-                        <Poster 
-                            src={title.main_poster?.medium || ""}
-                        />
                     </Box>
+                    <Names 
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center"
+
+                        }}
+                    />
+                    <Stats 
+                        sx={{
+                            mt: theme.spacing(4),
+                            columnGap: theme.spacing(5),
+                            justifyContent: "center"
+                        }}
+                    />
+                    <TabContext value={section}>
+                        <TabList onChange={handleChange} sx={{mt: theme.spacing(4)}}>
+                            <Tab label="Информация" value="1" sx={{fontSize: "14px"}}/>
+                            <Tab label="Главы" value="2" sx={{fontSize: "14px"}}/>
+                            <Tab label="Комментарии" value="3" sx={{fontSize: "14px"}}/>
+                        </TabList>
+                        <TabPanel value="1" sx={{p: `${theme.spacing(3)} 0`}}>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    rowGap: theme.spacing(3)
+                                }}
+                            >
+                                <About/>
+                                <GenresList />
+                                <OtherNames />
+                                <Similar />
+                            </Box>
+                        </TabPanel>
+                        <TabPanel value="2" sx={{p: `${theme.spacing(3)} 0`}}><Chapters /></TabPanel>
+                        <TabPanel value="3" sx={{p: `${theme.spacing(3)} 0`}}><Comments /></TabPanel>
+                    </TabContext>
                 </Box>
-                <Names 
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center"
+                <Box>
 
-                    }}
-                />
-                <Stats 
-                    sx={{
-                        mt: theme.spacing(4),
-                        columnGap: theme.spacing(5),
-                        justifyContent: "center"
-                    }}
-                />
-                <TabContext value={section}>
-                    <TabList onChange={handleChange} sx={{mt: theme.spacing(4)}}>
-                        <Tab label="Информация" value="1" sx={{fontSize: "14px"}}/>
-                        <Tab label="Главы" value="2" sx={{fontSize: "14px"}}/>
-                        <Tab label="Комментарии" value="3" sx={{fontSize: "14px"}}/>
-                    </TabList>
-                    <TabPanel value="1" sx={{p: `${theme.spacing(3)} 0`}}>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                rowGap: theme.spacing(3)
-                            }}
-                        >
-                            <About/>
-                            <GenresList />
-                            <OtherNames />
-                            <Similar />
-                        </Box>
-                    </TabPanel>
-                    <TabPanel value="2" sx={{p: `${theme.spacing(3)} 0`}}><Chapters /></TabPanel>
-                    <TabPanel value="3" sx={{p: `${theme.spacing(3)} 0`}}><Comments /></TabPanel>
-                </TabContext>
+                </Box>
+            </AppContent>
+            {title.background && (
+                <Box
+                sx={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    width: "100%",
+                    height: "600px",
+                    zIndex: "-1",
+                    background: `
+                        linear-gradient(rgba(${theme.palette.background.defaultChannel} / 0.8), 
+                        rgba(${theme.palette.background.defaultChannel} / 1)), 
+                        url('${title.background}')
+                    `,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPositionY: "0"
+                }}
+            >
             </Box>
-            <Box>
-
-            </Box>
-        </AppContent>
+            )}
+        </Box>
     )
 }
 
