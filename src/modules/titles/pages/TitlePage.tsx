@@ -23,6 +23,9 @@ import Chapters from "../components/Chapters";
 import Comments from "../components/Comments";
 import OpenGraphMeta from "../../../components/OpenGraphMeta";
 import { generatePath, TitleRoutes } from "../../../routes";
+import WestRoundedIcon from '@mui/icons-material/WestRounded';
+import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
+import Similar from "../../../pages/title/components/Similar";
 
 
 function TitlePagePC() {
@@ -117,7 +120,117 @@ function TitlePagePC() {
 }
 
 function TitlePageMobile() {
-    return (<></>)
+    const {title} = useTitle();
+
+    const theme = useTheme();
+
+    const [section, setSection] = useState<string>('1');
+        
+    const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
+        setSection(newValue);
+    };
+
+    if (!title)
+        return null;
+
+    return (
+        <AppContent>
+            <Box>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-between"
+                    }}
+                >
+                    <WestRoundedIcon />
+                    <MoreVertRoundedIcon />
+                </Box>
+                <Box
+                    sx={{
+                        mt: theme.spacing(7)
+                    }}
+                >
+                    <Box
+                        sx={{
+                            position: "relative",
+                            display: "flex",
+                            margin: "0 auto",
+
+                            minWidth: "160px",
+                            maxWidth: "200px",
+                            width: "50%"
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                position: "absolute",
+                                right: 0,
+                                top: 0,
+                                transform: "translate(30%, -30%)",
+
+                                width: "40px",
+                                height: "40px",
+
+                                borderRadius: "50%",
+                                background: "#FF0000",
+                                fontSize: "24px",
+                                color: "#FFFFFF"
+                            }}
+                        >
+                            10
+                        </Box>
+                        <Poster 
+                            src={title.main_poster?.medium || ""}
+                        />
+                    </Box>
+                </Box>
+                <Names 
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center"
+
+                    }}
+                />
+                <Stats 
+                    sx={{
+                        mt: theme.spacing(4),
+                        columnGap: theme.spacing(5),
+                        justifyContent: "center"
+                    }}
+                />
+                <TabContext value={section}>
+                    <TabList onChange={handleChange} sx={{mt: theme.spacing(4)}}>
+                        <Tab label="Информация" value="1" sx={{fontSize: "14px"}}/>
+                        <Tab label="Главы" value="2" sx={{fontSize: "14px"}}/>
+                        <Tab label="Комментарии" value="3" sx={{fontSize: "14px"}}/>
+                    </TabList>
+                    <TabPanel value="1" sx={{p: `${theme.spacing(3)} 0`}}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                rowGap: theme.spacing(3)
+                            }}
+                        >
+                            <About />
+                            <GenresList />
+                            <OtherNames />
+                            <Similar />
+                        </Box>
+                    </TabPanel>
+                    <TabPanel value="2" sx={{p: `${theme.spacing(3)} 0`}}><Chapters /></TabPanel>
+                    <TabPanel value="3" sx={{p: `${theme.spacing(3)} 0`}}><Comments /></TabPanel>
+                </TabContext>
+            </Box>
+            <Box>
+
+            </Box>
+        </AppContent>
+    )
 }
 
 

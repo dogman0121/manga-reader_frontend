@@ -1,6 +1,14 @@
 import { Box } from "@mui/material";
 
-function Poster({src, width}: {src: string, width?: string}){
+function Poster({
+    src, 
+    width,
+    style
+}: {
+    src: string, 
+    width?: string
+    style?: React.CSSProperties
+}){
     return (
         <Box
             sx={{
@@ -13,6 +21,7 @@ function Poster({src, width}: {src: string, width?: string}){
                     aspectRatio: "2/3",
                     borderRadius: "3% / 2%",
                     width: "100%",
+                    ...style
                 }} 
             />
         </Box>

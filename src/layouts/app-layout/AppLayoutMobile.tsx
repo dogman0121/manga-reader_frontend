@@ -27,7 +27,7 @@ export function Content({children}: {children: React.ReactNode}) {
         <Box sx={{
             pb: "52px",
             bgcolor: theme.palette.background.paper,
-            height: "100%"
+            minHeight: "100%"
         }}>
             {children}
         </Box>

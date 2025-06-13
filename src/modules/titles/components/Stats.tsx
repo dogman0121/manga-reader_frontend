@@ -2,7 +2,7 @@ import React from "react";
 import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { Box, SxProps, Typography } from "@mui/material";
-import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import StarOutlineRoundedIcon from '@mui/icons-material/StarOutlineRounded';
 import useTitle from "../hooks/useTitle";
 
 function StatsItem({children}: {children: React.ReactNode}) {
@@ -52,7 +52,7 @@ function Stats({sx}: {sx?: SxProps}) {
             }}
         >
             <StatsItem>
-                <StarBorderRoundedIcon
+                <StarOutlineRoundedIcon
                     sx={{
                         width: "28px",
                         height: "28px"
