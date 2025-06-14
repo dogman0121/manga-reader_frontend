@@ -145,6 +145,9 @@ function SearchInputMobile({sx, ...props}: BoxProps) {
                 <SearchOutlinedInputMobile
                     id="search-input"
                     fullWidth
+                    autoCapitalize="off"
+                    autoComplete="off"
+                    autoCorrect="off"
                     value={query}
                     autoFocus
                     onInput={(event: React.FormEvent) => {
