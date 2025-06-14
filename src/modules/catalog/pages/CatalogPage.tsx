@@ -120,7 +120,7 @@ function CatalogPageMobile() {
                         sx={{
                             width: "100vw",
                             height: "100vh",
-                            bgcolor: theme.palette.background.paper
+                            bgcolor: theme.palette.background.default
                         }}
                     >
                         <AppContent>

@@ -146,9 +146,13 @@ function SearchInputMobile({sx, ...props}: BoxProps) {
                     id="search-input"
                     type="text"
                     fullWidth
-                    autoCapitalize="off"
-                    autoComplete="off"
-                    autoCorrect="off"
+                    slotProps={{
+                        input: {
+                            autoCapitalize:"off",
+                            autoComplete:"off",
+                            autoCorrect:"off"
+                        }
+                    }}
                     value={query}
                     autoFocus
                     onInput={(event: React.FormEvent) => {
