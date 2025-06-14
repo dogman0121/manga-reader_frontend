@@ -145,7 +145,7 @@ function SearchInputMobile({sx, ...props}: BoxProps) {
                 <SearchOutlinedInputMobile
                     id="search-input"
                     fullWidth
-                    autoCapitalize="off"
+                    autoCapitalize="none"
                     autoComplete="off"
                     autoCorrect="off"
                     value={query}
