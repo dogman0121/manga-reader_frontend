@@ -30,8 +30,7 @@ function CommentBody() {
                     <Link to={generatePath(UserRoutes.INDEX, {userId: comment.user.id})}><Typography>{comment.user.login}</Typography></Link>
                     <Link to={generatePath(CommentRoutes.INDEX, {commentId: comment.id})}>
                         <Typography 
-                            variant="subtitle1"
-                            color="#545454"
+                            variant="caption"
                             fontSize={"12px"}
                             lineHeight={1.2}
                         >

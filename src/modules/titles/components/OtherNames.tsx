@@ -18,7 +18,7 @@ function OtherNames() {
         >
             <Typography lineHeight={"16px"}>Другие названия</Typography>
             <Breadcrumbs sx={{mt: theme.spacing(1)}}>
-                {title.name_translations?.map(name => <Typography lineHeight={"16px"} variant="subtitle1" fontSize={"14px"} key={name.lang}>{name.name}</Typography>)}
+                {title.name_translations?.map(name => <Typography lineHeight={"16px"} variant="caption" fontSize={"14px"} key={name.lang}>{name.name}</Typography>)}
             </Breadcrumbs>
         </Box>
     )
