@@ -26,6 +26,8 @@ import { generatePath, TitleRoutes } from "../../../routes";
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import Similar from "../../../pages/title/components/Similar";
+import Rating from "../components/Rating";
+import ReadButton from "../components/ReadButton";
 
 
 function TitlePagePC() {
@@ -73,22 +75,48 @@ function TitlePagePC() {
                             sx={{
                                 display: "flex",
                                 flexDirection: "column",
-                                gap: theme.spacing(4)
                             }}
                         >
-                            <Names />
-                            <Stats />
-                            <About />
-                            <GenresList />
-                            <OtherNames />
-                            <TabContext value={section}>
-                                <TabList onChange={handleChange}>
-                                    <Tab label="Главы" value="1" sx={{fontSize: "14px"}}/>
-                                    <Tab label="Комментарии" value="2" sx={{fontSize: "14px"}}/>
-                                </TabList>
-                                <TabPanel value="1" sx={{p: "0"}}><Chapters /></TabPanel>
-                                <TabPanel value="2" sx={{p: "0"}}><Comments /></TabPanel>
-                            </TabContext>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    justifyContent: "space-between"
+                                }}
+                            >
+                                <Names />
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        rowGap: theme.spacing(1)
+                                    }}
+                                >
+                                    <ReadButton />
+                                    <Rating />
+                                </Box>
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: theme.spacing(4)
+                                }}
+                            >
+                                <Stats />
+                                <About />
+                                <GenresList />
+                                <OtherNames />
+                                <TabContext value={section}>
+                                    <TabList onChange={handleChange}>
+                                        <Tab label="Главы" value="1" sx={{fontSize: "14px"}}/>
+                                        <Tab label="Комментарии" value="2" sx={{fontSize: "14px"}}/>
+                                    </TabList>
+                                    <TabPanel value="1" sx={{p: "0"}}><Chapters /></TabPanel>
+                                    <TabPanel value="2" sx={{p: "0"}}><Comments /></TabPanel>
+                                </TabContext>
+                            </Box>
                         </Box>
                     </Box>
                 </Box>
@@ -166,27 +194,14 @@ function TitlePageMobile() {
                                 width: "50%"
                             }}
                         >
-                            <Box
+                            <Rating 
                                 sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
                                     position: "absolute",
                                     right: 0,
                                     top: 0,
                                     transform: "translate(30%, -30%)",
-
-                                    width: "40px",
-                                    height: "40px",
-
-                                    borderRadius: "50%",
-                                    background: "#FF0000",
-                                    fontSize: "24px",
-                                    color: "#FFFFFF"
                                 }}
-                            >
-                                10
-                            </Box>
+                            />
                             <Poster 
                                 src={title.main_poster?.medium || ""}
                             />

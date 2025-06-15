@@ -46,6 +46,9 @@ function SettingsInner() {
         _event: React.MouseEvent<HTMLElement>,
         newMode: "vertical" | "horizontal",
     ) => {
+        console.log(newMode);
+        if (!newMode)
+            return;
         const s = Object.assign({}, settings);
         s.readingMode = newMode;
         setSettings(s);
