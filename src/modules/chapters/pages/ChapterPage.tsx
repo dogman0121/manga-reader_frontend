@@ -327,7 +327,9 @@ export default function ChapterPage() {
                                 open={commentsOpened}
                                 onClose={() => {setCommentsOpened(false)}}
                                 sx={{
-                                    padding: "0"
+                                    padding: 0,
+                                    width: "100%",
+                                    height: "100%"
                                 }}
                             >
                                 <ChapterCommentsModal />
