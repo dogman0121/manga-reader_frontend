@@ -25,7 +25,8 @@ import OpenGraphMeta from "../../../components/OpenGraphMeta";
 import { titleService } from "../../titles/service/api/titleService";
 import Title from "../../../pages/title/types/Title";
 import TitleProvider from "../../titles/components/TitleProvider";
-import Meta from "../../../components/Meta";
+import Meta from "../../../components/StatusBar";
+import StatusBar from "../../../components/StatusBar";
 
 function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => void}) {
     const theme = useTheme();
@@ -256,13 +257,13 @@ export default function ChapterPage() {
     
     return (
         <>
+            <StatusBar color={theme.palette.customBackgrounds.header} />
             <OpenGraphMeta 
                 title={`Глава ${currChapter.chapter} ${title.type?.name} ${title.name} читать онлайн | kanwoo`}
                 description={""}
                 url={generateChapterPath(currChapter)}
             />
             <ThemeProvider theme={theme}>
-                <Meta />
                 <CssBaseline />
                 <ReaderSettingsProvider>
                     <TitleProvider title={title} setTitle={setTitle}>

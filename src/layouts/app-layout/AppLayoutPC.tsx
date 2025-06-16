@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styles from "./AppLayout.module.css"
-import { SvgIcon, Box, Button  } from "@mui/material";
+import { SvgIcon, Box } from "@mui/material";
 import { Avatar, Checkbox } from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
@@ -17,6 +17,7 @@ import { useTheme } from "@mui/material/styles";
 import MainBlurContext from "./MainBlurContext";
 import { AppRoutes } from "../../routes";
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Button from "../../components/ui/Button";
 
 
 export function ContentPC({children}: {children: React.ReactNode}) {
@@ -160,11 +161,11 @@ function AppHeader() {
                                                 widows: "36px"
                                             }}
                                         />
-                                        <Button 
+                                        <Button
                                             variant="contained" 
                                             onClick={() => {openModal()}}
                                             sx={{
-                                                height: "36px"
+                                                height: "32px"
                                             }}
                                         >
                                             Войти

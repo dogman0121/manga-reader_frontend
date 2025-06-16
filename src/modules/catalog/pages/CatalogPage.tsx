@@ -16,6 +16,7 @@ import MobileDrawer from "../../../components/ui/MobileDrawer";
 import MobileModal from "../../../components/ui/MobileModal";
 import SearchListModal from "../../../features/search/components/SearchListModal";
 import { useNavigate } from "react-router-dom";
+import StatusBar from "../../../components/StatusBar";
 
 function CatalogPagePC() {
     const theme = useTheme();
@@ -73,6 +74,9 @@ function CatalogPageMobile() {
 
     return (
         <>
+            <StatusBar 
+                color={theme.palette.background.default}
+            />
             <SearchProvider emptyQuery={true}>
                 <AppContent>
                     <Box
