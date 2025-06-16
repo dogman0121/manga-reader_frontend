@@ -1,4 +1,4 @@
-import { Box, Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { Box, Paper, BottomNavigation, BottomNavigationAction, useTheme } from "@mui/material";
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -32,6 +32,8 @@ export function Content({children}: {children: React.ReactNode}) {
 }
 
 function AppLayoutMobile() {
+    const theme = useTheme();
+
     const [navSection, setNavSection] = useState(0);
 
     const [ menuOpened, setMenuOpened ] = useState(false);
@@ -90,12 +92,15 @@ function AppLayoutMobile() {
                     {blurContent}
                 </Blur>
             </Content>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1000 }} elevation={3}>
+            <Box sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 1000, boxShadow: "0 -1px 5px rgba(0, 0, 0, 0.1)" }} >
                 <BottomNavigation
                     value={navSection}
                     onChange={(_event, newValue) => {
                         setPrevPage(navSection);
                         setNavSection(newValue);
+                    }}
+                    sx={{
+                        bgcolor: theme.palette.background.paper
                     }}
                 >
                     <BottomNavigationAction 
@@ -124,7 +129,7 @@ function AppLayoutMobile() {
                         onClick={() => {setMenuOpened(true)}}
                     />
                 </BottomNavigation>
-            </Paper>
+            </Box>
             <UserMenuDrawer 
                 open={menuOpened}
                 onClose={() => {
