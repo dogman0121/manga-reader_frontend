@@ -1,4 +1,4 @@
-import { useTheme, Box, Accordion, AccordionSummary, AccordionDetails, Typography, Divider } from "@mui/material";
+import { useTheme, Box, Accordion, AccordionSummary, AccordionDetails, Typography, Divider, Paper } from "@mui/material";
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import SettingsIcon from '@mui/icons-material/Settings';
 import ThemeSetting from "./ThemeSetting";
@@ -8,14 +8,16 @@ export default function SettingsPC() {
     const theme = useTheme();
 
     return (
-        <Box
+        <Paper
+            elevation={2}
             sx={{
                 display: "flex",
                 flexDirection: "row",
                 p: "4px 6px",
                 bgcolor: theme.palette.customBackgrounds?.widget1,
                 alignItems: "center",
-                borderRadius: "6px"
+                borderRadius: "6px",
+                boxShadow: "none"
             }}
         >
             <Accordion
@@ -71,6 +73,6 @@ export default function SettingsPC() {
                     </Box>
                 </AccordionDetails>
             </Accordion>
-        </Box>
+        </Paper>
     )
 }

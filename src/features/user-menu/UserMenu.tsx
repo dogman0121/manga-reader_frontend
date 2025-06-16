@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { EMPTY_USER } from "../../types/User";
 import UserContext from "../../context/UserAuthContext";
 import { 
     Avatar, 
@@ -48,7 +47,7 @@ function UserWidgetMobile() {
             <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})}>
                 <Widget
                     sx={{
-                        p: "15px 12px"
+                        p: "8px 7px"
                     }}
                 >
                     <Avatar 
@@ -57,7 +56,7 @@ function UserWidgetMobile() {
                         sx={{
                             width: "46px",
                             height: "46px",
-                            borderRadius: "8px"
+                            borderRadius: "6px"
                         }}
                     />
                     <Box
@@ -98,14 +97,16 @@ function UserWidgetPC() {
     return (
         <>
             <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})}>
-                <Box
+                <Paper
+                    elevation={2}
                     sx={{
                         display: "flex",
                         flexDirection: "row",
                         p: "4px 6px",
                         bgcolor: theme.palette.customBackgrounds?.widget1,
                         alignItems: "center",
-                        borderRadius: "6px"
+                        borderRadius: "6px",
+                        boxShadow: "none"
                     }}
                 >
                     <Avatar 
@@ -136,7 +137,7 @@ function UserWidgetPC() {
                         </Typography>
                         <Typography>{user.login}</Typography>
                     </Box>
-                </Box>
+                </Paper>
             </Link>
         </>
     )
@@ -170,7 +171,6 @@ function UserMenuMobile() {
     return (
         <Box
             sx={{
-                padding: "10px 5px",
                 height: "100%",
             }}
         >
@@ -216,7 +216,7 @@ function UserMenu(){
         <>
             {device === DEVICE.MOBILE ?
                 <>
-                    {user !== EMPTY_USER ?
+                    {user != null ?
                         <UserMenuMobile />
                         :
                         <AnonymusMenu />
@@ -275,7 +275,7 @@ export function UserMenuPopover({open, onClose, anchorEl}: PopoverProps) {
                     }
                 }}
             >   
-                <Paper elevation={0}
+                <Paper elevation={1}
                     sx={{
                         width: "250px",
                         padding: "10px",

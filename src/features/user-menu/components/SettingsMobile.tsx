@@ -9,7 +9,6 @@ export default function SettingsMobile() {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    padding: "10px 5px",
                     height: "100%",
                 }}
             >

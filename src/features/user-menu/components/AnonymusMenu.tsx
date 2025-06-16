@@ -1,7 +1,8 @@
-import {Box, Button, useTheme} from "@mui/material";
+import {Box, useTheme} from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../../auth/context/AuthContext";
 import HeaderMobile from "./HeaderMobile";
+import Button from "../../../components/ui/Button";
 
 export default function AnonymusMenu() {
     const { openModal } = useContext(AuthContext);
@@ -14,8 +15,7 @@ export default function AnonymusMenu() {
                 sx={{
                     width: "100%",
                     height: "100%",
-                    padding: "10px 5px",
-                    bgcolor: theme.palette.background.default,
+                    bgcolor: theme.palette.background.paper,
                 }}
             >
                 <HeaderMobile />

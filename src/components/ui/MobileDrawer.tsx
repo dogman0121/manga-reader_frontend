@@ -19,7 +19,8 @@ export default function MobileDrawer({open, onClose, anchor, children, sx}: Draw
                     sx={{
                         width: "75vw",
                         height: "100%",
-                        p: theme.spacing(3),
+                        py: theme.spacing(3),
+                        px: theme.spacing(2),
                         ...sx
                     }}
                 >
