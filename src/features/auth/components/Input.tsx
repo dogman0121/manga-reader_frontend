@@ -3,22 +3,21 @@ import { TextField } from "@mui/material"
 import {styled} from "@mui/material/styles"
 
 const Input = styled(TextField)(({ theme }) => ({
+    '& label': {
+      color: theme.typography.caption.color
+    },
     '& label.Mui-focused': {
-      color: theme.vars.font.body1,
+      color: theme.typography.body1.color,
     },
     '& .MuiInput-underline:after': {
       borderBottomColor: 'yellow',
     },
     '& .MuiOutlinedInput-root': {
-
+      borderRadius: "12px",
       '&.Mui-focused fieldset': {
-        borderColor: theme.vars.font.body1,
+        borderColor: theme.typography.body1.color,
       },
     },
-    '& input': {
-      '-webkit-text-fill-color': `${theme.vars.font.body1} !important`,
-      color: theme.vars.font.body1
-    }
 }))
 
 export default Input;

@@ -1,9 +1,10 @@
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import styles from "./Auth.module.css"
 import { useState } from "react";
 import { tokenService } from "../services/tokenService";
 import { authService } from "../services/api/authService";
 import Input from "./Input";
+import Button from "../../../components/ui/Button";
 
 function Login({ setSection, onSuccess }: { setSection: Function, onSuccess?: Function}) {
     const [wrongForm, setWrongForm] = useState(false);
@@ -13,16 +14,16 @@ function Login({ setSection, onSuccess }: { setSection: Function, onSuccess?: Fu
     const [password, setPassword] = useState("");
 
     const handleLogin = async() => {
-        const response = await authService.login(login, password);
+        const {data, error} = await authService.login(login, password);
 
-        if (response.msg) {
+        if (error) {
             setWrongForm(true);
         }
         else {
-            tokenService.saveAccessToken(response.access_token);
-            tokenService.saveRefreshToken(response.refresh_token);
+            tokenService.saveAccessToken(data.access_token);
+            tokenService.saveRefreshToken(data.refresh_token);
 
-            onSuccess ? onSuccess() : null;
+            onSuccess?.()
         }
 
     }

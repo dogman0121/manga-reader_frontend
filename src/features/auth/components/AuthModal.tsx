@@ -1,10 +1,10 @@
 import Modal from "@mui/material/Modal";
 import Auth from "./Auth";
 import { useContext, useState } from "react";
-import UserContext from "../../../context/UserAuthContext";
 import fetchUser from "../../../services/api/fetchUser";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import MobileModal from "../../../components/ui/MobileModal";
+import UserAuthContext from "../../../context/UserAuthContext";
 
 
 function AuthModal({open, onClose}: {open: boolean, onClose: Function}) {
@@ -12,10 +12,11 @@ function AuthModal({open, onClose}: {open: boolean, onClose: Function}) {
 
     const { device } = useDeviceDetect();
 
-    const {setUser} = useContext(UserContext);
+    const {setUser} = useContext(UserAuthContext);
 
     const onAuth = async() => {
-        setUser(await fetchUser());
+        const {data: user} = await fetchUser();
+        setUser(user);
         handleClose();
     }
 

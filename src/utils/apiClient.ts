@@ -50,10 +50,10 @@ class ApiClient {
         if (!response.ok) 
             throw new Error("Failed to refresh token");
     
-        const json = await response.json()
+        const {data} = await response.json()
 
-        tokenService.saveAccessToken(json.access_token);
-        tokenService.saveRefreshToken(json.refresh_token);
+        tokenService.saveAccessToken(data.access_token);
+        tokenService.saveRefreshToken(data.refresh_token);
     }
 
     async _fetch(url: string, method: string, body?: RequestInit) {

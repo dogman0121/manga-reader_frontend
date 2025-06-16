@@ -4,8 +4,6 @@ import { SvgIcon, Box } from "@mui/material";
 import { Avatar, Checkbox } from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
-import UserContext from "../../context/UserAuthContext";
-import { EMPTY_USER } from "../../types/User";
 import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import ThemeContext from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
@@ -18,6 +16,7 @@ import MainBlurContext from "./MainBlurContext";
 import { AppRoutes } from "../../routes";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Button from "../../components/ui/Button";
+import UserAuthContext from "../../context/UserAuthContext";
 
 
 export function ContentPC({children}: {children: React.ReactNode}) {
@@ -54,7 +53,7 @@ export function Content({children}: {children: React.ReactNode}) {
 function AppHeader() {
     const { setTheme } = useContext(ThemeContext);
 
-    const { user } = useContext(UserContext);
+    const { user } = useContext(UserAuthContext);
 
     const { openModal } = useContext(AuthContext);
 
@@ -138,53 +137,49 @@ function AppHeader() {
                         }}
                     >
                         <NotificationsIcon />
-                        {user != null && (
-                            <>
-                                {user === EMPTY_USER && 
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            columnGap: "4px"
-                                        }}
-                                    >
-                                        <Checkbox
-                                            checked={checked}
-                                            onChange={
-                                                (e: React.ChangeEvent<HTMLInputElement>) => { 
-                                                    setChecked(e.target.checked);
-                                                    e.target.checked ? setTheme("dark") : setTheme("light") 
-                                                }
-                                            }
-                                            sx={{
-                                                height: "36px",
-                                                widows: "36px"
-                                            }}
-                                        />
-                                        <Button
-                                            variant="contained" 
-                                            onClick={() => {openModal()}}
-                                            sx={{
-                                                height: "32px"
-                                            }}
-                                        >
-                                            Войти
-                                        </Button>
-                                    </Box>
-                                }
-                                { user !== EMPTY_USER &&
-                                    <Avatar 
-                                        ref={avatarRef}
-                                        src={user.avatar}
-                                        sx={{
-                                            width: "36px",
-                                            height: "36px"
-                                        }}
-                                        onClick={() => {setUserMenuOpened(true)}}
-                                    />
-                                }
-                            </>
-                        )}
+                        {user == null && 
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    columnGap: "4px"
+                                }}
+                            >
+                                <Checkbox
+                                    checked={checked}
+                                    onChange={
+                                        (e: React.ChangeEvent<HTMLInputElement>) => { 
+                                            setChecked(e.target.checked);
+                                            e.target.checked ? setTheme("dark") : setTheme("light") 
+                                        }
+                                    }
+                                    sx={{
+                                        height: "36px",
+                                        widows: "36px"
+                                    }}
+                                />
+                                <Button
+                                    variant="contained" 
+                                    onClick={() => {openModal()}}
+                                    sx={{
+                                        height: "32px"
+                                    }}
+                                >
+                                    Войти
+                                </Button>
+                            </Box>
+                        }
+                        { user &&
+                            <Avatar 
+                                ref={avatarRef}
+                                src={user.avatar}
+                                sx={{
+                                    width: "36px",
+                                    height: "36px"
+                                }}
+                                onClick={() => {setUserMenuOpened(true)}}
+                            />
+                        }
                     </Box>
                 </Box>
                 <UserMenuPopover

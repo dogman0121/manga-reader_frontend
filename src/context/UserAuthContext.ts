@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { EMPTY_USER, User } from "../types/User"
 
 interface UserAuthContextProps {
-    user: User | null,
+    user: User | null | undefined,
     setUser: Function
 }
 

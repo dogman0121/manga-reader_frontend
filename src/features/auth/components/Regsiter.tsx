@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box"
-import Button from "@mui/material/Button"
 import styles from "./Auth.module.css"
 import { useState } from "react";
 import { authService } from "../services/api/authService";
 import Input from "./Input";
+import Button from "../../../components/ui/Button";
 
 
 function Register({ setSection }: { setSection: Function }) {

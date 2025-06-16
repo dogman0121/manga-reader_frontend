@@ -1,8 +1,9 @@
-import { Box, Button} from "@mui/material";
+import { Box } from "@mui/material";
 import Input from "./Input";
 import styles from "./Auth.module.css"
 import { useState } from "react";
 import { authService } from "../services/api/authService";
+import Button from "../../../components/ui/Button";
 
 
 function Recovery({ setSection }: { setSection: Function}) {

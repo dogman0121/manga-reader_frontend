@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
 import { AuthContext } from "../context/AuthContext"
 import AuthModal from "./AuthModal"
-import { User, EMPTY_USER } from "../../../types/User";
-import UserContext from "../../../context/UserAuthContext";
+import { User } from "../../../types/User";
 import fetchUser from "../../../services/api/fetchUser";
+import UserAuthContext from "../../../context/UserAuthContext";
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
     const [modalOpened, setModalOpened] = useState(false);
 
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<User | null | undefined>(undefined);
 
     useEffect(() => {
         fetchUser()
@@ -16,11 +16,10 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
                 if (user)
                     setUser(user);
                 else
-                    setUser(EMPTY_USER);
+                    setUser(null);
             })
             .catch(() => {
-                console.log(123);
-                setUser(EMPTY_USER);
+                setUser(null);
             })
         
     }, [])
@@ -28,7 +27,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
     return (
         <>
-            <UserContext.Provider
+            <UserAuthContext.Provider
                 value={{
                     user: user,
                     setUser: setUser
@@ -46,7 +45,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
                         />
                     
                 </AuthContext.Provider>
-            </UserContext.Provider>
+            </UserAuthContext.Provider>
         </>
     )
 }
