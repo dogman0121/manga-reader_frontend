@@ -25,6 +25,7 @@ import OpenGraphMeta from "../../../components/OpenGraphMeta";
 import { titleService } from "../../titles/service/api/titleService";
 import Title from "../../../pages/title/types/Title";
 import TitleProvider from "../../titles/components/TitleProvider";
+import Meta from "../../../components/Meta";
 
 function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => void}) {
     const theme = useTheme();
@@ -280,6 +281,7 @@ export default function ChapterPage() {
     
     return (
         <>
+            <Meta />
             <OpenGraphMeta 
                 title={`Глава ${currChapter.chapter} ${title.type?.name} ${title.name} читать онлайн | kanwoo`}
                 description={""}
