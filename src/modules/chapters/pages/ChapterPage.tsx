@@ -82,7 +82,7 @@ function Header({onOpenOptions}: {onOpenOptions: () => void}) {
         const hideHeader = throttle(() => {
             if (window.scrollY == 0)
                 return setHiddenHeader(false);
-            if (document.body.scrollHeight <= (window.innerHeight + window.scrollY + 100)){
+            if (document.body.scrollHeight <= (window.innerHeight + window.scrollY + 10)){
                 return setHiddenHeader(false);
             }
 

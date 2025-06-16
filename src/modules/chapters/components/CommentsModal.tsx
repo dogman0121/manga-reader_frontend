@@ -21,7 +21,9 @@ export default function CommentsModal() {
         >
             <Box
                 sx={{
-                    bgcolor: theme.palette.customBackgrounds.header
+                    bgcolor: theme.palette.customBackgrounds.header,
+                    position: "sticky",
+                    top: 0
                 }}
             >
                 <Content>
