@@ -27,6 +27,7 @@ import ChapterCreate from "./pages/chapters/create";
 import ChapterEdit from "./pages/chapters/edit";
 import TitleIndex from "./pages/title";
 import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
+import Meta from "./components/Meta";
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
           <ThemeProvider theme={device == DEVICE.MOBILE ? getMobileTheme(theme) : getTheme(theme)}>
             <CssBaseline />
             <AuthProvider>
+              <Meta />
               <Routes>
                 <Route>
                     <Route>
