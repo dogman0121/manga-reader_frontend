@@ -1,4 +1,4 @@
-import { Box, Paper, BottomNavigation, BottomNavigationAction, useTheme } from "@mui/material";
+import { Box, BottomNavigation, BottomNavigationAction, useTheme } from "@mui/material";
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';

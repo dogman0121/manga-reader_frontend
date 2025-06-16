@@ -25,7 +25,6 @@ import OpenGraphMeta from "../../../components/OpenGraphMeta";
 import { titleService } from "../../titles/service/api/titleService";
 import Title from "../../../pages/title/types/Title";
 import TitleProvider from "../../titles/components/TitleProvider";
-import Meta from "../../../components/StatusBar";
 import StatusBar from "../../../components/StatusBar";
 
 function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => void}) {
