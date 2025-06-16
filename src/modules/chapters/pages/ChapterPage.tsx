@@ -281,13 +281,13 @@ export default function ChapterPage() {
     
     return (
         <>
-            <Meta />
             <OpenGraphMeta 
                 title={`Глава ${currChapter.chapter} ${title.type?.name} ${title.name} читать онлайн | kanwoo`}
                 description={""}
                 url={generateChapterPath(currChapter)}
             />
             <ThemeProvider theme={theme}>
+                <Meta />
                 <CssBaseline />
                 <ReaderSettingsProvider>
                     <TitleProvider title={title} setTitle={setTitle}>
