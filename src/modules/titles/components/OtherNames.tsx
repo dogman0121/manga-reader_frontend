@@ -16,7 +16,7 @@ function OtherNames() {
                 flexDirection: "column",
             }}
         >
-            <Typography lineHeight={"16px"}>Другие названия</Typography>
+            <Typography lineHeight={"16px"} fontSize={"16px"}>Другие названия</Typography>
             <Breadcrumbs sx={{mt: theme.spacing(1)}}>
                 {title.name_translations?.map(name => <Typography lineHeight={"16px"} variant="caption" fontSize={"14px"} key={name.lang}>{name.name}</Typography>)}
             </Breadcrumbs>
