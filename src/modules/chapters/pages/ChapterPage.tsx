@@ -76,32 +76,7 @@ function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => vo
     )
 }
 
-function Header({onOpenOptions}: {onOpenOptions: () => void}) {
-    const [hiddenHeader, setHiddenHeader] = useState(false);
-
-    useEffect(() => {
-        const hideHeader = throttle(() => {
-            if (window.scrollY == 0)
-                return setHiddenHeader(false);
-            if (document.body.scrollHeight <= (window.innerHeight + window.scrollY + 10)){
-                return setHiddenHeader(false);
-            }
-
-            setHiddenHeader(true);
-        }, 100)
-
-        const showHeader = () => {
-            setHiddenHeader((q) => !q);
-        }
-
-        window.addEventListener("click", showHeader);
-        window.addEventListener("scroll", hideHeader);
-
-        return () => {
-            window.removeEventListener("click",showHeader);
-            window.removeEventListener("scroll", hideHeader);
-        }
-    }, [])
+function Header({onOpenOptions, open}: {onOpenOptions: () => void, open: boolean}) {
 
 
     return (
@@ -111,8 +86,8 @@ function Header({onOpenOptions}: {onOpenOptions: () => void}) {
                 sx={{
                     position: "fixed",
                     top: 0,
-                    transform: hiddenHeader ? "translateY(-100%)" : "translateY(0%)",
-                    opacity: hiddenHeader ? 0 : 100,
+                    transform: open ? "translateY(0%)" : "translateY(-100%)",
+                    opacity: open ? 1 : 0,
                     width: "100vw",
                     transition: ".2s"
                 }}
@@ -191,7 +166,7 @@ export default function ChapterPage() {
 
     const theme = getTheme(getColorScheme());
 
-    const [hidden, setHidden] = useState(false);
+    const [navigationHidden, setNavigationHidden] = useState(false);
 
     const [isOptionsOpened, setOptionsOpened] = useState(false);
 
@@ -261,12 +236,12 @@ export default function ChapterPage() {
     useEffect(() => {
         const hideOptions = throttle(() => {
             if (document.body.scrollHeight <= (window.innerHeight + window.scrollY + 10))
-                return setHidden(false);
+                return setNavigationHidden(false);
 
             if (window.scrollY == 0)
-                setHidden(false);
+                setNavigationHidden(false);
             else
-                setHidden(true);
+                setNavigationHidden(true);
         }, 100)
 
         window.addEventListener("scroll", hideOptions)
@@ -293,14 +268,14 @@ export default function ChapterPage() {
                     <TitleProvider title={title} setTitle={setTitle}>
                         <ChapterProvider setChapter={setCurrChapter} chapter={currChapter}>
                             <Box component={"header"}>
-                                <Header onOpenOptions={() => {setHidden(true);  setOptionsOpened(q => !q)}}/>
+                                <Header onOpenOptions={() => {setNavigationHidden(true);  setOptionsOpened(q => !q)}} open={!navigationHidden}/>
                             </Box>
                             <Box component={"main"}
                                 sx={{
                                     bgcolor: theme.palette.customBackgrounds.footer
                                 }}
                                 onClick={() => {
-                                    setHidden(q => !q)
+                                    setNavigationHidden(q => !q)
                                 }}
                             >
                                 {isLoading ?
@@ -315,7 +290,7 @@ export default function ChapterPage() {
                                     </>
                                 }
                                 <NavButtons
-                                    open={!hidden} 
+                                    open={!navigationHidden} 
                                     onPrevious={onPrevButton}
                                     onNext={onNextButton}
                                     onShowComments={onShowComments}
