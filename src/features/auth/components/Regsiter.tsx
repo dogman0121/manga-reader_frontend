@@ -19,10 +19,10 @@ function Register({ setSection }: { setSection: Function }) {
 
     const handleRegister = async() => {
         if (password == repeatPassword){
-            const response = await authService.register(login, email, password);
+            const {data} = await authService.register(login, email, password);
 
-            if (response.msg) {
-                switch(response.msg){
+            if (data.msg) {
+                switch(data.msg){
                     case "Email sent":
                         setSection("verify_message");
                         break;
