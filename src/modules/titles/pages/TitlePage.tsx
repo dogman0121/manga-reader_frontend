@@ -28,6 +28,7 @@ import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import Similar from "../../../pages/title/components/Similar";
 import Rating from "../components/Rating";
 import ReadButton from "../components/ReadButton";
+import Persons from "../components/Persons";
 
 
 function TitlePagePC() {
@@ -108,6 +109,7 @@ function TitlePagePC() {
                                 <About />
                                 <GenresList />
                                 <OtherNames />
+                                <Persons />
                                 <TabContext value={section}>
                                     <TabList onChange={handleChange}>
                                         <Tab label="Главы" value="1" sx={{fontSize: "14px"}}/>
@@ -240,6 +242,7 @@ function TitlePageMobile() {
                                 <GenresList />
                                 <OtherNames />
                                 <Similar />
+                                <Persons />
                             </Box>
                         </TabPanel>
                         <TabPanel value="2" sx={{p: `${theme.spacing(3)} 0`}}><Chapters /></TabPanel>

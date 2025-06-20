@@ -1,5 +1,4 @@
 import Genre from "../../../types/Genre";
-import Person from "../../../types/Person";
 import Poster from "../../../types/Poster";
 import Team from "../../../types/Team";
 import Translation from "./Translation";
@@ -34,9 +33,9 @@ export default interface Title {
         name: string
     },
     genres?: Array<Genre>,
-    authors?: Array<Person>,
-    artists?: Array<Person>,
-    publishers?: Array<Person>,
+    authors?: User[],
+    artists?: User[],
+    publishers?: User[],
     translations?: Array<Translation>,
     creator?: User,
     created_at?: Date,
