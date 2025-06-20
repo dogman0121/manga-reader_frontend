@@ -67,6 +67,8 @@ function HorizontalDisplay({
         RIGHT
     }
 
+    const theme = useTheme();
+
     const [pageIndex, setPageIndex] = useState(0);
     
     const [currentChapter, setCurrChapter] = useState(0);
@@ -138,16 +140,29 @@ function HorizontalDisplay({
     }
 
     return (
-        <Box
-            onClick={handlePress}
-        >
-            <PagesContainer>
-                {validateChapter() && (
-                    <PageItem page={chaptersList[currentChapter].pages[pageIndex]} />
-                )}
-            </PagesContainer>
+        <>
+            <Box 
+                position="relative"
+                onClick={handlePress}
+            >
+                <PagesContainer>
+                    {validateChapter() && (
+                        <PageItem page={chaptersList[currentChapter].pages[pageIndex]} />
+                    )}
+                </PagesContainer> 
+                <Box
+                    sx={{
+                        position: "absolute",
+                        right: theme.spacing(3),
+                        bottom: theme.spacing(2),
+                    }}
+                >
+                    {pageIndex+1}/{chaptersList[currentChapter].pages.length}
+                </Box>
+            </Box>
+            
             <Footer />
-        </Box>
+        </>
     )
 
 }

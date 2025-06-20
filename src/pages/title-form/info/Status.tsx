@@ -1,6 +1,6 @@
 import { Box, MenuItem } from "@mui/material"
 import { useFormContext, Controller } from "react-hook-form";
-import FormSelect from "../../../features/form/FormSelect";
+import FormSelect from "../../../features/form/components/FormSelect";
 
 
 function Status() {

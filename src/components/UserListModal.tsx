@@ -31,7 +31,7 @@ export default function UserListModal({
                 sx={{
                     borderRadius: "16px",
                     width: "min(400px, 100vw)",
-                    bgcolor: theme.vars.palette.background.paper,
+                    bgcolor: theme.palette.background.paper,
                     p: "20px",
 
                     display: "flex",

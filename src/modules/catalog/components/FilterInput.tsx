@@ -1,5 +1,5 @@
 import { styled } from "@mui/material";
-import FormInput, { FormInputProps } from "../../../features/form/FormInput";
+import FormInput, { FormInputProps } from "../../../features/form/components/FormInput";
 import useFilter from "../hooks/useFilter";
 import { ChangeEvent } from "react";
 

@@ -1,7 +1,8 @@
-import { Box, Chip, MenuItem, SelectChangeEvent, styled, Typography, useTheme } from "@mui/material";
-import FormSelect, { FormSelectProps } from "../../../features/form/FormSelect";
+import { Box, MenuItem, SelectChangeEvent, styled, Typography, useTheme } from "@mui/material";
+import FormSelect, { FormSelectProps } from "../../../features/form/components/FormSelect";
 import CancelIcon from "@mui/icons-material/Cancel"
 import useFilter from "../hooks/useFilter";
+import FormChip from "../../../features/form/components/FormChip";
 
 const MySelect = styled(FormSelect)(() => ({
     '& .InputTitle': {
@@ -20,15 +21,6 @@ const MySelect = styled(FormSelect)(() => ({
         height: "auto"
     }
 }));
-
-const MyChip = styled(Chip)(() => ({
-    height: "21px",
-    fontSize: "12px",
-    "& .MuiChip-label": {
-        paddingLeft: "8px",
-        paddingRight: "8px"
-    }
-}))
 
 
 type FilterSelectProps = {
@@ -62,7 +54,7 @@ export default function FilterSelect({name, options, ...props}: FilterSelectProp
                     {selected.length !== 0 ?
                         <>
                             {selected.map((value: string) => (
-                                <MyChip 
+                                <FormChip 
                                     key={value} 
                                     label={options.find((item) => item.id == parseInt(value))?.name}
                                     deleteIcon={

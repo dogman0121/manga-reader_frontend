@@ -7,8 +7,8 @@ import UserProfileContext from "../../UserProfile/context/UserProfileContext";
 import userService from "../../UserProfile/service/api/userService";
 import UserAuthContext from "../../../context/UserAuthContext";
 import Notification from "../../../components/ui/Notification";
-import FormInput from "../../../features/form/FormInput";
-import FormTextarea from "../../../features/form/FormTextarea";
+import FormInput from "../../../features/form/components/FormInput";
+import FormTextarea from "../../../features/form/components/FormTextarea";
 
 
 interface InfoForm {

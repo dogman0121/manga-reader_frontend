@@ -1,11 +1,11 @@
 import { Box, MenuItem, Typography, useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import FormInput from "../../../../features/form/FormInput";
+import FormInput from "../../../../features/form/components/FormInput";
 import { Controller, useForm } from "react-hook-form";
-import FormMultipleFilesInput from "../../../../features/form/FormMultipleFilesInput";
+import FormMultipleFilesInput from "../../../../features/form/components/FormMultipleFilesInput";
 import useFileInput from "../../../../features/form/hooks/useFileInput";
 import { useContext, useEffect } from "react";
-import FormSelect from "../../../../features/form/FormSelect";
+import FormSelect from "../../../../features/form/components/FormSelect";
 import UserAuthContext from "../../../../context/UserAuthContext";
 import { mockTeams } from "../../../../mocks/team.mock";
 import { ListItem } from "../../../../components/ListItem";
@@ -179,7 +179,7 @@ export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter |
                 />
                 <FormMultipleFilesInput 
                     title="Страницы" 
-                    onInput={handleChange}
+                    onChange={handleChange}
                     defaultValue={chapter?.pages.map((page) => ({
                         uuid: page.uuid, 
                         fileName: page.filename, 

@@ -1,6 +1,6 @@
 import { Box } from "@mui/material"
 import { useFormContext, Controller } from "react-hook-form";
-import FormTextarea from "../../../features/form/FormTextarea";
+import FormTextarea from "../../../features/form/components/FormTextarea";
 
 function Description() {
     const {control} = useFormContext();

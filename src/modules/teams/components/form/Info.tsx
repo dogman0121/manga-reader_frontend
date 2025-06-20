@@ -3,8 +3,8 @@ import { useState } from "react";
 import ImageInput from "../../../../components/ui/ImageInput";
 import ImageCropper from "../../../../components/ImageCropper";
 import { Box, Button } from '@mui/material';
-import FormInput from '../../../../features/form/FormInput';
-import FormTextarea from '../../../../features/form/FormTextarea';
+import FormInput from '../../../../features/form/components/FormInput';
+import FormTextarea from '../../../../features/form/components/FormTextarea';
 
 interface InfoFormProps {
     id: number,

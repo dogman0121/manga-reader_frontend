@@ -1,7 +1,7 @@
-import { Box, useTheme } from "@mui/material";
-import { getColorScheme } from "../../utils/colorScheme";
+import { Box, SxProps, useTheme } from "@mui/material";
+import { getColorScheme } from "../../../utils/colorScheme";
 
-export default function FormField({children}: {children: React.ReactNode}) {
+export default function FormField({children, sx}: {children: React.ReactNode, sx?: SxProps}) {
     const theme = useTheme()
 
     const color = getColorScheme() == "light" ? "0, 0, 0" : "255, 255, 255"
@@ -13,7 +13,8 @@ export default function FormField({children}: {children: React.ReactNode}) {
                 p: "10px",
                 borderRadius: "12px",
                 mt: theme.spacing(1),
-                bgcolor: theme.palette.background.paper
+                bgcolor: theme.palette.background.paper,
+                ...sx
             }}
         >
             {children}

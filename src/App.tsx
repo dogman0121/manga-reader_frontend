@@ -11,8 +11,6 @@ import AuthPage from "./features/auth/components/AuthPage";
 import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./features/auth/components/AuthProvider";
 import Catalog from "./pages/catalog";
-import AddTitle from "./pages/title-form/AddTitle";
-import UpdateTitle from "./pages/title-form/UpdateTitle";
 import CommentPage from "./pages/comment/CommentPage";
 import Home from "./pages/home/Home";
 import NotFound from "./pages/not-found/NotFound";
@@ -25,9 +23,11 @@ import TeamEdit from "./pages/teams/edit";
 import ChapterIndex from "./pages/chapters";
 import ChapterCreate from "./pages/chapters/create";
 import ChapterEdit from "./pages/chapters/edit";
-import TitleIndex from "./pages/title";
 import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
-
+import TitleIndex from "./pages/title";
+import TitleCreate from "./pages/title/create";
+import FormLayout from "./layouts/form-layout/FormLayout";
+import TitleUpdate from "./pages/title/update";
 
 function App() {
   const [theme, setTheme] = useState<"dark" | "light">(getColorScheme());
@@ -57,11 +57,7 @@ function App() {
             <CssBaseline />
             <AuthProvider>
               <Routes>
-                <Route>
-                    <Route>
-                      <Route path={ChapterRoutes.INDEX} element={<ChapterIndex/>} />
-                    </Route>
-                </Route>
+                <Route path={ChapterRoutes.INDEX} element={<ChapterIndex/>} />
                 <Route element={<AuthLayout />}>
                     <Route path={AuthRoutes.REGISTER} element={<AuthPage section="register" />}/>
                     <Route path={AuthRoutes.FORGOT} element={<AuthPage section="forgot" />}/>
@@ -70,12 +66,15 @@ function App() {
                     <Route path={AuthRoutes.RECOVERY} element={<AuthPage section="recovery"/>} />
                 </Route>
                 <Route element={<AppLayout />}>
-                    <Route path={ChapterRoutes.ADD} element={<ChapterCreate/>} />
-                    <Route path={ChapterRoutes.EDIT} element={<ChapterEdit/>} />
+                    <Route element={<FormLayout />}>
+                        <Route path={ChapterRoutes.ADD} element={<ChapterCreate/>} />
+                        <Route path={ChapterRoutes.EDIT} element={<ChapterEdit/>} />
+
+                        <Route path={TitleRoutes.ADD} element={<TitleCreate/>} />
+                        <Route path={TitleRoutes.EDIT} element={<TitleUpdate/>} />
+                    </Route>
                     <Route>
                         <Route path={TitleRoutes.INDEX} element={<TitleIndex />} />
-                        <Route path={TitleRoutes.ADD} element={<AddTitle/>} />
-                        <Route path={TitleRoutes.EDIT} element={<UpdateTitle/>} />
                     </Route>
                     <Route index element={<Home/>} />
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />

@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material"
 import { useFormContext, Controller } from "react-hook-form";
-import FormInput from "../../../features/form/FormInput";
+import FormInput from "../../../features/form/components/FormInput";
 
 function Name(){
     const {formState:{errors}, control} = useFormContext();

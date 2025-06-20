@@ -14,7 +14,7 @@ import { Box, Breadcrumbs, Typography, useTheme } from '@mui/material';
 import ErrorIcon from '@mui/icons-material/Error';
 import NotFound from '../../../pages/not-found/NotFound';
 import Notification from '../../../components/ui/Notification';
-import FormLoader from '../../../features/form/FormLoader';
+import FormLoader from '../../../features/form/components/FormLoader';
 import { generatePath, TitleRoutes } from '../../../routes';
 
 export default function ChapterEditPage(){
@@ -116,7 +116,7 @@ export default function ChapterEditPage(){
                     value="1"
                     sx={{
                         p: 0,
-                        mt: theme.spacing(3),
+                        mt: theme.spacing(5),
                         display: "flex",
                         flexDirection: "column",
                     }}

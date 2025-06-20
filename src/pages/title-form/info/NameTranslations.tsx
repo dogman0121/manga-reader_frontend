@@ -3,8 +3,8 @@ import { useFormContext, Controller } from "react-hook-form";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
-import FormInput from "../../../features/form/FormInput";
-import FormSelect from "../../../features/form/FormSelect";
+import FormInput from "../../../features/form/components/FormInput";
+import FormSelect from "../../../features/form/components/FormSelect";
 
 
 const langOptions = [

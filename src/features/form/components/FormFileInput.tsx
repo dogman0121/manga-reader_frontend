@@ -1,14 +1,18 @@
 import { Box, Typography } from "@mui/material";
-import { DropzoneInputProps, DropzoneRootProps } from "react-dropzone";
+import { DropzoneOptions, useDropzone } from "react-dropzone";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+import { useEffect } from "react";
+import FormFile from "../types/FormFile";
+import { v4 as uuid4 } from 'uuid';
 
 interface FormFileInput {
     width?: string | number,
     height?: string | number,
     aspectRatio?: string,
+    value?: FormFile[],
     form?: "circle" | "square" | "rectangle",
-    inputProps: DropzoneInputProps,
-    rootProps: DropzoneRootProps
+    onChange?: Function,
+    dropzoneOptions?: DropzoneOptions
 }
 
 export default function FormFileInput({
@@ -16,11 +20,30 @@ export default function FormFileInput({
     height,
     aspectRatio,
     form,
-    inputProps, 
-    rootProps
+    onChange,
+    dropzoneOptions
 }: FormFileInput) {
+
+    const {getRootProps, getInputProps, acceptedFiles} = useDropzone({
+        ...dropzoneOptions
+    });
+
+    useEffect(() => {
+        const files = acceptedFiles.map((file: File) => {
+            const uuid = uuid4().toString();
+            return {
+                    uuid: uuid, 
+                    fileName: file.name, 
+                    file: file, 
+                    src: URL.createObjectURL(file)
+                } as FormFile
+        });
+
+        onChange?.(files);
+    }, [acceptedFiles])
+
     return (
-        <Box {...rootProps}
+        <Box {...getRootProps()}
         >
             <Box
                 sx={{
@@ -60,7 +83,7 @@ export default function FormFileInput({
                     )}
                 </Box>
             </Box>
-            <input type="file" {...inputProps}/>
+            <input type="file" {...getInputProps()}/>
         </Box>
     )
 }

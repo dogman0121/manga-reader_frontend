@@ -2,14 +2,13 @@ import { Box, Typography, useTheme } from "@mui/material"
 import FormField from "./FormField"
 import { useEffect, useState } from "react";
 import FormFileInput from "./FormFileInput";
-import { useDropzone } from "react-dropzone";
+import { DropzoneOptions } from "react-dropzone";
 import { DndContext } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import FormFilePreviewDraggable from "./FormFilePreview";
-import { v4 as uuid4 } from 'uuid';
 
 
-import { useDeviceDetect, DEVICE } from "../../hooks/useDeviceDetect";
+import { useDeviceDetect, DEVICE } from "../../../hooks/useDeviceDetect";
 import { 
     closestCenter, 
     DragEndEvent, 
@@ -18,12 +17,13 @@ import {
     useSensor,
     useSensors,
 } from "@dnd-kit/core";
-import FormFile from "./types/FormFile";
+import FormFile from "../types/FormFile";
 
 interface FormMultipleInput {
     title?: string,
-    onInput?: Function
-    defaultValue?: Array<FormFile>
+    onChange?: Function
+    defaultValue?: Array<FormFile>,
+    dropzoneOptions?: DropzoneOptions
 }
 
 function FilesList({files, onChange}: {files: Array<FormFile>, onChange: Function}) {
@@ -72,47 +72,40 @@ function FilesList({files, onChange}: {files: Array<FormFile>, onChange: Functio
             sensors={sensors}
         >
             <SortableContext items={files.map(file => ({id: file.uuid}))}>
-                    {files.map(file => <FormFilePreviewDraggable key={file.uuid} onDelete={() => {handleDelete(file.uuid)}} file={file}/>)}
+                    {files.map(file => (
+                        <FormFilePreviewDraggable 
+                            aspectRatio="2/3"
+                            width="100%"
+                            key={file.uuid} 
+                            onDelete={() => {handleDelete(file.uuid)}} 
+                            file={file}/>
+                    ))}
             </SortableContext>
         </DndContext>
     )
 }
 
-export default function FormMultipleFilesInput({onInput, title, defaultValue}: FormMultipleInput) {
+export default function FormMultipleFilesInput({
+    onChange, 
+    title, 
+    defaultValue,
+    dropzoneOptions
+}: FormMultipleInput) {
     const [files, setFiles] = useState<Array<FormFile>>(defaultValue || []);
-
-    const {getRootProps, getInputProps, acceptedFiles} = useDropzone();
 
     const theme = useTheme()
 
-    useEffect(() => {        
-        setFiles(prev => {
-            const newArr: Array<FormFile> = Array.from(prev);
+    const handleChange = (files: FormFile[]) => {
+        setFiles(prev => prev.concat(files))
+    }
 
-            acceptedFiles.forEach((file: File) => {
-                if (!newArr.find((f) => f.fileName == file.name)){
-                    const uuid = uuid4().toString();
-                    newArr.push(
-                        {
-                            uuid: uuid, 
-                            fileName: file.name, 
-                            file: file, 
-                            src: URL.createObjectURL(file)
-                        } as FormFile)
-                }
-            });
-
-            return newArr;
-        })
-    }, [acceptedFiles]);
-
-    useEffect(() => {
-        (onInput && files.length) ? onInput(files) : null
-    }, [files]);
-
-    const handleChange = (files: Array<FormFile>) => {
+    const handleChangeOrder = (files: Array<FormFile>) => {
         setFiles(files);
     }
+
+    useEffect(() => {
+        onChange?.(files || []) 
+    }, [files]);
 
     return (
         <Box>
@@ -128,13 +121,13 @@ export default function FormMultipleFilesInput({onInput, title, defaultValue}: F
                         gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))"
                     }}
                 >
-                    <FilesList onChange={handleChange} files={Array.from(files)} />
+                    <FilesList onChange={handleChangeOrder} files={Array.from(files)} />
                     <FormFileInput 
                         width="100%"
                         aspectRatio="2/3"
                         form="rectangle"
-                        inputProps={getInputProps()} 
-                        rootProps={getRootProps()}
+                        dropzoneOptions={dropzoneOptions}
+                        onChange={handleChange}
                     />
                 </Box>
             </FormField>

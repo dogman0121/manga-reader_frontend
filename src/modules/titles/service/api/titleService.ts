@@ -4,12 +4,7 @@ class TitleService {
     async fetchTitle(titleId: number){
         const response = await apiClient.get(`/manga/${titleId}`);
     
-        if (response.ok){
-            return await response.json();
-        }
-        else { 
-            return null;
-        }
+        return await response.json();
     }
 
     async sendRating(titleId: number, rating: number) {

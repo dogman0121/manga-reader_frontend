@@ -67,7 +67,7 @@ export default function ChapterCreatePage() {
                     value="1"
                     sx={{
                         p: 0,
-                        mt: theme.spacing(3),
+                        mt: theme.spacing(5),
                         display: "flex",
                         flexDirection: "column",
                     }}
