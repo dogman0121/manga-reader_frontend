@@ -3,7 +3,7 @@ import useTitle from "../hooks/useTitle";
 import { User } from "../../../types/User";
 
 const MyChip = styled(Chip)(({theme}) => ({
-    backgroundColor: theme.palette.customBackgrounds.widget1
+    backgroundColor: theme.palette.secondary.main
 }))
 
 function PersonList({title, users}: {title: string, users: User[]}){
