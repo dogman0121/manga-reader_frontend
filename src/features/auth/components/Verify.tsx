@@ -15,11 +15,11 @@ function Verify() {
                         saveAccessToken(data.access_token);
                         saveRefreshToken(data.refresh_token);
                     }
-                    else
-                        document.location.href = "https://kanwoo.ru/";
+                    else{}
+                        //document.location.href = "https://kanwoo.ru/";
                 })
                 .then(() => {
-                    document.location.href = "https://kanwoo.ru/";
+                    //document.location.href = "https://kanwoo.ru/";
                 })
         }
 
