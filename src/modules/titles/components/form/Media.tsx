@@ -24,7 +24,7 @@ function Media() {
                                 display: "grid",
                                 gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
                                 mt: "5px",
-                                gap: "15px",
+                                gap: "10px",
                                 flexDirection: "row"
                             }}
                         >
