@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect"
 import { useNavigate, useParams } from "react-router-dom";
-import Title from "../../../pages/title/types/Title";
+import Title from "../types/Title";
 import { titleService } from "../service/api/titleService";
 import TitleProvider from "../components/TitleProvider";
 import PageLoader from "../../../components/ui/PageLoader";

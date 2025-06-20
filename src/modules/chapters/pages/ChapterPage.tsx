@@ -23,7 +23,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { throttle } from "lodash";
 import OpenGraphMeta from "../../../components/OpenGraphMeta";
 import { titleService } from "../../titles/service/api/titleService";
-import Title from "../../../pages/title/types/Title";
+import Title from "../../titles/types/Title";
 import TitleProvider from "../../titles/components/TitleProvider";
 import StatusBar from "../../../components/StatusBar";
 
