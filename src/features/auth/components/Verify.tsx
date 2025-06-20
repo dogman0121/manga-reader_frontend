@@ -8,14 +8,12 @@ function Verify() {
         
         const token = urlParams.get("t");
 
-        console.log(token);
-
         if (token !== null){
             authService.verify(token)
-                .then((json) => {
-                    if (!json.msg) {
-                        saveAccessToken(json.access_token);
-                        saveRefreshToken(json.refresh_token);
+                .then(({data, error}) => {
+                    if (!error) {
+                        saveAccessToken(data.access_token);
+                        saveRefreshToken(data.refresh_token);
                     }
                     else
                         document.location.href = "https://kanwoo.ru/";
