@@ -1,6 +1,8 @@
 import { Avatar, Box, Chip, styled, Typography } from "@mui/material";
 import useTitle from "../hooks/useTitle";
 import { User } from "../../../types/User";
+import { Link } from "react-router-dom";
+import { generatePath, UserRoutes } from "../../../routes";
 
 const MyChip = styled(Chip)(({theme}) => ({
     backgroundColor: theme.palette.secondary.main
@@ -14,7 +16,11 @@ function PersonList({title, users}: {title: string, users: User[]}){
         <Box>
             <Typography fontSize={"16px"}>{title}</Typography>
             <Box mt="5px">
-                {users.map(user => <MyChip key={user.id} avatar={<Avatar src={user.avatar}/>} label={user.login}/>)}
+                {users.map(user => (
+                    <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})} key={user.id}>
+                        <MyChip key={user.id} avatar={<Avatar src={user.avatar}/>} label={user.login}/>
+                    </Link> 
+                ))}
             </Box>
         </Box>
     )
