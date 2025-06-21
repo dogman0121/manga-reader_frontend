@@ -15,7 +15,14 @@ function PersonList({title, users}: {title: string, users: User[]}){
     return (
         <Box>
             <Typography fontSize={"16px"}>{title}</Typography>
-            <Box mt="5px">
+            <Box 
+                sx={{
+                    mt: "5px",
+                    display: "flex",
+                    flexDirection: "row",
+                    columnGap: "5px"
+                }}
+            >
                 {users.map(user => (
                     <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})} key={user.id}>
                         <MyChip key={user.id} avatar={<Avatar src={user.avatar}/>} label={user.login}/>
