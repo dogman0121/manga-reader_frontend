@@ -45,7 +45,8 @@ export default function Persons() {
             sx={{
                 display: "flex",
                 flexDirection: "row",
-                columnGap: "15px"
+                columnGap: "15px",
+                flexWrap: "wrap"
             }}
         >
             {title.authors && (

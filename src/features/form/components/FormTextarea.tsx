@@ -7,6 +7,9 @@ export default function FormTextarea(props: FormInputProps & TextFieldProps) {
             {...props}
             multiline
             minRows={3}
+            sx={{
+                lineHeight: "1.5"
+            }}
         />
     )
 }
