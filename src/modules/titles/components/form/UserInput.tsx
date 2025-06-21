@@ -85,7 +85,11 @@ export default function UserInput({
             renderTags={(value) => (
                 <Box
                     sx={{
-                        pl: "10px"
+                        pl: "10px",
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "10px",
+                        flexWrap: "wrap"
                     }}
                 >
                     {value.map(user => (
