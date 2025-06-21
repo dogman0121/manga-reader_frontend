@@ -20,7 +20,7 @@ function PersonList({title, users}: {title: string, users: User[]}){
                     mt: "5px",
                     display: "flex",
                     flexDirection: "row",
-                    gap: "5px",
+                    columnGap: "5px",
                     flexWrap: "wrap"
                 }}
             >
@@ -47,6 +47,7 @@ export default function Persons() {
                 display: "flex",
                 flexDirection: "row",
                 columnGap: "15px",
+                rowGap: "5px",
                 flexWrap: "wrap"
             }}
         >
