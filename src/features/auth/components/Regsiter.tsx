@@ -19,23 +19,34 @@ function Register({ setSection }: { setSection: Function }) {
 
     const handleRegister = async() => {
         if (password == repeatPassword){
-            const {data} = await authService.register(login, email, password);
+            const {data, error} = await authService.register(login, email, password);
 
-            if (data.msg) {
-                switch(data.msg){
-                    case "Email sent":
-                        setSection("verify_message");
-                        break;
-                    case "Login already taken":
-                        setWrongForm(3);
-                        break;
-                    case "Email already taken":
-                        setWrongForm(2);
-                        break;
-                    default:
-                        setWrongForm(10);
+            if (data?.msg == "Email sent"){
+                setSection("verify_message");
+                return;
+            }
+
+            
+            if (error){
+                if (error.detail.login){
+                    switch (error.detail.login){
+                        case "Login already taken":
+                            setWrongForm(3);
+                            break;
+                    }
+                }
+                else if (error.detail.email) {
+                    switch (error.detail.email){
+                        case "Email already taken":
+                            setWrongForm(2);
+                            break;
+                    }
+                }
+                else {
+                    setWrongForm(10);
                 }
             }
+
         }
         else {
             setWrongForm(1);

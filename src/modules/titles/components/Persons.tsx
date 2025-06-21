@@ -43,13 +43,13 @@ export default function Persons() {
             )}
             {title.artists && (
                 <PersonList 
-                    title="Авторы"
+                    title="Художники"
                     users={title.artists}
                 />
             )}
             {title.publishers && (
                 <PersonList 
-                    title="Авторы"
+                    title="Издатели"
                     users={title.publishers}
                 />
             )}
