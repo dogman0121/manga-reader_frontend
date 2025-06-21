@@ -20,7 +20,7 @@ function PersonList({title, users}: {title: string, users: User[]}){
                     mt: "5px",
                     display: "flex",
                     flexDirection: "row",
-                    columnGap: "5px",
+                    gap: "5px",
                     flexWrap: "wrap"
                 }}
             >
