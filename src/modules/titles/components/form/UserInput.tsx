@@ -88,7 +88,7 @@ export default function UserInput({
                         pl: "10px",
                         display: "flex",
                         flexDirection: "row",
-                        gap: "10px",
+                        gap: "5px",
                         flexWrap: "wrap"
                     }}
                 >
