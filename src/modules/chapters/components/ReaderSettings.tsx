@@ -8,7 +8,7 @@ import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 const OptionsList = styled(ToggleButtonGroup)(({ theme }) => ({
     borderRadius: "12px",
     border: `1px solid ${theme.palette.secondary.main}`,
-    padding: theme.spacing(1),
+    padding: theme.spacing(0.6),
     display: "flex",
     flexDirection: "row",
     columnGap: theme.spacing(1),
@@ -22,7 +22,7 @@ const Option = styled(ToggleButton)(({ theme }) => ({
     textTransform: "capitalize",
     padding: theme.spacing(1),
     color: theme.typography.body1.color,
-    lineHeight: 1.4,
+    lineHeight: 1,
 
     "&.Mui-selected": {
         background: theme.palette.secondary.main,

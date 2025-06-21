@@ -21,7 +21,8 @@ const NavButton = styled(IconButton)((_theme) => ({
     "&.Mui-disabled": {
         backgroundColor: getColorScheme() == "dark" ? "#000000" : "#FFFFFF",
         color: getColorScheme() == "dark" ? "#333333" : "#E6E6E6"
-    }
+    },
+    boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.2)"
 }))
 
 export default function NavButtons({

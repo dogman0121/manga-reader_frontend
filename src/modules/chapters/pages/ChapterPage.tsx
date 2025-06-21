@@ -44,6 +44,7 @@ function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => vo
                 backgroundColor: theme.palette.customBackgrounds.header,
                 position: "sticky",
                 transition: "top .3s ease",
+                zIndex: 1001,
                 ...sx
             }}
         >
