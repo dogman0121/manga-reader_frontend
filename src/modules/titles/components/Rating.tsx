@@ -64,6 +64,7 @@ export function RatingMobile({sx, rating}: {sx?: SxProps, rating?: number}) {
                     alignItems: "center",
                     justifyContent: "center",
                     bgcolor: theme.palette.background.paper,
+                    cursor: "pointer",
                     ...sx
                 }}
             >
@@ -97,6 +98,7 @@ export function RatingPC({sx, rating}: {sx?: SxProps, rating?: number}) {
                 sx={{
                     display: "flex",
                     alignItems: "center",
+                    cursor: "pointer",
                     ...sx
                 }}
             >Оценить <StarIcon sx={{ml: theme.spacing(1)}}/></Typography>
