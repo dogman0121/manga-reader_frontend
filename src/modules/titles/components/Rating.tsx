@@ -33,16 +33,14 @@ export function RatingIndicator({sx, rating}: {sx?: SxProps, rating: number}) {
         return colors.excellent;
     }
 
-    const theme = useTheme();
-
     return (
         <Box
             sx={{
                 background: getColor(rating),
-                color: theme.typography.body1.color,
                 lineHeight: 1,
                 p: "3px 5px",
                 borderRadius: "50px",
+                color: "#e1e1e0",
                 ...sx
             }}
         >

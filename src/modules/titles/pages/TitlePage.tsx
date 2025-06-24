@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect"
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Title from "../types/Title";
 import { titleService } from "../service/api/titleService";
 import TitleProvider from "../components/TitleProvider";
@@ -73,12 +73,16 @@ function TitlePagePC() {
                             }}
                         >
                             { title.permissions?.edit && (
-                                <Button 
-                                    variant="text"
-                                    sx={{
-                                        width: "100%"
-                                    }}
-                                >Редактировать</Button>
+                                <Link to={generatePath(TitleRoutes.EDIT, {titleId: title.id})}>
+                                    <Button 
+                                        variant="text"
+                                        sx={{
+                                            width: "100%",
+                                            color: theme.typography.caption.color,
+                                            background: "none"
+                                        }}
+                                    >Редактировать</Button>
+                                </Link>
                             )}
                         </Box>
                     </Box>

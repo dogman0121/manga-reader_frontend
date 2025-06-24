@@ -9,6 +9,8 @@ export default function ReadButton() {
                 height: "40px"
             }}
             variant="contained"
+            disableElevation
+            disableFocusRipple
         >
             Читать
         </Button>
