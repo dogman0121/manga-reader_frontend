@@ -29,6 +29,7 @@ import Similar from "../../../pages/title/components/Similar";
 import Rating from "../components/Rating";
 import ReadButton from "../components/ReadButton";
 import Persons from "../components/Persons";
+import Button from "../../../components/ui/Button";
 
 
 function TitlePagePC() {
@@ -63,6 +64,23 @@ function TitlePagePC() {
                         }}
                     >
                         <Poster src={title.main_poster?.medium || ""} />
+                        <Box
+                            sx={{
+                                mt: theme.spacing(2),
+                                display: "flex",
+                                flexDirection: "column",
+                                rowGap: theme.spacing(1)
+                            }}
+                        >
+                            { title.permissions?.edit && (
+                                <Button 
+                                    variant="text"
+                                    sx={{
+                                        width: "100%"
+                                    }}
+                                >Редактировать</Button>
+                            )}
+                        </Box>
                     </Box>
                     <Box
                         sx={{
