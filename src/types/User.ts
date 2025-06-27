@@ -6,7 +6,8 @@ export interface User {
     role: number,
     about: string,
     subscribed?: boolean
-    subscribers_count: number
+    subscribers_count: number,
+    notifications_count?: number
 }
 
 export const EMPTY_USER: User = {

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styles from "./AppLayout.module.css"
-import { SvgIcon, Box } from "@mui/material";
+import { SvgIcon, Box, IconButton, Badge } from "@mui/material";
 import { Avatar, Checkbox } from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
@@ -136,7 +136,6 @@ function AppHeader() {
                             columnGap: theme.spacing(3)
                         }}
                     >
-                        <NotificationsIcon />
                         {user == null && 
                             <Box
                                 sx={{
@@ -169,16 +168,37 @@ function AppHeader() {
                                 </Button>
                             </Box>
                         }
-                        { user &&
-                            <Avatar 
-                                ref={avatarRef}
-                                src={user.avatar}
-                                sx={{
-                                    width: "36px",
-                                    height: "36px"
-                                }}
-                                onClick={() => {setUserMenuOpened(true)}}
-                            />
+                        { user && 
+                            <>
+                                <IconButton>
+                                    <Badge 
+                                        badgeContent={user.notifications_count} 
+                                        color="error"
+                                        sx={{
+                                            "&:hover .MuiBadge-badge": {
+                                                opacity: 0,
+                                                transition: "0.2s ease-in"
+                                            }
+                                        }}
+                                    >
+                                        <NotificationsIcon 
+                                            sx={{
+                                                width: "22px",
+                                                height: "22px"
+                                            }}
+                                        />
+                                    </Badge>
+                                </IconButton>
+                                <Avatar 
+                                    ref={avatarRef}
+                                    src={user.avatar}
+                                    sx={{
+                                        width: "40px",
+                                        height: "40px"
+                                    }}
+                                    onClick={() => {setUserMenuOpened(true)}}
+                                />
+                            </>
                         }
                     </Box>
                 </Box>
