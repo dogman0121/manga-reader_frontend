@@ -4,7 +4,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useEffect, useState } from "react";
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, generatePath } from 'react-router-dom'
 import { UserMenuDrawer } from "../../features/user-menu/UserMenu";
 import Blur from "../../components/Blur";
 import MainBlurContext from "./MainBlurContext";
@@ -121,7 +121,11 @@ function AppLayoutMobile() {
                     />
                     <BottomNavigationAction 
                         sx={actionStyles} 
-                        icon={<NotificationsRoundedIcon fontSize="medium"/>} 
+                        icon={
+                            <Link to={generatePath(AppRoutes.NOTIFICATIONS)}>
+                                <NotificationsRoundedIcon fontSize="medium"/>
+                            </Link>
+                        } 
                     />
                     <BottomNavigationAction 
                         sx={actionStyles} 

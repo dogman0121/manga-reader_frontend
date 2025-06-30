@@ -1,24 +1,75 @@
 import { useContext, useEffect, useState } from "react";
-import AppToggleButton from "../../../components/ui/AppToggleButton";
-import AppToggleGroup from "../../../components/ui/AppToggleButtonGroup";
 import PageHeader from "../../../components/ui/PageHeader";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import { Box, useTheme } from "@mui/material";
 import { notificationService } from "../services/api/notificationService";
 import UserAuthContext from "../../../context/UserAuthContext";
-import NotificationItem from "../components/NotificationItem";
 import { User } from "../../../types/User";
 import Notification from "../types/Notification";
+import NotificationContext from "../context/NotificationsContext";
+import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
+import NotificationsProvider from "../components/NotificationsProvider";
+import NotificationsList from "../components/NotificationsList";
+import NotificationsCategorySelector from "../components/NotificationsCategorySelector";
+import NotificationsContext from "../context/NotificationsContext";
 
-export default function NotificationPage() {
+
+function NotificationPagePC() {
     const theme = useTheme();
 
-    const [ category, setCategory ] = useState("all");
+    const {notifications} = useContext(NotificationContext);
 
-    const handleChoose = (_event: React.MouseEvent<HTMLElement>, newValue: string) => {
-        if (newValue !== null)
-            setCategory(newValue);
-    }
+    return (
+        <AppContent>
+            <PageHeader>Уведомления</PageHeader>
+            <NotificationsCategorySelector 
+                sx={{
+                    mt: theme.spacing(2)
+                }}
+            />
+            <NotificationsList 
+                notifications={notifications}
+                sx={{
+                    mt: theme.spacing(3),
+                }}
+            />
+        </AppContent>
+    )
+    
+}
+
+function NotificationPageMobile() {
+    const {notifications} = useContext(NotificationsContext);
+
+    const theme = useTheme()
+
+    return (
+        <AppContent>
+            <Box
+                sx={{
+                    pt: theme.spacing(1),
+                    pb: theme.spacing(3),
+                    textAlign: "center",
+                    fontSize: "16px" 
+                }}
+            >
+                Уведомления
+            </Box>
+            <NotificationsCategorySelector />
+            <NotificationsList 
+                notifications={notifications}
+                sx={{
+                    mt: theme.spacing(3)
+                }}
+            />
+        </AppContent>
+    )
+}
+
+export default function NotificationPage() {
+    const {device} = useDeviceDetect();
+
+    const [category, setCategory] = useState<"all" | "comments" | "titles" | "marks">("all");
 
     const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -44,31 +95,14 @@ export default function NotificationPage() {
     }, [])
     
     return (
-        <AppContent>
-            <PageHeader>Уведомления</PageHeader>
-            <AppToggleGroup
-                value={category}
-                onChange={handleChoose}
-                exclusive
-                sx={{
-                    mt: theme.spacing(2)
-                }}
-            >
-                <AppToggleButton value="all">все</AppToggleButton>
-                <AppToggleButton value="comments">комментарии</AppToggleButton>
-                <AppToggleButton value="marks">оценки</AppToggleButton>
-                <AppToggleButton value="manga">тайтлы</AppToggleButton>
-            </AppToggleGroup>
-            <Box
-                sx={{
-                    mt: theme.spacing(3),
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: theme.spacing(2)
-                }}
-            >
-                {notifications.map(notification => <NotificationItem key={notification.id} notification={notification} />)}
-            </Box>
-        </AppContent>
+        <NotificationsProvider
+            notifications={notifications}
+            category={category}
+            setCategory={setCategory}
+        >
+            {device == DEVICE.PC && <NotificationPagePC />}
+            {device == DEVICE.PAD && <NotificationPagePC />}
+            {device == DEVICE.MOBILE && <NotificationPageMobile />}
+        </NotificationsProvider>
     )
 }
