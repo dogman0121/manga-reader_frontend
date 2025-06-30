@@ -23,7 +23,7 @@ export function ContentMobile({children}: {children: React.ReactNode}) {
 export function Content({children}: {children: React.ReactNode}) {
     return (
         <Box sx={{
-            pb: "52px",
+            pb: "56px",
             minHeight: "100%",
         }}>
             {children}
