@@ -50,7 +50,7 @@ function NotificationPageMobile() {
                     pt: theme.spacing(1),
                     pb: theme.spacing(3),
                     textAlign: "center",
-                    fontSize: "18px" 
+                    fontSize: "17px" 
                 }}
             >
                 Уведомления
