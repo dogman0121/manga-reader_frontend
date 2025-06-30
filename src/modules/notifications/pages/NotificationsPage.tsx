@@ -47,7 +47,6 @@ function NotificationPageMobile() {
         <AppContent>
             <Box
                 sx={{
-                    pt: theme.spacing(1),
                     pb: theme.spacing(3),
                     textAlign: "center",
                     fontSize: "17px" 
