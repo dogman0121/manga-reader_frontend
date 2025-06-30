@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styles from "./AppLayout.module.css"
-import { SvgIcon, Box, IconButton, Badge } from "@mui/material";
+import { SvgIcon, Box, IconButton, Badge, Tooltip } from "@mui/material";
 import { Avatar, Checkbox } from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
@@ -17,6 +17,7 @@ import { AppRoutes } from "../../routes";
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Button from "../../components/ui/Button";
 import UserAuthContext from "../../context/UserAuthContext";
+import NotificationPopover from "../../modules/notifications/components/NotificationPopover";
 
 
 export function ContentPC({children}: {children: React.ReactNode}) {
@@ -57,11 +58,15 @@ function AppHeader() {
 
     const { openModal } = useContext(AuthContext);
 
+    const [notificationsOpened, setNotificationsOpened] = useState(false);
+
     const [checked, setChecked] = useState(getColorScheme() === "dark" ? true : false);
 
     const [userMenuOpened, setUserMenuOpened] = useState(false);
 
     const [searchModalOpened, setSearchModalOpened] = useState(false);
+
+    const notificationRef = useRef(null);
 
     const avatarRef = useRef(null);
 
@@ -170,25 +175,32 @@ function AppHeader() {
                         }
                         { user && 
                             <>
-                                <IconButton>
-                                    <Badge 
-                                        badgeContent={user.notifications_count} 
-                                        color="error"
-                                        sx={{
-                                            "&:hover .MuiBadge-badge": {
-                                                opacity: 0,
-                                                transition: "0.2s ease-in"
-                                            }
-                                        }}
+                                <Tooltip
+                                    title="Уведомления"
+                                >
+                                    <IconButton
+                                        onClick={() => setNotificationsOpened(true)}
+                                        ref={notificationRef}
                                     >
-                                        <NotificationsIcon 
+                                        <Badge 
+                                            badgeContent={user.notifications_count} 
+                                            color="error"
                                             sx={{
-                                                width: "22px",
-                                                height: "22px"
+                                                "&:hover .MuiBadge-badge": {
+                                                    opacity: 0,
+                                                    transition: "0.2s ease-in"
+                                                }
                                             }}
-                                        />
-                                    </Badge>
-                                </IconButton>
+                                        >
+                                            <NotificationsIcon 
+                                                sx={{
+                                                    width: "22px",
+                                                    height: "22px"
+                                                }}
+                                            />
+                                        </Badge>
+                                    </IconButton>
+                                </Tooltip>
                                 <Avatar 
                                     ref={avatarRef}
                                     src={user.avatar}
@@ -196,17 +208,22 @@ function AppHeader() {
                                         width: "40px",
                                         height: "40px"
                                     }}
-                                    onClick={() => {setUserMenuOpened(true)}}
+                                    onClick={() => setUserMenuOpened(true)}
+                                />
+                                <NotificationPopover 
+                                    open={notificationsOpened}
+                                    onClose={() => {setNotificationsOpened(false)}}
+                                    anchorEl={notificationRef.current}
+                                />
+                                <UserMenuPopover
+                                    open={userMenuOpened}
+                                    onClose={() => {setUserMenuOpened(false)}}
+                                    anchorEl={avatarRef.current}
                                 />
                             </>
                         }
                     </Box>
                 </Box>
-                <UserMenuPopover
-                    open={userMenuOpened}
-                    onClose={() => {setUserMenuOpened(false)}}
-                    anchorEl={avatarRef.current}
-                />
                 <SearchModal open={searchModalOpened} onClose={() => {setSearchModalOpened(false)}}/>
             </Content>
         </Box>

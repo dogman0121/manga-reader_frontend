@@ -38,7 +38,7 @@ export default function Persons() {
     const {title} = useTitle();
 
 
-    if (title == null || !(title.authors?.length || title.artists?.length || title.artists))
+    if (title == null || !(title.authors?.length || title.artists?.length || title.artists?.length))
         return null;
 
     return (

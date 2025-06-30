@@ -153,6 +153,7 @@ export const lightTheme = createTheme({
             color: "#000000"
         },
         caption: {
+            fontSize: "12px",
             color: "#606060"
         }
     }
@@ -186,6 +187,7 @@ export const darkTheme = createTheme({
             color: "#e1e1e0"
         },
         caption: {
+            fontSize: "13px",
             color: "#BCBCBC"
         }
     }

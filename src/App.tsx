@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import AuthLayout from "./layouts/auth-layout/AuthLayout";
 import AppLayout from "./layouts/app-layout/AppLayout";
 import { useEffect, useState } from "react";
 import ThemeContext from "./context/ThemeContext"
@@ -28,6 +27,7 @@ import TitleIndex from "./pages/title";
 import TitleCreate from "./pages/title/create";
 import FormLayout from "./layouts/form-layout/FormLayout";
 import TitleUpdate from "./pages/title/update";
+import NotificationRouter from "./modules/notifications/NotificationRouter";
 
 function App() {
   const [theme, setTheme] = useState<"dark" | "light">(getColorScheme());
@@ -58,14 +58,14 @@ function App() {
             <AuthProvider>
               <Routes>
                 <Route path={ChapterRoutes.INDEX} element={<ChapterIndex/>} />
-                <Route element={<AuthLayout />}>
-                    <Route path={AuthRoutes.REGISTER} element={<AuthPage section="register" />}/>
-                    <Route path={AuthRoutes.FORGOT} element={<AuthPage section="forgot" />}/>
-                    <Route path={AuthRoutes.LOGIN} element={<AuthPage section="login" />}/>
-                    <Route path={AuthRoutes.VERIFY} element={<AuthPage section="verify" />}/>
-                    <Route path={AuthRoutes.RECOVERY} element={<AuthPage section="recovery"/>} />
-                </Route>
                 <Route element={<AppLayout />}>
+                    <Route>
+                        <Route path={AuthRoutes.REGISTER} element={<AuthPage section="register" />}/>
+                        <Route path={AuthRoutes.FORGOT} element={<AuthPage section="forgot" />}/>
+                        <Route path={AuthRoutes.LOGIN} element={<AuthPage section="login" />}/>
+                        <Route path={AuthRoutes.VERIFY} element={<AuthPage section="verify" />}/>
+                        <Route path={AuthRoutes.RECOVERY} element={<AuthPage section="recovery"/>} />
+                    </Route>
                     <Route element={<FormLayout />}>
                         <Route path={ChapterRoutes.ADD} element={<ChapterCreate/>} />
                         <Route path={ChapterRoutes.EDIT} element={<ChapterEdit/>} />
@@ -89,6 +89,8 @@ function App() {
                     </Route>
                     <Route path={AppRoutes.COMMENT} element={<CommentPage />} />
                     <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
+
+                    <Route path={AppRoutes.NOTIFICATIONS} element={<NotificationRouter />}/>
                 </Route>
               </Routes>
             </AuthProvider>

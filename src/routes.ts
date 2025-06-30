@@ -9,6 +9,7 @@ export enum AppRoutes {
     SETTINGS = '/settings',
     TEAM = '/teams',
     AUTH = '/auth',
+    NOTIFICATIONS = '/notifications/*',
     NOT_FOUND = '*'
 }
 
