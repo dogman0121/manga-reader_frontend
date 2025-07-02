@@ -257,7 +257,7 @@ function TitlePageMobile() {
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    rowGap: theme.spacing(3)
+                                    rowGap: theme.spacing(4)
                                 }}
                             >
                                 <About/>
