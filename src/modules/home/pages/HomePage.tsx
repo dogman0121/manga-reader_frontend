@@ -12,6 +12,7 @@ import { SearchInputDisabled } from "../../../features/search/components/SearchI
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import SearchModal from "../../../features/search/components/SearchModal";
 import SearchProvider from "../../../features/search/components/SearchProvider";
+import { HomeRoutes } from "../HomeRouter";
 
 function Carousel({children, sx}: {children: React.ReactElement[], sx?: SxProps}) {
     return (
@@ -60,16 +61,21 @@ function TitlesCarousel({
 function ProgressItem({title}: {title: Title}) {
     const theme = useTheme()
     
+    const {device} = useDeviceDetect();
+    
     return (
         <Box
             sx={{
                 p: theme.spacing(2),
-                bgcolor: theme.palette.background.paper,
                 borderRadius: "12px",
                 minWidth: "370px",
                 display: "flex",
                 flexDirection: "row",
                 gap: theme.spacing(3),
+                backgroundColor: device != DEVICE.MOBILE ? theme.palette.background.paper : undefined,
+                border: device == DEVICE.MOBILE 
+                    ? `1px solid rgba(${theme.palette.mode == "dark" ? "255, 255, 255" : "0, 0, 0"}, 0.23)`
+                    : undefined 
             }}
         >
             <Poster 
@@ -183,7 +189,7 @@ function HomePagePC() {
                 </Section>
                 <Section
                     title="Специально для вас"
-                    href="/"
+                    href={HomeRoutes.RECOMMENDATIONS}
                 >
                     <TitlesCarousel titles={[...titles, ...titles]}/>
                 </Section>
@@ -228,7 +234,7 @@ function HomePageMobile() {
                     </Section>
                     <Section
                         title="Специально для вас"
-                        href="/"
+                        href={HomeRoutes.RECOMMENDATIONS}
                     >
                         <TitlesCarousel titles={[...titles, ...titles]}/>
                     </Section>

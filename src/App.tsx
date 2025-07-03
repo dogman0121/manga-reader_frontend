@@ -87,10 +87,11 @@ function App() {
                         <Route path={TeamRoutes.EDIT} element={<TeamEdit />}/>
                     </Route>
                     <Route path={AppRoutes.COMMENT} element={<CommentPage />} />
-                    <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
 
-                    <Route index element={<HomeRouter />} />
+                    <Route path={AppRoutes.HOME} element={<HomeRouter />} />
                     <Route path={AppRoutes.NOTIFICATIONS} element={<NotificationsRouter />}/>
+
+                    <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
                 </Route>
               </Routes>
             </AuthProvider>

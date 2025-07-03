@@ -1,6 +1,5 @@
 // src/constants/routes.ts
 export enum AppRoutes {
-    HOME = '/',
     CATALOG = '/catalog',
     TITLE = '/manga',
     COMMENT = '/comments',
@@ -10,6 +9,7 @@ export enum AppRoutes {
     TEAM = '/teams',
     AUTH = '/auth',
     NOTIFICATIONS = '/notifications/*',
+    HOME = '/*',
     NOT_FOUND = '*'
 }
 

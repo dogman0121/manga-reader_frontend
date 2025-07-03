@@ -1,14 +1,15 @@
-import { Box, BottomNavigation, BottomNavigationAction, useTheme } from "@mui/material";
+import { Box, BottomNavigation, BottomNavigationAction, useTheme, Typography } from "@mui/material";
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useEffect, useState } from "react";
-import { Outlet, Link, generatePath } from 'react-router-dom'
+import { Outlet, Link, generatePath, useNavigate } from 'react-router-dom'
 import { UserMenuDrawer } from "../../features/user-menu/UserMenu";
 import Blur from "../../components/Blur";
 import MainBlurContext from "./MainBlurContext";
 import { AppRoutes } from "../../routes";
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
 export function ContentMobile({children}: {children: React.ReactNode}) {
     return (
@@ -27,6 +28,27 @@ export function Content({children}: {children: React.ReactNode}) {
             minHeight: "100%",
         }}>
             {children}
+        </Box>
+    )
+}
+
+export function AppHeaderMobile({
+    title
+}: {
+    title: string
+}) {
+    const navigate = useNavigate();
+
+    return (
+        <Box
+            sx={{
+                padding: "15px 10px",
+                display: "flex",
+                flexDirection: "row"
+            }}
+        >
+            <ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>
+            <Typography ml={"10px"}>{title}</Typography>
         </Box>
     )
 }
