@@ -1,15 +1,15 @@
 // src/constants/routes.ts
 export enum AppRoutes {
     CATALOG = '/catalog',
-    TITLE = '/manga',
+    TITLE = '/manga/*',
     COMMENT = '/comments',
     USER = '/users',
     POST = '/posts',
     SETTINGS = '/settings',
     TEAM = '/teams',
     AUTH = '/auth',
-    NOTIFICATIONS = '/notifications/*',
-    HOME = '/*',
+    NOTIFICATIONS = '/notifications',
+    HOME = '/',
     NOT_FOUND = '*'
 }
 

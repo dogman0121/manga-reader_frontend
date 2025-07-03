@@ -1,8 +1,8 @@
 import { apiClient } from "../../../../utils/apiClient";
 
 class TitleService {
-    async fetchTitle(titleId: number){
-        const response = await apiClient.get(`/manga/${titleId}`);
+    async fetchTitle(slug: string){
+        const response = await apiClient.get(`/manga/${slug}`);
     
         return await response.json();
     }

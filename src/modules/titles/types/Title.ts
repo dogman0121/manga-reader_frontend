@@ -15,6 +15,7 @@ interface Poster {
 export default interface Title {
     id: number,
     name: string,
+    slug: string,
     name_translations?: {
         lang: string,
         name: string

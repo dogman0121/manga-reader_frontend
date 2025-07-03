@@ -13,7 +13,7 @@ function MangaItem({ item }: { item: Title }) {
     const theme = useTheme()
 
     return (
-        <Link to={`/manga/${item.id}`}>
+        <Link to={`/manga/${item.slug}`}>
             <Box
                 sx={{
                     display: "flex",

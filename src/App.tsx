@@ -13,7 +13,7 @@ import Catalog from "./pages/catalog";
 import CommentPage from "./pages/comment/CommentPage";
 import NotFound from "./pages/not-found/NotFound";
 import UserProfile from "./pages/UserProfile";
-import { AppRoutes, AuthRoutes, ChapterRoutes, TeamRoutes, TitleRoutes, UserRoutes } from "./routes";
+import { AppRoutes, AuthRoutes, ChapterRoutes, TeamRoutes, UserRoutes } from "./routes";
 import UserProfileSettings from "./pages/UserProfileSettings";
 import TeamIndex from "./pages/teams";
 import TeamCreate from "./pages/teams/create";
@@ -22,12 +22,10 @@ import ChapterIndex from "./pages/chapters";
 import ChapterCreate from "./pages/chapters/create";
 import ChapterEdit from "./pages/chapters/edit";
 import { DEVICE, useDeviceDetect } from "./hooks/useDeviceDetect";
-import TitleIndex from "./pages/title";
-import TitleCreate from "./pages/title/create";
 import FormLayout from "./layouts/form-layout/FormLayout";
-import TitleUpdate from "./pages/title/update";
 import NotificationsRouter from "./modules/notifications/NotificationsRouter";
 import HomeRouter from "./modules/home/HomeRouter";
+import TitleRouter from "./modules/titles/TitleRouter";
 
 function App() {
   const [theme, setTheme] = useState<"dark" | "light">(getColorScheme());
@@ -69,12 +67,6 @@ function App() {
                     <Route element={<FormLayout />}>
                         <Route path={ChapterRoutes.ADD} element={<ChapterCreate/>} />
                         <Route path={ChapterRoutes.EDIT} element={<ChapterEdit/>} />
-
-                        <Route path={TitleRoutes.ADD} element={<TitleCreate/>} />
-                        <Route path={TitleRoutes.EDIT} element={<TitleUpdate/>} />
-                    </Route>
-                    <Route>
-                        <Route path={TitleRoutes.INDEX} element={<TitleIndex />} />
                     </Route>
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />
                     <Route>
@@ -90,7 +82,7 @@ function App() {
 
                     <Route path={AppRoutes.HOME} element={<HomeRouter />} />
                     <Route path={AppRoutes.NOTIFICATIONS} element={<NotificationsRouter />}/>
-
+                    <Route path={AppRoutes.TITLE} element={<TitleRouter />} />
                     <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
                 </Route>
               </Routes>

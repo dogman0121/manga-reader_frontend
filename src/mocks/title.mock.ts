@@ -2,6 +2,7 @@ import Title from "../modules/titles/types/Title";
 
 export const titles: Title[] =  [
     {
+        slug: "ataka-titanov",
         adult: {
             id: 4,
             name: "18+"
@@ -29,18 +30,18 @@ export const titles: Title[] =  [
                 subscribers_count: 1
             }
         ],
-        "authors": [
+        authors: [
             {
-                "about": "\u0420\u0443\u0441\u044b, \u043f\u0435\u0439\u0442\u0435 \u0432\u043e\u0434\u0443 \u0438\u0437 \u0411\u0430\u0439\u043a\u0430\u043b\u0430",
-                "avatar": "https://kanwoo.ru/uploads/user/4/e719bcfc-61a5-4f2a-a3b8-2fa800a6f8db.jpg",
-                "created_at": "2025-04-27T16:39:59.970617Z",
-                "email": "ujhjlyjd.ivan@yandex.ru",
-                "id": 4,
-                "login": "BednyGamer",
-                "notifications_count": 0,
-                "role": 1,
-                "subscribed": null,
-                "subscribers_count": 2
+                about: "\u0420\u0443\u0441\u044b, \u043f\u0435\u0439\u0442\u0435 \u0432\u043e\u0434\u0443 \u0438\u0437 \u0411\u0430\u0439\u043a\u0430\u043b\u0430",
+                avatar: "https://kanwoo.ru/uploads/user/4/e719bcfc-61a5-4f2a-a3b8-2fa800a6f8db.jpg",
+                created_at: "2025-04-27T16:39:59.970617Z",
+                email: "ujhjlyjd.ivan@yandex.ru",
+                id: 4,
+                login: "BednyGamer",
+                notifications_count: 0,
+                role: 1,
+                subscribed: null,
+                subscribers_count: 2
             }
         ],
         "background": "https://kanwoo.ru/uploads/manga/1/035991c8-9d0a-4a41-8724-b9808ff3c7d7.jpg",
@@ -144,6 +145,7 @@ export const titles: Title[] =  [
         "year": 2009
     },
     {
+        slug: "borba-v-pryamom-efire",
         "adult": {
             "id": 1,
             "name": "\u043d\u0435\u0442"
@@ -226,6 +228,7 @@ export const titles: Title[] =  [
         "year": 2019
     },
     {
+        slug: "klinok-rassekayuschij-demonov",
         "adult": {
             "id": 1,
             "name": "\u043d\u0435\u0442"
@@ -324,6 +327,7 @@ export const titles: Title[] =  [
         "year": 2016
     },
     {
+        slug: "ya-rasprodal-svoyu-zhizn-po-desyat-tyisyach-ien-za-god",
         "adult": {
             "id": 1,
             "name": "\u043d\u0435\u0442"
@@ -373,6 +377,7 @@ export const titles: Title[] =  [
         "year": 2016
     },
     {
+        slug: "chelovek-benzopila",
         "adult": {
             "id": 1,
             "name": "\u043d\u0435\u0442"

@@ -161,7 +161,7 @@ export default function ChapterPage() {
 
     const [commentsOpened, setCommentsOpened] = useState(false);
 
-    const {chapterId, titleId} = useParams();
+    const {chapterId, slug} = useParams();
 
     const navigate = useNavigate();
 
@@ -179,7 +179,7 @@ export default function ChapterPage() {
 
     const generateChapterPath = (chapter: Chapter) => {
         return generatePath(ChapterRoutes.INDEX, {
-            titleId: parseInt(titleId || ""), 
+            slug: slug || "", 
             chapterId: chapter.id
         })
     }
@@ -199,10 +199,7 @@ export default function ChapterPage() {
     }, [])
 
     useEffect(() => {
-        if (isNaN(parseInt(titleId || "")))
-            return;
-
-        titleService.fetchTitle(parseInt(titleId || ""))
+        titleService.fetchTitle(slug || "")
             .then(({data}) => {
                 setTitle(data);
             })

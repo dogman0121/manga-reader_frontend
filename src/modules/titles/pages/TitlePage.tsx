@@ -73,7 +73,7 @@ function TitlePagePC() {
                             }}
                         >
                             { title.permissions?.edit && (
-                                <Link to={generatePath(TitleRoutes.EDIT, {titleId: title.id})}>
+                                <Link to={generatePath("/manga/:slug/edit", {slug: title.slug})}>
                                     <Button 
                                         variant="text"
                                         sx={{
@@ -237,8 +237,8 @@ function TitlePageMobile() {
                         sx={{
                             display: "flex",
                             flexDirection: "column",
-                            alignItems: "center"
-
+                            alignItems: "center",
+                            textAlign: "center"
                         }}
                     />
                     <Stats 
@@ -307,7 +307,7 @@ function TitlePageMobile() {
 export default function TitlePage() {
     const {device} = useDeviceDetect();
 
-    const {titleId} = useParams();
+    const {slug} = useParams();
 
     const [title, setTitle] = useState<Title | null>(null);
 
@@ -317,7 +317,7 @@ export default function TitlePage() {
 
         setIsLoading(true);
 
-        titleService.fetchTitle(parseInt(titleId || ""))
+        titleService.fetchTitle(slug || "")
         .then(({data}) => {
             if (data)
                 setTitle(data);
@@ -327,7 +327,7 @@ export default function TitlePage() {
         })
         
         return () => {}
-    }, [titleId])
+    }, [slug])
 
     if (isLoading)
         return <PageLoader />

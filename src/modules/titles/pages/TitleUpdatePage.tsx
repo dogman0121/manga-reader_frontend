@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import useFormUtils from "../../../features/form/hooks/useFormUtils";
 import Title from "../types/Title";
 import { titleService } from "../service/api/titleService";
-import { Link, useParams } from "react-router-dom";
+import { generatePath, Link, useParams } from "react-router-dom";
 import { Breadcrumbs, Typography, useTheme } from "@mui/material";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import TitleForm, { compileFormData } from "../components/form/TitleForm";
 import AddTitleForm from "../types/AddTitleForm";
-import { generatePath, TitleRoutes } from "../../../routes";
 import PageLoader from "../../../components/ui/PageLoader";
 import { apiClient } from "../../../utils/apiClient";
 
@@ -18,7 +17,7 @@ export default function TitleUpdatePage() {
 
     const theme = useTheme();
 
-    const {titleId} = useParams();
+    const {slug} = useParams();
 
     const [title, setTitle] = useState<Title | undefined>();
 
@@ -28,7 +27,7 @@ export default function TitleUpdatePage() {
 
         setLoading(true);
 
-        const {error} = await apiClient.sendForm(`/manga/${titleId}`, "PUT", formData);
+        const {error} = await apiClient.sendForm(`/manga/${slug}`, "PUT", formData);
 
         setLoading(false);
 
@@ -47,7 +46,7 @@ export default function TitleUpdatePage() {
     const processTitle = async() => {
         setTitleLoading(true);
         
-        const {data: title, error} = await titleService.fetchTitle(parseInt(titleId || ""));
+        const {data: title, error} = await titleService.fetchTitle(slug || "");
 
         setTitleLoading(false);
 
@@ -70,7 +69,7 @@ export default function TitleUpdatePage() {
         processTitle();
 
         return () => {};
-    }, [titleId]);
+    }, [slug]);
 
     if (titleLoading)
         return <PageLoader />
@@ -79,7 +78,7 @@ export default function TitleUpdatePage() {
         <AppContent>
             <Breadcrumbs>
                     <Link 
-                        to={generatePath(TitleRoutes.INDEX, {titleId: titleId || ""})}
+                        to={generatePath("/manga/:slug", {slug: slug || ""})}
                     >
                         <Typography
                             sx={{

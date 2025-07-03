@@ -1,7 +1,6 @@
 import { Box, BoxProps, styled, Typography, useTheme } from "@mui/material";
 import Title from "../modules/titles/types/Title";
-import { generatePath, TitleRoutes } from "../routes";
-import { Link } from "react-router-dom";
+import { generatePath, Link } from "react-router-dom";
 import Poster from "./ui/Poster";
 
 
@@ -16,7 +15,7 @@ export default function TitleItem({ title, sx, ...props }: {title: Title} & Omit
     return (
         <Link 
             draggable={false}
-            to={generatePath(TitleRoutes.INDEX, {titleId: title.id})}
+            to={generatePath("/manga/:slug", {slug: title.slug})}
             style={{
                 userSelect: "none"
             }}
