@@ -50,7 +50,7 @@ function TitlesCarousel({
             {titles.map(title => <TitleItem 
                 title={title}
                 sx={{
-                    minWidth: "max(130px, calc((100% - 15px * 7) / 8))",
+                    minWidth: "max(120px, calc((100% - 15px * 7) / 8))",
                 }}
             />)}
         </Carousel>
