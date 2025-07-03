@@ -54,7 +54,7 @@ function Stats() {
                 open={subscribersOpened} 
                 onClose={() => {setSubscribersOpened(false)}} 
                 users={subscribers} title="Подписчики"
-                length={profileUser.subscribers_count}
+                length={profileUser.subscribers_count || 0}
                 onScrollEnd={() => {setSubscribersPage(prev => ++prev)}}
                 children={<></>}
             />
@@ -84,7 +84,7 @@ function InfoMobile() {
                 }}
             >
                 <Avatar
-                    src={profileUser?.avatar}
+                    src={profileUser?.avatar || ""}
                     sx={{width: "70px", height: "70px"}}
                 />
                 <Box
@@ -134,7 +134,7 @@ function InfoPC() {
                 }}
             >
                 <Avatar
-                    src={user?.avatar}
+                    src={user?.avatar || ""}
                     sx={{width: "120px", height: "120px"}}
                 />
                 <Box

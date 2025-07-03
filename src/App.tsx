@@ -11,7 +11,6 @@ import { HelmetProvider } from "react-helmet-async";
 import AuthProvider from "./features/auth/components/AuthProvider";
 import Catalog from "./pages/catalog";
 import CommentPage from "./pages/comment/CommentPage";
-import Home from "./pages/home/Home";
 import NotFound from "./pages/not-found/NotFound";
 import UserProfile from "./pages/UserProfile";
 import { AppRoutes, AuthRoutes, ChapterRoutes, TeamRoutes, TitleRoutes, UserRoutes } from "./routes";
@@ -27,7 +26,8 @@ import TitleIndex from "./pages/title";
 import TitleCreate from "./pages/title/create";
 import FormLayout from "./layouts/form-layout/FormLayout";
 import TitleUpdate from "./pages/title/update";
-import NotificationRouter from "./modules/notifications/NotificationRouter";
+import NotificationsRouter from "./modules/notifications/NotificationsRouter";
+import HomeRouter from "./modules/home/HomeRouter";
 
 function App() {
   const [theme, setTheme] = useState<"dark" | "light">(getColorScheme());
@@ -76,7 +76,6 @@ function App() {
                     <Route>
                         <Route path={TitleRoutes.INDEX} element={<TitleIndex />} />
                     </Route>
-                    <Route index element={<Home/>} />
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />
                     <Route>
                         <Route path={UserRoutes.INDEX} element={<UserProfile />} />
@@ -90,7 +89,8 @@ function App() {
                     <Route path={AppRoutes.COMMENT} element={<CommentPage />} />
                     <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
 
-                    <Route path={AppRoutes.NOTIFICATIONS} element={<NotificationRouter />}/>
+                    <Route index element={<HomeRouter />} />
+                    <Route path={AppRoutes.NOTIFICATIONS} element={<NotificationsRouter />}/>
                 </Route>
               </Routes>
             </AuthProvider>

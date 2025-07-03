@@ -2,12 +2,13 @@ export interface User {
     id: number,
     login: string,
     email: string,
-    avatar: string,
-    role: number,
-    about: string,
-    subscribed?: boolean
-    subscribers_count: number,
-    notifications_count?: number
+    avatar?: string,
+    role: number | null,
+    about?: string,
+    subscribed?: boolean | null,
+    subscribers_count: number | null,
+    notifications_count?: number | null,
+    created_at?: string | null
 }
 
 export const EMPTY_USER: User = {

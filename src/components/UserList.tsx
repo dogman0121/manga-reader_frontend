@@ -26,7 +26,7 @@ export function UserItem({user, endAdornment}: UserItemProps) {
                 <ListItem 
                     title={user.login}
                     subtitle={user.about}
-                    img={user.avatar}
+                    img={user.avatar || ""}
                 />
             </Link>
             {endAdornment}

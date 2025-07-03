@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom"
 import { Box, Typography, useTheme } from "@mui/material";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
-import Translation from "../../../pages/title/types/Translation";
 import { ListItem } from "../../../components/ListItem";
 import { chapterService } from "../../../modules/chapters/service/api/chapterService";
 import { ChapterRoutes, generatePath } from "../../../routes";
@@ -13,6 +12,9 @@ import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import Notification from "../../../components/ui/Notification";
 import TitleContext from "../context/TitleContext";
+import Translation from "../types/Translation";
+import { User } from "../../../types/User";
+import Team from "../../../types/Team";
 
 
 function ChapterItem({ 
@@ -90,15 +92,15 @@ function Translator({translation, onChoose}: {translation: Translation, onChoose
         >
             {translation.translator_type == "user" && (
                 <ListItem 
-                    img={translation.translator.avatar}
-                    title={translation.translator.login}
+                    img={(translation.translator as User).avatar || ""}
+                    title={(translation.translator as User).login || ""}
                     subtitle={`Кол-во глав: ${translation.chapters_count}`}
                 />
             )}
             {translation.translator_type == "team" && (
                 <ListItem 
-                    img={translation.translator.poster}
-                    title={translation.translator.name}
+                    img={(translation.translator as Team).poster}
+                    title={(translation.translator as Team).name}
                     subtitle={`Кол-во глав: ${translation.chapters_count}`}
                 />
             )}

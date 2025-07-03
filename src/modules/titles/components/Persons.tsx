@@ -26,7 +26,7 @@ function PersonList({title, users}: {title: string, users: User[]}){
             >
                 {users.map(user => (
                     <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})} key={user.id}>
-                        <MyChip key={user.id} avatar={<Avatar src={user.avatar}/>} label={user.login}/>
+                        <MyChip key={user.id} avatar={<Avatar src={user.avatar || ""}/>} label={user.login}/>
                     </Link> 
                 ))}
             </Box>

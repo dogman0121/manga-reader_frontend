@@ -4,7 +4,7 @@ import { User } from "../../../types/User";
 export default interface Translation {
     id: number,
     translator_type: "team" | "user",
-    translator: Team & User,
+    translator: Team | User,
     chapters_count: number,
     permissions: {
         update?: boolean,

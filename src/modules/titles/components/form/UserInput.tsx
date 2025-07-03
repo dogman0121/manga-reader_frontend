@@ -76,7 +76,7 @@ export default function UserInput({
                     {...props}
                 >
                     <ListItem 
-                        img={option.avatar}
+                        img={option.avatar || ""}
                         title={option.login}
                         subtitle={option.about}
                     />

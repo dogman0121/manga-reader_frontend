@@ -203,7 +203,7 @@ function AppHeader() {
                                 </Tooltip>
                                 <Avatar 
                                     ref={avatarRef}
-                                    src={user.avatar}
+                                    src={user.avatar || ""}
                                     sx={{
                                         width: "40px",
                                         height: "40px"

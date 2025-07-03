@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, Children } from "react";
 import SearchContext from "../context/SearchContext";
 import { searchService } from "../services/api/searchService";
-import Title from "../../../pages/title/types/Title";
+import Title from "../../../modules/titles/types/Title";
 
 
 export enum SECTIONS {

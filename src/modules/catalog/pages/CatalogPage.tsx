@@ -13,10 +13,9 @@ import { searchService } from "../../../features/search/services/api/searchServi
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MobileDrawer from "../../../components/ui/MobileDrawer";
-import MobileModal from "../../../components/ui/MobileModal";
-import SearchListModal from "../../../features/search/components/SearchListModal";
 import { useNavigate } from "react-router-dom";
 import StatusBar from "../../../components/StatusBar";
+import SearchModal from "../../../features/search/components/SearchModal";
 
 function CatalogPagePC() {
     const theme = useTheme();
@@ -66,7 +65,7 @@ function CatalogPageMobile() {
 
     const navigate = useNavigate();
 
-    const { section } = useContext(SearchContext);
+    const { query, section } = useContext(SearchContext);
 
     const [filtersOpened, setFiltersOpened] = useState(false);
 
@@ -77,75 +76,47 @@ function CatalogPageMobile() {
             <StatusBar 
                 color={theme.palette.background.default}
             />
-            <SearchProvider emptyQuery={true}>
-                <AppContent>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            columnGap: theme.spacing(2)
-                        }}
-                    >
-                        <ArrowBackRoundedIcon 
-                            onClick={() => {navigate(-1)}}
-                        />
-                        <SearchInputDisabled 
-                            onClick={() => {setModalOpened(true)}}
-                        />
-                        <MoreVertRoundedIcon 
-                            onClick={() => {setFiltersOpened(true)}}
-                        />
-                    </Box>
-                    <SearchSectionSelector
-                        sx={{
-                            mt: theme.spacing(2)
-                        }}
+            <AppContent>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        columnGap: theme.spacing(2)
+                    }}
+                >
+                    <ArrowBackRoundedIcon 
+                        onClick={() => {navigate(-1)}}
                     />
-                </AppContent>
-                <Divider />
-                <AppContent>
-                    <>
-                        {section == SECTIONS.MANGA && <MangaResults />}
-                    </>
-                </AppContent>
-                <MobileDrawer
-                    open={filtersOpened}
-                    onClose={() => {setFiltersOpened(false)}}
-                    anchor="right"
-                >
-                    <Filters />
-                </MobileDrawer>
-                <MobileModal
-                    open={modalOpened}
-                    onClose={() => {setModalOpened(false)}}
-                >
-                    <Box
-                        sx={{
-                            width: "100vw",
-                            height: "100vh",
-                            bgcolor: theme.palette.background.default
-                        }}
-                    >
-                        <AppContent>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    columnGap: theme.spacing(2)
-                                }}
-                            >
-                                <ArrowBackRoundedIcon 
-                                    onClick={() => {setModalOpened(false)}}
-                                />
-                                <SearchInput/>
-                            </Box>
-                            <SearchListModal sx={{mt: theme.spacing(3)}}/>
-                        </AppContent>
-                    </Box>
-                </MobileModal>
-            </SearchProvider>
+                    <SearchInputDisabled 
+                        onClick={() => {setModalOpened(true)}}
+                        value={query}
+                        placeholder="Поиск"
+                    />
+                    <MoreVertRoundedIcon 
+                        onClick={() => {setFiltersOpened(true)}}
+                    />
+                </Box>
+                <SearchSectionSelector
+                    sx={{
+                        mt: theme.spacing(2)
+                    }}
+                />
+            </AppContent>
+            <Divider />
+            <AppContent>
+                <>
+                    {section == SECTIONS.MANGA && <MangaResults />}
+                </>
+            </AppContent>
+            <MobileDrawer
+                open={filtersOpened}
+                onClose={() => {setFiltersOpened(false)}}
+                anchor="right"
+            >
+                <Filters />
+            </MobileDrawer>
+            <SearchModal open={modalOpened} onClose={() => {setModalOpened(false)}}/>
         </>
     )
 }

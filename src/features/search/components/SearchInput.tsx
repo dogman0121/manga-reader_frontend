@@ -76,10 +76,14 @@ const SearchOutlinedInputMobile = styled(OutlinedInput)(({theme}) => ({
 }));
 
 
-function SearchInputDisabledMobile({sx, onClick, ...props}: BoxProps) {
+function SearchInputDisabledMobile({
+    sx, 
+    onClick,
+    value = "",
+    placeholder = "Поиск", 
+    ...props
+}: BoxProps & {value?: string, placeholder?: string}) {
     const theme = useTheme();
-
-    const {query, setQuery} = useContext(SearchContext);
 
     const color = getColorScheme() == "light" ? "0, 0, 0" : "255, 255, 255"; 
 
@@ -105,12 +109,12 @@ function SearchInputDisabledMobile({sx, onClick, ...props}: BoxProps) {
                 sx={{width: "100%"}}
                 onClick={onClick}
             >
-                {query != "" ?
-                    <Typography>{query}</Typography>
+                {value != "" ?
+                    <Typography>{value}</Typography>
                     :
                     <Typography
                         color={`rgba(${color}, 0.42)`}
-                    >Поиск</Typography>
+                    >{placeholder}</Typography>
                 }
             </Box>
             <CloseIcon 
@@ -119,7 +123,6 @@ function SearchInputDisabledMobile({sx, onClick, ...props}: BoxProps) {
                     height: "20px",
                     cursor: "pointer"
                 }}
-                onClick={() => {setQuery("")}}
             />
         </Box>
     )
@@ -182,7 +185,7 @@ function SearchInputMobile({sx, ...props}: BoxProps) {
     )
 }
 
-export function SearchInputDisabled({...props}: BoxProps) {
+export function SearchInputDisabled({...props}: BoxProps & {value?: string, placeholder?: string}) {
     const {device} = useDeviceDetect();
     
     return (

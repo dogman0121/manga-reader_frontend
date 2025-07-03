@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import SearchContext from "../../../features/search/context/SearchContext";
 import { Box, styled, Typography, useTheme } from "@mui/material";
-import Title from "../../../pages/title/types/Title";
+import Title from "../../titles/types/Title";
 import { generatePath, TitleRoutes } from "../../../routes";
 import { Link } from "react-router-dom";
 import Poster from "../../../components/ui/Poster";

@@ -1,8 +1,16 @@
 import Genre from "../../../types/Genre";
-import Poster from "../../../types/Poster";
 import Team from "../../../types/Team";
 import Translation from "./Translation";
 import { User } from "../../../types/User";
+
+interface Poster {
+    uuid: string,
+    original: string,
+    large: string,
+    medium: string,
+    small: string,
+    thumbnail: string
+}
 
 export default interface Title {
     id: number,
@@ -13,7 +21,7 @@ export default interface Title {
     }[],
     description?: string,
     main_poster?: Poster,
-    background?: string,
+    background?: string | null,
     posters?: Array<Poster>,
     year?: number,
     views?: number,
@@ -43,7 +51,7 @@ export default interface Title {
     similar?: Array<Title>,
     teams?: Array<Team>,
     permissions?: {
-        edit: boolean
+        edit?: boolean
     },
-    user_rating?: number
+    user_rating?: number | null
 }

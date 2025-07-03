@@ -26,7 +26,7 @@ export default function Info() {
     const {user: authUser} = useContext(UserAuthContext);
     const {setUser: setProfileUser, user: profileUser} = useContext(UserProfileContext);
 
-    const [userAvatar, setUserAvatar] = useState(profileUser?.avatar);
+    const [userAvatar, setUserAvatar] = useState(profileUser?.avatar || "");
 
     const [notificationOpened, setNotificationOpened] = useState(false);
 
@@ -43,7 +43,7 @@ export default function Info() {
 
         setValue("login", profileUser.login);
         setImgUrl(profileUser?.avatar || "");
-        setValue("about", profileUser.about);
+        setValue("about", profileUser.about || "");
     }, [])
 
     useEffect(() => {

@@ -25,7 +25,7 @@ import OpenGraphMeta from "../../../components/OpenGraphMeta";
 import { generatePath, TitleRoutes } from "../../../routes";
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
-import Similar from "../../../pages/title/components/Similar";
+import Similar from "../components/Similar";
 import Rating from "../components/Rating";
 import ReadButton from "../components/ReadButton";
 import Persons from "../components/Persons";

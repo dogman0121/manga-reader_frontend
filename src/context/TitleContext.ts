@@ -1,13 +1,12 @@
 import { createContext } from "react";
-import Title from "../pages/title/types/Title";
-import { EMPTY_TITLE } from "../pages/title/types/Title";
+import Title from "../modules/titles/types/Title";
 
 
 interface TitleContextProps {
-    title: Title
+    title: Title | null
 }
 
-const TitleContext = createContext<TitleContextProps>({title: EMPTY_TITLE});
+const TitleContext = createContext<TitleContextProps>({title: null});
 
 
 export default TitleContext;

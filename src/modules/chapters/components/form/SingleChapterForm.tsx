@@ -145,7 +145,7 @@ export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter |
                                     }}
                                 >
                                     <ListItem
-                                        img={currentUser.avatar}
+                                        img={currentUser.avatar || ""}
                                         title={currentUser.login}
                                         subtitle={currentUser.about}
                                     />

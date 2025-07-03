@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import Title from "../types/Title";
 import { Box, Typography } from "@mui/material";
 import Poster from "../../../components/ui/Poster";
-import TitleContext from "../../../context/TitleContext";
+import Title from "../types/Title";
+import useTitle from "../hooks/useTitle";
 
 function SimilarItem({ manga }: {manga: Title}) {
     return (
@@ -34,7 +33,7 @@ function SimilarItem({ manga }: {manga: Title}) {
 
 
 function Similar() {
-    const {title} = useContext(TitleContext);
+    const {title} = useTitle();
 
     if (!title || !title.similar)
         return null;

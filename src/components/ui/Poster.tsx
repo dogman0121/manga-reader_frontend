@@ -16,6 +16,7 @@ function Poster({
             }}
         >
             <img
+                draggable={false}
                 src={src}
                 style={{
                     aspectRatio: "2/3",

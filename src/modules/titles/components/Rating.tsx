@@ -123,7 +123,7 @@ export default function Rating({sx}: {sx?: SxProps}) {
     
     const {device} = useDeviceDetect();
 
-    const [rating, setRating] = useState<number | undefined>(title?.user_rating);
+    const [rating, setRating] = useState<number | undefined>(title?.user_rating || undefined);
 
     const [modalOpened, setModalOpened] = useState(false);
 
