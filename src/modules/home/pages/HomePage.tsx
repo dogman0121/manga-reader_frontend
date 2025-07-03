@@ -229,10 +229,8 @@ function HomePageMobile() {
                         titles={[...titles, ...titles, ...titles]} 
                         sx={{
                             "& .TitleItem": {
-                                width: "160px"
-                            },
-                            
-                            
+                                minWidth: "max(140px, calc((100% - 15px * 8) / 9))"
+                            }
                         }}
                     />
                     <Section 
