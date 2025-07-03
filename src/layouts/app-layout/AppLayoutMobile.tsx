@@ -49,7 +49,7 @@ export function AppHeaderMobile({
             }}
         >
             <ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>
-            <Typography ml={"10px"}>{title}</Typography>
+            <Typography ml={"10px"} fontSize={"16px"}>{title}</Typography>
         </Box>
     )
 }
