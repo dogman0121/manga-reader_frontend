@@ -93,7 +93,7 @@ function AppHeader() {
                             display: "flex"
                         }}
                     >   
-                        <Link to={AppRoutes.HOME}>
+                        <Link to="/">
                             <SvgIcon 
                                 viewBox="0 0 96 96"
                                 sx={{
