@@ -42,7 +42,7 @@ export function AppHeaderMobile({
     return (
         <Box
             sx={{
-                padding: "10px",
+                padding: "15px 10px",
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center"
