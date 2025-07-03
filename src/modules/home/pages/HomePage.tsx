@@ -69,7 +69,7 @@ function ProgressItem({title}: {title: Title}) {
                 minWidth: "370px",
                 display: "flex",
                 flexDirection: "row",
-                gap: theme.spacing(3)
+                gap: theme.spacing(3),
             }}
         >
             <Poster 
@@ -200,13 +200,14 @@ function HomePageMobile() {
             <AppContent>
                 <SearchInputDisabled 
                     onClick={() => setModalOpened(true)}
+                    placeholder="Быстрый поиск"
                 />
                 <Box
                     sx={{
-                        mt: "20px",
+                        mt: "25px",
                         display: "flex",
                         flexDirection: "column",
-                        gap: "25px"
+                        gap: "20px"
                     }}
                 >
                     <TitlesCarousel
