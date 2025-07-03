@@ -129,7 +129,7 @@ function AppLayoutMobile() {
                     <BottomNavigationAction 
                         sx={actionStyles} 
                         icon={
-                            <Link to={AppRoutes.HOME}>
+                            <Link to="/">
                                 <HomeRoundedIcon fontSize="medium"/>
                             </Link>
                         } 

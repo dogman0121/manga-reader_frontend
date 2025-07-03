@@ -1,4 +1,4 @@
-import { Box, SxProps, Typography, useTheme } from "@mui/material";
+import { Box, Divider, SxProps, Typography, useTheme } from "@mui/material";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { titles } from "../../../mocks/title.mock";
 import TitleItem from "../../../components/TitleItem";
@@ -203,14 +203,20 @@ function HomePageMobile() {
 
     return (
         <SearchProvider emptyQuery={false}>
-            <AppContent>
+            <Box
+                sx={{
+                    p: "15px 10px"
+                }}
+            >
                 <SearchInputDisabled 
                     onClick={() => setModalOpened(true)}
                     placeholder="Быстрый поиск"
                 />
+            </Box>
+            <Divider />
+            <AppContent>
                 <Box
-                    sx={{
-                        mt: "25px",
+                    sx={{  
                         display: "flex",
                         flexDirection: "column",
                         gap: "20px"
