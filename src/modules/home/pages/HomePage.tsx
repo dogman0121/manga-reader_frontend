@@ -205,12 +205,15 @@ function HomePageMobile() {
         <SearchProvider emptyQuery={false}>
             <Box
                 sx={{
-                    p: "10px"
+                    p: "10px",
                 }}
             >
                 <SearchInputDisabled 
                     onClick={() => setModalOpened(true)}
                     placeholder="Быстрый поиск"
+                    sx={{
+                        height: "34px"
+                    }}
                 />
             </Box>
             <Divider />

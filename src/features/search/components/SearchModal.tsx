@@ -29,7 +29,8 @@ function SearchModalMobile({open, onClose}: {open: boolean, onClose: () => void}
                             display: "flex",
                             flexDirection: "row",
                             alignItems: "center",
-                            columnGap: theme.spacing(2)
+                            columnGap: theme.spacing(2),
+                            height: "34px"
                         }}
                     >
                         <ArrowBackRoundedIcon 

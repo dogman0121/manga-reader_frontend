@@ -194,7 +194,9 @@ function TitlePageMobile() {
                     <Box
                         sx={{
                             display: "flex",
-                            justifyContent: "space-between"
+                            justifyContent: "space-between",
+                            height: "34px",
+                            alignItems: "center"
                         }}
                     >
                         <WestRoundedIcon 

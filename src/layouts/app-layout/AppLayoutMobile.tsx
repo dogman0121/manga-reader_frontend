@@ -42,14 +42,21 @@ export function AppHeaderMobile({
     return (
         <Box
             sx={{
-                padding: "15px 10px",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center"
+                padding: "10px",
+                
             }}
         >
-            <ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>
-            <Typography ml={"10px"} fontSize={"16px"}>{title}</Typography>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    height: "34px"
+                }}
+            >
+                <ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>
+                <Typography ml={"10px"} fontSize={"16px"}>{title}</Typography>
+            </Box>
         </Box>
     )
 }
