@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import PageHeader from "../../../components/ui/PageHeader";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
-import { Box, useTheme } from "@mui/material";
+import { Box, Divider, useTheme } from "@mui/material";
 import { notificationService } from "../services/api/notificationService";
 import UserAuthContext from "../../../context/UserAuthContext";
 import { User } from "../../../types/User";
@@ -40,28 +40,35 @@ function NotificationPagePC() {
 
 function NotificationPageMobile() {
     const {notifications} = useContext(NotificationsContext);
-
-    const theme = useTheme()
-
+    
     return (
-        <AppContent>
+        <>
             <Box
                 sx={{
-                    pb: theme.spacing(3),
-                    textAlign: "center",
-                    fontSize: "17px" 
+                    p: "10px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px"
                 }}
             >
-                Уведомления
+                <Box
+                    sx={{
+                        textAlign: "center",
+                        fontSize: "16px",
+                    }}
+                >
+                    Уведомления
+                </Box>
+                <NotificationsCategorySelector />
             </Box>
-            <NotificationsCategorySelector />
-            <NotificationsList 
-                notifications={notifications}
-                sx={{
-                    mt: theme.spacing(3)
-                }}
-            />
-        </AppContent>
+            <Divider />
+            <AppContent>
+                <NotificationsList 
+                    notifications={notifications}
+                />
+            </AppContent>
+        </>
+        
     )
 }
 
