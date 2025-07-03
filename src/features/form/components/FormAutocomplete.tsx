@@ -23,9 +23,9 @@ export default function FormAutocomplete<
         <Autocomplete
             sx={{
                 "& .MuiOutlinedInput-root": {
-                    padding: "8px 5px",
+                    padding: "6px 5px",
                     "& .MuiOutlinedInput-input": {
-                        padding: "0 10px"
+                        padding: "0 5px"
                     }
                 },
                 ...sx

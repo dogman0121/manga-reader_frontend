@@ -85,7 +85,7 @@ export default function UserInput({
             renderTags={(value) => (
                 <Box
                     sx={{
-                        pl: "10px",
+                        pl: "5px",
                         display: "flex",
                         flexDirection: "row",
                         gap: "5px",
