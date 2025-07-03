@@ -205,7 +205,7 @@ function HomePageMobile() {
         <SearchProvider emptyQuery={false}>
             <Box
                 sx={{
-                    p: "15px 10px"
+                    p: "10px"
                 }}
             >
                 <SearchInputDisabled 
