@@ -44,7 +44,8 @@ export function AppHeaderMobile({
             sx={{
                 padding: "15px 10px",
                 display: "flex",
-                flexDirection: "row"
+                flexDirection: "row",
+                alignItems: "center"
             }}
         >
             <ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>
