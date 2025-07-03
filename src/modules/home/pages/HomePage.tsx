@@ -50,7 +50,7 @@ function TitlesCarousel({
             {titles.map(title => <TitleItem 
                 title={title}
                 sx={{
-                    width: "140px"
+                    minWidth: "max(130px, calc((100% - 15px * 7) / 8))",
                 }}
             />)}
         </Carousel>
@@ -163,7 +163,7 @@ function HomePagePC() {
                 sx={{
                     p: "0 20px",
                     "& .TitleItem": {
-                        width: "160px"
+                        minWidth: "max(140px, calc((100% - 15px * 8) / 9))"
                     }
                     
                 }}

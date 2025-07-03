@@ -13,19 +13,19 @@ export default function TitleItem({ title, sx, ...props }: {title: Title} & Omit
     const theme = useTheme();
 
     return (
-        <Link 
-            draggable={false}
-            to={generatePath("/manga/:slug", {slug: title.slug})}
-            style={{
-                userSelect: "none"
+        <Box 
+            className="TitleItem"
+            sx={{
+                ...sx
             }}
+            {...props}
         >
-            <Box 
-                className="TitleItem"
-                sx={{
-                    ...sx
+            <Link 
+                draggable={false}
+                to={generatePath("/manga/:slug", {slug: title.slug})}
+                style={{
+                    userSelect: "none"
                 }}
-                {...props}
             >
                 <Poster 
                     src={title.main_poster?.small || ""} 
@@ -58,7 +58,7 @@ export default function TitleItem({ title, sx, ...props }: {title: Title} & Omit
                     >
                         {title.name}</CatalogText>
                 </Box>
-            </Box>
-        </Link>
+            </Link>
+        </Box>
     )
 }
