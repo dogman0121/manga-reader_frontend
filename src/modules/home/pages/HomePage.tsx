@@ -68,7 +68,7 @@ function ProgressItem({title}: {title: Title}) {
             sx={{
                 p: theme.spacing(2),
                 borderRadius: "12px",
-                minWidth: "370px",
+                minWidth: "340px",
                 display: "flex",
                 flexDirection: "row",
                 gap: theme.spacing(3),
