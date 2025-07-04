@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import Chapter from "../../chapters/types/Chapter";
-import { Link, useParams } from "react-router-dom"
+import { generatePath, Link, useParams } from "react-router-dom"
 import { Box, Typography, useTheme } from "@mui/material";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
 import { ListItem } from "../../../components/ListItem";
 import { chapterService } from "../../../modules/chapters/service/api/chapterService";
-import { ChapterRoutes, generatePath } from "../../../routes";
 import useTitle from "../hooks/useTitle";
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
@@ -26,7 +25,7 @@ function ChapterItem({
     editable?: boolean,
     onDelete?: Function
 }) {
-    const {titleId} = useParams();
+    const {slug} = useParams();
 
     const theme = useTheme();
 
@@ -45,7 +44,7 @@ function ChapterItem({
                 alignItems: "center"
             }}
         >
-            <Link to={generatePath(ChapterRoutes.INDEX, {titleId: titleId || "", chapterId: chapter.id})}>
+            <Link to={generatePath("/manga/:slug/chapters/:chapterId", {slug: slug || "", chapterId: chapter.id.toString()})}>
                 <Typography>
                     Том {chapter.tome} Глава {chapter.chapter}
                 </Typography> 
@@ -60,7 +59,7 @@ function ChapterItem({
                 >
                     <Link 
                         style={{display: "flex"}}
-                        to={generatePath(ChapterRoutes.EDIT, {titleId: titleId || "", chapterId: chapter.id})}
+                        to={generatePath("/manga/:slug/chapters/:chapterId/edit", {slug: slug || "", chapterId: chapter.id.toString()})}
                     >
                         <EditRoundedIcon sx={{width: "18px", height: "18px"}}/>
                     </Link>
@@ -124,7 +123,7 @@ function ChaptersHeader() {
         >
             <Typography>Список глав</Typography>
             <Box>
-                <Link to={generatePath(ChapterRoutes.ADD, {titleId: title.id})}>
+                <Link to={generatePath("/manga/:slug/chapters/add", {slug: title.slug || ""})}>
                     <AddRoundedIcon/>
                 </Link>
                 <SwapVertRoundedIcon/>
