@@ -33,7 +33,8 @@ function ListMobile({title, titles}: ListProps) {
     return (
         <>
             <AppHeaderMobile 
-                title={title}
+                backArrow
+                firstLine={title}
             />
             <Divider />
             <AppContent>

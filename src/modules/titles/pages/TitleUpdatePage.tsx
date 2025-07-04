@@ -11,7 +11,6 @@ import { apiClient } from "../../../utils/apiClient";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 import PageHeader from "../../../components/ui/PageHeader";
-import { Divider } from "@mui/material";
 
 export default function TitleUpdatePage() {
     const {setLoading, showNotification, showErrorBlur} = useFormUtils();
@@ -80,10 +79,10 @@ export default function TitleUpdatePage() {
     return (
         <>
             {device == DEVICE.MOBILE && (
-                <>
-                    <AppHeaderMobile title="Редактирование тайтла" />
-                    <Divider />
-                </>
+                <AppHeaderMobile 
+                    backArrow
+                    firstLine={"Изменение тайтла"}
+                />
             )}
             <AppContent>
                 { device != DEVICE.MOBILE && (

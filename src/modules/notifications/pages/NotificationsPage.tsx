@@ -12,6 +12,7 @@ import NotificationsProvider from "../components/NotificationsProvider";
 import NotificationsList from "../components/NotificationsList";
 import NotificationsCategorySelector from "../components/NotificationsCategorySelector";
 import NotificationsContext from "../context/NotificationsContext";
+import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 
 
 function NotificationPagePC() {
@@ -43,25 +44,20 @@ function NotificationPageMobile() {
     
     return (
         <>
-            <Box
-                sx={{
-                    p: "10px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "10px"
-                }}
-            >
-                <Box
-                    sx={{
-                        textAlign: "center",
-                        fontSize: "16px",
-                    }}
-                >
-                    Уведомления
-                </Box>
-                <NotificationsCategorySelector />
-            </Box>
-            <Divider />
+            <AppHeaderMobile
+                firstLine={
+                    <Box
+                        sx={{
+                            textAlign: "center",
+                        }}
+                    >
+                        Уведомления
+                    </Box>
+                }
+                secondLine={
+                    <NotificationsCategorySelector />
+                }
+            />
             <AppContent>
                 <NotificationsList 
                     notifications={notifications}

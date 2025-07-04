@@ -13,6 +13,7 @@ import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import SearchModal from "../../../features/search/components/SearchModal";
 import SearchProvider from "../../../features/search/components/SearchProvider";
 import { HomeRoutes } from "../HomeRouter";
+import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 
 function Carousel({children, sx}: {children: React.ReactElement[], sx?: SxProps}) {
     return (
@@ -203,19 +204,17 @@ function HomePageMobile() {
 
     return (
         <SearchProvider emptyQuery={false}>
-            <Box
-                sx={{
-                    p: "10px",
-                }}
-            >
-                <SearchInputDisabled 
-                    onClick={() => setModalOpened(true)}
-                    placeholder="Быстрый поиск"
-                    sx={{
-                        height: "34px"
-                    }}
-                />
-            </Box>
+            <AppHeaderMobile
+                firstLine={
+                    <SearchInputDisabled 
+                        onClick={() => setModalOpened(true)}
+                        placeholder="Быстрый поиск"
+                        sx={{
+                            height: "34px"
+                        }}
+                    />
+                }
+            />
             <Divider />
             <AppContent>
                 <Box

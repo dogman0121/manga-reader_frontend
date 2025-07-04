@@ -8,7 +8,6 @@ import { generatePath, TitleRoutes } from "../../../routes";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 import PageHeader from "../../../components/ui/PageHeader";
-import { Divider } from "@mui/material";
 
 
 export default function TitleCreatePage() {
@@ -38,10 +37,10 @@ export default function TitleCreatePage() {
     return (
         <>
             {device == DEVICE.MOBILE && (
-                <>
-                    <AppHeaderMobile title="Добавление тайтла" />
-                    <Divider />
-                </>
+                <AppHeaderMobile 
+                    backArrow
+                    firstLine={"Добавление тайтла"}
+                />
             )}
             <AppContent>
                 { device != DEVICE.MOBILE && (

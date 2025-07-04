@@ -1,9 +1,9 @@
-import { Box, BottomNavigation, BottomNavigationAction, useTheme, Typography } from "@mui/material";
+import { Box, BottomNavigation, BottomNavigationAction, useTheme, Divider } from "@mui/material";
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import { useEffect, useState } from "react";
+import { Children, useEffect, useState } from "react";
 import { Outlet, Link, generatePath, useNavigate } from 'react-router-dom'
 import { UserMenuDrawer } from "../../features/user-menu/UserMenu";
 import Blur from "../../components/Blur";
@@ -32,32 +32,66 @@ export function Content({children}: {children: React.ReactNode}) {
     )
 }
 
-export function AppHeaderMobile({
-    title
-}: {
-    title: string
-}) {
-    const navigate = useNavigate();
-
+export function AppHeaderMobileInner({children}: {children?: React.ReactElement | React.ReactElement[]}) {
+    
     return (
         <Box
             sx={{
-                padding: "10px",
-                
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                height: "34px"
             }}
         >
+            {Children.map(children, child => child)}
+        </Box>
+    )
+}
+
+export function AppHeaderMobile({
+    backArrow,
+    firstLine,
+    secondLine
+}: {
+    backArrow?: boolean,
+    firstLine?: string | React.ReactElement,
+    secondLine?: string | React.ReactElement
+}) {
+    const navigate = useNavigate();
+
+    const theme = useTheme()
+
+    return (
+        <Box>
             <Box
                 sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    height: "34px"
+                    padding: "10px",
+                    
                 }}
             >
-                <ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>
-                <Typography ml={"10px"} fontSize={"16px"}>{title}</Typography>
+                <AppHeaderMobileInner>
+                    {backArrow == true ? (<ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>) : <></>}
+                    <Box
+                        sx={{
+                            ml: backArrow ? theme.spacing(2) : undefined,
+                            fontSize: "16px",
+                            width: "100%"
+                        }}
+                    >
+                        {firstLine}
+                    </Box>
+                </AppHeaderMobileInner>
+                {secondLine && (
+                    <Box
+                        sx={{mt: theme.spacing(2)}}
+                    >
+                        {secondLine}
+                    </Box>
+                )}
             </Box>
+            <Divider />
         </Box>
+        
     )
 }
 

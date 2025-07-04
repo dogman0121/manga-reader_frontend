@@ -1,4 +1,4 @@
-import { Box, Divider, Paper, useTheme } from "@mui/material";
+import { Box, Paper, useTheme } from "@mui/material";
 import PageHeader from "../../../components/ui/PageHeader";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import SearchInput, { SearchInputDisabled } from "../../../features/search/components/SearchInput";
@@ -10,12 +10,11 @@ import MangaResults from "../components/MangaResults";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import Filters from "../components/Filters";
 import { searchService } from "../../../features/search/services/api/searchService";
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MobileDrawer from "../../../components/ui/MobileDrawer";
-import { useNavigate } from "react-router-dom";
 import StatusBar from "../../../components/StatusBar";
 import SearchModal from "../../../features/search/components/SearchModal";
+import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 
 function CatalogPagePC() {
     const theme = useTheme();
@@ -63,8 +62,6 @@ function CatalogPagePC() {
 function CatalogPageMobile() {
     const theme = useTheme();
 
-    const navigate = useNavigate();
-
     const { query, section } = useContext(SearchContext);
 
     const [filtersOpened, setFiltersOpened] = useState(false);
@@ -76,35 +73,35 @@ function CatalogPageMobile() {
             <StatusBar 
                 color={theme.palette.background.default}
             />
-            <AppContent>
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        columnGap: theme.spacing(2),
-                        height: "34px"
-                    }}
-                >
-                    <ArrowBackRoundedIcon 
-                        onClick={() => {navigate(-1)}}
+            <AppHeaderMobile
+                backArrow
+                firstLine={
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: theme.spacing(2),
+                            alignItems: "center"
+                        }}
+                    >
+                        <SearchInputDisabled 
+                            onClick={() => {setModalOpened(true)}}
+                            value={query}
+                            placeholder="Поиск"
+                        />
+                        <MoreVertRoundedIcon 
+                            onClick={() => {setFiltersOpened(true)}}
+                        />
+                    </Box>
+                }
+                secondLine={
+                    <SearchSectionSelector
+                        sx={{
+                            mt: theme.spacing(2)
+                        }}
                     />
-                    <SearchInputDisabled 
-                        onClick={() => {setModalOpened(true)}}
-                        value={query}
-                        placeholder="Поиск"
-                    />
-                    <MoreVertRoundedIcon 
-                        onClick={() => {setFiltersOpened(true)}}
-                    />
-                </Box>
-                <SearchSectionSelector
-                    sx={{
-                        mt: theme.spacing(2)
-                    }}
-                />
-            </AppContent>
-            <Divider />
+                }
+            />
             <AppContent>
                 <>
                     {section == SECTIONS.MANGA && <MangaResults />}

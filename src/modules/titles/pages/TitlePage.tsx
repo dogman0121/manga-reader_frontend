@@ -30,6 +30,7 @@ import Rating from "../components/Rating";
 import ReadButton from "../components/ReadButton";
 import Persons from "../components/Persons";
 import Button from "../../../components/ui/Button";
+import { AppHeaderMobileInner } from "../../../layouts/app-layout/AppLayoutMobile";
 
 
 function TitlePagePC() {
@@ -191,19 +192,23 @@ function TitlePageMobile() {
         <Box>
             <AppContent>
                 <Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            height: "34px",
-                            alignItems: "center"
-                        }}
-                    >
-                        <WestRoundedIcon 
-                            onClick={() => {navigate(-1)}}
-                        />
-                        <MoreVertRoundedIcon />
-                    </Box>
+                    <AppHeaderMobileInner>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                width: "100%"
+                            }}
+                        >
+                            <WestRoundedIcon 
+                                onClick={() => {navigate(-1)}}
+                            />
+                            <MoreVertRoundedIcon />
+                        </Box>
+                        
+                    </AppHeaderMobileInner>
                     <Box
                         sx={{
                             mt: theme.spacing(7)
