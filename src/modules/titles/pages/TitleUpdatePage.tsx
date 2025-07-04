@@ -11,7 +11,7 @@ import { apiClient } from "../../../utils/apiClient";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 import PageHeader from "../../../components/ui/PageHeader";
-import { Breadcrumbs, Typography } from "@mui/material";
+import { Breadcrumbs, Typography, useTheme } from "@mui/material";
 
 export default function TitleUpdatePage() {
     const {setLoading, showNotification, showErrorBlur} = useFormUtils();
@@ -24,8 +24,9 @@ export default function TitleUpdatePage() {
 
     const {device} = useDeviceDetect();
 
+    const theme = useTheme()
+
     const onSubmit = async(data: AddTitleForm) => {
-        console.log(123);
         const formData = compileFormData(data);
 
         setLoading(true);
@@ -93,6 +94,7 @@ export default function TitleUpdatePage() {
                             <Link to={"/"}>
                                 <Typography
                                     sx={{
+                                        color: theme.typography.caption.color,
                                         "&:hover": {
                                             textDecoration: "underline"
                                         }
@@ -104,6 +106,7 @@ export default function TitleUpdatePage() {
                             <Link to={generatePath("/manga/:slug", {slug: title?.slug || ""})}>
                                 <Typography
                                     sx={{
+                                        color: theme.typography.caption.color,
                                         "&:hover": {
                                             textDecoration: "underline"
                                         }
@@ -112,7 +115,7 @@ export default function TitleUpdatePage() {
                                     {title?.name}    
                                 </Typography>
                             </Link>
-                            <Typography>Изменение тайтла</Typography>
+                            <Typography sx={{color: theme.typography.caption.color}}>Изменение тайтла</Typography>
                         </Breadcrumbs>
                     </>
                 )}

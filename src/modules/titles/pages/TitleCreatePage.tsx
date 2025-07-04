@@ -8,7 +8,7 @@ import { generatePath, TitleRoutes } from "../../../routes";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 import PageHeader from "../../../components/ui/PageHeader";
-import { Breadcrumbs, Typography } from "@mui/material";
+import { Breadcrumbs, Typography, useTheme } from "@mui/material";
 
 
 export default function TitleCreatePage() {
@@ -17,6 +17,8 @@ export default function TitleCreatePage() {
     const navigate = useNavigate();
 
     const {device} = useDeviceDetect();
+
+    const theme = useTheme()
 
     const onSubmit = async (data: AddTitleForm) => {
         const formData = compileFormData(data);
@@ -51,6 +53,7 @@ export default function TitleCreatePage() {
                             <Link to={generatePath("/")}>
                                 <Typography
                                     sx={{
+                                        color: theme.typography.caption.color,
                                         "&:hover": {
                                             textDecoration: "underline"
                                         }
@@ -59,7 +62,7 @@ export default function TitleCreatePage() {
                                     Главная  
                                 </Typography>
                             </Link>
-                            <Typography>Изменение тайтла</Typography>
+                            <Typography sx={{color: theme.typography.caption.color}}>Изменение тайтла</Typography>
                         </Breadcrumbs>
                     </>
                 )}

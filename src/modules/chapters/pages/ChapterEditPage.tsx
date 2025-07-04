@@ -15,14 +15,17 @@ import ErrorIcon from '@mui/icons-material/Error';
 import NotFound from '../../../pages/not-found/NotFound';
 import Notification from '../../../components/ui/Notification';
 import FormLoader from '../../../features/form/components/FormLoader';
-import { generatePath, TitleRoutes } from '../../../routes';
+import { generatePath } from '../../../routes';
+import PageHeader from '../../../components/ui/PageHeader';
+import { DEVICE, useDeviceDetect } from '../../../hooks/useDeviceDetect';
+import { AppHeaderMobile } from '../../../layouts/app-layout/AppLayoutMobile';
 
 export default function ChapterEditPage(){
     const {chapterId} = useParams();
 
     const theme = useTheme();
 
-    const {titleId} = useParams();
+    const {slug} = useParams();
 
     const [tab, setTab] = useState("1");
     
@@ -39,6 +42,8 @@ export default function ChapterEditPage(){
     const [error, setError] = useState("");
 
     const [notification, setNotification] = useState(0);
+
+    const {device} = useDeviceDetect();
 
     const handleCloseNotification = () => {
         setNotification(0);
@@ -76,104 +81,131 @@ export default function ChapterEditPage(){
         return <NotFound />
 
     return (
-        <AppContent>
-            {/* <PageHeader>Редактирование главы</PageHeader> */}
-            <Breadcrumbs>
-                <Link 
-                    to={generatePath(TitleRoutes.INDEX, {titleId: titleId || ""})}
+        <>
+            {device == DEVICE.MOBILE && (
+                <AppHeaderMobile 
+                    backArrow
+                    firstLine={"Изменение главы"}
+                />
+            )}
+            <AppContent>
+                {device != DEVICE.MOBILE && (
+                    <>
+                        <PageHeader>Добавление главы</PageHeader>
+                        <Breadcrumbs>
+                            <Link
+                                to={"/"}
+                            >
+                                <Typography
+                                    sx={{
+                                        color: theme.typography.caption.color,
+                                        "&:hover": {
+                                            textDecoration: "underline"
+                                        }
+                                    }}
+                                >
+                                    Главная
+                                </Typography>
+                            </Link>
+                            <Link
+                                to={generatePath("/manga/:slug", {slug: slug || ""})}
+                            >
+                                <Typography
+                                    sx={{
+                                        color: theme.typography.caption.color,
+                                        "&:hover": {
+                                            textDecoration: "underline"
+                                        }
+                                    }}
+                                >
+                                    Атака титанов
+                                </Typography>
+                            </Link>
+                            <Typography
+                                sx={{color: theme.typography.caption.color,}}
+                            >Изменение главы</Typography>
+                        </Breadcrumbs>
+                    </>
+                )}
+                <TabContext
+                    value={tab}
                 >
-                    <Typography
+                    <TabList
                         sx={{
-                            color: theme.typography.caption.color,
-                            "&:hover": {
-                                textDecoration: "underline"
+                            mt: theme.spacing(1),
+                            "& .MuiTab-root": {
+                                textTransform: "capitalize"
                             }
-                        }}
+                        }} 
+                        onChange={handleChangeTab}
                     >
-                        Атака титанов
-                    </Typography>
-                </Link>
-                <Typography
-                    sx={{color: theme.typography.caption.color,}}
-                >Редактирование главы</Typography>
-            </Breadcrumbs>
-            <TabContext
-                value={tab}
-            >
-                <TabList
-                    sx={{
-                        mt: theme.spacing(1),
-                        "& .MuiTab-root": {
-                            textTransform: "capitalize"
-                        }
-                    }} 
-                    onChange={handleChangeTab}
-                >
-                    <Tab label="Одиночное" value="1"/>
-                    <Tab label="Множественное" value="2"/>
-                </TabList>
-                <TabPanel 
-                    value="1"
-                    sx={{
-                        p: 0,
-                        mt: theme.spacing(5),
-                        display: "flex",
-                        flexDirection: "column",
-                    }}
-                >
-                    <SingleChapterForm chapter={chapter} onSend={handleEdit}/>
-                </TabPanel>
-                <TabPanel
-                    value="2"
-                    sx={{
-                        p: 0,
-                    }}
-                >
-                    12312
-                </TabPanel>
-            </TabContext>
-            <FormModal 
-                open={error != ""}
-            >   
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        columnGap: "10px",
-                        alignItems: "center"
-                    }}
-                >
-                    <ErrorIcon 
+                        <Tab label="Одиночное" value="1"/>
+                        <Tab label="Множественное" value="2"/>
+                    </TabList>
+                    <TabPanel 
+                        value="1"
                         sx={{
-                            width: "35px",
-                            height: "35px",
-                            color: "#FF0000"
+                            p: 0,
+                            mt: theme.spacing(5),
+                            display: "flex",
+                            flexDirection: "column",
                         }}
-                    />
-                    <Box
                     >
-                        {error === "forbidden" && (
-                            <>
-                                <Typography fontSize={18}>Упс... У вас нет доступа!</Typography>
-                                <Typography fontSize={14}>Обратитесь к администраторам</Typography>
-                            </>
-                        )}
+                        <SingleChapterForm chapter={chapter} onSend={handleEdit}/>
+                    </TabPanel>
+                    <TabPanel
+                        value="2"
+                        sx={{
+                            p: 0,
+                        }}
+                    >
+                        12312
+                    </TabPanel>
+                </TabContext>
+                <FormModal 
+                    open={error != ""}
+                >   
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            columnGap: "10px",
+                            alignItems: "center"
+                        }}
+                    >
+                        <ErrorIcon 
+                            sx={{
+                                width: "35px",
+                                height: "35px",
+                                color: "#FF0000"
+                            }}
+                        />
+                        <Box
+                        >
+                            {error === "forbidden" && (
+                                <>
+                                    <Typography fontSize={18}>Упс... У вас нет доступа!</Typography>
+                                    <Typography fontSize={14}>Обратитесь к администраторам</Typography>
+                                </>
+                            )}
+                        </Box>
                     </Box>
-                </Box>
-            </FormModal>
-            <Notification 
-                open={notification == 1}
-                variant="error"
-                onClose={handleCloseNotification}
-                message="При отправке данный произошла ошибка"
-            />
-            <Notification 
-                open={notification == 2}
-                variant="success"
-                onClose={handleCloseNotification}
-                message="Изменения успешно сохранены"
-            />
-            <FormLoader open={formIsLoading} />
-        </AppContent>
+                </FormModal>
+                <Notification 
+                    open={notification == 1}
+                    variant="error"
+                    onClose={handleCloseNotification}
+                    message="При отправке данный произошла ошибка"
+                />
+                <Notification 
+                    open={notification == 2}
+                    variant="success"
+                    onClose={handleCloseNotification}
+                    message="Изменения успешно сохранены"
+                />
+                <FormLoader open={formIsLoading} />
+            </AppContent>
+        </>
+        
     )
 }
