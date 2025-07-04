@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useFormUtils from "../../../features/form/hooks/useFormUtils";
 import Title from "../types/Title";
 import { titleService } from "../service/api/titleService";
-import { useParams } from "react-router-dom";
+import { generatePath, Link, useParams } from "react-router-dom";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import TitleForm, { compileFormData } from "../components/form/TitleForm";
 import AddTitleForm from "../types/AddTitleForm";
@@ -11,6 +11,7 @@ import { apiClient } from "../../../utils/apiClient";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 import PageHeader from "../../../components/ui/PageHeader";
+import { Breadcrumbs, Typography } from "@mui/material";
 
 export default function TitleUpdatePage() {
     const {setLoading, showNotification, showErrorBlur} = useFormUtils();
@@ -86,7 +87,34 @@ export default function TitleUpdatePage() {
             )}
             <AppContent>
                 { device != DEVICE.MOBILE && (
-                    <PageHeader>Редактирование тайтла</PageHeader>
+                    <>
+                        <PageHeader>Изменение тайтла</PageHeader>
+                        <Breadcrumbs>
+                            <Link to={"/"}>
+                                <Typography
+                                    sx={{
+                                        "&:hover": {
+                                            textDecoration: "underline"
+                                        }
+                                    }}
+                                >
+                                    Главная 
+                                </Typography>
+                            </Link>
+                            <Link to={generatePath("/manga/:slug", {slug: title?.slug || ""})}>
+                                <Typography
+                                    sx={{
+                                        "&:hover": {
+                                            textDecoration: "underline"
+                                        }
+                                    }}
+                                >
+                                    {title?.name}    
+                                </Typography>
+                            </Link>
+                            <Typography>Изменение тайтла</Typography>
+                        </Breadcrumbs>
+                    </>
                 )}
                 <TitleForm onSubmit={onSubmit} title={title}/>
             </AppContent> 

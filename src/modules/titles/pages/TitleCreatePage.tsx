@@ -3,11 +3,12 @@ import TitleForm, { compileFormData } from "../components/form/TitleForm";
 import AddTitleForm from "../types/AddTitleForm";
 import { apiClient } from "../../../utils/apiClient";
 import useFormUtils from "../../../features/form/hooks/useFormUtils";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { generatePath, TitleRoutes } from "../../../routes";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 import PageHeader from "../../../components/ui/PageHeader";
+import { Breadcrumbs, Typography } from "@mui/material";
 
 
 export default function TitleCreatePage() {
@@ -44,7 +45,23 @@ export default function TitleCreatePage() {
             )}
             <AppContent>
                 { device != DEVICE.MOBILE && (
-                    <PageHeader>Добавление тайтла</PageHeader>
+                    <>
+                        <PageHeader>Добавление тайтла</PageHeader>
+                        <Breadcrumbs>
+                            <Link to={generatePath("/")}>
+                                <Typography
+                                    sx={{
+                                        "&:hover": {
+                                            textDecoration: "underline"
+                                        }
+                                    }}
+                                >
+                                    Главная  
+                                </Typography>
+                            </Link>
+                            <Typography>Изменение тайтла</Typography>
+                        </Breadcrumbs>
+                    </>
                 )}
                 <TitleForm onSubmit={onSubmit}/>
             </AppContent> 

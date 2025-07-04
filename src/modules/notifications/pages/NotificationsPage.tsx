@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import PageHeader from "../../../components/ui/PageHeader";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
-import { Box, Divider, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { notificationService } from "../services/api/notificationService";
 import UserAuthContext from "../../../context/UserAuthContext";
 import { User } from "../../../types/User";
