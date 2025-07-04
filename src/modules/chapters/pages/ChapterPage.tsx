@@ -6,7 +6,7 @@ import { Content } from "../../../layouts/app-layout/AppLayoutPC";
 import { useState, useRef, useEffect } from "react";
 import Chapter from "../types/Chapter";
 import ChapterProvider from "../components/ChapterProvider";
-import {  ChapterRoutes, generatePath, TitleRoutes } from "../../../routes";
+import {  ChapterRoutes, generatePath } from "../../../routes";
 import ReaderSettings from "../components/ReaderSettings";
 import ReaderSettingsProvider from "../components/ReaderSettingsProvider";
 import ChapterDisplay from "../components/Display";
@@ -32,7 +32,7 @@ function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => vo
 
     const navigate = useNavigate();
 
-    const {titleId} = useParams();
+    const {slug} = useParams();
 
     const optionsAnchor = useRef(null);
 
@@ -60,7 +60,7 @@ function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => vo
                     <WestRoundedIcon 
                         sx={{width: "24px", height: "24px", cursor: "pointer"}} 
                         onClick={() => {
-                            navigate(generatePath(TitleRoutes.INDEX, {titleId: titleId || ""}))
+                            navigate(generatePath("/manga/:slug", {slug: slug || ""}))
                         }}
                     />
                     <Typography>ТОМ {chapter?.tome || "-"} ГЛАВА {chapter?.chapter || "-"}</Typography>
