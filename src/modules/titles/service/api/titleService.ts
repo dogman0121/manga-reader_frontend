@@ -7,12 +7,12 @@ class TitleService {
         return await response.json();
     }
 
-    async sendRating(titleId: number, rating: number) {
-        return await (await apiClient.post(`/manga/${titleId}/ratings`, {rating: rating})).json();
+    async sendRating(slug: string, rating: number) {
+        return await (await apiClient.post(`/manga/${slug}/ratings`, {rating: rating})).json();
     }
 
-    async getRating(titleId: number) {
-        return await (await apiClient.get(`/manga/${titleId}/ratings`)).json();
+    async getRating(slug: string) {
+        return await (await apiClient.get(`/manga/${slug}/ratings`)).json();
     }
 }
 

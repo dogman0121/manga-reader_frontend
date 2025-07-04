@@ -174,7 +174,7 @@ export default function Rating({sx}: {sx?: SxProps}) {
         return null;
 
     const handleSetRating = async (newRating: number) => {
-        const {error} = await titleService.sendRating(title.id, newRating);
+        const {error} = await titleService.sendRating(title.slug, newRating);
         if (error)
             return;
 
@@ -206,7 +206,7 @@ export default function Rating({sx}: {sx?: SxProps}) {
                     }}
                 >
                     <Box>
-                        <Typography textAlign="center" fontSize="16px">Рейтинг</Typography>
+                        <Typography textAlign="center" fontSize="18px">Рейтинг</Typography>
                     </Box>
                     <Box
                         sx={{
@@ -229,7 +229,7 @@ export default function Rating({sx}: {sx?: SxProps}) {
                             >
                                 <StarIcon />
                                 <Typography>{r.number}</Typography>
-                                <Typography>{r.text}</Typography>
+                                <Typography fontSize={"16px"}>{r.text}</Typography>
                             </Box>
                         ))}
                         
