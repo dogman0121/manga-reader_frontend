@@ -23,8 +23,8 @@ export enum AuthRoutes {
 
 export enum TitleRoutes {
     ADD = `${AppRoutes.TITLE}/add`,
-    INDEX = `${AppRoutes.TITLE}/:titleId`,
-    EDIT = `${AppRoutes.TITLE}/:titleId/edit`,
+    INDEX = `${AppRoutes.TITLE}/:slug`,
+    EDIT = `${AppRoutes.TITLE}/:slug/edit`,
 }
 
 export enum ChapterRoutes {
