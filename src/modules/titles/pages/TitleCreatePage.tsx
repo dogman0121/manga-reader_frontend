@@ -1,5 +1,3 @@
-import { Breadcrumbs, Typography } from "@mui/material";
-import { useTheme } from "@mui/material";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import TitleForm, { compileFormData } from "../components/form/TitleForm";
 import AddTitleForm from "../types/AddTitleForm";
@@ -7,14 +5,18 @@ import { apiClient } from "../../../utils/apiClient";
 import useFormUtils from "../../../features/form/hooks/useFormUtils";
 import { useNavigate } from "react-router-dom";
 import { generatePath, TitleRoutes } from "../../../routes";
+import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
+import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
+import PageHeader from "../../../components/ui/PageHeader";
+import { Divider } from "@mui/material";
 
 
 export default function TitleCreatePage() {
-    const theme = useTheme();
-
     const {setLoading, showNotification} = useFormUtils();
 
     const navigate = useNavigate();
+
+    const {device} = useDeviceDetect();
 
     const onSubmit = async (data: AddTitleForm) => {
         const formData = compileFormData(data);
@@ -35,12 +37,16 @@ export default function TitleCreatePage() {
 
     return (
         <>
+            {device == DEVICE.MOBILE && (
+                <>
+                    <AppHeaderMobile title="Добавление тайтла" />
+                    <Divider />
+                </>
+            )}
             <AppContent>
-                <Breadcrumbs>
-                        <Typography
-                            sx={{color: theme.typography.caption.color,}}
-                        >Добавление манги</Typography>
-                </Breadcrumbs>
+                { device != DEVICE.MOBILE && (
+                    <PageHeader>Добавление тайтла</PageHeader>
+                )}
                 <TitleForm onSubmit={onSubmit}/>
             </AppContent> 
         </>

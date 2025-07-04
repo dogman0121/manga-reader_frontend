@@ -2,24 +2,27 @@ import { useEffect, useState } from "react";
 import useFormUtils from "../../../features/form/hooks/useFormUtils";
 import Title from "../types/Title";
 import { titleService } from "../service/api/titleService";
-import { generatePath, Link, useParams } from "react-router-dom";
-import { Breadcrumbs, Typography, useTheme } from "@mui/material";
+import { useParams } from "react-router-dom";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import TitleForm, { compileFormData } from "../components/form/TitleForm";
 import AddTitleForm from "../types/AddTitleForm";
 import PageLoader from "../../../components/ui/PageLoader";
 import { apiClient } from "../../../utils/apiClient";
+import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
+import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
+import PageHeader from "../../../components/ui/PageHeader";
+import { Divider } from "@mui/material";
 
 export default function TitleUpdatePage() {
     const {setLoading, showNotification, showErrorBlur} = useFormUtils();
 
     const [titleLoading, setTitleLoading] = useState(true);
 
-    const theme = useTheme();
-
     const {slug} = useParams();
 
     const [title, setTitle] = useState<Title | undefined>();
+
+    const {device} = useDeviceDetect();
 
     const onSubmit = async(data: AddTitleForm) => {
         console.log(123);
@@ -75,27 +78,20 @@ export default function TitleUpdatePage() {
         return <PageLoader />
 
     return (
-        <AppContent>
-            <Breadcrumbs>
-                    <Link 
-                        to={generatePath("/manga/:slug", {slug: slug || ""})}
-                    >
-                        <Typography
-                            sx={{
-                                color: theme.typography.caption.color,
-                                "&:hover": {
-                                    textDecoration: "underline"
-                                }
-                            }}
-                        >
-                            {title?.name}
-                        </Typography>
-                    </Link>
-                    <Typography
-                        sx={{color: theme.typography.caption.color,}}
-                    >Редактирование манги</Typography>
-            </Breadcrumbs>
-            <TitleForm onSubmit={onSubmit} title={title}/>
-        </AppContent> 
+        <>
+            {device == DEVICE.MOBILE && (
+                <>
+                    <AppHeaderMobile title="Редактирование тайтла" />
+                    <Divider />
+                </>
+            )}
+            <AppContent>
+                { device != DEVICE.MOBILE && (
+                    <PageHeader>Редактирование тайтла</PageHeader>
+                )}
+                <TitleForm onSubmit={onSubmit} title={title}/>
+            </AppContent> 
+        </>
+        
     )
 }
