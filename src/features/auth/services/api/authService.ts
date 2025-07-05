@@ -18,7 +18,7 @@ class AuthService {
     }
 
     async recovery(token: string, password: string) {
-        const response = await apiClient.post("/users/forgot", {token, password})
+        const response = await apiClient.post("/users/recovery", {token, password})
         return await response.json();
     }
 
