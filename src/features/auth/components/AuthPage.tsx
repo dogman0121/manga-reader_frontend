@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import Auth from "./Auth"
 
 export default function AuthPage({ section }: {section: string}) {
@@ -6,9 +7,16 @@ export default function AuthPage({ section }: {section: string}) {
     }
     
     return (
-        <Auth 
-            section={section}
-            onAuth={onAuth}
-        />
+        <Box
+            sx={{
+                height: "100vh"
+            }}
+        >
+            <Auth 
+                section={section}
+                onAuth={onAuth}
+            />
+        </Box>
+        
     )
 }
