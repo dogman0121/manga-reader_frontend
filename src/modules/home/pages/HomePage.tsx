@@ -164,7 +164,7 @@ function HomePagePC() {
                 sx={{
                     p: "0 20px",
                     "& .TitleItem": {
-                        minWidth: "max(140px, calc((100% - 15px * 8) / 9))"
+                        minWidth: "max(140px, min(150px, calc((100% - 15px * 8) / 9)))"
                     }
                     
                 }}
