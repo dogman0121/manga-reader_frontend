@@ -192,25 +192,25 @@ function TitlePageMobile() {
 
     return (
         <Box>
+            <AppHeaderMobileInner>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        width: "100%"
+                    }}
+                >
+                    <WestRoundedIcon 
+                        onClick={() => {navigate(-1)}}
+                    />
+                    <MoreVertRoundedIcon />
+                </Box>
+                
+            </AppHeaderMobileInner>
             <AppContent>
                 <Box>
-                    <AppHeaderMobileInner>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                width: "100%"
-                            }}
-                        >
-                            <WestRoundedIcon 
-                                onClick={() => {navigate(-1)}}
-                            />
-                            <MoreVertRoundedIcon />
-                        </Box>
-                        
-                    </AppHeaderMobileInner>
                     <Box
                         sx={{
                             mt: theme.spacing(7)

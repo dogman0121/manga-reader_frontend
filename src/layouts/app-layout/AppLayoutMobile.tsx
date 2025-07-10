@@ -36,10 +36,7 @@ export function AppHeaderMobileInner({children}: {children?: React.ReactElement 
     return (
         <Box
             sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                height: "34px"
+                p: "10px"
             }}
         >
             {Children.map(children, child => child)}
@@ -62,35 +59,38 @@ export function AppHeaderMobile({
 
     return (
         <Box>
-            <Box
-                sx={{
-                    padding: "10px",
-                    
-                }}
-            >
-                <AppHeaderMobileInner>
-                    {backArrow == true ? (<ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>) : <></>}
+            <AppHeaderMobileInner>
+                <Box>
                     <Box
                         sx={{
-                            ml: backArrow ? theme.spacing(2) : undefined,
-                            fontSize: "16px",
-                            width: "100%"
+                            height: "34px",
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center"
                         }}
                     >
-                        {firstLine}
+                        {backArrow == true ? (<ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>) : <></>}
+                        <Box
+                            sx={{
+                                ml: backArrow ? theme.spacing(2) : undefined,
+                                fontSize: "16px",
+                                width: "100%"
+                            }}
+                        >
+                            {firstLine}
+                        </Box>
                     </Box>
-                </AppHeaderMobileInner>
-                {secondLine && (
-                    <Box
-                        sx={{mt: theme.spacing(2)}}
-                    >
-                        {secondLine}
-                    </Box>
-                )}
-            </Box>
+                    {secondLine && (
+                        <Box
+                            sx={{mt: theme.spacing(2)}}
+                        >
+                            {secondLine}
+                        </Box>
+                    )}
+                </Box>
+            </AppHeaderMobileInner>
             <Divider />
         </Box>
-        
     )
 }
 
