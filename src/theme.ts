@@ -176,7 +176,7 @@ export const darkTheme = createTheme({
         customBackgrounds: {
             header: "#06090E",
             footer: "#06090E",
-            widget1: "#404040"
+            widget1: "#212121"
         }
     },
     spacing: 5,
