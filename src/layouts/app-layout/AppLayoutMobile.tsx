@@ -36,7 +36,8 @@ export function AppHeaderMobileInner({children}: {children?: React.ReactElement 
     return (
         <Box
             sx={{
-                p: "10px"
+                p: "10px",
+                fontSize: "16px"
             }}
         >
             {Children.map(children, child => child)}
