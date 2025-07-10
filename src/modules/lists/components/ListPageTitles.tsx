@@ -5,13 +5,16 @@ import TitleItem from "../../titles/components/ui/TitleItem";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import Title from "../../titles/types/Title";
 import List from "../types/List";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { listService } from "../service/api/listService";
+import UserAuthContext from "../../../context/UserAuthContext";
 
 export default function ListPageTitles() {
     const {list, setList} = useList()
 
     const [mangaList, setMangaList] = useState(list?.manga || []); 
+
+    const {user: currentUser} = useContext(UserAuthContext);
 
     const theme = useTheme();
 
@@ -56,27 +59,31 @@ export default function ListPageTitles() {
                             form="square" 
                             title={title}
                             rightTopAdornment={
-                                <Box
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleDelete(title)
-                                    }}
-                                    sx={{
-                                        borderRadius: "50%",
-                                        bgcolor: theme.palette.customBackgrounds.widget1,
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        p: "2px"
-                                    }}
-                                >
-                                    <CloseRoundedIcon 
-                                        sx={{
-                                            width: "20px",
-                                            height: "20px"
-                                        }}
-                                    />
-                                </Box>
+                                <>
+                                    {currentUser?.id == list.creator.id && (
+                                        <Box
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                handleDelete(title)
+                                            }}
+                                            sx={{
+                                                borderRadius: "50%",
+                                                bgcolor: theme.palette.customBackgrounds.widget1,
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                p: "2px"
+                                            }}
+                                        >
+                                            <CloseRoundedIcon 
+                                                sx={{
+                                                    width: "16px",
+                                                    height: "16px"
+                                                }}
+                                            />
+                                        </Box>
+                                    )}
+                                </>
                             } 
                         />
                     ))}
