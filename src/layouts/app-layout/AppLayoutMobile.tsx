@@ -31,14 +31,12 @@ export function Content({children}: {children: React.ReactNode}) {
     )
 }
 
-export function AppHeaderMobileInner({children}: {children?: React.ReactElement | React.ReactElement[]}) {
+export function AppHeaderMobileWrapper({children}: {children?: React.ReactElement | React.ReactElement[]}) {
     
     return (
         <Box
             sx={{
                 p: "10px",
-                fontSize: "16px",
-                height: "34px"
             }}
         >
             {Children.map(children, child => child)}
@@ -61,7 +59,7 @@ export function AppHeaderMobile({
 
     return (
         <Box>
-            <AppHeaderMobileInner>
+            <AppHeaderMobileWrapper>
                 <Box>
                     <Box
                         sx={{
@@ -90,7 +88,7 @@ export function AppHeaderMobile({
                         </Box>
                     )}
                 </Box>
-            </AppHeaderMobileInner>
+            </AppHeaderMobileWrapper>
             <Divider />
         </Box>
     )
