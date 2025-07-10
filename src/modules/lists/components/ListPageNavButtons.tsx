@@ -9,6 +9,7 @@ import { listService } from "../service/api/listService";
 import List from "../types/List";
 import Share from "../../../components/Share";
 import EditListForm from "./EditListForm";
+import Notification from "../../../components/ui/Notification";
 
 export default function ListPageNavButtons() {
     const theme = useTheme();
@@ -21,7 +22,14 @@ export default function ListPageNavButtons() {
     
     const [editOpen, setEditOpen] = useState(false);
 
+    const [notifyOpen, setNotifyOpen] = useState(false);
+
     const handleAddSave = async() => {
+        if (!currentUser){
+            setNotifyOpen(true);
+            return;
+        }
+
         if (!list) return;
 
         const response = await listService.addSave(list);
@@ -74,9 +82,9 @@ export default function ListPageNavButtons() {
                 {list.creator.id != currentUser?.id && (
                     <>
                         {list.is_saved_by_user ? 
-                            <AppButton variant="contained" onClick={handleAddSave}>Сохранить</AppButton>
+                            <AppButton variant="outlined" onClick={handleDeleteSave}>Удалить</AppButton> 
                             :
-                            <AppButton variant="outlined" onClick={handleDeleteSave}>Удалить</AppButton>    
+                            <AppButton variant="contained" onClick={handleAddSave}>Сохранить</AppButton>
                         }
                     </>
                 )}
@@ -84,24 +92,28 @@ export default function ListPageNavButtons() {
                     variant="contained" 
                     color="secondary"
                     onClick={() => {setShareOpen(true)}}
+                    sx={{
+                        width: "40px",
+                        height: "40px",
+                        minWidth: "auto",
+                        color: theme.typography.body1.color
+                    }}
                 >
-                    <ShareRoundedIcon 
-                        sx={{
-                            color: theme.typography.body1.color
-                        }}
-                    />
+                    <ShareRoundedIcon/>
                 </AppButton>
                 {list.creator.id == currentUser?.id && (
                     <AppButton
                         variant="contained" 
                         color="secondary"
                         onClick={() => {setEditOpen(true)}}
+                        sx={{
+                            width: "40px",
+                            height: "40px",
+                            minWidth: "auto",
+                            color: theme.typography.body1.color
+                        }}
                     >
-                        <EditRoundedIcon 
-                            sx={{
-                                color: theme.typography.body1.color
-                            }}
-                        />
+                        <EditRoundedIcon/>
                     </AppButton>
                 )}
             </Box>
@@ -115,6 +127,12 @@ export default function ListPageNavButtons() {
                 list={list}
                 onClose={() => setEditOpen(false)}
                 onSubmit={handleEditList}
+            />
+            <Notification 
+                variant="error"
+                open={notifyOpen}
+                onClose={() => {setNotifyOpen(false)}}
+                message="Необходимо авторизироваться"
             />
         </>
     )

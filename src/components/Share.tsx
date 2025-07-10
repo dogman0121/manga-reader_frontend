@@ -238,6 +238,7 @@ export default function Share({...props}: ShareProps) {
     return (
         <>
             {device == DEVICE.MOBILE && <ShareMobile {...props}/>}
+            {device == DEVICE.PAD && <SharePC {...props} />}
             {device == DEVICE.PC && <SharePC {...props}/>}
         </>
     )

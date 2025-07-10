@@ -8,12 +8,18 @@ const TitleItemSquareText = styled(Typography)(() => ({
     fontSize: "14px"
 })) 
 
-function TitleItemSquare({title}: {title: Title}) {
+export interface TitleItemProps {
+    title: Title,
+    rightTopAdornment?: React.ReactElement
+}
+
+function TitleItemSquare({title, rightTopAdornment}: TitleItemProps) {
     const theme = useTheme();
 
     return (
         <Box 
             className="TitleItem"
+            sx={{position: "relative"}}
         >
             <Link 
                 draggable={false}
@@ -54,30 +60,39 @@ function TitleItemSquare({title}: {title: Title}) {
                         {title.name}
                     </TitleItemSquareText>
                 </Box>
+                {rightTopAdornment && (
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            right: theme.spacing(1),
+                            top: theme.spacing(1)
+                        }}
+                    >
+                        {rightTopAdornment}
+                    </Box>
+                )}
             </Link>
         </Box>
     )
 }
 
-function TitleItemRect({title}: {title: Title}) {
+function TitleItemRect({title}: TitleItemProps) {
     return (
         <>{title.name}</>
     )
 }
 
 export default function TitleItem({
-    title, 
+    title,
+    rightTopAdornment, 
     form
-}: {
-    title: Title,
-    form: "square" | "rectangle"
-}) {
+}: {form: "square" | "rectangle"} & TitleItemProps) {
     return (
         <>
             {form == "square" ?
-                <TitleItemSquare title={title}/>
+                <TitleItemSquare title={title} rightTopAdornment={rightTopAdornment}/>
                 :
-                <TitleItemRect title={title}/>
+                <TitleItemRect title={title} rightTopAdornment={rightTopAdornment}/>
             }
         </>
     )
