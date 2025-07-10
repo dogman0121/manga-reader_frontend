@@ -44,7 +44,7 @@ export default function Share({open, onClose, link}: {link: string, open: boolea
                     bgcolor: theme.palette.background.paper,
                     borderRadius: "12px",
                     p: theme.spacing(3),
-                    width: "400px"
+                    width: "min(400px, 100vw)"
                 }}
             >
                 <Box
