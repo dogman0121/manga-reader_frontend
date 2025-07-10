@@ -95,11 +95,7 @@ function CatalogPageMobile() {
                     </Box>
                 }
                 secondLine={
-                    <SearchSectionSelector
-                        sx={{
-                            mt: theme.spacing(2)
-                        }}
-                    />
+                    <SearchSectionSelector/>
                 }
             />
             <AppContent>
