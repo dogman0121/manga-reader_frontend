@@ -210,7 +210,7 @@ function TitlePageMobile() {
                     </Box>
                     <Box
                         sx={{
-                            mt: theme.spacing(7)
+                            mt: theme.spacing(5)
                         }}
                     >
                         <Box
