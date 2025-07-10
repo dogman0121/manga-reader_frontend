@@ -9,12 +9,11 @@ export default function SettingsPC() {
 
     return (
         <Paper
-            elevation={2}
+            elevation={4}
             sx={{
                 display: "flex",
                 flexDirection: "row",
                 p: "4px 6px",
-                bgcolor: theme.palette.customBackgrounds?.widget1,
                 alignItems: "center",
                 borderRadius: "6px",
                 boxShadow: "none"

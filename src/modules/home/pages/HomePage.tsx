@@ -1,6 +1,6 @@
 import { Box, Divider, SxProps, Typography, useTheme } from "@mui/material";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
-import { titles } from "../../../mocks/title.mock";
+import { mockTitles } from "../../../mocks/title.mock";
 import TitleItem from "../../../components/TitleItem";
 import { Children, useState } from "react";
 import Title from "../../titles/types/Title";
@@ -160,7 +160,7 @@ function HomePagePC() {
             }}
         >
             <TitlesCarousel
-                titles={[...titles, ...titles, ...titles]} 
+                titles={[...mockTitles, ...mockTitles, ...mockTitles]} 
                 sx={{
                     p: "0 20px",
                     "& .TitleItem": {
@@ -186,13 +186,13 @@ function HomePagePC() {
                     title="Продолжить чтение"
                     href="/"
                 >
-                    <ProgressCarousel titles={titles} />
+                    <ProgressCarousel titles={mockTitles} />
                 </Section>
                 <Section
                     title="Специально для вас"
                     href={HomeRoutes.RECOMMENDATIONS}
                 >
-                    <TitlesCarousel titles={[...titles, ...titles]}/>
+                    <TitlesCarousel titles={[...mockTitles, ...mockTitles]}/>
                 </Section>
             </Box>
         </Box>
@@ -225,7 +225,7 @@ function HomePageMobile() {
                     }}
                 >
                     <TitlesCarousel
-                        titles={[...titles, ...titles, ...titles]} 
+                        titles={[...mockTitles, ...mockTitles, ...mockTitles]} 
                         sx={{
                             "& .TitleItem": {
                                 minWidth: "max(140px, calc((100% - 15px * 8) / 9))"
@@ -236,13 +236,13 @@ function HomePageMobile() {
                         title="Продолжить чтение"
                         href="/"
                     >
-                        <ProgressCarousel titles={titles} />
+                        <ProgressCarousel titles={mockTitles} />
                     </Section>
                     <Section
                         title="Специально для вас"
                         href={HomeRoutes.RECOMMENDATIONS}
                     >
-                        <TitlesCarousel titles={[...titles, ...titles]}/>
+                        <TitlesCarousel titles={[...mockTitles, ...mockTitles]}/>
                     </Section>
                 </Box>
                 <SearchModal open={modalOpened} onClose={() => setModalOpened(false)}/>

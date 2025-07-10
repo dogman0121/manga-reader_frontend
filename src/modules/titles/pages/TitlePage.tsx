@@ -31,6 +31,7 @@ import ReadButton from "../components/ReadButton";
 import Persons from "../components/Persons";
 import Button from "../../../components/ui/Button";
 import { AppHeaderMobileInner } from "../../../layouts/app-layout/AppLayoutMobile";
+import SaveButton from "../components/SaveButton";
 
 
 function TitlePagePC() {
@@ -73,6 +74,7 @@ function TitlePagePC() {
                                 rowGap: theme.spacing(1)
                             }}
                         >
+                            <SaveButton />
                             { title.permissions?.edit && (
                                 <Link to={generatePath("/manga/:slug/edit", {slug: title.slug})}>
                                     <Button 

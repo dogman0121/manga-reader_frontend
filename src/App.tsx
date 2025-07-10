@@ -26,6 +26,7 @@ import FormLayout from "./layouts/form-layout/FormLayout";
 import NotificationsRouter from "./modules/notifications/NotificationsRouter";
 import HomeRouter from "./modules/home/HomeRouter";
 import TitleRouter from "./modules/titles/TitleRouter";
+import ListsRouter from "./modules/lists/ListsRouter";
 
 function App() {
   const [theme, setTheme] = useState<"dark" | "light">(getColorScheme());
@@ -84,6 +85,7 @@ function App() {
                     <Route path={AppRoutes.NOTIFICATIONS} element={<NotificationsRouter />}/>
                     <Route path={AppRoutes.TITLE} element={<TitleRouter />} />
                     <Route path={AppRoutes.NOT_FOUND} element={<NotFound />} />
+                    <Route path={AppRoutes.LISTS} element={<ListsRouter />} />
                 </Route>
               </Routes>
             </AuthProvider>

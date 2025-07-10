@@ -2,6 +2,7 @@ import Genre from "../../../types/Genre";
 import Team from "../../../types/Team";
 import Translation from "./Translation";
 import { User } from "../../../types/User";
+import List from "../../lists/types/List";
 
 interface Poster {
     uuid: string,
@@ -54,5 +55,6 @@ export default interface Title {
     permissions?: {
         edit?: boolean
     },
-    user_rating?: number | null
+    user_rating?: number | null,
+    user_lists?: List[]
 }

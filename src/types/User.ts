@@ -1,3 +1,5 @@
+import List from "../modules/lists/types/List"
+
 export interface User {
     id: number,
     login: string,
@@ -8,7 +10,8 @@ export interface User {
     subscribed?: boolean | null,
     subscribers_count: number | null,
     notifications_count?: number | null,
-    created_at?: string | null
+    created_at?: string | null,
+    lists?: List[]
 }
 
 export const EMPTY_USER: User = {

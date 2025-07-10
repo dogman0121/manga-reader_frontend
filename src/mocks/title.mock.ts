@@ -1,6 +1,6 @@
 import Title from "../modules/titles/types/Title";
 
-export const titles: Title[] =  [
+export const mockTitles: Title[] =  [
     {
         slug: "ataka-titanov",
         adult: {
@@ -427,3 +427,5 @@ export const titles: Title[] =  [
         "year": 2025
     }
 ]
+
+export const mockTitle = mockTitles[0];

@@ -24,7 +24,7 @@ export function ContentPC({children}: {children: React.ReactNode}) {
     return (
         <Box
             sx={{
-                p: "35px 20px 15px",
+                p: "35px 20px 25px",
                 maxWidth: "1240px",
 
                 margin: "0 auto",

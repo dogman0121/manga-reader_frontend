@@ -10,7 +10,8 @@ export enum AppRoutes {
     AUTH = '/auth',
     NOTIFICATIONS = '/notifications/*',
     HOME = '/*',
-    NOT_FOUND = '*'
+    NOT_FOUND = '*',
+    LISTS = '/lists/*'
 }
 
 export enum AuthRoutes {

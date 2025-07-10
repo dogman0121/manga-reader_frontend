@@ -98,12 +98,11 @@ function UserWidgetPC() {
         <>
             <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})}>
                 <Paper
-                    elevation={2}
+                    elevation={3}
                     sx={{
                         display: "flex",
                         flexDirection: "row",
                         p: "4px 6px",
-                        bgcolor: theme.palette.customBackgrounds?.widget1,
                         alignItems: "center",
                         borderRadius: "6px",
                         boxShadow: "none"

@@ -28,4 +28,4 @@ export const mockUsers: User[] = [
         avatar: "https://cover.imglib.info/uploads/users/7696705/mozmziawkWCa.jpg"},
 ]
 
-export const userUser = mockUsers[0];
+export const mockUser = mockUsers[0];
