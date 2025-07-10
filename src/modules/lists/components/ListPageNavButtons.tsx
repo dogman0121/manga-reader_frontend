@@ -62,8 +62,8 @@ export default function ListPageNavButtons() {
     }
 
     const handleEditList = async (lst: List) => {
-        setList(lst);
         setEditOpen(false);
+        setList(lst);
     }
 
     if (!list)

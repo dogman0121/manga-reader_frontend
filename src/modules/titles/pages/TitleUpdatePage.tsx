@@ -31,7 +31,7 @@ export default function TitleUpdatePage() {
 
         setLoading(true);
 
-        const {error} = await apiClient.sendForm(`/manga/${slug}`, "PUT", formData);
+        const {error} = await(await apiClient.sendForm(`/manga/${slug}`, "PUT", formData)).json();
 
         setLoading(false);
 

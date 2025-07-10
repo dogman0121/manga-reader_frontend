@@ -90,7 +90,7 @@ class ApiClient {
     }
 
     async sendForm(url: string, method: "POST" | "PUT", form: FormData){
-        return await (await this._sendFormRequest(url, method, form)).json();
+        return this._sendFormRequest(url, method, form);
     }
 }
 

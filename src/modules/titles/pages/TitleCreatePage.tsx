@@ -24,7 +24,7 @@ export default function TitleCreatePage() {
         const formData = compileFormData(data);
         setLoading(true);
 
-        const {data: title, error} = await apiClient.sendForm("/manga", "POST", formData);
+        const {data: title, error} = await(await apiClient.sendForm("/manga", "POST", formData)).json();
 
         if (error)
             showNotification(
