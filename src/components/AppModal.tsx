@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, SxProps, Typography, useTheme } from "@mui/material";
 import Modal from "../features/modal/Modal";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { Children } from "react";
@@ -7,12 +7,14 @@ export default function AppModal({
     title,
     open,
     onClose,
-    children
+    children,
+    sx
 }:{
     title: string,
     open: boolean,
     onClose: () => void,
-    children: React.ReactElement
+    children: React.ReactElement,
+    sx?: SxProps
 }) {
     const theme = useTheme();
 
@@ -20,6 +22,9 @@ export default function AppModal({
         <Modal
             open={open}
             onClose={onClose}
+            sx={{
+                ...sx
+            }}
         >
             <Box
                 sx={{

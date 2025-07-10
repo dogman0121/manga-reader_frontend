@@ -38,13 +38,12 @@ export default function ListForm({
             open={open}
             onClose={onClose}
             title={title}
+            sx={{
+                width: "min(400px, 100vw)"
+            }}
         >
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Box
-                    sx={{
-                        minWidth: "400px"
-                    }}
-                >
+                <Box>
                     <Box
                         sx={{
                             display: "flex",
@@ -56,7 +55,8 @@ export default function ListForm({
                             name="name"
                             control={control}
                             render={({field}) => (
-                                <FormInput 
+                                <FormInput
+                                    fullWidth 
                                     title="Название"
                                     placeholder="Введите название"
                                     {...field}
@@ -70,6 +70,7 @@ export default function ListForm({
                             render={({field}) => (
                                 <FormTextarea 
                                     title="Описание"
+                                    fullWidth
                                     placeholder="Введите описание"
                                     {...field}
 
