@@ -64,7 +64,7 @@ export function AppHeaderMobile({
                 <Box>
                     <Box
                         sx={{
-                            height: "34px",
+                            height: backArrow ? "34px" : undefined,
                             display: "flex",
                             flexDirection: "row",
                             alignItems: "center"
