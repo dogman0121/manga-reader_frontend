@@ -1,8 +1,9 @@
-import Button from "../../../components/ui/Button";
+import AppButton from "../../../components/ui/AppButton";
+
 
 export default function ReadButton() {
     return (
-        <Button 
+        <AppButton 
             sx={{
                 width: "140px",
                 borderRadius: "12px",
@@ -13,6 +14,6 @@ export default function ReadButton() {
             disableFocusRipple
         >
             Читать
-        </Button>
+        </AppButton>
     )
 }
