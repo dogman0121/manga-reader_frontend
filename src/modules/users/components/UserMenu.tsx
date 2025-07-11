@@ -11,7 +11,7 @@ import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import MobileDrawer from "../../../components/ui/MobileDrawer";
 import { getColorScheme } from "../../../utils/colorScheme";
 import ThemeContext from "../../../context/ThemeContext";
-
+import { Link } from "react-router-dom";
 
 function UserWidget() {
     const {user: currentUser} = useContext(UserAuthContext);
@@ -111,14 +111,19 @@ function MenuInner() {
             <UserWidget />
             <Divider/>
             <Box>
-                <Option 
-                    icon={<NotificationsIcon sx={{width: "20px", height: "20px"}}/>}
-                    text={"Уведомления"}
-                />
-                <Option 
-                    icon={<HistoryRoundedIcon sx={{width: "20px", height: "20px"}}/>}
-                    text={"История просмотров"}
-                />
+                <Link to="/notifications">
+                    <Option 
+                        icon={<NotificationsIcon sx={{width: "20px", height: "20px"}}/>}
+                        text={"Уведомления"}
+                    />
+                </Link>
+                <Link to="/history">
+                    <Option 
+                        icon={<HistoryRoundedIcon sx={{width: "20px", height: "20px"}}/>}
+                        text={"История просмотров"}
+                    />
+                </Link>
+                
                 <Option 
                     icon={<AddRoundedIcon sx={{width: "20px", height: "20px"}}/>}
                     text={"Добавить контент"}
@@ -126,10 +131,13 @@ function MenuInner() {
             </Box>
             <Divider/>
             <Box>
-                <Option 
-                    icon={<SettingsRoundedIcon sx={{width: "20px", height: "20px"}}/>}
-                    text={"Настройки"}
-                />
+                <Link to="/users/settings">
+                    <Option 
+                        icon={<SettingsRoundedIcon sx={{width: "20px", height: "20px"}}/>}
+                        text={"Настройки"}
+                    />
+                </Link>
+                
                 <Option 
                     icon={<LightModeRoundedIcon sx={{width: "20px", height: "20px"}}/>}
                     text={"Тема"}
