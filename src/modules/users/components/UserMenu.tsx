@@ -1,5 +1,5 @@
 import { Avatar, Box, Divider, DrawerProps, Popover, PopoverProps, Typography } from "@mui/material"
-import { useContext } from "react"
+import React, { useContext } from "react"
 import UserAuthContext from "../../../context/UserAuthContext"
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HistoryRoundedIcon from '@mui/icons-material/HistoryRounded';
@@ -9,6 +9,8 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import AppButton from "../../../components/ui/AppButton";
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import MobileDrawer from "../../../components/ui/MobileDrawer";
+import { getColorScheme } from "../../../utils/colorScheme";
+import ThemeContext from "../../../context/ThemeContext";
 
 
 function UserWidget() {
@@ -23,8 +25,9 @@ function UserWidget() {
                 display: "flex",
                 flexDirection: "row",
                 gap: "10px",
-                bgcolor: "#323232",
-                borderRadius: "8px"
+                bgcolor: getColorScheme() == "dark" ? "#323232" : "#F6F6F6",
+                borderRadius: "8px",
+                cursor: "pointer",
             }}
         >
             <Avatar variant="square" src={currentUser.avatar} sx={{borderRadius: "4px"}}/>
@@ -47,32 +50,56 @@ function UserWidget() {
 
 function Option({
     icon,
-    text
+    text,
+    endAdornment,
+    onClick
 }:{
     icon: React.ReactElement,
-    text: string
+    text: string,
+    endAdornment?: React.ReactElement,
+    onClick?: () => void
 }) {
     return (
         <Box
+            onClick={onClick}
             sx={{
                 display: "flex",
                 flexDirection: "row",
+                justifyContent: "space-between",
                 alignItems: "center",
-                gap: "10px",
                 borderRadius: "8px",
+                cursor: "pointer",
                 p: "7px 10px",
                 "&:hover": {
-                    bgcolor: "#323232"
+                    bgcolor: getColorScheme() == "dark" ? "#323232" : "#F6F6F6"
                 }
             }}
         >
-            {icon}
-            <Typography>{text}</Typography>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: "10px",
+                }}
+            >
+                {icon}
+                <Typography>{text}</Typography>
+            </Box>
+            {endAdornment}
         </Box>
     )
 }
 
 function MenuInner() {
+    const {setTheme} = useContext(ThemeContext)
+
+    const handleSwitchTheme = () => {
+        if (getColorScheme() == "dark")
+            return setTheme("light")
+        return setTheme("dark")
+    }
+
     return (
         <Box
             sx={{
@@ -106,6 +133,12 @@ function MenuInner() {
                 <Option 
                     icon={<LightModeRoundedIcon sx={{width: "20px", height: "20px"}}/>}
                     text={"Тема"}
+                    endAdornment={
+                        <Typography variant="caption">
+                            {getColorScheme() == "dark" ? "темная" : "светлая"}
+                        </Typography>
+                    }
+                    onClick={handleSwitchTheme}
                 />
             </Box>
             <Divider />
