@@ -1,7 +1,6 @@
 import { Avatar, Box, Typography, useTheme } from "@mui/material";
 import Notification from "../types/Notification";
-import { Link } from "react-router-dom";
-import { generatePath, UserRoutes } from "../../../routes";
+import { generatePath, Link } from "react-router-dom";
 import formatTimedelta from "../../../utils/formatTimedelta";
 
 export default function NotificationItem({notification}: {notification: Notification}) {
@@ -10,7 +9,7 @@ export default function NotificationItem({notification}: {notification: Notifica
             {notification.action == "subscribe" && (
                 <NotificationBody 
                     image={notification.payload.user?.avatar || ""}
-                    creatorLink={generatePath(UserRoutes.INDEX, {userId: notification.payload.user?.id || ""})}
+                    creatorLink={generatePath("/users/:userId", {userId: notification.payload.user?.id.toString() || ""})}
                     creator={notification.payload.user?.login || ""}
                     text={<>подписался на вас</>}
                     datetime={new Date(notification.created_at)}

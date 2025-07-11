@@ -4,9 +4,10 @@ import UserAuthContext from "../../../context/UserAuthContext"
 import UserProfileContext from "../context/UserProfileContext";
 import userService from "../service/api/userService";
 import { Link } from "react-router-dom";
-import { generatePath, UserRoutes } from "../../../routes";
+import { generatePath } from "../../../routes";
+import { UsersRoutes } from "../UsersRouter";
 
-export default function ActionButtons() {
+export default function UserPageActionButtons() {
     const {user: authUser} = useContext(UserAuthContext);
     const {user: profileUser} = useContext(UserProfileContext);
 
@@ -47,7 +48,7 @@ export default function ActionButtons() {
                 </>
                 :
                 <>
-                    <Link to={generatePath(UserRoutes.SETTINGS, {userId: profileUser.id})}>
+                    <Link to={generatePath(UsersRoutes.SETTINGS)}>
                         <Button variant="outlined">Редактировать</Button>
                     </Link>
                 </>

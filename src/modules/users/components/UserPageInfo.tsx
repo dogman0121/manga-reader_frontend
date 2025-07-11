@@ -2,7 +2,7 @@ import { Avatar, Box, Button, Typography } from "@mui/material"
 import { useContext, useEffect, useState } from "react"
 import UserProfileContext from "../context/UserProfileContext"
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
-import ActionButtons from "./ActionButtons";
+import ActionButtons from "./UserPageActionButtons";
 import UserListModal from "../../../components/UserListModal";
 import userService from "../service/api/userService";
 import { User } from "../../../types/User";
@@ -158,7 +158,7 @@ function InfoPC() {
     )
 }
 
-export default function Info() {
+export default function UserPageInfo() {
     const { device } = useDeviceDetect();
 
     return (

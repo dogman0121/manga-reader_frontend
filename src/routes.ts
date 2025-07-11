@@ -3,7 +3,7 @@ export enum AppRoutes {
     CATALOG = '/catalog',
     TITLE = '/manga/*',
     COMMENT = '/comments',
-    USER = '/users',
+    USERS = '/users/*',
     POST = '/posts',
     SETTINGS = '/settings',
     TEAM = '/teams',
@@ -32,11 +32,6 @@ export enum ChapterRoutes {
     INDEX = `${TitleRoutes.INDEX}/chapters/:chapterId`,
     ADD = `${TitleRoutes.INDEX}/chapters/add`,
     EDIT = `${TitleRoutes.INDEX}/chapters/:chapterId/edit`
-}
-
-export enum UserRoutes {
-    INDEX = `${AppRoutes.USER}/:userId`,
-    SETTINGS = `${AppRoutes.USER}/:userId/settings`
 }
 
 export enum CommentRoutes {

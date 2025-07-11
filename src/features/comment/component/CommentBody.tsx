@@ -3,8 +3,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { commentService } from "../service/api/commentService";
 import { useContext } from "react";
 import CommentContext from "../context/CommentContext";
-import { Link } from "react-router-dom"
-import { CommentRoutes, generatePath, UserRoutes } from "../../../routes";
+import { generatePath, Link } from "react-router-dom"
+import { CommentRoutes } from "../../../routes";
 
 function CommentBody() {
     const {comment} = useContext(CommentContext);
@@ -27,8 +27,8 @@ function CommentBody() {
                 }}
             >
                 <Box>
-                    <Link to={generatePath(UserRoutes.INDEX, {userId: comment.user.id})}><Typography>{comment.user.login}</Typography></Link>
-                    <Link to={generatePath(CommentRoutes.INDEX, {commentId: comment.id})}>
+                    <Link to={generatePath("/users/:userId", {userId: comment.user.id.toString()})}><Typography>{comment.user.login}</Typography></Link>
+                    <Link to={generatePath(CommentRoutes.INDEX, {commentId: comment.id.toString()})}>
                         <Typography 
                             variant="caption"
                             fontSize={"12px"}

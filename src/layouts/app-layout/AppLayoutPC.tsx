@@ -8,7 +8,6 @@ import { DEVICE, useDeviceDetect } from "../../hooks/useDeviceDetect";
 import ThemeContext from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
 import SearchModal from "../../features/search/components/SearchModal";
-import { UserMenuPopover } from "../../features/user-menu/UserMenu";
 import { AuthContext } from "../../features/auth/context/AuthContext";
 import Blur from "../../components/Blur";
 import { useTheme } from "@mui/material/styles";
@@ -18,6 +17,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Button from "../../components/ui/Button";
 import UserAuthContext from "../../context/UserAuthContext";
 import NotificationPopover from "../../modules/notifications/components/NotificationPopover";
+import { UserMenuPopover } from "../../modules/users/components/UserMenu";
 
 
 export function ContentPC({children}: {children: React.ReactNode}) {

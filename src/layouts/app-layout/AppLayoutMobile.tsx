@@ -5,7 +5,7 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { Children, useEffect, useState } from "react";
 import { Outlet, Link, generatePath, useNavigate } from 'react-router-dom'
-import { UserMenuDrawer } from "../../features/user-menu/UserMenu";
+import { UserMenuDrawer } from "../../modules/users/components/UserMenu"
 import Blur from "../../components/Blur";
 import MainBlurContext from "./MainBlurContext";
 import { AppRoutes } from "../../routes";

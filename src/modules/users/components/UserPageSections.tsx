@@ -5,7 +5,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { useState } from 'react';
 
 
-export default function Sections() {
+export default function UserPageSections() {
     const [currentSection, setCurrentSection] = useState("1");
 
     const handleChange = (_event: React.SyntheticEvent, newValue: string) => {

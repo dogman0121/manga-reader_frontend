@@ -1,7 +1,6 @@
 import { Box, SxProps } from "@mui/material";
 import { User } from "../types/User";
-import { generatePath, UserRoutes } from "../routes";
-import { Link } from "react-router-dom";
+import { generatePath, Link } from "react-router-dom";
 import React from "react";
 import { ListItem } from "./ListItem";
 
@@ -22,7 +21,7 @@ export function UserItem({user, endAdornment}: UserItemProps) {
                 alignItems: "center"
             }}
         >
-            <Link to={generatePath(UserRoutes.INDEX, {userId: user.id})}>
+            <Link to={generatePath("/users/:userId", {userId: user.id.toString()})}>
                 <ListItem 
                     title={user.login}
                     subtitle={user.about}

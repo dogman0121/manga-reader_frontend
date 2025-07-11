@@ -12,9 +12,7 @@ import AuthProvider from "./features/auth/components/AuthProvider";
 import Catalog from "./pages/catalog";
 import CommentPage from "./pages/comment/CommentPage";
 import NotFound from "./pages/not-found/NotFound";
-import UserProfile from "./pages/UserProfile";
-import { AppRoutes, AuthRoutes, ChapterRoutes, TeamRoutes, UserRoutes } from "./routes";
-import UserProfileSettings from "./pages/UserProfileSettings";
+import { AppRoutes, AuthRoutes, ChapterRoutes, TeamRoutes } from "./routes";
 import TeamIndex from "./pages/teams";
 import TeamCreate from "./pages/teams/create";
 import TeamEdit from "./pages/teams/edit";
@@ -27,6 +25,7 @@ import NotificationsRouter from "./modules/notifications/NotificationsRouter";
 import HomeRouter from "./modules/home/HomeRouter";
 import TitleRouter from "./modules/titles/TitleRouter";
 import ListsRouter from "./modules/lists/ListsRouter";
+import UsersRouter from "./modules/users/UsersRouter";
 
 function App() {
   const [theme, setTheme] = useState<"dark" | "light">(getColorScheme());
@@ -71,16 +70,13 @@ function App() {
                     </Route>
                     <Route path={AppRoutes.CATALOG} element={<Catalog />} />
                     <Route>
-                        <Route path={UserRoutes.INDEX} element={<UserProfile />} />
-                        <Route path={UserRoutes.SETTINGS} element={<UserProfileSettings />} />
-                    </Route>
-                    <Route>
                         <Route path={TeamRoutes.INDEX} element={<TeamIndex />}/>
                         <Route path={TeamRoutes.ADD} element={<TeamCreate />}/>
                         <Route path={TeamRoutes.EDIT} element={<TeamEdit />}/>
                     </Route>
                     <Route path={AppRoutes.COMMENT} element={<CommentPage />} />
 
+                    <Route path={AppRoutes.USERS} element={<UsersRouter />} />
                     <Route path={AppRoutes.HOME} element={<HomeRouter />} />
                     <Route path={AppRoutes.NOTIFICATIONS} element={<NotificationsRouter />}/>
                     <Route path={AppRoutes.TITLE} element={<TitleRouter />} />
