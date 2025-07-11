@@ -95,7 +95,6 @@ export function RatingMobile({sx, rating}: {sx?: SxProps, rating?: number}) {
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: "12px",
-                    ...sx
                 }}
             />
         </Box>
