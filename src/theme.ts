@@ -142,7 +142,7 @@ export const lightTheme = createTheme({
         },
         customBackgrounds: {
             header: "#FFF1AA",
-            footer: "#FFD600",
+            footer: "#ffc200",
             widget1: "#F4F4F5"
         }
     },
