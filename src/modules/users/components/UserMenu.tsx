@@ -25,7 +25,7 @@ function UserWidget() {
                 display: "flex",
                 flexDirection: "row",
                 gap: "10px",
-                bgcolor: getColorScheme() == "dark" ? "#323232" : "#F6F6F6",
+                bgcolor: getColorScheme() == "dark" ? "#2e2e2e" : "#F6F6F6",
                 borderRadius: "8px",
                 cursor: "pointer",
             }}
@@ -71,7 +71,7 @@ function Option({
                 cursor: "pointer",
                 p: "7px 10px",
                 "&:hover": {
-                    bgcolor: getColorScheme() == "dark" ? "#323232" : "#F6F6F6"
+                    bgcolor: getColorScheme() == "dark" ? "#2e2e2e" : "#F6F6F6"
                 }
             }}
         >
@@ -178,7 +178,7 @@ export function UserMenuPopover({sx, ...props}: PopoverProps) {
                 },
                 ...sx
             }}
-            elevation={2}
+            elevation={1}
             {...props}
         >
             <MenuInner />
