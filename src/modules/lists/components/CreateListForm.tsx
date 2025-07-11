@@ -23,7 +23,7 @@ export default function CreateListForm({
     return (
         <ListForm 
             open={open}
-            title="Изменение списка"
+            title="Создание списка"
             onClose={onClose}
             onSubmit={handleSubmit}
         />
