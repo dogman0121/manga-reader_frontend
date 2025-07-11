@@ -18,7 +18,7 @@ function StarIcon({sx}: {sx?: SxProps}) {
 export function RatingIndicator({sx, rating}: {sx?: SxProps, rating: number}) {
     const colors = {
         bad: "#FF0000",
-        normal: "#FFCC00",
+        normal: "#c88800",
         good: "#33CC66",
         excellent: "#339900"
     }
