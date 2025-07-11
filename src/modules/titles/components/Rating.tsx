@@ -57,35 +57,48 @@ export function RatingMobile({sx, rating}: {sx?: SxProps, rating?: number}) {
         return (
             <Box
                 sx={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
                     display: "flex",
+                    flexDirection: "row",
                     alignItems: "center",
-                    justifyContent: "center",
+                    p: "4px 10px",
+                    borderRadius: "50px",
                     bgcolor: theme.palette.background.paper,
-                    cursor: "pointer",
                     ...sx
                 }}
             >
-                <StarIcon sx={{width: "30px", height: "30px"}}/>
+                <Typography fontSize={"13px"}>Оценить</Typography>
+                <StarIcon sx={{ml: theme.spacing(0.6), width: "20px", height: "20px"}}/>
             </Box>
         )
 
     return (
-        <RatingIndicator 
-            rating={rating} 
+        <Box
             sx={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
                 display: "flex",
+                flexDirection: "row",
                 alignItems: "center",
-                justifyContent: "center",
-                fontSize: "24px",
+                p: "4px 10px",
+                borderRadius: "50px",
+                bgcolor: theme.palette.background.paper,
                 ...sx
             }}
-        />
+        >
+            <Typography fontSize={"13px"}>Оценка:</Typography>
+            <RatingIndicator 
+                rating={rating} 
+                sx={{
+                    ml: theme.spacing(1),
+                    width: "22px",
+                    height: "16px",
+                    borderRadius: "50px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "12px",
+                    ...sx
+                }}
+            />
+        </Box>
     )
 }
 
@@ -187,6 +200,7 @@ export default function Rating({sx}: {sx?: SxProps}) {
     return (
         <>
             <Box
+                className="rating"
                 onClick={() => {setModalOpened(true)}}
             >
                 {device == DEVICE.MOBILE && (<RatingMobile sx={sx} rating={rating}/>)}

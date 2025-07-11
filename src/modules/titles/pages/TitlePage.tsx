@@ -210,7 +210,10 @@ function TitlePageMobile() {
                     </Box>
                     <Box
                         sx={{
-                            mt: theme.spacing(5)
+                            mt: theme.spacing(3),
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center"
                         }}
                     >
                         <Box
@@ -224,25 +227,21 @@ function TitlePageMobile() {
                                 width: "50%"
                             }}
                         >
-                            <Rating 
-                                sx={{
-                                    position: "absolute",
-                                    right: 0,
-                                    top: 0,
-                                    transform: "translate(30%, -30%)",
-                                }}
-                            />
                             <Poster 
                                 src={title.main_poster?.medium || ""}
                             />
                         </Box>
+                        <Rating
+                            sx={{mt: "5px"}}
+                        />
                     </Box>
                     <Names 
                         sx={{
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            textAlign: "center"
+                            textAlign: "center",
+                            mt: "5px"
                         }}
                     />
                     <Stats 
