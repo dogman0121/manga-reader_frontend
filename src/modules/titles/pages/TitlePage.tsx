@@ -230,15 +230,6 @@ function TitlePageMobile() {
                             <Poster 
                                 src={title.main_poster?.medium || ""}
                             />
-                            <Rating
-                                sx={{
-                                    mt: "5px",
-                                    position: "absolute",
-                                    bottom: "10px",
-                                    left: "50%",
-                                    transform: "translateX(-50%)"
-                                }}
-                            />
                         </Box>
                     </Box>
                     <Names 
