@@ -50,7 +50,7 @@ export function RatingIndicator({sx, rating}: {sx?: SxProps, rating: number}) {
 }
 
 
-export function RatingMobile({sx, rating}: {sx?: SxProps, rating?: number}) {
+export function RatingMobile({rating}: {sx?: SxProps, rating?: number}) {
     const theme = useTheme();
 
     if (rating == undefined)
@@ -60,11 +60,10 @@ export function RatingMobile({sx, rating}: {sx?: SxProps, rating?: number}) {
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
-                    p: "4px 10px",
+                    p: "2px 6px",
                     borderRadius: "50px",
                     bgcolor: theme.palette.background.paper,
                     boxShadow: "rgba(0, 0, 0, 0.4) 0px 0.5px 2px",
-                    ...sx
                 }}
             >
                 <Typography fontSize={"13px"}>Оценить</Typography>
@@ -78,11 +77,10 @@ export function RatingMobile({sx, rating}: {sx?: SxProps, rating?: number}) {
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
-                p: "4px 10px",
+                p: "2px 6px",
                 borderRadius: "50px",
                 bgcolor: theme.palette.background.paper,
                 boxShadow: "rgba(0, 0, 0, 0.4) 0px 0.5px 2px",
-                ...sx
             }}
         >
             <Typography fontSize={"13px"}>Оценка:</Typography>
@@ -203,6 +201,9 @@ export default function Rating({sx}: {sx?: SxProps}) {
             <Box
                 className="rating"
                 onClick={() => {setModalOpened(true)}}
+                sx={{
+                    ...sx
+                }}
             >
                 {device == DEVICE.MOBILE && (<RatingMobile sx={sx} rating={rating}/>)}
                 {device == DEVICE.PC && (<RatingPC sx={sx} rating={rating}/>)}
