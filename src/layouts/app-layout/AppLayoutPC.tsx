@@ -206,7 +206,8 @@ function AppHeader() {
                                     src={user.avatar || ""}
                                     sx={{
                                         width: "40px",
-                                        height: "40px"
+                                        height: "40px",
+                                        cursor: "pointer"
                                     }}
                                     onClick={() => setUserMenuOpened(true)}
                                 />
