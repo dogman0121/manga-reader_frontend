@@ -63,7 +63,7 @@ export function RatingMobile({sx, rating}: {sx?: SxProps, rating?: number}) {
                     p: "4px 10px",
                     borderRadius: "50px",
                     bgcolor: theme.palette.background.paper,
-                    boxShadow: "rgba(0, 0, 0, 0.4) 0px 0.5px 3px",
+                    boxShadow: "rgba(0, 0, 0, 0.4) 0px 0.5px 2px",
                     ...sx
                 }}
             >
@@ -81,7 +81,7 @@ export function RatingMobile({sx, rating}: {sx?: SxProps, rating?: number}) {
                 p: "4px 10px",
                 borderRadius: "50px",
                 bgcolor: theme.palette.background.paper,
-                boxShadow: "rgba(0, 0, 0, 0.4) 0px 0.5px 3px",
+                boxShadow: "rgba(0, 0, 0, 0.4) 0px 0.5px 2px",
                 ...sx
             }}
         >
