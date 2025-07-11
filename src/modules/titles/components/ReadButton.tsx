@@ -6,7 +6,6 @@ export default function ReadButton() {
         <AppButton 
             sx={{
                 width: "140px",
-                borderRadius: "12px",
                 height: "40px"
             }}
             variant="contained"
