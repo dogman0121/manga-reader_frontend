@@ -147,11 +147,11 @@ function TitlePagePC() {
                                                 "& .MuiTab-root": {
                                                     textTransform: "capitalize",
                                                     color: theme.typography.body1.color,
-                                                    padding: "10px 30px"
+                                                    padding: "10px 30px",
+                                                    "&.Mui-selected": {
+                                                        color: theme.typography.body1.color
+                                                    }
                                                 },
-                                                "& .Mui-selected": {
-                                                    color: theme.typography.body1.color
-                                                }
                                             }}
                                         >
                                             <Tab 
@@ -283,11 +283,11 @@ function TitlePageMobile() {
                                 "& .MuiTab-root": {
                                     textTransform: "capitalize",
                                     color: theme.typography.body1.color,
-                                    padding: "10px 30px"
+                                    padding: "10px 30px",
+                                    "&.Mui-selected": {
+                                        color: theme.typography.body1.color
+                                    }
                                 },
-                                "& .Mui-selected": {
-                                    color: theme.typography.body1.color
-                                }
                             }}>
                                 <Tab label="Информация" value="1" sx={{fontSize: "14px"}}/>
                                 <Tab label="Главы" value="2" sx={{fontSize: "14px"}}/>
