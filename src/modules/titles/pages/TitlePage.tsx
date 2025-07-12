@@ -134,14 +134,42 @@ function TitlePagePC() {
                                 <GenresList />
                                 <OtherNames />
                                 <Persons />
-                                <TabContext value={section}>
-                                    <TabList onChange={handleChange}>
-                                        <Tab label="Главы" value="1" sx={{fontSize: "14px"}}/>
-                                        <Tab label="Комментарии" value="2" sx={{fontSize: "14px"}}/>
-                                    </TabList>
-                                    <TabPanel value="1" sx={{p: "0"}}><Chapters /></TabPanel>
-                                    <TabPanel value="2" sx={{p: "0"}}><Comments /></TabPanel>
-                                </TabContext>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: '15px'
+                                    }}
+                                >
+                                    <TabContext value={section}>
+                                        <TabList onChange={handleChange}
+                                            sx={{
+                                                "& .MuiTab-root": {
+                                                    textTransform: "capitalize",
+                                                    color: theme.typography.body1.color,
+                                                    padding: "10px 30px"
+                                                },
+                                                "& .Mui-selected": {
+                                                    color: theme.typography.body1.color
+                                                }
+                                            }}
+                                        >
+                                            <Tab 
+                                                label="Главы" 
+                                                value="1" 
+                                                sx={{
+                                                    fontSize: "14px",
+                                                    "&.Mui-Selected": {
+                                                        color: theme.typography.body1.color
+                                                    }
+                                                }}
+                                            />
+                                            <Tab label="Комментарии" value="2" sx={{fontSize: "14px"}}/>
+                                        </TabList>
+                                        <TabPanel value="1" sx={{p: "0"}}><Chapters /></TabPanel>
+                                        <TabPanel value="2" sx={{p: "0"}}><Comments /></TabPanel>
+                                    </TabContext>
+                                </Box>
                             </Box>
                         </Box>
                     </Box>
@@ -248,30 +276,42 @@ function TitlePageMobile() {
                             justifyContent: "center"
                         }}
                     />
-                    <TabContext value={section}>
-                        <TabList onChange={handleChange} sx={{mt: theme.spacing(4)}}>
-                            <Tab label="Информация" value="1" sx={{fontSize: "14px"}}/>
-                            <Tab label="Главы" value="2" sx={{fontSize: "14px"}}/>
-                            <Tab label="Комментарии" value="3" sx={{fontSize: "14px"}}/>
-                        </TabList>
-                        <TabPanel value="1" sx={{p: `${theme.spacing(3)} 0`}}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    rowGap: theme.spacing(4)
-                                }}
-                            >
-                                <About/>
-                                <GenresList />
-                                <OtherNames />
-                                <Similar />
-                                <Persons />
-                            </Box>
-                        </TabPanel>
-                        <TabPanel value="2" sx={{p: `${theme.spacing(3)} 0`}}><Chapters /></TabPanel>
-                        <TabPanel value="3" sx={{p: `${theme.spacing(3)} 0`}}><Comments /></TabPanel>
-                    </TabContext>
+                    <Box>
+                        <TabContext value={section}>
+                            <TabList onChange={handleChange} sx={{
+                                mt: theme.spacing(4),
+                                "& .MuiTab-root": {
+                                    textTransform: "capitalize",
+                                    color: theme.typography.body1.color,
+                                    padding: "10px 30px"
+                                },
+                                "& .Mui-selected": {
+                                    color: theme.typography.body1.color
+                                }
+                            }}>
+                                <Tab label="Информация" value="1" sx={{fontSize: "14px"}}/>
+                                <Tab label="Главы" value="2" sx={{fontSize: "14px"}}/>
+                                <Tab label="Комментарии" value="3" sx={{fontSize: "14px"}}/>
+                            </TabList>
+                            <TabPanel value="1" sx={{p: `${theme.spacing(3)} 0`}}>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        rowGap: theme.spacing(4)
+                                    }}
+                                >
+                                    <About/>
+                                    <GenresList />
+                                    <OtherNames />
+                                    <Similar />
+                                    <Persons />
+                                </Box>
+                            </TabPanel>
+                            <TabPanel value="2" sx={{p: `${theme.spacing(3)} 0`}}><Chapters /></TabPanel>
+                            <TabPanel value="3" sx={{p: `${theme.spacing(3)} 0`}}><Comments /></TabPanel>
+                        </TabContext>
+                    </Box>
                 </Box>
                 <Box>
 
