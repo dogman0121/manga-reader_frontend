@@ -44,6 +44,7 @@ function CatalogPagePC() {
                     </Box>
                 </Box>
                 <Paper
+                    elevation={1}
                     sx={{
                         p: theme.spacing(3),
                         boxShadow: "none",
