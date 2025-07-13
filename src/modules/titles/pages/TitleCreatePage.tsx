@@ -4,7 +4,7 @@ import AddTitleForm from "../types/AddTitleForm";
 import { apiClient } from "../../../utils/apiClient";
 import useFormUtils from "../../../features/form/hooks/useFormUtils";
 import { Link, useNavigate } from "react-router-dom";
-import { generatePath, TitleRoutes } from "../../../routes";
+import { generatePath } from "../../../routes";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 import PageHeader from "../../../components/ui/PageHeader";
