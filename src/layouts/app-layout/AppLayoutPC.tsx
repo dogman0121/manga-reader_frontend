@@ -128,6 +128,9 @@ function AppHeader() {
                             <Box 
                                 component="li" 
                                 onClick={() => {setSearchModalOpened(true)}}
+                                sx={{
+                                    cursor: "pointer"
+                                }}
                             >
                                 поиск
                             </Box>
