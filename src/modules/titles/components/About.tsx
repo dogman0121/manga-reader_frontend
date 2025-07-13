@@ -49,7 +49,8 @@ function About() {
                     width: "100%",
                     overflowWrap: "break-word",
                     overflowY: "hidden",
-                    fontSize: "16px" 
+                    fontSize: "16px",
+                    whiteSpace: "pre-wrap"
                 }}
                 ref={textRef}
             >
