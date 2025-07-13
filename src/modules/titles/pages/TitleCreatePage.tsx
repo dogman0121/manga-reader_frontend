@@ -62,7 +62,7 @@ export default function TitleCreatePage() {
                                     Главная  
                                 </Typography>
                             </Link>
-                            <Typography sx={{color: theme.typography.caption.color}}>Изменение тайтла</Typography>
+                            <Typography sx={{color: theme.typography.caption.color}}>Добавление тайтла</Typography>
                         </Breadcrumbs>
                     </>
                 )}
