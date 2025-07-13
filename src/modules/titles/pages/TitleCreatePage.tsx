@@ -32,7 +32,7 @@ export default function TitleCreatePage() {
                 "При отправке формы произошла ошибка"
             )
         else 
-            navigate(generatePath(TitleRoutes.INDEX, {titleId: title.id}))
+            navigate(generatePath("/manga/:slug", {slug: title.slug}))
 
         setLoading(false);
     }
