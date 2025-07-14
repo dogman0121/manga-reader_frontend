@@ -176,12 +176,13 @@ export function RatingModal({
                     rowGap: theme.spacing(2)
                 }}
             >
-                {ratingsList.map((r) => (
+                {ratingsList.reverse().map((r) => (
                     <Box 
                         key={r.number}
-                        onClick={() => {
+                        onClick={(e: React.MouseEvent) => {
                             onSetRating(r.number)
                             onClose?.()
+                            e.stopPropagation()
                         }}
                         sx={{
                             display: "flex",

@@ -6,7 +6,7 @@ import { titleService } from "../service/api/titleService";
 import TitleProvider from "../components/TitleProvider";
 import PageLoader from "../../../components/ui/PageLoader";
 import NotFound from "../../../pages/not-found/NotFound";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import useTitle from "../hooks/useTitle";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import Poster from "../../../components/ui/Poster";
@@ -129,23 +129,25 @@ function TitlePagePC() {
                                             }}
                                         >
                                             {userRating ? 
-                                                <Box>
-                                                        <Typography
-                                                            sx={{
-                                                                display: "flex",
-                                                                alignItems: "center",
-                                                            }}
-                                                        >Ваша оценка: <RatingIndicator rating={userRating} sx={{ml: theme.spacing(1)}}/></Typography>
+                                                <Box
+                                                    sx={{
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                    }}
+                                                >
+                                                    Ваша оценка: 
+                                                    <RatingIndicator rating={userRating} sx={{ml: theme.spacing(1)}}/>
                                                 </Box> 
                                                 :
-                                                <Box>
-                                                        <Typography
-                                                            sx={{
-                                                                display: "flex",
-                                                                alignItems: "center",
-                                                                cursor: "pointer",
-                                                            }}
-                                                        >Оценить <RatingStarIcon sx={{ml: theme.spacing(1)}}/></Typography>
+                                                <Box
+                                                    sx={{
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        cursor: "pointer",
+                                                    }}
+                                                >
+                                                    Оценить 
+                                                    <RatingStarIcon sx={{ml: theme.spacing(0.2)}}/>
                                                 </Box>
                                                 }
                                             </Box>

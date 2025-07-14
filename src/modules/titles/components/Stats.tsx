@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react";
+import React, { useState } from "react";
 import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { Box, SxProps, Typography, useTheme } from "@mui/material";
@@ -23,31 +23,18 @@ function StatsItem({children}: {children: React.ReactNode}) {
     )
 }
 
-function StatsText({children}: {children: React.ReactNode}){
+function StatsText({children, sx}: {children: React.ReactNode, sx?: SxProps}){
     return (
         <Typography
             sx={{
                 fontSize: "16px",
 
                 margin: "auto 0 auto 5px",
-                whiteSpace: "nowrap"
+                whiteSpace: "nowrap",
+                ...sx
             }}
         >
             {children}
-        </Typography>
-    )
-}
-
-function StatsCaption({children}: {children: React.ReactNode}) {
-    return (
-        <Typography
-            variant="caption"
-            sx={{
-                fontSize: "15px",
-                lineHeight: "20px"
-            }}
-        >
-            {Children.map(children, child => child)}
         </Typography>
     )
 }
@@ -74,7 +61,7 @@ function Stats({sx}: {sx?: SxProps}) {
             }}
         >
             {device == DEVICE.MOBILE ?
-                <RatingContext onSetRating={(newRating: number | null) => {console.log(newRating);setUserRating(newRating)}}>
+                <RatingContext onSetRating={(newRating: number | null) => {setUserRating(newRating)}}>
                     <StatsItem>
                         <StarOutlineRoundedIcon
                             sx={{
@@ -98,7 +85,7 @@ function Stats({sx}: {sx?: SxProps}) {
                                 }}
                             >
                                 <StatsText>{title.rating}</StatsText>
-                                <StatsCaption>({title.rating_count})</StatsCaption>
+                                <StatsText sx={{ml: 0}}>({title.rating_count})</StatsText>
                             </Box>
                             {userRating && (
                                 <RatingIndicator 
@@ -141,7 +128,7 @@ function Stats({sx}: {sx?: SxProps}) {
                             }}
                         >
                             <StatsText>{title.rating}</StatsText>
-                            <StatsCaption>({title.rating_count})</StatsCaption>
+                            <StatsText sx={{ml: 0}}>({title.rating_count})</StatsText>
                         </Box>
                 </StatsItem>
             }
