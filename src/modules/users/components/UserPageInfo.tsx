@@ -85,7 +85,7 @@ function InfoMobile() {
             >
                 <Avatar
                     src={profileUser?.avatar || ""}
-                    sx={{width: "70px", height: "70px"}}
+                    sx={{width: "90px", height: "90px"}}
                 />
                 <Box
                     sx={{
@@ -117,11 +117,11 @@ function InfoPC() {
         <Box
             sx={{
                 maxWidth: "1060px",
-                p: "30px 30px",
+                p: "15px 30px",
                 mx: "auto",
                 display: "flex",
                 flexDirection: "column",
-                rowGap: "20px"
+                rowGap: "15px"
             }}
         >
             <Box
@@ -135,7 +135,7 @@ function InfoPC() {
             >
                 <Avatar
                     src={user?.avatar || ""}
-                    sx={{width: "120px", height: "120px"}}
+                    sx={{width: "150px", height: "150px"}}
                 />
                 <Box
                     sx={{

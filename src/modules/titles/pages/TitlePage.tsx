@@ -31,6 +31,7 @@ import ReadButton from "../components/ReadButton";
 import Persons from "../components/Persons";
 import Button from "../../../components/ui/Button";
 import SaveButton from "../components/SaveButton";
+import { AppTab, AppTabContext, AppTabList, AppTabPanel } from "../../../components/ui/AppTabs";
 
 
 function TitlePagePC() {
@@ -134,41 +135,18 @@ function TitlePagePC() {
                                 <GenresList />
                                 <OtherNames />
                                 <Persons />
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        gap: '15px'
-                                    }}
-                                >
-                                    <TabContext value={section}>
-                                        <TabList onChange={handleChange}
-                                            sx={{
-                                                "& .MuiTab-root": {
-                                                    textTransform: "capitalize",
-                                                    color: theme.typography.body1.color,
-                                                    padding: "10px 30px",
-                                                    "&.Mui-selected": {
-                                                        color: theme.typography.body1.color
-                                                    }
-                                                },
-                                            }}
-                                        >
-                                            <Tab 
+                                <Box>
+                                    <AppTabContext value={section}>
+                                        <AppTabList onChange={handleChange}>
+                                            <AppTab 
                                                 label="Главы" 
-                                                value="1" 
-                                                sx={{
-                                                    fontSize: "14px",
-                                                    "&.Mui-Selected": {
-                                                        color: theme.typography.body1.color
-                                                    }
-                                                }}
+                                                value="1"
                                             />
-                                            <Tab label="Комментарии" value="2" sx={{fontSize: "14px"}}/>
-                                        </TabList>
-                                        <TabPanel value="1" sx={{p: "0"}}><Chapters /></TabPanel>
-                                        <TabPanel value="2" sx={{p: "0"}}><Comments /></TabPanel>
-                                    </TabContext>
+                                            <AppTab label="Комментарии" value="2" sx={{fontSize: "14px"}}/>
+                                        </AppTabList>
+                                        <AppTabPanel value="1"><Chapters /></AppTabPanel>
+                                        <AppTabPanel value="2" sx={{p: "0"}}><Comments /></AppTabPanel>
+                                    </AppTabContext>
                                 </Box>
                             </Box>
                         </Box>

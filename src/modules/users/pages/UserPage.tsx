@@ -1,4 +1,3 @@
-import { Box } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import PageLoader from "../../../components/ui/PageLoader";
@@ -6,11 +5,11 @@ import NotFound from "../../../pages/not-found/NotFound";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import ProfileProvider from "../components/ProfileProvider";
 import UserPageInfo from "../components/UserPageInfo";
-import UserPageActionButtons from "../components/UserPageActionButtons";
 import userService from "../service/api/userService";
 import { User } from "../types/User";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
+import { AppTab, AppTabContext, AppTabList } from "../../../components/ui/AppTabs";
 
 
 export default function UserPage() {
@@ -21,6 +20,12 @@ export default function UserPage() {
     const [user, setUser] = useState<User | null>(null);
 
     const [isLoading, setIsLoading] = useState(true);
+
+    const [section, setSection] = useState("1");
+
+    const handleSetSection = (_event: React.SyntheticEvent, newValue: string) => {
+        setSection(newValue);
+    };
     
     useEffect(() => {
         userService.fetchUser(parseInt(userId || "", 10))
@@ -46,10 +51,12 @@ export default function UserPage() {
             )}
             <AppContent>
                 <ProfileProvider user={user} setUser={setUser}>
-                    <Box>
-                        <UserPageInfo />
-                        <UserPageActionButtons />
-                    </Box>
+                    <UserPageInfo />
+                    <AppTabContext value={section}>
+                        <AppTabList onChange={handleSetSection}>
+                            <AppTab value="1" label="Списки"/>
+                        </AppTabList>
+                    </AppTabContext>
                 </ProfileProvider>
             </AppContent>
         </>
