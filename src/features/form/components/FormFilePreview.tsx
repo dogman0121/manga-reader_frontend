@@ -1,4 +1,4 @@
-import { Box } from "@mui/material"
+import { Box, Typography, useTheme } from "@mui/material"
 import {CSS} from '@dnd-kit/utilities';
 import {
     useSortable,
@@ -14,7 +14,8 @@ interface FormFilePreviewProps {
     height?: string,
     aspectRatio?: string,
     onDelete?: () => void, 
-    file:FormFile
+    file: FormFile,
+    showFilename?: boolean
 }
 
 export default function FormFilePreviewDraggable({
@@ -22,8 +23,11 @@ export default function FormFilePreviewDraggable({
     height,
     aspectRatio, 
     onDelete, 
-    file 
+    file,
+    showFilename 
 } : FormFilePreviewProps) {
+    const theme = useTheme();
+
     if (!file?.uuid)
         return;
 
@@ -41,6 +45,7 @@ export default function FormFilePreviewDraggable({
         zIndex: isDragging ? 10 : 1,
         transform: CSS.Translate.toString(transform),
     };
+
 
     return (
         <Box 
@@ -95,6 +100,18 @@ export default function FormFilePreviewDraggable({
                     }}
                 />
             </Box>
+            {showFilename && (
+                <Typography
+                    sx={{
+                        mt: theme.spacing(1),
+                        display: "-webkit-box",
+                        WebkitLineClamp: "1",
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis"
+                    }}
+                >{file.fileName}</Typography>
+            )}
         </Box>
     );
 }
@@ -106,7 +123,10 @@ export function FormFilePreview({
     aspectRatio, 
     onDelete, 
     file, 
+    showFilename
 } : FormFilePreviewProps) {
+    const theme = useTheme();
+
     if (!file?.uuid)
         return;
 
@@ -152,6 +172,18 @@ export function FormFilePreview({
                     />
                 )}
             </Box>
+            {showFilename && (
+                <Typography
+                    sx={{
+                        mt: theme.spacing(1),
+                        display: "-webkit-box",
+                        WebkitLineClamp: "1",
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis"
+                    }}
+                >{file.fileName}</Typography>
+            )}
         </Box>
     );
 }

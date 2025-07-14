@@ -31,20 +31,16 @@ export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter |
 
     const { user:currentUser } = useContext(UserAuthContext);
 
-    if (!currentUser)
-        return null;
+    const {handleChange, acceptedFiles} = useFileInput();
 
     const {control, handleSubmit, setValue} = useForm<ChapterFormProps>({
         defaultValues: {
             tome: chapter?.tome || 1,
             chapter:  chapter?.chapter || 1,
             name: chapter?.name || "",
-            author: chapter?.team ? `team/${chapter.team.id}` : chapter?.creator ? `user/${chapter.creator.id}` : `user/${currentUser.id}`
         }
     });
-
-    const {handleChange, acceptedFiles} = useFileInput();
-
+    
     useEffect(() => {
         const newPages: Array<File | undefined> = acceptedFiles.map(file => file.file)
 
@@ -75,6 +71,9 @@ export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter |
 
         onSend(formData);
     }
+
+    if (!currentUser)
+        return null;
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -130,6 +129,7 @@ export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter |
                 <Controller 
                     name="author"
                     control={control}
+                    defaultValue={`user/${currentUser.id}`}
                     render={({field}) => (
                         <FormSelect 
                             {...field}
@@ -180,6 +180,7 @@ export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter |
                 <FormMultipleFilesInput 
                     title="Страницы" 
                     onChange={handleChange}
+                    showFilenames
                     defaultValue={chapter?.pages.map((page) => ({
                         uuid: page.uuid, 
                         fileName: page.filename, 

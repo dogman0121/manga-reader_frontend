@@ -24,9 +24,17 @@ interface FormMultipleInput {
     onChange?: Function
     defaultValue?: Array<FormFile>,
     dropzoneOptions?: DropzoneOptions
+    showFilenames?: boolean
 }
 
-function FilesList({files, onChange}: {files: Array<FormFile>, onChange: Function}) {
+function FilesList({
+    files, 
+    onChange, 
+    showFilenames
+}: {
+    files: Array<FormFile>, 
+    onChange: Function, 
+    showFilenames?: boolean}) {
     const pointerSencor = useSensor(PointerSensor);
     const touchSensor = useSensor(
         TouchSensor, { 
@@ -78,7 +86,9 @@ function FilesList({files, onChange}: {files: Array<FormFile>, onChange: Functio
                             width="100%"
                             key={file.uuid} 
                             onDelete={() => {handleDelete(file.uuid)}} 
-                            file={file}/>
+                            file={file}
+                            showFilename={showFilenames}
+                        />
                     ))}
             </SortableContext>
         </DndContext>
@@ -89,7 +99,8 @@ export default function FormMultipleFilesInput({
     onChange, 
     title, 
     defaultValue,
-    dropzoneOptions
+    dropzoneOptions,
+    showFilenames
 }: FormMultipleInput) {
     const [files, setFiles] = useState<Array<FormFile>>(defaultValue || []);
 
@@ -121,7 +132,7 @@ export default function FormMultipleFilesInput({
                         gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))"
                     }}
                 >
-                    <FilesList onChange={handleChangeOrder} files={Array.from(files)} />
+                    <FilesList onChange={handleChangeOrder} files={Array.from(files)} showFilenames={showFilenames}/>
                     <FormFileInput 
                         width="100%"
                         aspectRatio="2/3"
