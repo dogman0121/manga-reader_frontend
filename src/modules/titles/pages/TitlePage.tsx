@@ -6,7 +6,7 @@ import { titleService } from "../service/api/titleService";
 import TitleProvider from "../components/TitleProvider";
 import PageLoader from "../../../components/ui/PageLoader";
 import NotFound from "../../../pages/not-found/NotFound";
-import { Box, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import useTitle from "../hooks/useTitle";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import Poster from "../../../components/ui/Poster";
@@ -26,7 +26,7 @@ import { generatePath, TitleRoutes } from "../../../routes";
 import WestRoundedIcon from '@mui/icons-material/WestRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import Similar from "../components/Similar";
-import Rating from "../components/Rating";
+import { RatingContext, RatingIndicator, RatingStarIcon } from "../components/Rating";
 import ReadButton from "../components/ReadButton";
 import Persons from "../components/Persons";
 import Button from "../../../components/ui/Button";
@@ -40,6 +40,8 @@ function TitlePagePC() {
     const { title } = useTitle();
 
     const [section, setSection] = useState<string>('1');
+
+    const [userRating, setUserRating] = useState(title?.user_rating || null);
         
     const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
         setSection(newValue);
@@ -120,7 +122,34 @@ function TitlePagePC() {
                                     }}
                                 >
                                     <ReadButton />
-                                    <Rating />
+                                    <RatingContext onSetRating={(newRating: number | null) => {setUserRating(newRating)}}>
+                                        <Box
+                                            sx={{
+                                                cursor: "pointer"
+                                            }}
+                                        >
+                                            {userRating ? 
+                                                <Box>
+                                                        <Typography
+                                                            sx={{
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                            }}
+                                                        >Ваша оценка: <RatingIndicator rating={userRating} sx={{ml: theme.spacing(1)}}/></Typography>
+                                                </Box> 
+                                                :
+                                                <Box>
+                                                        <Typography
+                                                            sx={{
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                cursor: "pointer",
+                                                            }}
+                                                        >Оценить <RatingStarIcon sx={{ml: theme.spacing(1)}}/></Typography>
+                                                </Box>
+                                                }
+                                            </Box>
+                                    </RatingContext>
                                 </Box>
                             </Box>
                             <Box

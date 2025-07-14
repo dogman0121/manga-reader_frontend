@@ -1,12 +1,11 @@
 import { Box, SxProps, Typography, useTheme } from "@mui/material";
-import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
-import { useState } from "react";
-import Modal from "../../../features/modal/Modal";
+import { Children, useState } from "react";
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import { titleService } from "../service/api/titleService";
 import useTitle from "../hooks/useTitle";
+import AppModal from "../../../components/AppModal";
 
-function StarIcon({sx}: {sx?: SxProps}) {
+export function RatingStarIcon({sx}: {sx?: SxProps}) {
     return <StarRoundedIcon 
         sx={{
             color: "#FFD600",
@@ -15,10 +14,14 @@ function StarIcon({sx}: {sx?: SxProps}) {
     />
 }
 
-export function RatingIndicator({sx, rating}: {sx?: SxProps, rating: number}) {
+export function RatingIndicator({
+    sx, 
+    rating,
+    icon
+}: {sx?: SxProps, rating: number, icon?: React.ReactElement}) {
     const colors = {
         bad: "#FF0000",
-        normal: "#c88800",
+        normal: "#FFEF00",
         good: "#33CC66",
         excellent: "#339900"
     }
@@ -37,107 +40,81 @@ export function RatingIndicator({sx, rating}: {sx?: SxProps, rating: number}) {
         <Box
             sx={{
                 background: getColor(rating),
-                lineHeight: 1,
                 p: "3px 5px",
                 borderRadius: "50px",
-                color: "#e1e1e0",
                 ...sx
             }}
         >
-            {rating}
+            {icon && (
+                icon
+            )}
+            <Typography
+                sx={{
+                    lineHeight: "1",
+                    color: "#FFF"
+                }}
+            >
+                {rating}
+            </Typography>
+            
         </Box>
     )
 }
 
+export function RatingContext({
+    children,
+    onSetRating
+}: {children?: React.ReactElement, onSetRating?: Function}) {
+    const { title } = useTitle();
 
-export function RatingMobile({rating}: {sx?: SxProps, rating?: number}) {
-    const theme = useTheme();
+    const [rating, setRating] = useState<number | null>(title?.user_rating || null);
 
-    if (rating == undefined)
-        return (
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    p: "2px 6px",
-                    borderRadius: "50px",
-                    bgcolor: theme.palette.background.paper,
-                    boxShadow: "rgba(0, 0, 0, 0.4) 0px 0.5px 2px",
-                }}
-            >
-                <Typography fontSize={"13px"}>Оценить</Typography>
-                <StarIcon sx={{ml: theme.spacing(0.6), width: "20px", height: "20px"}}/>
-            </Box>
-        )
+    const [modalOpened, setModalOpened] = useState(false);
+
+
+    if (title == null)
+        return null;
+
+    const handleSetRating = async (newRating: number) => {
+        const {error} = await titleService.sendRating(title.slug, newRating);
+        if (error)
+            return;
+
+        if (newRating == rating){
+            setRating(null);
+            onSetRating?.(null)
+        }
+        else {
+            setRating(newRating);
+            onSetRating?.(newRating)
+        }
+    }
 
     return (
         <Box
-            sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                p: "2px 6px",
-                borderRadius: "50px",
-                bgcolor: theme.palette.background.paper,
-                boxShadow: "rgba(0, 0, 0, 0.4) 0px 0.5px 2px",
-            }}
+            onClick={() => {setModalOpened(true)}}
         >
-            <Typography fontSize={"13px"}>Оценка:</Typography>
-            <RatingIndicator 
-                rating={rating} 
-                sx={{
-                    ml: theme.spacing(1),
-                    width: "22px",
-                    height: "16px",
-                    borderRadius: "50px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "13px",
-                }}
+            {Children.map(children, child => child)}
+            <RatingModal 
+                open={modalOpened}
+                onClose={() => {setModalOpened(false)}}
+                onSetRating={handleSetRating}
             />
         </Box>
     )
 }
 
-export function RatingPC({sx, rating}: {sx?: SxProps, rating?: number}) {
-    const theme = useTheme();
+export function RatingModal({
+    open,
+    onClose,
+    onSetRating
+}: {
+    open: boolean,
+    onClose: () => void,
+    onSetRating: Function
+}) {
 
-    if (rating == undefined)
-        return (
-            <Typography
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    cursor: "pointer",
-                    ...sx
-                }}
-            >Оценить <StarIcon sx={{ml: theme.spacing(1)}}/></Typography>
-        )
-
-    return (
-        <Typography
-            sx={{
-                display: "flex",
-                alignItems: "center",
-                ...sx
-            }}
-        >Ваша оценка: <RatingIndicator rating={rating} sx={{ml: theme.spacing(1)}}/></Typography>
-    )
-
-}
-
-export default function Rating({sx}: {sx?: SxProps}) {
-    const theme = useTheme();
-
-    const { title } = useTitle();
-    
-    const {device} = useDeviceDetect();
-
-    const [rating, setRating] = useState<number | undefined>(title?.user_rating || undefined);
-
-    const [modalOpened, setModalOpened] = useState(false);
+    const theme = useTheme()
 
     const ratingsList = [
         {
@@ -182,76 +159,45 @@ export default function Rating({sx}: {sx?: SxProps}) {
         }
     ]
 
-    if (title == null)
-        return null;
-
-    const handleSetRating = async (newRating: number) => {
-        const {error} = await titleService.sendRating(title.slug, newRating);
-        if (error)
-            return;
-
-        if (newRating == rating)
-            setRating(undefined);
-        else 
-            setRating(newRating);
-    }
-
     return (
-        <>
+        <AppModal
+            title="Рейтинг"
+            open={open}
+            onClose={(event) => {
+                onClose?.()
+                event.stopPropagation()
+            }}
+        >
             <Box
-                className="rating"
-                onClick={() => {setModalOpened(true)}}
                 sx={{
-                    ...sx
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "300px",
+                    rowGap: theme.spacing(2)
                 }}
             >
-                {device == DEVICE.MOBILE && (<RatingMobile sx={sx} rating={rating}/>)}
-                {device == DEVICE.PC && (<RatingPC sx={sx} rating={rating}/>)}
-                {device == DEVICE.PAD && (<RatingPC sx={sx} rating={rating}/>)}
-            </Box>
-            <Modal
-                open={modalOpened}
-                onClose={() => {setModalOpened(false)}}
-            >
-                <Box
-                    sx={{
-                        bgcolor: theme.palette.background.paper,
-                        borderRadius: "12px",
-                        p: theme.spacing(3),
-                        width: "250px"
-                    }}
-                >
-                    <Box>
-                        <Typography textAlign="center" fontSize="18px">Рейтинг</Typography>
-                    </Box>
-                    <Box
+                {ratingsList.map((r) => (
+                    <Box 
+                        key={r.number}
+                        onClick={() => {
+                            onSetRating(r.number)
+                            onClose?.()
+                        }}
                         sx={{
-                            mt: theme.spacing(3),
                             display: "flex",
-                            flexDirection: "column",
-                            rowGap: theme.spacing(2)
+                            flexDirection: "row",
+                            columnGap: theme.spacing(2),
+                            alignItems: "center",
+                            cursor: "pointer"
                         }}
                     >
-                        {ratingsList.map((r) => (
-                            <Box 
-                                key={r.number}
-                                onClick={() => {handleSetRating(r.number)}}
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    columnGap: theme.spacing(2),
-                                    alignItems: "center"
-                                }}
-                            >
-                                <StarIcon />
-                                <Typography>{r.number}</Typography>
-                                <Typography fontSize={"16px"}>{r.text}</Typography>
-                            </Box>
-                        ))}
-                        
+                        <RatingStarIcon />
+                        <Typography fontSize={"16px"}>{r.number}</Typography>
+                        <Typography>{r.text}</Typography>
                     </Box>
-                </Box>
-            </Modal>
-        </>
+                ))}
+                
+            </Box>
+        </AppModal>
     )
 }

@@ -12,7 +12,7 @@ export default function AppModal({
 }:{
     title: string,
     open: boolean,
-    onClose: () => void,
+    onClose: React.MouseEventHandler,
     children: React.ReactElement,
     sx?: SxProps
 }) {
