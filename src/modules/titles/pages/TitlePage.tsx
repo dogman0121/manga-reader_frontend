@@ -176,7 +176,7 @@ function TitlePagePC() {
                                             <AppTab label="Комментарии" value="2" sx={{fontSize: "14px"}}/>
                                         </AppTabList>
                                         <AppTabPanel value="1"><Chapters /></AppTabPanel>
-                                        <AppTabPanel value="2" sx={{p: "0"}}><Comments /></AppTabPanel>
+                                        <AppTabPanel value="2"><Comments /></AppTabPanel>
                                     </AppTabContext>
                                 </Box>
                             </Box>
