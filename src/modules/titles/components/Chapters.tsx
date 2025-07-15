@@ -32,9 +32,7 @@ function ChapterItem({
     return (
         <Box
             sx={{
-                mt: "5px",
-
-                padding: "12px 14px",
+                padding: "10px 15px",
                 backgroundColor: theme.palette.secondary.main,
                 borderRadius: "12px",
 
@@ -202,7 +200,14 @@ function Chapters() {
                     />
                 ))}
             </Box>
-            <Box mt={"10px"}>
+            <Box
+                sx={{
+                    mt: theme.spacing(2),
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: theme.spacing(1)
+                }}
+            >
                 { chapters.sort((a: Chapter, b: Chapter) => a.chapter - b.chapter).map((chapter) => (
                     <ChapterItem 
                         key={chapter.id} 
