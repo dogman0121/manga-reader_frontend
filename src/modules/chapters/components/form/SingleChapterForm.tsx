@@ -9,7 +9,6 @@ import FormSelect from "../../../../features/form/components/FormSelect";
 import UserAuthContext from "../../../../context/UserAuthContext";
 import { mockTeams } from "../../../../mocks/team.mock";
 import { ListItem } from "../../../../components/ListItem";
-import { useParams } from "react-router-dom";
 import Chapter from "../../types/Chapter";
 import FormFile from "../../../../features/form/types/FormFile";
 import Button from "../../../../components/ui/Button";
@@ -25,7 +24,6 @@ interface ChapterFormProps {
 }
 
 export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter | null, onSend: Function}) {
-    const {titleId} = useParams();
 
     const theme = useTheme();
 
@@ -50,8 +48,6 @@ export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter |
 
     const onSubmit = (d: ChapterFormProps) => {
         const formData = new FormData();
-
-        formData.append("manga", titleId || "");
 
         formData.append("tome", d.tome.toString());
         formData.append("chapter", d.chapter.toString());
