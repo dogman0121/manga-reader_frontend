@@ -28,7 +28,7 @@ export default function ChapterCreatePage() {
     };
 
     const handleAdd = async (form: FormData) => {
-        form.append("slug", slug || "");
+        form.append("manga", slug || "");
         await chapterService.addChapter(form);
     } 
 
