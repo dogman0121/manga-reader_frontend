@@ -203,7 +203,7 @@ function Chapters() {
                 ))}
             </Box>
             <Box mt={"10px"}>
-                { chapters.map((chapter) => (
+                { chapters.sort((a: Chapter, b: Chapter) => a.chapter - b.chapter).map((chapter) => (
                     <ChapterItem 
                         key={chapter.id} 
                         chapter={chapter} 
