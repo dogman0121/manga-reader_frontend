@@ -157,7 +157,7 @@ function UserPageMobile() {
                     >
                         <Avatar
                             src={profile?.avatar || ""}
-                            sx={{width: "90px", height: "90px"}}
+                            sx={{width: "86px", height: "86px"}}
                         />
                         <Box
                             sx={{
@@ -169,7 +169,7 @@ function UserPageMobile() {
                             }}
                         >
                             <Box>
-                                <Typography fontSize={"18px"}>{profile?.login}</Typography>
+                                <Typography fontSize={"16px"}>{profile?.login}</Typography>
                                 <UserPageStats />
                             </Box>
                         </Box>
