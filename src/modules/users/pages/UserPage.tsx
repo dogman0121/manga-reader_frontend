@@ -121,7 +121,12 @@ function UserPageMobile() {
                             <>
                                 <Typography fontSize={"inherit"}>Мой профиль</Typography>
                                 <Link to="/users/settings" style={{display: "flex"}}>
-                                    <SettingsRoundedIcon />
+                                    <SettingsRoundedIcon 
+                                        sx={{
+                                            width: "22px",
+                                            height: "22px"
+                                        }}
+                                    />
                                 </Link>
                             </>
                             :
