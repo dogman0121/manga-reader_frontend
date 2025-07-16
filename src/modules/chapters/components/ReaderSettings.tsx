@@ -23,6 +23,7 @@ const Option = styled(ToggleButton)(({ theme }) => ({
     padding: theme.spacing(1),
     color: theme.typography.body1.color,
     lineHeight: 1,
+    fontSize: "13px",
 
     "&.Mui-selected": {
         background: theme.palette.secondary.main,
