@@ -33,17 +33,17 @@ export default function UserPageStats() {
                 }}
             >
                 <Box>
-                    <Typography fontSize="12px" textTransform="uppercase" variant="subtitle1">Посты</Typography>
+                    <Typography fontSize="13px" textTransform="lowercase" variant="subtitle1">Посты</Typography>
                     <Typography>0</Typography>
                 </Box>
                 <Box
                     onClick={()=>{setSubscribersOpened(true)}} sx={{cursor: "pointer"}}
                 >
-                    <Typography fontSize="12px" textTransform="uppercase" variant="subtitle1">Подписчики</Typography>
+                    <Typography fontSize="13px" textTransform="lowercase" variant="subtitle1">Подписчики</Typography>
                     <Typography>{profileUser.subscribers_count}</Typography>
                 </Box>
                 <Box>
-                    <Typography fontSize="12px" textTransform="uppercase" variant="subtitle1">Подписки</Typography>
+                    <Typography fontSize="13px" textTransform="lowercase" variant="subtitle1">Подписки</Typography>
                     <Typography>0</Typography>
                 </Box>
             </Box>
