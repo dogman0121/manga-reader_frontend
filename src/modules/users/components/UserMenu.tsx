@@ -20,32 +20,36 @@ function UserWidget() {
     if (!currentUser) return null;
 
     return (
-        <Box
-            sx={{
-                p: "6px 8px",
-                display: "flex",
-                flexDirection: "row",
-                gap: "10px",
-                bgcolor: getColorScheme() == "dark" ? "#2e2e2e" : "#F6F6F6",
-                borderRadius: "8px",
-                cursor: "pointer",
-            }}
+        <Link
+            to={`/users/${currentUser.id}`}
         >
-            <Avatar variant="square" src={currentUser.avatar} sx={{borderRadius: "4px"}}/>
-            <Box>
-                <Typography 
-                    variant="caption"
-                    sx={{
-                        textDecoration: "underline"
-                    }}    
-                >
-                    Мой профиль
-                </Typography>
-                <Typography>
-                    {currentUser.login}
-                </Typography>
+            <Box
+                sx={{
+                    p: "6px 8px",
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "10px",
+                    bgcolor: getColorScheme() == "dark" ? "#2e2e2e" : "#F6F6F6",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                }}
+            >
+                <Avatar variant="square" src={currentUser.avatar} sx={{borderRadius: "4px"}}/>
+                <Box>
+                    <Typography 
+                        variant="caption"
+                        sx={{
+                            textDecoration: "underline"
+                        }}    
+                    >
+                        Мой профиль
+                    </Typography>
+                    <Typography>
+                        {currentUser.login}
+                    </Typography>
+                </Box>
             </Box>
-        </Box>
+        </Link>
     )
 }
 
