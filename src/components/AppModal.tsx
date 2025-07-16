@@ -41,7 +41,7 @@ export default function AppModal({
                         alignItems: "center"
                     }}
                 >
-                    <Typography fontSize={"16px"}>{title}</Typography>
+                    <Typography fontSize={"16px"} >{title}</Typography>
                     <CloseRoundedIcon 
                         sx={{
                             cursor: "pointer",

@@ -12,6 +12,7 @@ import MobileDrawer from "../../../components/ui/MobileDrawer";
 import { getColorScheme } from "../../../utils/colorScheme";
 import ThemeContext from "../../../context/ThemeContext";
 import { Link } from "react-router-dom";
+import { authService } from "../../../features/auth/services/api/authService";
 
 function UserWidget() {
     const {user: currentUser} = useContext(UserAuthContext);
@@ -94,6 +95,8 @@ function Option({
 function MenuInner() {
     const {setTheme} = useContext(ThemeContext)
 
+    const {setUser} = useContext(UserAuthContext);
+
     const handleSwitchTheme = () => {
         if (getColorScheme() == "dark")
             return setTheme("light")
@@ -152,6 +155,10 @@ function MenuInner() {
             <Divider />
             <AppButton 
                 color="error"
+                onClick={() => {
+                    authService.logout()
+                    setUser(null);
+                }}
                 sx={{
                     textTransform: "capitalize",
                     display: "flex",

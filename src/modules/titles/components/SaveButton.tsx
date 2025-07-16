@@ -1,5 +1,4 @@
 import { Box, Popover, useTheme } from "@mui/material";
-import Button from "../../../components/ui/Button";
 import { useContext, useRef, useState } from "react";
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
@@ -10,6 +9,7 @@ import { User } from "../../../types/User";
 import useTitle from "../hooks/useTitle";
 import { listService } from "../../lists/service/api/listService";
 import Title from "../types/Title";
+import AppButton from "../../../components/ui/AppButton";
 
 
 export default function SaveButton() {
@@ -76,9 +76,9 @@ export default function SaveButton() {
 
     return (
         <>
-            <Button variant="contained" onClick={() => setOpen(true)} ref={anchorEl}>
+            <AppButton variant="contained" onClick={() => setOpen(true)} ref={anchorEl}>
                 Сохранить
-            </Button>
+            </AppButton>
             <Popover
                 open={open}
                 anchorEl={anchorEl.current}
