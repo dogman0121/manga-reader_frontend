@@ -14,6 +14,7 @@ const NavButton = styled(IconButton)((_theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    color: "#000",
     //boxShadow: getColorScheme() == "light" ? "0.5px 0.5px 4px rgba(0, 0, 0, 0.1)" : "0.5px 0.5px 4px rgba(255, 255, 255, 0.1)",
     "&:hover": {
         backgroundColor: getColorScheme() == "dark" ? "#000000" : "#FFFFFF",
