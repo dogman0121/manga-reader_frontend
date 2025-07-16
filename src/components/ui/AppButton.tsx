@@ -21,6 +21,7 @@ const AppButton = ({sx, color, variant, ...props}: ButtonProps) => {
                 },
                 ...sx
             }}
+            variant={variant}
             color={color}
             {...props}
         />
