@@ -40,11 +40,6 @@ html:root[data-color-scheme="dark"] {
     --paper-color: #171717;
 }
 
-#root {
-    height: 100vh;
-    width: 100vw;
-}
-
 input:-webkit-autofill {
     box-shadow: inset 0 0 0 30px hsla(0, 0%, 55%, 0) !important;
     -webkit-transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
