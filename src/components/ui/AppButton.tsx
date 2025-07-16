@@ -13,7 +13,7 @@ const AppButton = ({sx, color, variant, ...props}: ButtonProps) => {
                 textTransform: "capitalize",
 
 
-                "&:hover": variant == "contained" ? {
+                "&:hover": variant == "contained" || !variant ? {
                     bgcolor: color == "inherit" ? "inherit" : theme.palette[color || "primary"].main,
                     boxShadow: "none"
                 }: {
