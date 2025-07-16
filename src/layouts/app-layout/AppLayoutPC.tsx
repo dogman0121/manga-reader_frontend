@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styles from "./AppLayout.module.css"
-import { SvgIcon, Box, IconButton, Badge, Tooltip } from "@mui/material";
+import { SvgIcon, Box, Badge } from "@mui/material";
 import { Avatar, Checkbox } from "@mui/material";
 import { getColorScheme} from "../../utils/colorScheme";
 import { useState, useContext, useRef } from "react";
@@ -18,6 +18,8 @@ import Button from "../../components/ui/Button";
 import UserAuthContext from "../../context/UserAuthContext";
 import NotificationPopover from "../../modules/notifications/components/NotificationPopover";
 import { UserMenuPopover } from "../../modules/users/components/UserMenu";
+import AppTooltip from "../../components/ui/AppTooltip";
+import AppIconButton from "../../components/ui/AppIconButton";
 
 
 export function ContentPC({children}: {children: React.ReactNode}) {
@@ -178,10 +180,13 @@ function AppHeader() {
                         }
                         { user && 
                             <>
-                                <Tooltip
+                                <AppTooltip
                                     title="Уведомления"
                                 >
-                                    <IconButton
+                                    <AppIconButton
+                                        sx={{
+                                            p: "8px"
+                                        }}
                                         onClick={() => setNotificationsOpened(true)}
                                         ref={notificationRef}
                                     >
@@ -202,8 +207,8 @@ function AppHeader() {
                                                 }}
                                             />
                                         </Badge>
-                                    </IconButton>
-                                </Tooltip>
+                                    </AppIconButton>
+                                </AppTooltip>
                                 <Avatar 
                                     ref={avatarRef}
                                     src={user.avatar || ""}

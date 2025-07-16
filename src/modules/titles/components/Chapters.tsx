@@ -14,6 +14,8 @@ import TitleContext from "../context/TitleContext";
 import Translation from "../types/Translation";
 import { User } from "../../../types/User";
 import Team from "../../../types/Team";
+import AppTooltip from "../../../components/ui/AppTooltip";
+import AppIconButton from "../../../components/ui/AppIconButton";
 
 
 function ChapterItem({ 
@@ -122,9 +124,20 @@ function ChaptersHeader() {
             <Typography>Список глав</Typography>
             <Box>
                 <Link to={generatePath("/manga/:slug/chapters/add", {slug: title.slug || ""})}>
-                    <AddRoundedIcon/>
+                    <AppTooltip title="Добавить главу">
+                        <AppIconButton>
+                            <AddRoundedIcon/>
+                        </AppIconButton>
+                    </AppTooltip>
+                    
                 </Link>
-                <SwapVertRoundedIcon/>
+                <AppTooltip title="Отсортировать">
+                    <AppIconButton>
+                        <SwapVertRoundedIcon/>
+                    </AppIconButton>
+                </AppTooltip>
+                
+                
             </Box>
         </Box>
 
