@@ -6,7 +6,7 @@ import { Box, IconButton, styled, useTheme } from "@mui/material"
 import { MouseEventHandler } from "react"
 import useChapter from '../hooks/useChapter';
 
-const NavButton = styled(IconButton)((_theme) => ({
+const NavButton = styled(IconButton)(({theme}) => ({
     width: "48px",
     height: "48px",
     borderRadius: "50%",
@@ -14,7 +14,7 @@ const NavButton = styled(IconButton)((_theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    color: "#000",
+    color: theme.typography.body1.color,
     //boxShadow: getColorScheme() == "light" ? "0.5px 0.5px 4px rgba(0, 0, 0, 0.1)" : "0.5px 0.5px 4px rgba(255, 255, 255, 0.1)",
     "&:hover": {
         backgroundColor: getColorScheme() == "dark" ? "#000000" : "#FFFFFF",
