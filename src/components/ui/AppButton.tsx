@@ -1,6 +1,6 @@
 import { Button, ButtonProps, useTheme} from "@mui/material";
 
-const AppButton = ({sx, color, ...props}: ButtonProps) => {
+const AppButton = ({sx, color, variant, ...props}: ButtonProps) => {
     const theme = useTheme();
 
     return (
@@ -12,8 +12,11 @@ const AppButton = ({sx, color, ...props}: ButtonProps) => {
                 borderRadius: "24px",
                 textTransform: "capitalize",
 
-                "&:hover": {
+
+                "&:hover": variant == "contained" ? {
                     bgcolor: color == "inherit" ? "inherit" : theme.palette[color || "primary"].main,
+                    boxShadow: "none"
+                }: {
                     boxShadow: "none"
                 },
                 ...sx
