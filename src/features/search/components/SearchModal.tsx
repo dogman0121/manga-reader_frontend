@@ -99,6 +99,7 @@ function SearchModal({...props}: {open: boolean, onClose: () => void}) {
     return (
         <>
             {device == DEVICE.PC && <SearchModalPC {...props} />}
+            {device == DEVICE.PAD && <SearchModalPC {...props} />}
             {device == DEVICE.MOBILE && <SearchModalMobile {...props} />}
         </>
     )
