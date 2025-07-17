@@ -1,24 +1,24 @@
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
 import { useEffect, useState } from "react";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
-import SingleChapterForm from '../components/form/SingleChapterForm';
+import ChapterFormSingle from '../components/form/ChapterFormSingle';
 import { chapterService } from '../service/api/chapterService';
 import { Link, useParams } from 'react-router-dom';
 import Chapter from '../types/Chapter';
 import PageLoader from '../../../components/ui/PageLoader';
-import FormModal from '../../../layouts/form-layout/FormModal';
-import { Box, Breadcrumbs, Typography, useTheme } from '@mui/material';
-import ErrorIcon from '@mui/icons-material/Error';
-import NotFound from '../../../pages/not-found/NotFound';
+import { Box, Breadcrumbs, CircularProgress, Typography, useTheme } from '@mui/material';
 import Notification from '../../../components/ui/Notification';
-import FormLoader from '../../../features/form/components/FormLoader';
 import { generatePath } from '../../../routes';
 import PageHeader from '../../../components/ui/PageHeader';
 import { DEVICE, useDeviceDetect } from '../../../hooks/useDeviceDetect';
 import { AppHeaderMobile } from '../../../layouts/app-layout/AppLayoutMobile';
+import AppButton from '../../../components/ui/AppButton';
+
+const enum RESPONSES {
+    OK,
+    NOT_FOUND,
+    BAD_REQUEST,
+    FORBIDDEN
+}
 
 export default function ChapterEditPage(){
     const {chapterId} = useParams();
@@ -27,38 +27,40 @@ export default function ChapterEditPage(){
 
     const {slug} = useParams();
 
-    const [tab, setTab] = useState("1");
-    
-    const handleChangeTab = (_event: React.SyntheticEvent, newValue: string) => {
-        setTab(newValue);
-    };
-
     const [chapter, setChapter] = useState<Chapter | null>(null);
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [formIsLoading, setFormIsLoading] = useState(false);
-
-    const [error, setError] = useState("");
-
-    const [notification, setNotification] = useState(0);
+    const [isSending, setIsSending] = useState(false);
 
     const {device} = useDeviceDetect();
 
-    const handleCloseNotification = () => {
-        setNotification(0);
-    }
+    const [error, setError] = useState(RESPONSES.OK);
+
+    const [notificationOpen, setNotificationOpen] = useState(false);
 
     const handleEdit = async (form: FormData) => {
-        setFormIsLoading(true);
+        setIsSending(true);
         const {error} = await chapterService.updateChapter(parseInt(chapterId || ""), form);
 
-        setFormIsLoading(false);
-        if (error)
-            setNotification(1);
-        else
-            setNotification(2);
+        setIsSending(false);
 
+        switch(error?.code) {
+            case "not_found":
+                setError(RESPONSES.NOT_FOUND)
+                break;
+            case "bad_request":
+                setError(RESPONSES.BAD_REQUEST)
+                break;
+            case "forbidden": 
+                setError(RESPONSES.FORBIDDEN)
+                break;
+            default:
+                setError(RESPONSES.OK)
+                break;
+        }
+
+        setNotificationOpen(true);
     }
 
     useEffect(() => {
@@ -69,6 +71,7 @@ export default function ChapterEditPage(){
 
                 if (error)
                     setError(error.code)
+
                 setIsLoading(false);
             })
         
@@ -76,22 +79,50 @@ export default function ChapterEditPage(){
 
     if (isLoading)
         return <PageLoader />
-
-    if (error == "not_found")
-        return <NotFound />
-
     return (
         <>
             {device == DEVICE.MOBILE && (
                 <AppHeaderMobile 
                     backArrow
-                    firstLine={"Изменение главы"}
+                    firstLine={
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                alignItems: "center"
+                            }}
+                        >
+                            <Typography fontSize={"inherit"}>
+                                Изменение главы
+                            </Typography>
+                            <AppButton 
+                                variant="contained"
+                                type='submit'
+                                loading={isSending}
+                                loadingIndicator={
+                                    <CircularProgress
+                                        size={"20px"}
+                                        sx={{
+                                            color: "#000000"
+                                        }}
+                                    />
+                                }
+                                form="chapter-form"
+                                sx={{
+                                    height: "34px"
+                                }}
+                            >
+                                Отправить
+                            </AppButton>
+                        </Box>
+                    }
                 />
             )}
             <AppContent>
                 {device != DEVICE.MOBILE && (
                     <>
-                        <PageHeader>Добавление главы</PageHeader>
+                        <PageHeader>Изменение главы</PageHeader>
                         <Breadcrumbs>
                             <Link
                                 to={"/"}
@@ -127,42 +158,28 @@ export default function ChapterEditPage(){
                         </Breadcrumbs>
                     </>
                 )}
-                <TabContext
-                    value={tab}
-                >
-                    <TabList
+                <ChapterFormSingle 
+                    chapter={chapter} 
+                    onSend={handleEdit}
+                    sx={{
+                        mt: device != DEVICE.MOBILE ? theme.spacing(5) : undefined
+                    }}
+                />
+                {device != DEVICE.MOBILE && (
+                    <AppButton 
+                        variant="contained"
+                        type='submit'
+                        loading={isSending}
+                        form="chapter-form"
                         sx={{
-                            mt: theme.spacing(1),
-                            "& .MuiTab-root": {
-                                textTransform: "capitalize"
-                            }
-                        }} 
-                        onChange={handleChangeTab}
-                    >
-                        <Tab label="Одиночное" value="1"/>
-                        <Tab label="Множественное" value="2"/>
-                    </TabList>
-                    <TabPanel 
-                        value="1"
-                        sx={{
-                            p: 0,
-                            mt: theme.spacing(5),
-                            display: "flex",
-                            flexDirection: "column",
+                            mt: theme.spacing(3),
+                            height: "34px"
                         }}
                     >
-                        <SingleChapterForm chapter={chapter} onSend={handleEdit}/>
-                    </TabPanel>
-                    <TabPanel
-                        value="2"
-                        sx={{
-                            p: 0,
-                        }}
-                    >
-                        12312
-                    </TabPanel>
-                </TabContext>
-                <FormModal 
+                        Отправить
+                    </AppButton>
+                )}
+                {/* <FormModal 
                     open={error != ""}
                 >   
                     <Box
@@ -190,20 +207,19 @@ export default function ChapterEditPage(){
                             )}
                         </Box>
                     </Box>
-                </FormModal>
+                </FormModal> */}
                 <Notification 
-                    open={notification == 1}
+                    open={notificationOpen && error != RESPONSES.OK}
                     variant="error"
-                    onClose={handleCloseNotification}
+                    onClose={() => setNotificationOpen(false)}
                     message="При отправке данный произошла ошибка"
                 />
                 <Notification 
-                    open={notification == 2}
+                    open={notificationOpen && error == RESPONSES.OK}
                     variant="success"
-                    onClose={handleCloseNotification}
+                    onClose={() => setNotificationOpen(false)}
                     message="Изменения успешно сохранены"
                 />
-                <FormLoader open={formIsLoading} />
             </AppContent>
         </>
         

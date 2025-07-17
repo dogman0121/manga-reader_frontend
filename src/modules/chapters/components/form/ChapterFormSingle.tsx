@@ -1,4 +1,4 @@
-import { Box, MenuItem, Typography, useTheme } from "@mui/material";
+import { Box, MenuItem, SxProps, Typography, useTheme } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import FormInput from "../../../../features/form/components/FormInput";
 import { Controller, useForm } from "react-hook-form";
@@ -11,7 +11,6 @@ import { mockTeams } from "../../../../mocks/team.mock";
 import { ListItem } from "../../../../components/ListItem";
 import Chapter from "../../types/Chapter";
 import FormFile from "../../../../features/form/types/FormFile";
-import Button from "../../../../components/ui/Button";
 
 
 interface ChapterFormProps {
@@ -23,7 +22,15 @@ interface ChapterFormProps {
     author: string
 }
 
-export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter | null, onSend: Function}) {
+export default function ChapterFormSingle({
+    chapter, 
+    onSend,
+    sx
+}: {
+    chapter: Chapter | null, 
+    onSend: Function,
+    sx?: SxProps
+}) {
 
     const theme = useTheme();
 
@@ -72,12 +79,13 @@ export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter |
         return null;
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} id="chapter-form">
             <Box
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    rowGap: theme.spacing(3)
+                    rowGap: theme.spacing(3),
+                    ...sx
                 }}
             >
                 <Grid container spacing={1.5} columns={{md: 12, xs: 1}}>
@@ -184,7 +192,6 @@ export default function SingleChapterForm({chapter, onSend}: {chapter: Chapter |
                     } as FormFile))}
                 />
             </Box>
-            <Button sx={{mt: "15px"}} variant="contained" type="submit">Отправить</Button>
         </form>
     )
 }
