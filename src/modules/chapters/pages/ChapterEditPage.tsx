@@ -41,6 +41,7 @@ export default function ChapterEditPage(){
 
     const handleEdit = async (form: FormData) => {
         setIsSending(true);
+
         const {error} = await chapterService.updateChapter(parseInt(chapterId || ""), form);
 
         setIsSending(false);
@@ -179,35 +180,6 @@ export default function ChapterEditPage(){
                         Отправить
                     </AppButton>
                 )}
-                {/* <FormModal 
-                    open={error != ""}
-                >   
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            columnGap: "10px",
-                            alignItems: "center"
-                        }}
-                    >
-                        <ErrorIcon 
-                            sx={{
-                                width: "35px",
-                                height: "35px",
-                                color: "#FF0000"
-                            }}
-                        />
-                        <Box
-                        >
-                            {error === "forbidden" && (
-                                <>
-                                    <Typography fontSize={18}>Упс... У вас нет доступа!</Typography>
-                                    <Typography fontSize={14}>Обратитесь к администраторам</Typography>
-                                </>
-                            )}
-                        </Box>
-                    </Box>
-                </FormModal> */}
                 <Notification 
                     open={notificationOpen && error != RESPONSES.OK}
                     variant="error"

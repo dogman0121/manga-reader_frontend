@@ -20,17 +20,25 @@ function SearchModalMobile({open, onClose}: {open: boolean, onClose: () => void}
                 sx={{
                     width: "100vw",
                     height: "100vh",
+                    overflow: "auto",
                     bgcolor: theme.palette.background.default
                 }}
             >
-                <AppContent>
+                <Box
+                    sx={{
+                        p: `${theme.spacing(2)}`,
+                        position: "sticky",
+                        top: 0,
+                        bgcolor: theme.palette.background.default
+                    }}
+                >
                     <Box
                         sx={{
                             display: "flex",
                             flexDirection: "row",
                             alignItems: "center",
                             columnGap: theme.spacing(2),
-                            height: "34px"
+                            height: "34px",
                         }}
                     >
                         <ArrowBackRoundedIcon 
@@ -38,7 +46,11 @@ function SearchModalMobile({open, onClose}: {open: boolean, onClose: () => void}
                         />
                         <SearchInput/>
                     </Box>
-                    <SearchListModal sx={{mt: theme.spacing(3)}}/>
+                </Box>
+                
+                <AppContent>
+                    
+                    <SearchListModal/>
                 </AppContent>
             </Box>
         </MobileModal>
@@ -84,7 +96,9 @@ function SearchModalPC({open, onClose}: {open: boolean, onClose: () => void}) {
                     />
                     <SearchListModal 
                         sx={{
-                            mt: "15px"
+                            maxHeight: "600px",
+                            overflowY: "auto",
+                            mt: "15px",
                         }}
                     />
                 </Box>

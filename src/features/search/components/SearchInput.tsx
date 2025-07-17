@@ -39,7 +39,10 @@ function SearchInputPC({...props}: BoxProps) {
                     }}
                     startAdornment={
                         <InputAdornment position="start">
-                            <SearchIcon fontSize="large" />
+                            <SearchIcon sx={{
+                                width: "32px",
+                                height: "32px"
+                            }} />
                         </InputAdornment>
                     }
                     endAdornment={

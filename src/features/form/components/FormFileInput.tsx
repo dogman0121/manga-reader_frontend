@@ -78,7 +78,7 @@ export default function FormFileInput({
                             Добавить файл
                         </Box>
                         <Typography variant="subtitle1" fontSize={"14px"}>
-                            (.zip, .rar, .png. jpg)
+                            (.zip, .png, .jpg)
                         </Typography></>
                     )}
                 </Box>

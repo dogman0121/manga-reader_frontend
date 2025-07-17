@@ -1,9 +1,10 @@
 import { Children, useContext } from "react";
 import SearchContext from "../context/SearchContext";
-import { Box, CircularProgress, SxProps } from "@mui/material";
+import { Box, BoxProps, CircularProgress} from "@mui/material";
+import ScrollableBox from "../../../components/ScrollableBox";
 
 
-function SearchList({ sx, children }: {sx?: SxProps, children: React.ReactNode}) {
+function SearchList({ sx, children, ...props }: BoxProps) {
     const {query, isLoading, results} = useContext(SearchContext);
 
     if (isLoading)
@@ -37,11 +38,15 @@ function SearchList({ sx, children }: {sx?: SxProps, children: React.ReactNode})
         )
 
     return (
-        <Box
-            sx={{...sx}}
+        <ScrollableBox
+            sx={{
+                overflowY: "auto",
+                ...sx
+            }}
+            {...props}
         >
             {Children.map(children, (child) => child)}
-        </Box>
+        </ScrollableBox>
     )
 }
 

@@ -6,6 +6,8 @@ import { DropzoneOptions } from "react-dropzone";
 import { DndContext } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import FormFilePreviewDraggable from "./FormFilePreview";
+import { v4 as uuid4} from "uuid";
+import "jszip";
 
 
 import { useDeviceDetect, DEVICE } from "../../../hooks/useDeviceDetect";
@@ -18,13 +20,15 @@ import {
     useSensors,
 } from "@dnd-kit/core";
 import FormFile from "../types/FormFile";
+import JSZip from "jszip";
 
 interface FormMultipleInput {
     title?: string,
     onChange?: Function
     defaultValue?: Array<FormFile>,
     dropzoneOptions?: DropzoneOptions
-    showFilenames?: boolean
+    showFilenames?: boolean,
+    unpackZip?: boolean
 }
 
 function FilesList({
@@ -95,22 +99,63 @@ function FilesList({
     )
 }
 
+async function getZipFiles(zipFile: File){
+    const {files} = await JSZip().loadAsync(zipFile);
+
+    const unpackedFiles: FormFile[] = [];
+
+    for (let f of Object.values(files)) {
+        const fileName = f.name.substring(0, f.name.lastIndexOf("."))
+        const file = new File([await f.async("blob")], fileName, {type: "image/webp"}); 
+        unpackedFiles.push({
+            uuid: uuid4(),
+            file: file,
+            fileName: f.name,
+            src: URL.createObjectURL(file)
+        })
+    }
+
+    return unpackedFiles;
+}
+
 export default function FormMultipleFilesInput({
     onChange, 
     title, 
     defaultValue,
     dropzoneOptions,
-    showFilenames
+    showFilenames,
+    unpackZip
 }: FormMultipleInput) {
     const [files, setFiles] = useState<Array<FormFile>>(defaultValue || []);
 
     const theme = useTheme()
 
-    const handleChange = (files: FormFile[]) => {
-        setFiles(prev => prev.concat(files))
+    const handleChange = async (files: FormFile[]) => {
+        const newFiles: FormFile[] = [];
+
+        for (let f of files) {
+            switch(f.file?.type) {
+                case "application/x-zip-compressed":
+                    if (unpackZip){
+                        const unpackedFiles = await getZipFiles(f.file);
+                        newFiles.push(...unpackedFiles);
+                        break;
+                    }
+                    else {
+                        newFiles.push(f)
+                        break;
+                    }
+
+                default:
+                    newFiles.push(f)
+
+            }
+        }
+        
+        setFiles(prev => prev.concat(newFiles))
     }
 
-    const handleChangeOrder = (files: Array<FormFile>) => {
+    const handleChangeOrder = (files: FormFile[]) => {
         setFiles(files);
     }
 

@@ -46,19 +46,21 @@ function SearchListModal({ sx }: { sx?: SxProps }) {
 
     return (
         <>
-            <SearchList sx={sx}>
+            <SearchList 
+                className="scrollable"
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "8px",
+                    ...sx
+                }}
+            >
                 {section === SECTIONS.MANGA && (
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            rowGap: "5px"
-                        }}
-                    >
+                    <>
                         {results.map((result) => 
                             <MangaItem item={result} key={result.id}/>
                         )}
-                    </Box>
+                    </>
                 )} 
             </SearchList>
         </>

@@ -53,7 +53,7 @@ export default function ChapterFormSingle({
         setValue("pages_order", acceptedFiles.map(file => file.fileName))
     }, [acceptedFiles]);
 
-    const onSubmit = (d: ChapterFormProps) => {
+    const onSubmit = async (d: ChapterFormProps) => {
         const formData = new FormData();
 
         formData.append("tome", d.tome.toString());
@@ -185,6 +185,7 @@ export default function ChapterFormSingle({
                     title="Страницы" 
                     onChange={handleChange}
                     showFilenames
+                    unpackZip
                     defaultValue={chapter?.pages.map((page) => ({
                         uuid: page.uuid, 
                         fileName: page.filename, 
