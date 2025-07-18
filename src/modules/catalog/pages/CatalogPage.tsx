@@ -105,6 +105,7 @@ function CatalogPageMobile() {
                 </>
             </AppContent>
             <MobileDrawer
+                elevation={0}
                 open={filtersOpened}
                 onClose={() => {setFiltersOpened(false)}}
                 anchor="right"
