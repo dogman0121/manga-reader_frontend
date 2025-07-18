@@ -7,6 +7,7 @@ import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import MobileModal from "../../../components/ui/MobileModal";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
+import ScrollableBox from "../../../components/ScrollableBox";
 
 function SearchModalMobile({open, onClose}: {open: boolean, onClose: () => void}) {
     const theme = useTheme();
@@ -20,38 +21,53 @@ function SearchModalMobile({open, onClose}: {open: boolean, onClose: () => void}
                 sx={{
                     width: "100vw",
                     height: "100vh",
-                    overflow: "auto",
+                    overflow: "hidden",
                     bgcolor: theme.palette.background.default
                 }}
             >
                 <Box
                     sx={{
-                        p: `${theme.spacing(2)}`,
-                        position: "sticky",
-                        top: 0,
-                        bgcolor: theme.palette.background.default
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        position: "static",
                     }}
                 >
                     <Box
                         sx={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            columnGap: theme.spacing(2),
-                            height: "34px",
+                            p: `${theme.spacing(2)}`,
+                            position: "sticky",
+                            top: 0,
+                            bgcolor: theme.palette.background.default
                         }}
                     >
-                        <ArrowBackRoundedIcon 
-                            onClick={onClose}
-                        />
-                        <SearchInput/>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                                columnGap: theme.spacing(2),
+                                height: "34px",
+                            }}
+                        >
+                            <ArrowBackRoundedIcon 
+                                onClick={onClose}
+                            />
+                            <SearchInput/>
+                        </Box>
                     </Box>
-                </Box>
-                
-                <AppContent>
                     
-                    <SearchListModal/>
-                </AppContent>
+                    <ScrollableBox
+                        sx={{
+                            flexGrow: 1,
+                            overflowY: "auto"
+                        }}
+                    >
+                        <AppContent>
+                            <SearchListModal/>
+                        </AppContent>
+                    </ScrollableBox>
+                </Box>
             </Box>
         </MobileModal>
     )
@@ -62,22 +78,6 @@ function SearchModalPC({open, onClose}: {open: boolean, onClose: () => void}) {
     const handleClose = () => {
         onClose();
     }
-
-    const styles = {
-        position: "absolute",
-        top: "10px",
-        left: "50%",
-        transform: 'translateX(-50%)',
-        bgcolor: 'background.paper',
-        boxShadow: 24,
-        border: "none",
-        borderRadius: "12px",
-        padding: "12px 12px",
-        width: "600px",
-        "&:focus": {
-          outline: "none"
-        }
-    }
     
     return (
         <Modal
@@ -86,21 +86,58 @@ function SearchModalPC({open, onClose}: {open: boolean, onClose: () => void}) {
         >
             <SearchProvider emptyQuery={false}>
                 <Box
-                    sx={{ ...styles }}
+                    sx={{
+                        position: "absolute",
+                        top: "10px",
+                        left: "50%",
+                        height: "90vh",
+                        overflow: "hidden",
+                        transform: 'translateX(-50%)',
+                        bgcolor: 'background.paper',
+                        boxShadow: 24,
+                        border: "none",
+                        borderRadius: "20px",
+                        width: "650px",
+                        "&:focus": {
+                            outline: "none"
+                        }
+                    }}
                 >
-                    <SearchInput/>
-                    <SearchSectionSelector 
+                    <Box
                         sx={{
-                            mt: "5px"
+                            display: "flex",
+                            flexDirection: "column",
+                            position: "static",
+                            maxHeight: "100%",
+
                         }}
-                    />
-                    <SearchListModal 
-                        sx={{
-                            maxHeight: "600px",
-                            overflowY: "auto",
-                            mt: "15px",
-                        }}
-                    />
+                    >
+                        <Box
+                            sx={{
+                                padding: "10px",
+                            }}
+                        >
+                            <SearchInput/>
+                            <SearchSectionSelector 
+                                sx={{
+                                    mt: "5px"
+                                }}
+                            />
+                        </Box>
+                        <ScrollableBox
+                            sx={{
+                                p: "5px 10px",
+                                flexGrow: 1,
+                                overflowY: "auto"
+                            }}
+                        >
+                            <SearchListModal 
+                                sx={{
+                                
+                                }}
+                            />
+                        </ScrollableBox>
+                    </Box>
                 </Box>
             </SearchProvider>
         </Modal>

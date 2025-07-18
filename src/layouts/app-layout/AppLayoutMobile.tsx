@@ -31,7 +31,7 @@ export function Content({children}: {children: React.ReactNode}) {
     )
 }
 
-export function AppHeaderMobileWrapper({children}: {children?: React.ReactElement | React.ReactElement[]}) {
+export function AppHeaderMobileWrapper({children}: {children?: React.ReactNode}) {
     
     return (
         <Box
@@ -58,36 +58,40 @@ export function AppHeaderMobile({
     const theme = useTheme()
 
     return (
-        <Box>
+        <Box
+            sx={{
+                position: "sticky",
+                bgcolor: theme.palette.background.default,
+                top: 0
+            }}
+        >
             <AppHeaderMobileWrapper>
-                <Box>
+                <Box
+                    sx={{
+                        height: backArrow ? "34px" : undefined,
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center"
+                    }}
+                >
+                    {backArrow == true ? (<ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>) : <></>}
                     <Box
                         sx={{
-                            height: backArrow ? "34px" : undefined,
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center"
+                            ml: backArrow ? theme.spacing(2) : undefined,
+                            fontSize: "16px",
+                            width: "100%"
                         }}
                     >
-                        {backArrow == true ? (<ArrowBackRoundedIcon onClick={() => {navigate(-1)}}/>) : <></>}
-                        <Box
-                            sx={{
-                                ml: backArrow ? theme.spacing(2) : undefined,
-                                fontSize: "16px",
-                                width: "100%"
-                            }}
-                        >
-                            {firstLine}
-                        </Box>
+                        {firstLine}
                     </Box>
-                    {secondLine && (
-                        <Box
-                            sx={{mt: theme.spacing(2)}}
-                        >
-                            {secondLine}
-                        </Box>
-                    )}
                 </Box>
+                {secondLine && (
+                    <Box
+                        sx={{mt: theme.spacing(2)}}
+                    >
+                        {secondLine}
+                    </Box>
+                )}
             </AppHeaderMobileWrapper>
             <Divider />
         </Box>

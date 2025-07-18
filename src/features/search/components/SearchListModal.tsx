@@ -57,7 +57,7 @@ function SearchListModal({ sx }: { sx?: SxProps }) {
             >
                 {section === SECTIONS.MANGA && (
                     <>
-                        {results.map((result) => 
+                        {results.splice(0, 10).map((result) => 
                             <MangaItem item={result} key={result.id}/>
                         )}
                     </>
