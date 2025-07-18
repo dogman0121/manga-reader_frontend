@@ -50,7 +50,10 @@ export default function ChapterFormSingle({
         const newPages: Array<File | undefined> = acceptedFiles.map(file => file.file)
 
         setValue("new_pages", newPages.filter(page => page != undefined))
-        setValue("pages_order", acceptedFiles.map(file => file.fileName))
+        setValue("pages_order", acceptedFiles.map(file => {
+            const name = file.fileName.slice(0, file.fileName.lastIndexOf("."))
+            return name;
+        }))
     }, [acceptedFiles]);
 
     const onSubmit = async (d: ChapterFormProps) => {
