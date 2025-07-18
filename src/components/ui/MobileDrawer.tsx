@@ -1,7 +1,7 @@
 import { Box, Drawer, DrawerProps, useTheme } from '@mui/material';
 import MobileModalWrapper from './ModalWrapper';
 
-export default function MobileDrawer({open, onClose, anchor, children, sx}: DrawerProps) {
+export default function MobileDrawer({open, onClose, anchor, children, sx, ...props}: DrawerProps) {
     const theme = useTheme();
     
     return (
@@ -13,7 +13,7 @@ export default function MobileDrawer({open, onClose, anchor, children, sx}: Draw
                 open={open}
                 onClose={onClose}
                 anchor={anchor}
-                elevation={0}
+                {...props}
             >
                 <Box
                     sx={{
