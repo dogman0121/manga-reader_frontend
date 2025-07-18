@@ -20,7 +20,7 @@ function SearchModalMobile({open, onClose}: {open: boolean, onClose: () => void}
             <Box
                 sx={{
                     width: "100vw",
-                    height: "100vh",
+                    height: "100%",
                     overflow: "hidden",
                     bgcolor: theme.palette.background.default
                 }}
