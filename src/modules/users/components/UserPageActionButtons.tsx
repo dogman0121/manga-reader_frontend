@@ -33,25 +33,27 @@ export function SubscribeButton({sx, ...props}: ButtonProps) {
             {subscribed ?
                 <AppButton
                     variant="contained"
+                    color="secondary"
+                    onClick={handleSubscribe}
+                    sx={{
+                        pt: "3px",
+                        ...sx
+                    }}
+                >
+                    Отписаться
+                </AppButton>
+                :
+                <AppButton
+                    variant="contained"
                     color="primary"
                     onClick={handleSubscribe}
                     sx={{
+                        pt: "3px",
                         ...sx
                     }}
                     {...props}
                 >
                     Подписаться
-                </AppButton>
-                :
-                <AppButton
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleSubscribe}
-                    sx={{
-                        ...sx
-                    }}
-                >
-                    Отписаться
                 </AppButton>
             }
         </>
