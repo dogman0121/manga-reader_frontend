@@ -189,6 +189,12 @@ export default function ChapterFormSingle({
                     onChange={handleChange}
                     showFilenames
                     unpackZip
+                    dropzoneOptions={{
+                        accept: {
+                            "image/*": [".png", ".jpeg", ".jpg"],
+                            "application/*": [".zip"]
+                        }
+                    }}
                     defaultValue={chapter?.pages.map((page) => ({
                         uuid: page.uuid, 
                         fileName: page.filename, 
