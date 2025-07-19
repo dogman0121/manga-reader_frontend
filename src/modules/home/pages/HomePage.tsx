@@ -276,7 +276,6 @@ function UpdatesList({titles, sx}: {titles: Title[], sx?:SxProps}) {
                         }}
                     >
                         <Typography 
-                            fontSize={"16px"}
                             fontWeight={600}
                         >
                             {title.name}
