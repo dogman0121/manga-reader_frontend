@@ -13,6 +13,7 @@ export default function MobileDrawer({open, onClose, anchor, children, sx, ...pr
                 open={open}
                 onClose={onClose}
                 anchor={anchor}
+                elevation={0}
                 {...props}
             >
                 <Box
