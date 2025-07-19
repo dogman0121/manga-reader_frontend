@@ -88,13 +88,14 @@ function HomePageHeroMobile() {
             </Box>
             <Box
                 sx={{
-                    px: theme.spacing(1)
+                    px: theme.spacing(2)
                 }}
             >
                 <AppButton
                     variant="contained"
                     sx={{
                         width: "100%",
+                        py: theme.spacing(1)
                     }}
                 >
                     Читать
