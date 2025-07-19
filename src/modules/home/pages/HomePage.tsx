@@ -380,7 +380,7 @@ function HomePageMobile() {
                     </Box>
                 }
                 sx={{
-                    bgcolor: theme.palette.customBackgrounds.header
+                    bgcolor: theme.palette.background.default
                 }}
             >
 
