@@ -8,7 +8,6 @@ import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import Poster from "../../../components/ui/Poster";
 import ScrollContainer from 'react-indiana-drag-scroll'
 import { Link } from "react-router-dom";
-import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import SearchProvider from "../../../features/search/components/SearchProvider";
 import { HomeRoutes } from "../HomeRouter";
 import HomePageHero from "../components/HomePageHero";
@@ -75,9 +74,7 @@ function ProgressItem({title}: {title: Title}) {
                 flexDirection: "row",
                 gap: theme.spacing(3),
                 backgroundColor: device != DEVICE.MOBILE ? theme.palette.background.paper : undefined,
-                border: device == DEVICE.MOBILE 
-                    ? `1px solid rgba(${theme.palette.mode == "dark" ? "255, 255, 255" : "0, 0, 0"}, 0.23)`
-                    : undefined 
+                boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.4)"
             }}
         >
             <Poster 
@@ -111,13 +108,14 @@ function ProgressItem({title}: {title: Title}) {
     )
 }
 
-function Section({title, href, children}: {title: string, href: string, children: React.ReactElement}) {
+function Section({title, href, children, sx}: {title: string, href: string, children: React.ReactElement, sx?: SxProps}) {
     return (
         <Box
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "10px"
+                gap: "10px",
+                ...sx
             }}
         >
             <Link to={href}>
@@ -147,9 +145,159 @@ function Section({title, href, children}: {title: string, href: string, children
     )
 }
 
+function SectionMobile({
+    title, 
+    href, 
+    children, 
+    sx
+}: {
+    title: string, 
+    href: string, 
+    children: React.ReactElement, 
+    sx?: SxProps
+}) {
+    const theme = useTheme();
+
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                ...sx
+            }}
+        >
+            <Box
+                sx={{
+                    px: theme.spacing(2)
+                }}
+            >
+                <Link to={href}>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: "5px",
+                            "&:hover": {
+                                textDecoration: "underline"
+                            }
+                        }}
+                    >
+                        <Typography 
+                            fontSize={"20px"}
+                            fontWeight={"600"} 
+                            lineHeight={"22px"}
+                        >
+                            {title}
+                        </Typography>
+                        <ArrowForwardRoundedIcon sx={{width:"20px", height: "20px"}}/>
+                    </Box>
+                </Link>
+            </Box>
+            {children}
+        </Box>
+    )
+}
+
+function ProgressCarouselMobile({titles}: {titles: Title[]}) {
+    const theme = useTheme();
+    return (
+        <Carousel
+            sx={{
+                "& .carousel": {
+                    p: theme.spacing(2)
+                }
+            }}
+        >
+            {titles.map(title => <ProgressItem title={title}/>)}
+        </Carousel>
+    )
+}
+
+function TitlesCarouselMobile({
+    titles, 
+    sx
+}: {
+    titles: Title[], 
+    sx?: SxProps
+}) {
+    const theme = useTheme();
+
+    return (
+        <Carousel 
+            sx={{
+                "& .carousel": {
+                    p: theme.spacing(2)
+                },
+                ...sx
+            }}
+        >
+            {titles.map(title => <TitleItem 
+                title={title}
+                sx={{
+                    minWidth: "max(120px, calc((100% - 15px * 7) / 8))",
+                }}
+            />)}
+        </Carousel>
+    )
+
+}
+
+function UpdatesList({titles, sx}: {titles: Title[], sx?:SxProps}) {
+    const theme = useTheme();
+
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: theme.spacing(3),
+                ...sx
+            }}
+        >
+            {titles.map(title => (
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: theme.spacing(4)
+                    }}
+                >
+                    <Poster 
+                        src={title.main_poster?.small || ""}
+                        width="70px"
+                    />
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center"
+                        }}
+                    >
+                        <Typography 
+                            fontSize={"16px"}
+                            fontWeight={600}
+                        >
+                            {title.name}
+                        </Typography>
+                        <Typography
+                            sx={{
+                                mt: theme.spacing(1)
+                            }}
+                        >Том 1 Глава 2</Typography>
+                    </Box>
+                </Box>
+            ))}
+        </Box>
+    )
+}
+
+
 function ProgressCarousel({titles}: {titles: Title[]}) {
     return (
-        <Carousel>
+        <Carousel
+        >
             {titles.map(title => <ProgressItem title={title}/>)}
         </Carousel>
     )
@@ -239,9 +387,50 @@ function HomePageMobile() {
 
             </AppHeaderMobile>
             <HomePageHero />
-            <AppContent>
-                ddff
-            </AppContent>
+            <Box
+                sx={{
+                    mt: theme.spacing(5),
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: theme.spacing(5)
+                }}
+            >
+                <SectionMobile
+                    title="Продолжить читать"
+                    href="/history"
+                >
+                    <ProgressCarouselMobile titles={mockTitles}/>
+                </SectionMobile>
+                <SectionMobile
+                    title="Новинки"
+                    href="/new"
+                >
+                    <TitlesCarouselMobile titles={mockTitles} />
+                </SectionMobile>
+                <SectionMobile
+                    title="Выбор редакции"
+                    href="/favourites"
+                >
+                    <TitlesCarouselMobile titles={mockTitles} />
+                </SectionMobile>
+                <SectionMobile
+                    title="Законченные"
+                    href="/ended"
+                >
+                    <TitlesCarouselMobile titles={mockTitles} />
+                </SectionMobile>
+                <SectionMobile
+                    title="Последние обновления"
+                    href="/last-updates"
+                >
+                    <UpdatesList 
+                        titles={mockTitles} 
+                        sx={{
+                            p: theme.spacing(2)
+                        }}
+                    />
+                </SectionMobile>
+            </Box>
         </SearchProvider>
         
     )

@@ -32,7 +32,7 @@ function HomePageHeroMobile() {
             >   
                 <Box
                     sx={{
-                        pt: "30px",
+                        pt: "50px",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center"
