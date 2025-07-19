@@ -1,19 +1,17 @@
-import { Box, Divider, SxProps, Typography, useTheme } from "@mui/material";
+import { Box, SxProps, Typography, useTheme } from "@mui/material";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { mockTitles } from "../../../mocks/title.mock";
 import TitleItem from "../../../components/TitleItem";
-import { Children, useState } from "react";
+import { Children } from "react";
 import Title from "../../titles/types/Title";
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import Poster from "../../../components/ui/Poster";
 import ScrollContainer from 'react-indiana-drag-scroll'
 import { Link } from "react-router-dom";
-import { SearchInputDisabled } from "../../../features/search/components/SearchInput";
 import { AppContent } from "../../../layouts/app-layout/AppLayout";
-import SearchModal from "../../../features/search/components/SearchModal";
 import SearchProvider from "../../../features/search/components/SearchProvider";
 import { HomeRoutes } from "../HomeRouter";
-import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
+import HomePageHero from "../components/HomePageHero";
 
 function Carousel({children, sx}: {children: React.ReactElement[], sx?: SxProps}) {
     return (
@@ -131,7 +129,11 @@ function Section({title, href, children}: {title: string, href: string, children
                         }
                     }}
                 >
-                    <Typography fontSize={"16px"} lineHeight={"22px"}>
+                    <Typography 
+                        fontSize={"20px"}
+                        fontWeight={"600"} 
+                        lineHeight={"22px"}
+                    >
                         {title}
                     </Typography>
                     <ArrowForwardRoundedIcon sx={{width:"20px", height: "20px"}}/>
@@ -200,52 +202,11 @@ function HomePagePC() {
 }
 
 function HomePageMobile() {
-    const [modalOpened, setModalOpened] = useState(false);
-
     return (
         <SearchProvider emptyQuery={false}>
-            <AppHeaderMobile
-                firstLine={
-                    <SearchInputDisabled 
-                        onClick={() => setModalOpened(true)}
-                        placeholder="Быстрый поиск"
-                        sx={{
-                            height: "34px"
-                        }}
-                    />
-                }
-            />
-            <Divider />
+            <HomePageHero />
             <AppContent>
-                <Box
-                    sx={{  
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "20px"
-                    }}
-                >
-                    <TitlesCarousel
-                        titles={[...mockTitles, ...mockTitles, ...mockTitles]} 
-                        sx={{
-                            "& .TitleItem": {
-                                minWidth: "max(140px, calc((100% - 15px * 8) / 9))"
-                            }
-                        }}
-                    />
-                    <Section 
-                        title="Продолжить чтение"
-                        href="/"
-                    >
-                        <ProgressCarousel titles={mockTitles} />
-                    </Section>
-                    <Section
-                        title="Специально для вас"
-                        href={HomeRoutes.RECOMMENDATIONS}
-                    >
-                        <TitlesCarousel titles={[...mockTitles, ...mockTitles]}/>
-                    </Section>
-                </Box>
-                <SearchModal open={modalOpened} onClose={() => setModalOpened(false)}/>
+                ddff
             </AppContent>
         </SearchProvider>
         

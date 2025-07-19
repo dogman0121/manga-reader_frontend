@@ -1,5 +1,3 @@
-import { Box } from "@mui/material";
-
 function Poster({
     src, 
     width,
@@ -10,22 +8,16 @@ function Poster({
     style?: React.CSSProperties
 }){
     return (
-        <Box
-            sx={{
-                maxWidth: width || "100%",
-            }}
-        >
-            <img
-                draggable={false}
-                src={src}
-                style={{
-                    aspectRatio: "2/3",
-                    borderRadius: "3% / 2%",
-                    width: "100%",
-                    ...style
-                }} 
-            />
-        </Box>
+        <img
+            draggable={false}
+            src={src}
+            style={{
+                aspectRatio: "2/3",
+                borderRadius: "3% / 2%",
+                width: width || "100%",
+                ...style
+            }} 
+        />
     )
 }
 
