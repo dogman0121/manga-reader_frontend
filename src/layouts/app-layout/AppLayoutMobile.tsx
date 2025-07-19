@@ -72,7 +72,7 @@ export function AppHeaderMobile({
             <AppHeaderMobileWrapper>
                 <Box
                     sx={{
-                        height: "34px",
+                        maxHeight: "34px",
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center"

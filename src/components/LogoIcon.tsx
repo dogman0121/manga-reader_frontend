@@ -1,13 +1,15 @@
-import { SvgIcon } from "@mui/material"
+import { SvgIcon, SvgIconProps } from "@mui/material"
 
-export default function LogoIcon() {
+export default function LogoIcon({sx, ...props}: SvgIconProps) {
     return (
         <SvgIcon 
             viewBox="0 0 96 96"
             sx={{
                 width: "32px",
-                height: "32px"
+                height: "32px",
+                ...sx
             }}
+            {...props}
         >
             <g transform="translate(0.000000,96.000000) scale(0.100000,-0.100000)"
                 fill="var(--icon)" stroke="none">

@@ -218,11 +218,16 @@ function HomePageMobile() {
                             justifyContent: "space-between"
                         }}
                     >
-                        <LogoIcon />
-                        <SearchIcon 
+                        <LogoIcon 
                             sx={{
                                 width: "28px",
                                 height: "28px"
+                            }}
+                        />
+                        <SearchIcon 
+                            sx={{
+                                width: "26px",
+                                height: "26px"
                             }}
                         />
                     </Box>
