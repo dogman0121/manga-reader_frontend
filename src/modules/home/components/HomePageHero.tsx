@@ -13,7 +13,7 @@ function HomePageHeroMobile() {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: theme.spacing(3)
+                gap: theme.spacing(3),
             }}
         >
             <Box
@@ -106,7 +106,8 @@ function HomePageHeroMobile() {
                     display: "flex",
                     flexDirection: "row",
                     gap: theme.spacing(1),
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    pb: theme.spacing(3)
                 }}
             >
                 {

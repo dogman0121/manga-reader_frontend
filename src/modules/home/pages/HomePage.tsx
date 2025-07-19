@@ -12,6 +12,9 @@ import { AppContent } from "../../../layouts/app-layout/AppLayout";
 import SearchProvider from "../../../features/search/components/SearchProvider";
 import { HomeRoutes } from "../HomeRouter";
 import HomePageHero from "../components/HomePageHero";
+import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
+import LogoIcon from "../../../components/LogoIcon";
+import SearchIcon from '@mui/icons-material/Search';
 
 function Carousel({children, sx}: {children: React.ReactElement[], sx?: SxProps}) {
     return (
@@ -202,8 +205,34 @@ function HomePagePC() {
 }
 
 function HomePageMobile() {
+    const theme = useTheme()
+
     return (
         <SearchProvider emptyQuery={false}>
+            <AppHeaderMobile
+                firstLine={
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between"
+                        }}
+                    >
+                        <LogoIcon />
+                        <SearchIcon 
+                            sx={{
+                                width: "28px",
+                                height: "28px"
+                            }}
+                        />
+                    </Box>
+                }
+                sx={{
+                    bgcolor: theme.palette.customBackgrounds.header
+                }}
+            >
+
+            </AppHeaderMobile>
             <HomePageHero />
             <AppContent>
                 ddff

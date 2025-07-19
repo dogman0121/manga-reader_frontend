@@ -1,4 +1,4 @@
-import { Box, BottomNavigation, BottomNavigationAction, useTheme, Divider } from "@mui/material";
+import { Box, BottomNavigation, BottomNavigationAction, useTheme, Divider, SxProps } from "@mui/material";
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -47,11 +47,13 @@ export function AppHeaderMobileWrapper({children}: {children?: React.ReactNode})
 export function AppHeaderMobile({
     backArrow,
     firstLine,
-    secondLine
+    secondLine,
+    sx
 }: {
     backArrow?: boolean,
     firstLine?: string | React.ReactElement,
-    secondLine?: string | React.ReactElement
+    secondLine?: string | React.ReactElement,
+    sx?: SxProps
 }) {
     const navigate = useNavigate();
 
@@ -62,13 +64,15 @@ export function AppHeaderMobile({
             sx={{
                 position: "sticky",
                 bgcolor: theme.palette.background.default,
-                top: 0
+                top: 0,
+                zIndex: 1001,
+                ...sx
             }}
         >
             <AppHeaderMobileWrapper>
                 <Box
                     sx={{
-                        height: backArrow ? "34px" : undefined,
+                        height: "34px",
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center"
