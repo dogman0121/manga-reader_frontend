@@ -14,6 +14,7 @@ import HomePageHero from "../components/HomePageHero";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 import LogoIcon from "../../../components/LogoIcon";
 import SearchIcon from '@mui/icons-material/Search';
+import {v4 as uuid4} from "uuid";
 
 function Carousel({children, sx}: {children: React.ReactElement[], sx?: SxProps}) {
     return (
@@ -50,6 +51,7 @@ function TitlesCarousel({
         <Carousel sx={{...sx}}>
             {titles.map(title => <TitleItem 
                 title={title}
+                key={uuid4()}
                 sx={{
                     minWidth: "max(120px, calc((100% - 15px * 7) / 8))",
                 }}
@@ -62,8 +64,6 @@ function TitlesCarousel({
 function ProgressItem({title}: {title: Title}) {
     const theme = useTheme()
     
-    const {device} = useDeviceDetect();
-    
     return (
         <Box
             sx={{
@@ -73,7 +73,7 @@ function ProgressItem({title}: {title: Title}) {
                 display: "flex",
                 flexDirection: "row",
                 gap: theme.spacing(3),
-                backgroundColor: device != DEVICE.MOBILE ? theme.palette.background.paper : undefined,
+                backgroundColor: theme.palette.background.paper,
                 boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.4)"
             }}
         >
@@ -210,7 +210,7 @@ function ProgressCarouselMobile({titles}: {titles: Title[]}) {
                 }
             }}
         >
-            {titles.map(title => <ProgressItem title={title}/>)}
+            {titles.map(title => <ProgressItem key={uuid4()} title={title}/>)}
         </Carousel>
     )
 }
@@ -235,6 +235,7 @@ function TitlesCarouselMobile({
         >
             {titles.map(title => <TitleItem 
                 title={title}
+                key={uuid4()}
                 sx={{
                     minWidth: "max(120px, calc((100% - 15px * 7) / 8))",
                 }}
@@ -258,6 +259,7 @@ function UpdatesList({titles, sx}: {titles: Title[], sx?:SxProps}) {
         >
             {titles.map(title => (
                 <Box
+                    key={uuid4()}
                     sx={{
                         display: "flex",
                         flexDirection: "row",

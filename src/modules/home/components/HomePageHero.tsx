@@ -1,19 +1,24 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
-import { mockTitle } from "../../../mocks/title.mock";
+import { mockTitles } from "../../../mocks/title.mock";
 import Poster from "../../../components/ui/Poster";
 import AppButton from "../../../components/ui/AppButton";
-import { range } from "lodash";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import "./styles.css"
 
-function HomePageHeroMobile() {
-    const theme = useTheme();
+import { EffectFade, Autoplay, Pagination } from 'swiper/modules';
+import Title from "../../titles/types/Title";
 
-    return(
+
+function HeroBlock({title}: {title: Title}) {
+    const theme = useTheme()
+
+    return (
         <Box
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: theme.spacing(3),
+                pb: theme.spacing(5)
             }}
         >
             <Box
@@ -23,7 +28,7 @@ function HomePageHeroMobile() {
                         rgba(${theme.palette.background.defaultChannel} / 0.8), 
                         rgba(${theme.palette.background.defaultChannel} / 0.8)
                         ),
-                        url(${mockTitle.background ? mockTitle.background : mockTitle.main_poster?.large})
+                        url(${title.background ? title.background : title.main_poster?.large})
                     `,
                     backgroundSize: 'cover',
                     backgroundPositionX: 'center',
@@ -39,7 +44,7 @@ function HomePageHeroMobile() {
                     }}
                 >
                     <Poster 
-                        src={mockTitle.main_poster?.medium || ""}
+                        src={title.main_poster?.medium || ""}
                         style={{
                             maxWidth: "160px",
                         }}
@@ -57,14 +62,14 @@ function HomePageHeroMobile() {
                             fontSize={"16px"}
                             lineHeight={1}
                         >
-                            {mockTitle.type?.name}
+                            {title.type?.name}
                         </Typography>
                         <Typography
                             variant="caption"
                             fontSize={"16px"}
                             lineHeight={1}
                         >
-                            {mockTitle.year}
+                            {title.year}
                         </Typography>
                     </Box>
                     <Typography
@@ -72,6 +77,7 @@ function HomePageHeroMobile() {
                         fontWeight= "600"
                         lineHeight= "1.2"
                         sx={{
+                            height: "2.4em",
                             width: "100%",
                             textAlign: "center",
                             background: `
@@ -82,12 +88,13 @@ function HomePageHeroMobile() {
                             `
                         }}
                     >
-                        {mockTitle.name}
+                        {title.name}
                     </Typography>
                 </Box>
             </Box>
             <Box
                 sx={{
+                    my: theme.spacing(3),
                     px: theme.spacing(2)
                 }}
             >
@@ -101,29 +108,48 @@ function HomePageHeroMobile() {
                     Читать
                 </AppButton>
             </Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: theme.spacing(1),
-                    justifyContent: "center",
-                    pb: theme.spacing(3)
+        </Box>
+    )
+}
+
+function HomePageHeroMobile() {
+    const theme = useTheme();
+
+    return(
+        <Box
+            sx={{
+                "& .swiper-pagination-bullet": {
+                    bgcolor: `${theme.palette.secondary.main}`,
+                    opacity: "1",
+                    width: "25px",
+                    height: "8px",
+                    borderRadius: "8px" 
+                },
+                "& .swiper-pagination-bullet-active": {
+                    bgcolor: theme.palette.primary.main,
+                    width: "40px"
+                }
+            }}
+        >
+            <Swiper
+                modules={[EffectFade, Pagination, Autoplay]}
+                pagination={{
+                    clickable: true
+                }}
+                speed={800}
+                effect={"fade"}
+                loop
+                allowTouchMove={false}
+                autoplay={{
+                    delay: 5000
                 }}
             >
-                {
-                    range(0, 5).map(ind => (
-                        <Box
-                            key={ind}
-                            sx={{
-                                bgcolor: theme.palette.secondary.main,
-                                width: "25px",
-                                height: "8px",
-                                borderRadius: "8px"
-                            }}
-                        />
-                    ))
-                }
-            </Box>
+                <SwiperSlide><HeroBlock title={mockTitles[0]}/></SwiperSlide>
+                <SwiperSlide><HeroBlock title={mockTitles[1]}/></SwiperSlide>
+                <SwiperSlide><HeroBlock title={mockTitles[2]}/></SwiperSlide>
+                <SwiperSlide><HeroBlock title={mockTitles[3]}/></SwiperSlide>
+                <SwiperSlide><HeroBlock title={mockTitles[4]}/></SwiperSlide>
+            </Swiper>
         </Box>
     )
 }
