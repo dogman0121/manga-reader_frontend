@@ -437,7 +437,7 @@ function HomePageMobile() {
                     </Box>
                 }
                 sx={{
-                    bgcolor: theme.palette.background.default
+                    bgcolor: theme.palette.customBackgrounds.header
                 }}
             >
 
