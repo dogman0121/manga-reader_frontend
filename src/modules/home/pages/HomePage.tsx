@@ -289,7 +289,6 @@ function UpdatesList({titles, sx}: {titles: Title[], sx?:SxProps}) {
 
     const styles = device != DEVICE.MOBILE ? 
     {
-        p: theme.spacing(2),
         bgcolor: theme.palette.background.paper,
         borderRadius: "8px",
     }: {
