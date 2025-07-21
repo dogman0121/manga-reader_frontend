@@ -33,6 +33,7 @@ function Names({sx, className, ...props}: BoxProps) {
                 sx={{
                     fontSize: "24px",
                     lineHeight: "26px",
+                    fontWeight: 600
                 }}
             > {title?.name} </Typography>
             

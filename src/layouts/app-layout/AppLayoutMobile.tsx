@@ -82,7 +82,8 @@ export function AppHeaderMobile({
                     <Box
                         sx={{
                             ml: backArrow ? theme.spacing(2) : undefined,
-                            fontSize: "16px",
+                            fontSize: "18px",
+                            fontWeight: 600,
                             width: "100%"
                         }}
                     >
