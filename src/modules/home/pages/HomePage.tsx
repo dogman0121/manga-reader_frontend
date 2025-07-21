@@ -9,7 +9,6 @@ import Poster from "../../../components/ui/Poster";
 import ScrollContainer from 'react-indiana-drag-scroll'
 import { Link } from "react-router-dom";
 import SearchProvider from "../../../features/search/components/SearchProvider";
-import { HomeRoutes } from "../HomeRouter";
 import HomePageHero from "../components/HomePageHero";
 import { AppHeaderMobile } from "../../../layouts/app-layout/AppLayoutMobile";
 import LogoIcon from "../../../components/LogoIcon";
@@ -40,29 +39,10 @@ function Carousel({children, sx}: {children: React.ReactElement[], sx?: SxProps}
     )
 }
 
-function TitlesCarousel({
-    titles, 
-    sx
-}: {
-    titles: Title[], 
-    sx?: SxProps
-}) {
-    return (
-        <Carousel sx={{...sx}}>
-            {titles.map(title => <TitleItem 
-                title={title}
-                key={uuid4()}
-                sx={{
-                    minWidth: "max(120px, calc((100% - 15px * 7) / 8))",
-                }}
-            />)}
-        </Carousel>
-    )
-
-}
-
 function ProgressItem({title}: {title: Title}) {
     const theme = useTheme()
+
+    const {device} = useDeviceDetect();
     
     return (
         <Box
@@ -74,7 +54,7 @@ function ProgressItem({title}: {title: Title}) {
                 flexDirection: "row",
                 gap: theme.spacing(3),
                 backgroundColor: theme.palette.background.paper,
-                boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.4)"
+                boxShadow: device == DEVICE.MOBILE ? "0px 0px 4px rgba(0, 0, 0, 0.4)" : undefined
             }}
         >
             <Poster 
@@ -108,7 +88,18 @@ function ProgressItem({title}: {title: Title}) {
     )
 }
 
-function Section({title, href, children, sx}: {title: string, href: string, children: React.ReactElement, sx?: SxProps}) {
+function SectionPC({
+    title, 
+    href, 
+    children, 
+    sx
+}: {
+    title: string, 
+    href: string, 
+    children: React.ReactElement, 
+    sx?: SxProps
+}) {
+
     return (
         <Box
             sx={{
@@ -118,28 +109,30 @@ function Section({title, href, children, sx}: {title: string, href: string, chil
                 ...sx
             }}
         >
-            <Link to={href}>
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        gap: "5px",
-                        "&:hover": {
-                            textDecoration: "underline"
-                        }
-                    }}
-                >
-                    <Typography 
-                        fontSize={"20px"}
-                        fontWeight={"600"} 
-                        lineHeight={"22px"}
+            <Box>
+                <Link to={href}>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            gap: "5px",
+                            "&:hover": {
+                                textDecoration: "underline"
+                            }
+                        }}
                     >
-                        {title}
-                    </Typography>
-                    <ArrowForwardRoundedIcon sx={{width:"20px", height: "20px"}}/>
-                </Box>
-            </Link>
+                        <Typography 
+                            fontSize={"20px"}
+                            fontWeight={"600"} 
+                            lineHeight={"22px"}
+                        >
+                            {title}
+                        </Typography>
+                        <ArrowForwardRoundedIcon sx={{width:"20px", height: "20px"}}/>
+                    </Box>
+                </Link>
+            </Box>
             {children}
         </Box>
     )
@@ -215,6 +208,21 @@ function ProgressCarouselMobile({titles}: {titles: Title[]}) {
     )
 }
 
+function ProgressCarouselPC({titles}: {titles: Title[]}) {
+    const theme = useTheme();
+    return (
+        <Carousel
+            sx={{
+                "& .carousel": {
+                    py: theme.spacing(2),
+                }
+            }}
+        >
+            {titles.map(title => <ProgressItem key={uuid4()} title={title}/>)}
+        </Carousel>
+    )
+}
+
 function TitlesCarouselMobile({
     titles, 
     sx
@@ -245,15 +253,55 @@ function TitlesCarouselMobile({
 
 }
 
+function TitlesCarouselPC({
+    titles, 
+    sx
+}: {
+    titles: Title[], 
+    sx?: SxProps
+}) {
+    const theme = useTheme();
+
+    return (
+        <Carousel 
+            sx={{
+                "& .carousel": {
+                    py: theme.spacing(2),
+                },
+                ...sx
+            }}
+        >
+            {titles.map(title => <TitleItem 
+                title={title}
+                key={uuid4()}
+                sx={{
+                    minWidth: "max(120px, calc((100% - 15px * 7) / 8))",
+                }}
+            />)}
+        </Carousel>
+    )
+}
+
 function UpdatesList({titles, sx}: {titles: Title[], sx?:SxProps}) {
     const theme = useTheme();
+
+    const {device} = useDeviceDetect();
+
+    const styles = device != DEVICE.MOBILE ? 
+    {
+        p: theme.spacing(2),
+        bgcolor: theme.palette.background.paper,
+        borderRadius: "8px",
+    }: {
+
+    }
 
     return (
         <Box
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: theme.spacing(3),
+                gap: theme.spacing(2),
                 ...sx
             }}
         >
@@ -261,9 +309,10 @@ function UpdatesList({titles, sx}: {titles: Title[], sx?:SxProps}) {
                 <Box
                     key={uuid4()}
                     sx={{
+                        ...styles,
                         display: "flex",
                         flexDirection: "row",
-                        gap: theme.spacing(4)
+                        gap: theme.spacing(4),
                     }}
                 >
                     <Poster 
@@ -294,60 +343,66 @@ function UpdatesList({titles, sx}: {titles: Title[], sx?:SxProps}) {
     )
 }
 
-
-function ProgressCarousel({titles}: {titles: Title[]}) {
-    return (
-        <Carousel
-        >
-            {titles.map(title => <ProgressItem title={title}/>)}
-        </Carousel>
-    )
-}
-
 function HomePagePC() {
+    const theme = useTheme();
     
     return (
         <Box
             sx={{
-                pt: "35px",
-                pb: "25px"
+                maxWidth: "1240px",
+                mx: "auto"
             }}
         >
-            <TitlesCarousel
-                titles={[...mockTitles, ...mockTitles, ...mockTitles]} 
-                sx={{
-                    p: "0 20px",
-                    "& .TitleItem": {
-                        minWidth: "max(140px, min(150px, calc((100% - 15px * 8) / 9)))"
-                    }
-                    
-                }}
-            />
             <Box
                 sx={{
-                    maxWidth: "1240px",
-                    padding: "0 20px",
-
-                    margin: "0 auto",
-                    mt: "25px",
-
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "25px"
+                    px: "20px",
                 }}
             >
-                <Section 
-                    title="Продолжить чтение"
-                    href="/"
+                <HomePageHero />
+                <Box
+                    sx={{
+                        mt: theme.spacing(5),
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: theme.spacing(5),
+                    }}
                 >
-                    <ProgressCarousel titles={mockTitles} />
-                </Section>
-                <Section
-                    title="Специально для вас"
-                    href={HomeRoutes.RECOMMENDATIONS}
-                >
-                    <TitlesCarousel titles={[...mockTitles, ...mockTitles]}/>
-                </Section>
+                    <SectionPC
+                        title="Продолжить читать"
+                        href="/history"
+                    >
+                        <ProgressCarouselPC titles={[...mockTitles, ...mockTitles]}/>
+                    </SectionPC>
+                    <SectionPC
+                        title="Новинки"
+                        href="/new"
+                    >
+                        <TitlesCarouselPC titles={[...mockTitles, ...mockTitles]} />
+                    </SectionPC>
+                    <SectionPC
+                        title="Выбор редакции"
+                        href="/favourites"
+                    >
+                        <TitlesCarouselPC titles={[...mockTitles, ...mockTitles]} />
+                    </SectionPC>
+                    <SectionPC
+                        title="Законченные"
+                        href="/ended"
+                    >
+                        <TitlesCarouselPC titles={[...mockTitles, ...mockTitles]} />
+                    </SectionPC>
+                    <SectionPC
+                        title="Последние обновления"
+                        href="/last-updates"
+                    >
+                        <UpdatesList 
+                            titles={mockTitles} 
+                            sx={{
+                                p: theme.spacing(2)
+                            }}
+                        />
+                    </SectionPC>
+                </Box>
             </Box>
         </Box>
     )

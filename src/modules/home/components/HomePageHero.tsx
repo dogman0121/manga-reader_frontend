@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, ThemeOptions, Typography, useTheme } from "@mui/material";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { mockTitles } from "../../../mocks/title.mock";
 import Poster from "../../../components/ui/Poster";
@@ -6,11 +6,12 @@ import AppButton from "../../../components/ui/AppButton";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "./styles.css"
 
-import { EffectFade, Autoplay, Pagination } from 'swiper/modules';
+import { Navigation, EffectFade, Autoplay, Pagination } from 'swiper/modules';
 import Title from "../../titles/types/Title";
+import { Link } from "react-router-dom";
 
 
-function HeroBlock({title}: {title: Title}) {
+function HeroBlockMobile({title}: {title: Title}) {
     const theme = useTheme()
 
     return (
@@ -98,24 +99,130 @@ function HeroBlock({title}: {title: Title}) {
                     px: theme.spacing(2)
                 }}
             >
-                <AppButton
-                    variant="contained"
-                    sx={{
-                        width: "100%",
-                        py: theme.spacing(1)
-                    }}
+                <Link
+                    to={`/manga/${title.slug}`}
                 >
-                    Читать
-                </AppButton>
+                    <AppButton
+                        variant="contained"
+                        sx={{
+                            width: "100%",
+                        }}
+                    >
+                        Читать
+                    </AppButton>
+                </Link>
             </Box>
         </Box>
     )
 }
 
-function HomePageHeroMobile() {
+
+function HeroBlockPC({title}: {title: Title}) {
     const theme = useTheme();
 
-    return(
+    return (
+        <Box
+            sx={{
+                background: `
+                    linear-gradient(
+                    rgba(${theme.palette.background.defaultChannel} / 0.8), 
+                    rgba(${theme.palette.background.defaultChannel} / 0.8)
+                    ),
+                    url(${title.background ? title.background : title.main_poster?.large})
+                `,
+                backgroundSize: 'cover',
+                backgroundPositionX: 'center',
+                backgroundRepeat: 'no-repeat',
+            }}
+        >
+            <Box
+                sx={{
+                    py: theme.spacing(20),
+                    maxWidth: "860px",
+                    mx: "auto",
+
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "50px",
+                    alignItems: "center"
+                }}
+            >
+                <Poster 
+                    src={title.main_poster?.medium || ""}
+                    style={{
+                        maxWidth: "200px"
+                    }}
+                />
+                <Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: theme.spacing(2)
+                        }}
+                    >
+                        <Typography 
+                            fontSize={"16px"}
+                            variant="caption"
+                        >
+                            {title.type?.name}
+                        </Typography>
+                        <Typography 
+                            fontSize={"16px"}
+                            variant="caption"
+                        >
+                            {title.year}
+                        </Typography>
+                    </Box>
+                    <Typography
+                        fontSize={"24px"}
+                        fontWeight={600}
+                        lineHeight={"1"}
+                    >
+                        {title.name}
+                    </Typography>
+                    <Typography
+                        fontSize={"16px"}
+                        lineHeight={"1.5"}
+                        sx={{
+                            mt: theme.spacing(4),
+                            height: "7.5em",
+                            display: "-webkit-box",
+                            WebkitLineClamp: "5",
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis"
+                        }}
+                    >
+                        {title.description}
+                    </Typography>
+                    <Link
+                        to={`/manga/${title.slug}`}
+                        style={{
+                            marginTop: theme.spacing(3)
+                        }}
+                    >
+                        <AppButton
+                            variant="contained"
+                            sx={{
+                                mt: theme.spacing(3),
+                                width: "150px",
+                                height: "45px"
+                            }}
+                        >
+                            Читать
+                        </AppButton>
+                    </Link>
+                </Box>
+            </Box>
+        </Box>
+    )
+}
+
+function HomePageHeroPC() {
+    const theme = useTheme();
+
+    return (
         <Box
             sx={{
                 "& .swiper-pagination-bullet": {
@@ -128,7 +235,49 @@ function HomePageHeroMobile() {
                 "& .swiper-pagination-bullet-active": {
                     bgcolor: theme.palette.primary.main,
                     width: "40px"
-                }
+                },
+            }}
+        >
+            <Swiper
+                modules={[Navigation, EffectFade, Pagination, Autoplay]}
+                pagination={{
+                    clickable: true
+                }}
+                speed={800}
+                effect={"fade"}
+                loop
+                allowTouchMove={false}
+                autoplay={{
+                    delay: 5000
+                }}
+            >
+                <SwiperSlide><HeroBlockPC title={mockTitles[0]}/></SwiperSlide>
+                <SwiperSlide><HeroBlockPC title={mockTitles[1]}/></SwiperSlide>
+                <SwiperSlide><HeroBlockPC title={mockTitles[2]}/></SwiperSlide>
+                <SwiperSlide><HeroBlockPC title={mockTitles[3]}/></SwiperSlide>
+                <SwiperSlide><HeroBlockPC title={mockTitles[4]}/></SwiperSlide>
+            </Swiper>
+        </Box>
+    )
+}
+
+function HomePageHeroMobile() {
+    const theme = useTheme();
+
+    return (
+        <Box
+            sx={{
+                "& .swiper-pagination-bullet": {
+                    bgcolor: `${theme.palette.secondary.main}`,
+                    opacity: "1",
+                    width: "25px",
+                    height: "8px",
+                    borderRadius: "8px" 
+                },
+                "& .swiper-pagination-bullet-active": {
+                    bgcolor: theme.palette.primary.main,
+                    width: "40px"
+                },
             }}
         >
             <Swiper
@@ -144,21 +293,16 @@ function HomePageHeroMobile() {
                     delay: 5000
                 }}
             >
-                <SwiperSlide><HeroBlock title={mockTitles[0]}/></SwiperSlide>
-                <SwiperSlide><HeroBlock title={mockTitles[1]}/></SwiperSlide>
-                <SwiperSlide><HeroBlock title={mockTitles[2]}/></SwiperSlide>
-                <SwiperSlide><HeroBlock title={mockTitles[3]}/></SwiperSlide>
-                <SwiperSlide><HeroBlock title={mockTitles[4]}/></SwiperSlide>
+                <SwiperSlide><HeroBlockMobile title={mockTitles[0]}/></SwiperSlide>
+                <SwiperSlide><HeroBlockMobile title={mockTitles[1]}/></SwiperSlide>
+                <SwiperSlide><HeroBlockMobile title={mockTitles[2]}/></SwiperSlide>
+                <SwiperSlide><HeroBlockMobile title={mockTitles[3]}/></SwiperSlide>
+                <SwiperSlide><HeroBlockMobile title={mockTitles[4]}/></SwiperSlide>
             </Swiper>
         </Box>
     )
 }
 
-function HomePageHeroPC() {
-    return (
-        <></>
-    )
-}
 
 export default function HomePageHero() {
     const {device} = useDeviceDetect()
@@ -167,8 +311,8 @@ export default function HomePageHero() {
     return (
         <>
             {device == DEVICE.MOBILE && <HomePageHeroMobile />}
-            {device == DEVICE.PC && <HomePageHeroPC />}
             {device == DEVICE.PAD && <HomePageHeroPC />}
+            {device == DEVICE.PC && <HomePageHeroPC />}
         </>
     )
 }
