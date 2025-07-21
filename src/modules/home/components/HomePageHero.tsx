@@ -1,4 +1,4 @@
-import { Box, ThemeOptions, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { DEVICE, useDeviceDetect } from "../../../hooks/useDeviceDetect";
 import { mockTitles } from "../../../mocks/title.mock";
 import Poster from "../../../components/ui/Poster";
