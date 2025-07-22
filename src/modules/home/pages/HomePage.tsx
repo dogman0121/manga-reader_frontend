@@ -350,7 +350,8 @@ function HomePagePC() {
         <Box
             sx={{
                 maxWidth: "1240px",
-                mx: "auto"
+                mx: "auto",
+                pb: theme.spacing(7)
             }}
         >
             <Box
