@@ -63,7 +63,14 @@ function HeaderInner({sx, onOpenOptions}: {sx?: SxProps, onOpenOptions: () => vo
                             navigate(generatePath("/manga/:slug", {slug: slug || ""}))
                         }}
                     />
-                    <Typography>ТОМ {chapter?.tome || "-"} ГЛАВА {chapter?.chapter || "-"}</Typography>
+                    <Typography
+                        sx={{
+                            fontWeight: 600,
+                            textTransform: "uppercase"
+                        }}    
+                    >
+                        ТОМ {chapter?.tome || "-"} ГЛАВА {chapter?.chapter || "-"}
+                    </Typography>
                     <MoreVertRoundedIcon sx={{width: "24px", height: "24px"}}
                         ref={optionsAnchor}
                         onClick={(event) => {
